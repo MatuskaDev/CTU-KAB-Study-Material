@@ -1,151 +1,377 @@
 # 1. Klasická kryptografie
 
 !!! abstract "Cíle kapitoly"
-    - Pochopit princip substituce a transpozice
-    - Umět zašifrovat/dešifrovat všechny klasické šifry
-    - Znát útoky a slabiny každé šifry
-    - Rozumět pojmu **klíčový prostor** a frekvenční analýze
+    - Pochopit základní pojmy kryptologie a modely útočníka
+    - Umět zašifrovat/dešifrovat všechny klasické šifry (Caesar, Afinní, Hill, Vigenère, Transpozice)
+    - Znát kryptoanalýzu každé šifry — frekvenční analýza, Kasiski, IC
+    - Rozumět pojmům **konfúze** a **difúze**, **substituce** a **transpozice**
 
 Klasická kryptografie operuje nad přirozeným jazykem (abeceda A–Z = čísla 0–25). Bezpečnost závisí na tajnosti algoritmu nebo klíče, nikoli na matematicky tvrdém problému.
 
 ---
 
-## 1.1 Caesarova šifra
+## 1.0 Základní pojmy v kryptologii
 
-### Definice
+### Kryptologie, kryptografie, kryptoanalýza
+
+- **Kryptologie** – tvorba a luštění šifer
+    - **Kryptografie** – věda o tvorbě šifer
+    - **Kryptoanalýza** – věda o luštění šifer
+- **Otevřený Text (OT)** – text, který je určen k utajení
+- **Šifrování** – proces převádějící otevřený text do **Šifrového Textu (ŠT)**
+- **Šifra** – metoda, která převádí text do utajené formy
+- **Dešifrování** – proces opačný k procesu šifrování, je založený na znalosti šifry
+
+**Luštění – kryptoanalýza:**
+
+- **Identifikace** – jaký šifrovací systém byl použit
+- **Prolomení** – způsob šifrování zprávy, určení neměnných částí systému. Kolik šifrových zpráv je potřebných k prolomení
+- **Nastavení** – určení, jak se mění proměnlivé části kryptosystému
+
+### Šifra vs. kód
+
+- **Šifra** – utajení obsahu zprávy před nepovolanou osobou
+- **Kód** – **neutajuje se zpráva**, ale upravuje tak, aby ji bylo možné přenést přes nějaký kanál (např. kódy pro detekci chyb – paritní, nebo samoopravné kódy – Hammingovy kódy)
+
+**Šifrovací systémy** vytváří šifrovou zprávu z OT pomocí šifrovacího algoritmu. Do nástupu počítačů dominovaly 3 základní metody:
+
+1. **substituční** – záměna znaků
+2. **transpoziční** – přeuspořádání znaků
+3. **metoda kódové knihy**
+
+Substituční a transpoziční šifry jsou **symetrické** – používají stejný klíč pro šifrování i dešifrování.
+
+### Šifrování pomocí kódové knihy
+
+Slovník s běžnými frázemi nahrazovanými kódovými skupinami (čtveřice/pětice písmen nebo čísel).
+
+- K jedné frázi může existovat více kódových skupin → ztíží identifikaci frekventovaných výrazů
+- Překlad zprávy do málo používaného jazyka lze považovat za šifrování pomocí kódové knihy (příklad: Navajové – japonská armáda v pacifiku)
+- Osobní těsnopis (středověk) – pravidelný výskyt symbolů poskytuje dostatečný klíč k rozluštění
+
+### Posuzování spolehlivosti šifrových systémů
+
+Při posuzování navrhovaného šifrovacího systému je důležité posoudit jeho sílu – odolnost vůči všem známým útokům za **předpokladu znalosti typu šifrovacího systému** (Kerckhoffsův princip).
+
+Odolnost šifrovacího systému je posuzována v 5 situacích. Kryptoanalytik provádí luštění se znalostí:
+
+| # | Útok | Znalost kryptoanalytika |
+|---|------|-------------------------|
+| 1 | **Ciphertext-only attack** | Pouze ŠT (systém rozluštěný v této situaci je za normálních podmínek nepoužitelný) |
+| 2 | **Known-plaintext attack** | ŠT a jeden nebo více OT |
+| 3 | **Chosen-plaintext attack** | ŠT a odpovídající **vybraný** OT |
+| 4 | **Chosen-ciphertext attack** | ŠT, který je vybrán na základě určitého významu, a k tomu dešifrovaný odpovídající OT |
+| 5 | **Chosen-text attack** | Sjednocení metody 3. a 4. |
+
+### Steganografie a terminologie textu
+
+**Steganografie** – ukrytí samotné **existence** zprávy (nejen jejího obsahu). Zakládá se na principu vkládání zprávy do běžných a nepodezřelých objektů – textů, programů, obrázků atd.
+
+**Terminologie analýzy textu:**
+
+- **Monogram** – jedno písmeno v jakékoliv abecedě
+- **Bigram** – jakákoliv dvojice sousedních písmen v textu
+- **Trigram** – trojice po sobě následujících písmen
+- **Polygram** – nespecifikovaný počet písmen po sobě jdoucích v textu
+- **Symbol** – jakékoliv písmeno, číslice, interpunkční znaménko atd.
+- **Řetězec** – jakákoliv posloupnost po sobě jdoucích symbolů
+
+---
+
+## 1.1 Monoalfabetické substituční šifry
+
+### Číselné ekvivalenty písmen
+
+Každému písmenu anglické abecedy přiřadíme číslo:
+
+| A | B | C | D | E | F | G | H | I | J | K  | L  | M  |
+|---|---|---|---|---|---|---|---|---|---|----|----|-----|
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+
+| N  | O  | P  | Q  | R  | S  | T  | U  | V  | W  | X  | Y  | Z  |
+|----|----|----|----|----|----|----|----|----|----|----|----|----|
+| 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 |
+
+### Caesarova šifra
 
 !!! info "Formule"
-    **Šifrování:** $c = (p + k) \bmod 26$
+    **Šifrování:** $c = |p + k|_{26}$
 
-    **Dešifrování:** $p = (c - k) \bmod 26$
+    **Dešifrování:** $p = |c - k|_{26}$
 
-    $p$ = číselná hodnota plaintext písmene (A=0, B=1, …, Z=25), $k$ = klíč (posun).
+    Tradičně $k = 3$: A → D, B → E, ..., W → Z, X → A, Y → B, Z → C.
 
-### Příklad — $k = 3$
+#### Příklad šifrování: zpráva „THIS MESSAGE IS TOP SECRET", $k = 3$
 
-Každé písmeno posuneme o 3 dopředu v abecedě (K→N, R→U, …):
+Zprávu seskupíme do bloků po pěti písmenech:
 
-| Plaintext  | K  | R  | Y  | P  | T  | O  |
-|------------|----|----|----|----|----|----|
-| Hodnota    | 10 | 17 | 24 | 15 | 19 | 14 |
-| +3 mod 26  | 13 | 20 | 1  | 18 | 22 | 17 |
-| Ciphertext | **N** | **U** | **B** | **S** | **W** | **R** |
-
-```mermaid
-flowchart LR
-    A["Plaintext: KRYPTO"] --> B["Klíč k=3\n(posun +3)"]
-    B --> C["mod 26 pro každý znak"]
-    C --> D["Ciphertext: NUBSWR"]
-    style A fill:#1e3a2f,stroke:#34d399,color:#e2e8f0
-    style D fill:#3d1515,stroke:#f87171,color:#e2e8f0
+```
+THISM ESSAG EISTO PSECR ET
 ```
 
-### Analýza bezpečnosti
+Číselné ekvivalenty:
+
+```
+19 7 8 18 12    4 18 18 0 6    4 8 18 19 14    15 18 4 2 17    4 19
+```
+
+Transformace $c = |p + 3|_{26}$:
+
+```
+22 10 11 21 15    7 21 21 3 9    7 11 21 22 17    18 21 7 5 20    7 22
+```
+
+Šifrový text: **WKLVP HVVDJ HLVWR SVHFU HW**
+
+#### Příklad dešifrování: ŠT „WKLVL VKRZZ HGHFL SKHU"
+
+Transformace $p = |c - 3|_{26}$:
+
+```
+22 10 11 21 11 → 19 7 8 18 8   → T H I S I
+21 10 17 25 25 → 18 7 14 22 22 → S H O W W
+7 6 7 5 11    → 4 3 4 2 8     → E D E C I
+18 10 7 20    → 15 7 4 17     → P H E R
+```
+
+Výsledek: **THIS IS HOW WE DECIPHER**
+
+#### Jednoduché substituční šifry – zobecnění
+
+Šifry s transformací posunu jsou definovány vztahem $c = |p + k|_{26}$, kde $k$ je posun. Caesarova šifra je speciálním případem pro $k = 3$.
 
 !!! danger "Bezpečnost: Triviálně slabá"
     - **Klíčový prostor:** pouze **25 klíčů** → hrubá síla v sekundách
-    - **Frekvenční analýza:** nejčastější písmeno v angličtině je E → hledáme, čemu odpovídá
-    - Klíč lze určit z jediného zachyceného znaku
-
-!!! tip "Zkouška"
-    Umět ručně zašifrovat/dešifrovat slovo. Znat velikost klíčového prostoru (25). Vědět, proč je to nezabezpečené.
+    - **Frekvenční analýza:** nejčastější písmeno v angličtině je E → stačí najít, čemu odpovídá
 
 ---
 
-## 1.2 Afinní šifra
-
-### Definice
+### Afinní šifra
 
 !!! info "Formule"
-    **Šifrování:** $c = (a \cdot p + b) \bmod 26$
+    **Šifrování:** $c = |ap + b|_{26}, \quad 0 \le c \le 25$
 
-    **Dešifrování:** $p = a^{-1} \cdot (c - b) \bmod 26$
+    **Dešifrování:** $p = |a^{-1}(c - b)|_{26}, \quad 0 \le p \le 25$
 
-    Klíč = dvojice $(a, b)$. Podmínka: $\gcd(a, 26) = 1$.
+    Klíč = dvojice $(a, b)$. **Podmínka:** $\gcd(a, 26) = 1$.
 
-### Podmínka klíče — proč $\gcd(a, 26) = 1$?
+Obecnější šifrou oproti Caesarovi je **afinní transformace** $c = |ap + b|_{26}$, kde $a, b \in \mathbb{Z}$ a $\gcd(a, 26) = 1$. Transformace posunem je afinní transformací pro $a = 1$.
 
-Pokud $\gcd(a, 26) \neq 1$, mapování není bijekce — více písmen se zobrazí na stejný znak, dešifrování je nejednoznačné.
+Existuje 12 konstant $a$ (kde $\varphi(26) = 12$) a 26 hodnot $b$, tedy $12 \times 26 = 312$ afinních transformací.
 
 **Povolené hodnoty $a$:** {1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25} → **12 hodnot**
 
+**Proč $\gcd(a, 26) = 1$?** Pokud podmínka nesplněna, mapování není bijekce – více písmen OT se zobrazí na stejný znak, dešifrování je nejednoznačné.
+
 **Velikost klíčového prostoru:** $12 \times 26 = \mathbf{312}$ klíčů
 
-### Příklad — $a = 5$, $b = 8$, šifrování 'A'
+#### Příklad: $a = 7$, $b = 10$, šifrování „PLEASE SEND MONEY"
 
-$$c = (5 \cdot 0 + 8) \bmod 26 = 8 \Rightarrow \text{'I'}$$
+$c = |7p + 10|_{26}$ → ŠT: **LJMKG MGMXF QEXMW**
 
-### Výpočet inverzního prvku $a^{-1}$
+Pro dešifrování: $a^{-1} = |7|^{-1}_{26} = 15$ (protože $7 \times 15 = 105 = 4 \times 26 + 1$), tedy $p = |15(c - 10)|_{26} = |15c + 6|_{26}$.
 
-Hledáme $x$ tak, aby $a \cdot x \equiv 1 \pmod{26}$ — rozšířený Euklidův algoritmus.
+Vzájemný vztah písmen pro šifru $c = |7p + 10|_{26}$:
 
-!!! example "Příklad: $5^{-1} \bmod 26$"
-    Hledáme $x$: $5x \equiv 1 \pmod{26}$
-    
-    Zkusíme: $5 \times 21 = 105 = 4 \times 26 + 1$ → zbytek 1 ✓
-    
-    $5^{-1} \bmod 26 = \mathbf{21}$
+![Bijekce afinní šifry c=|7p+10|₂₆](../assets/img/prednasky/p01-014.png)
 
-!!! question "Typická zkouška"
-    „Zašifrujte slovo XYZ afinní šifrou s klíčem $(a, b)$. Jak dešifrovat?"
-    
-    Postup: převést na čísla → aplikovat formuli → převést zpět. Nezapomeňte na podmínku $\gcd(a,26)=1$.
+#### Příklad: $a = 7$, $b = 10$, dešifrování
+
+ŠT „FEXEN ZMBMK JNHMG MYZMN" → OT: **DO NOT REVEAL THE SECRET**
 
 ---
 
-## 1.3 Hillova šifra
+## 1.2 Kryptoanalýza monoalfabetických šifer
 
-### Definice
+### Frekvenční analýza
 
-!!! info "Formule (pro blok délky $n$)"
-    **Šifrování:** $\vec{c} = K \cdot \vec{p} \pmod{26}$
+Pokus prolomit znakovou šifru může začít porovnáním četnosti výskytu písmen v ŠT a OT.
 
-    **Dešifrování:** $\vec{p} = K^{-1} \cdot \vec{c} \pmod{26}$
+**Četnost výskytu jednotlivých písmen v běžném anglickém textu:**
 
-    $K$ = čtvercová klíčová matice $n \times n$, $\vec{p}$ = vektor $n$ plaintext písmen.
+![Četnost písmen v anglickém textu](../assets/img/prednasky/p01-015.png)
 
-### Podmínka invertibility
+| A | B | C | D | E  | F | G | H | I | J   | K   | L | M |
+|---|---|---|---|----|---|---|---|---|-----|-----|---|---|
+| 7 | 1 | 3 | 4 | **13** | 3 | 2 | 3 | 8 | <1 | <1 | 4 | 3 |
 
-Matice $K$ musí být invertibilní mod 26: $\gcd(\det(K), 26) = 1$.
+| N | O | P | Q | R | S | T | U | V | W | X   | Y | Z   |
+|---|---|---|---|---|---|---|---|---|---|-----|---|-----|
+| 8 | 7 | 3 | <1| 8 | 6 | 9 | 3 | 1 | 1 | <1 | 2 | <1 |
 
-### Příklad — bigramy ($n=2$), klíč $K = \begin{pmatrix}3 & 3 \\ 2 & 5\end{pmatrix}$, plaintext "HE"
+Typický anglický text má největší výskyt písmen **E (13%), T, N, R, I, O, A (7–9%)**.
 
-**Krok 1 — Převod na vektory:**
-$$\vec{p} = \begin{pmatrix}H \\ E\end{pmatrix} = \begin{pmatrix}7 \\ 4\end{pmatrix}$$
+### Příklad – útok na Caesarovu šifru (ciphertext-only)
 
-**Krok 2 — Maticové násobení:**
-$$K \cdot \vec{p} = \begin{pmatrix}3 & 3 \\ 2 & 5\end{pmatrix} \begin{pmatrix}7 \\ 4\end{pmatrix} = \begin{pmatrix}3\cdot7 + 3\cdot4 \\ 2\cdot7 + 5\cdot4\end{pmatrix} = \begin{pmatrix}33 \\ 34\end{pmatrix}$$
+ŠT: `YFXMP CESPZ CJTDF DPQFW QZCPY NTASP CTYRX PDDLR PD`
 
-**Krok 3 — Redukce mod 26:**
-$$\begin{pmatrix}33 \\ 34\end{pmatrix} \bmod 26 = \begin{pmatrix}7 \\ 8\end{pmatrix} \Rightarrow \begin{pmatrix}H \\ I\end{pmatrix}$$
+Četnosti výskytu písmen v ŠT:
 
-Ciphertext: **"HI"**
+| A | B | C | D | E | F | G | H | I | J | K | L | M |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | 0 | 4 | 5 | 1 | 3 | 0 | 0 | 0 | 1 | 0 | 1 | 1 |
+| N | O | **P** | Q | R | S | T | U | V | W | X | Y | Z |
+| 1 | 0 | **7** | 2 | 2 | 2 | 3 | 0 | 0 | 1 | 2 | 3 | 2 |
 
-### Inverze matice mod 26
+**P** má největší výskyt → odpovídá **E** v OT. Tedy $|4 + k|_{26} = 15$, z toho $k = 11$.
 
-$$K^{-1} = \det(K)^{-1} \cdot \text{adj}(K) \pmod{26}$$
+$c = |p + 11|_{26}$, obráceně $p = |c - 11|_{26}$ → OT: **NUMBER THEORY IS USEFUL FOR ENCIPHERING MESSAGES.**
 
-Pro $K = \begin{pmatrix}3 & 3 \\ 2 & 5\end{pmatrix}$:
+### Příklad – útok na afinní šifru (ciphertext-only)
 
-- $\det(K) = 3 \cdot 5 - 3 \cdot 2 = 9$
-- $9^{-1} \bmod 26 = 3$ (protože $9 \cdot 3 = 27 \equiv 1$)
-- $\text{adj}(K) = \begin{pmatrix}5 & -3 \\ -2 & 3\end{pmatrix} \equiv \begin{pmatrix}5 & 23 \\ 24 & 3\end{pmatrix} \pmod{26}$
+ŠT:
+```
+USLEL JUTCC YRTPS URKLT YGGFV
+ELYUS LRYXD JURTU ULVCU URJRK
+QLLQL YXSRV LBRYZ CYREK LVEXB
+RYZDG HRGUS LJLLM LYPDJ LJTJU
+FALGU PTGVT JULYU SLDAL TJRWU
+SLJFE OLPU
+```
 
-!!! tip "Zkouška"
-    Hillova šifra bývá na zkoušce jako výpočetní příklad. Procvičte maticové násobení mod 26 a výpočet inverze.
+Četnosti:
+
+| A | B | C | D | E | F | G | H | I | J  | K | **L**  | M |
+|---|---|---|---|---|---|---|---|---|----|----|----|----|
+| 2 | 2 | 4 | 4 | 5 | 3 | 6 | 1 | 0 | 10 | 3 | **22** | 1 |
+| N | O | P | Q | R  | S | T | **U** | V | W | X | Y  | Z |
+|---|---|---|---|----|----|---|----|----|---|---|----|----|
+| 0 | 1 | 4 | 2 | 12 | 7 | 8 | **16** | 5 | 1 | 3 | 10 | 2 |
+
+**L** (22×) odpovídá **E**, **U** (16×) odpovídá **T** v OT. Podle $c = |ap + b|_{26}$:
+
+$$|4a + b|_{26} = 11 \quad \text{(E=4 → L=11)}$$
+$$|19a + b|_{26} = 20 \quad \text{(T=19 → U=20)}$$
+
+Řešení: $|a|_{26} = 11$, $|b|_{26} = 19$. Dešifrovací transformace ($|11|^{-1}_{26} = 19$):
+
+$$p = |19(c - 19)|_{26} = |19c + 3|_{26}, \quad 0 \le p \le 25$$
+
+Výsledek: **THEBE STAPP ROACH TOLEA RNNUM ...**
 
 ---
 
-## 1.4 Vigenèrova šifra
+## 1.3 Polygrafické substituční šifry — Hillova šifra
+
+### Motivace
+
+!!! warning "Slabina monoalfabetických šifer"
+    Afinní šifry jsou zranitelné při použití kryptoanalýzy založené na **frekvenční analýze** – distribuce četností ŠT odráží distribuci OT.
+
+K eliminaci těchto nevýhod byl vyvinut systém nahrazující bloky určité délky OT bloky ŠT → **šifry polygrafické – blokové**. Tyto šifry na modulární aritmetice vyvinul **Hill v roce 1930**.
+
+### Hillova šifra – bigramy ($n = 2$)
+
+Uvažujeme šifru s blokem jednoho bigramu OT, který je převáděn do ŠT dvoupísmenovými bloky. Pokud zpráva končí blokem s jedním písmenem, přidáváme **X** (padding).
+
+!!! example "Příklad: zpráva „THE GOLD IS BURIED IN ORONO""
+
+    Seskupení: **TH EG OL DI SB UR IE DI NO RO NO.**
+
+    Číselné ekvivalenty: `19 7 | 4 6 | 14 11 | 3 8 | 18 1 | 20 17 | 8 4 | 3 8 | 13 14 | 17 14 | 13 14`
+
+    Klíčová transformace:
+
+    $$c_1 = |5p_1 + 17p_2|_{26}, \qquad c_2 = |4p_1 + 15p_2|_{26}$$
+
+    První blok (19, 7):
+
+    $$c_1 = |5 \cdot 19 + 17 \cdot 7|_{26} = |214|_{26} = 6$$
+    $$c_2 = |4 \cdot 19 + 15 \cdot 7|_{26} = |181|_{26} = 25$$
+
+Celý zašifrovaný text převodem na písmena: **GZ SC XN VC DJ ZX EO VC RC LS RC**
+
+### Hillova šifra – maticový zápis
+
+!!! info "Formule (obecná)"
+    **Šifrování:** $|\mathbf{c}|_{26} = |\mathbf{A} \cdot \mathbf{p}|_{26}$
+
+    **Dešifrování:** $|\mathbf{p}|_{26} = |\mathbf{A}^{-1} \cdot \mathbf{c}|_{26}$
+
+    kde **A** je matice $n \times n$ a $\gcd(\det \mathbf{A}, 26) = 1$.
+
+Pro bigramy ($n=2$) s výše uvedenou transformací:
+
+$$\left|\begin{pmatrix}c_1 \\ c_2\end{pmatrix}\right|_{26} = \left|\begin{pmatrix}5 & 17 \\ 4 & 15\end{pmatrix} \cdot \begin{pmatrix}p_1 \\ p_2\end{pmatrix}\right|_{26}$$
+
+Dešifrovací matice:
+
+$$\left|\begin{pmatrix}p_1 \\ p_2\end{pmatrix}\right|_{26} = \left|\begin{pmatrix}17 & 5 \\ 18 & 23\end{pmatrix} \cdot \begin{pmatrix}c_1 \\ c_2\end{pmatrix}\right|_{26}$$
+
+### Hillova šifra – trigramy ($n = 3$)
+
+!!! example "Příklad: šifrování zprávy „STOP PAYMENT""
+
+    Šifrovací matice:
+
+    $$\mathbf{A} = \begin{pmatrix}11 & 2 & 19 \\ 5 & 23 & 25 \\ 20 & 7 & 1\end{pmatrix}, \quad \det \mathbf{A} = 5, \quad \gcd(5, 26) = 1 \ ✓$$
+
+    Zpráva seskupena do trojic s paddingem X: **STO | PPA | YME | NTX**
+
+    Číselné ekvivalenty: `18 19 14 | 15 15 0 | 24 12 4 | 13 19 23`
+
+    První blok:
+
+    $$\left|\begin{pmatrix}11 & 2 & 19 \\ 5 & 23 & 25 \\ 20 & 7 & 1\end{pmatrix} \begin{pmatrix}18 \\ 19 \\ 14\end{pmatrix}\right|_{26} = \left|\begin{pmatrix}502 \\ 877 \\ 507\end{pmatrix}\right|_{26} = \begin{pmatrix}8 \\ 19 \\ 13\end{pmatrix}$$
+
+    Celý ŠT: `8 19 13 | 13 4 15 | 0 2 22 | 20 11 0` → **ITN NEP ACW ULA**
+
+    Inverzní matice:
+
+    $$|\mathbf{A}^{-1}|_{26} = \begin{pmatrix}6 & 21 & 11 \\ 21 & 25 & 16 \\ 19 & 3 & 7\end{pmatrix}$$
+
+### Podmínka invertibility matice
+
+Matice $\mathbf{A}$ musí být invertibilní mod 26: $\gcd(\det(\mathbf{A}), 26) = 1$.
+
+Inverze: $\mathbf{A}^{-1} = \det(\mathbf{A})^{-1} \cdot \text{adj}(\mathbf{A}) \pmod{26}$
+
+### Zobecnění – blokové šifrování
+
+Pokud víme, že bloky o velikosti $n$ znaků ŠT $c_{1j}, c_{2j}, \ldots, c_{nj}$ vzájemně odpovídají blokům $n$ znaků OT $p_{1j}, p_{2j}, \ldots, p_{nj}$, obdržíme soustavu $n$ lineárních kongruencí:
+
+$$|\mathbf{AP}|_{26} = |\mathbf{C}|_{26}$$
+
+kde **P** a **C** jsou matice dimenze $n \times n$. Pokud $\gcd(\det \mathbf{P}, 26) = 1$, platí $|\mathbf{A}|_{26} = |\mathbf{CP}^{-1}|_{26}$.
+
+### Kryptoanalýza Hillovy šifry
+
+!!! danger "Slabiny"
+    - **Frekvenční analýza** $n$-gramů je možná pouze pro malé $n$ (pro $n = 2$ existuje $26^2 = 676$ kombinací bigram; nejčastější v angličtině: **TH**, pak **HE**)
+    - **Known-plaintext attack:** Lze využít lineární závislosti ŠT na OT k získání matice **A** — stačí $n$ párů OT/ŠT bloků
+    - **Chosen-plaintext attack:** Zvolím OT tak, aby matice **P** byla jednotková → dostávám přímo $\mathbf{C} = \mathbf{A}$ (klíč)!
+    - Pro velké $n$ (např. $n = 10$: $26^{10} \doteq 1.4 \times 10^{14}$ kombinací) je kryptoanalýza velmi obtížná
+
+#### Příklad – known-plaintext útok
+
+Bloky 19 7 a 7 4 odpovídají v ŠT blokům 10 23 a 21 25:
+
+$$\mathbf{A} \begin{pmatrix}19 & 7 \\ 7 & 4\end{pmatrix}_{26} = \begin{pmatrix}10 & 21 \\ 23 & 25\end{pmatrix}_{26}$$
+
+Řešením: $\mathbf{A} = \begin{pmatrix}23 & 17 \\ 21 & 2\end{pmatrix}$, $|\mathbf{A}^{-1}|_{26} = \begin{pmatrix}2 & 9 \\ 5 & 23\end{pmatrix}$.
+
+---
+
+## 1.4 Polyalfabetické substituční šifry
 
 ### Definice
+
+Monoalfabetické šifry jsou málo bezpečné – distribuce četnosti ŠT odráží distribuci OT. **Polyalfabetické šifry** řeší tento nedostatek.
+
+**Systém polyalfabetických šifer** nad abecedou $\mathbb{Z}_N$ tvoří konečná nebo nekonečná posloupnost monoalfabetických transformací $(T_1, T_2, \ldots, T_n, \ldots)$. Prostor klíčů: $K = \{T_1, T_2, \ldots, T_n, \ldots\}$.
+
+Speciálním případem jsou **Vigenèrovské šifry** – konečná posloupnost transformací s posunem:
+
+$$K = \{k_1, k_2, \ldots, k_n\}, \quad k_i \in \mathbb{Z}_N$$
+
+### Vigenèrova šifra
 
 !!! info "Formule"
-    $$c_i = (p_i + k_{i \bmod V}) \bmod 26$$
+    $$c_j = |p_j + k_{|j|_n}|_N$$
 
-    Klíčové slovo délky $V$ se **cyklicky opakuje** přes celý plaintext.
+    Číslo $n$ se nazývá **periodou** (délkou klíče). Klíčové slovo se cyklicky opakuje.
 
-### Příklad — klíč "KEY", plaintext "KRYPTOGR"
+#### Příklad — klíč „KEY", plaintext „KRYPTOGR"
 
 | Pozice | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 |--------|---|---|---|---|---|---|---|---|
@@ -154,22 +380,33 @@ Pro $K = \begin{pmatrix}3 & 3 \\ 2 & 5\end{pmatrix}$:
 | Součet mod 26 | 20 | 21 | 22 | 25 | 23 | 12 | 16 | 21 |
 | Ciphertext | **U** | **V** | **W** | **Z** | **X** | **M** | **Q** | **V** |
 
+#### Příklad — klíč $K = (B,R,I,D,G,E) = (1,17,8,3,6,4)$
+
+OT: **THE LITERATURE OF CRYPTOGRAPHY HAS A CURIOUS HISTORY**
+
+ŠT v blocích po 5:
+```
+THELI TERAT UREOF CRYPT OGRAP HYHAS ACURI ...
+BRIDG EBRID GEBRI DGEBR IDGEB RIDGE BRIDG ...
+UYMOO XFIIW ...
+```
+
+Algoritmus snižuje vliv četnosti každého písmene OT – má k dispozici 6 různých transformací. Konečný klíč je ovšem slabina, zvláště je-li klíč slovem přirozeného jazyka.
+
 ### Vlastnosti a bezpečnost
 
-- **Klíčový prostor:** $26^V$ možností — výrazně větší než Caesar
-- **Vzdálenost jednoznačnosti:** $\delta_U = \frac{H(K)}{D}$, kde $D = 3.2$ b/znak (angličtina) → pro $V=4$: $\delta_U = \frac{4 \cdot \log_2 26}{3.2} \approx 5.9$ znaků
+- **Klíčový prostor:** $26^V$ možností
+- **Vzdálenost jednoznačnosti:** $\delta_U = \frac{H(K)}{D}$, kde $D \approx 3.2$ b/znak (angličtina)
 
 ### Útok: Kasiskiho test
 
-Pokud se v ciphertextu opakuje stejný vzor, jeho vzdálenost je pravděpodobně násobkem $V$.
+Pokud se v ciphertextu opakuje stejný vzor, vzdálenost opakování je pravděpodobně násobkem $V$.
 
 !!! example "Kasiskiho test"
-    Ciphertext: `...THE...abc...THE...abc...`
-    
-    Vzdálenost mezi `THE` a druhým `THE` = 12
-    
-    $\text{gcd}(12, ...) \Rightarrow V | 12 \Rightarrow V \in \{1, 2, 3, 4, 6, 12\}$
-    
+    Výskyt vzoru `THE` na pozicích 5 a 17 → vzdálenost = 12
+
+    $\gcd(12, \ldots) \Rightarrow V \mid 12 \Rightarrow V \in \{1, 2, 3, 4, 6, 12\}$
+
     Pak pro každou pozici mod $V$ zvlášť → Caesarova šifra → frekvenční analýza.
 
 ### Útok: Index koincidence (Friedman)
@@ -178,7 +415,6 @@ $$IC = \frac{\sum_{i=0}^{25} n_i(n_i - 1)}{N(N-1)}$$
 
 - Angličtina: $IC \approx 0.065$
 - Náhodný text: $IC \approx 0.038$
-- Vigenèrův šifrový text: $IC \approx 0.038$ + korekce závisí na $V$
 
 $$V \approx \frac{0.065 - 0.038}{IC - 0.038}$$
 
@@ -187,35 +423,54 @@ $$V \approx \frac{0.065 - 0.038}{IC - 0.038}$$
 
 ---
 
-## 1.5 Sloupcová transpozice
+## 1.5 Transpoziční šifry
 
-### Princip
+### Konfúze vs. difúze
 
-Transpozice **nemění** znaky (žádná konfúze), pouze **mění jejich pořadí** (difúze). Frekvenční vzory jsou zachovány.
+| Vlastnost | Substituce | Transpozice |
+|-----------|:----------:|:-----------:|
+| **Konfúze** – ztížení určení způsobu transformace a klíče na ŠT | ✓ | ✗ |
+| **Difúze** – rozptyl informace zprávy nebo klíče po celé šíři ŠT | ✗ | ✓ |
 
-### Příklad — klíč "3 1 4 2"
+- **Transpozice** = šifrování, kde dochází ke změně uspořádání písmen zprávy (žádná záměna znaků)
+- Transpozice odstraňuje systematické struktury a je označována za **permutaci** symbolů zprávy
+- Frekvenční vzory jednotlivých písmen jsou **zachovány** – útok možný přes frekvenční analýzu
 
-```
-Plaintext:   K R Y P T O G R A F I E
+### Sloupcová transpozice
 
-Seřadíme do mřížky (4 sloupce):
-Číslo sl.:   3   1   4   2
-Sloupce:     K   R   Y   P
-             T   O   G   R
-             A   F   I   E
+Sloupcová transpozice přerozděluje znaky OT do sloupců. Znaky OT se rozdělí do bloků po $k$ písmenech a zapíší se po sobě do mřížky; ŠT se čte po sloupcích.
 
-Bereme sloupce v pořadí 1,2,3,4:
-  Sloupec 1: R O F
-  Sloupec 2: P R E
-  Sloupec 3: K T A
-  Sloupec 4: Y G I
+!!! example "Příklad – pětisloupcová transpozice"
 
-Ciphertext: ROF PRE KTA YGI → ROFPREKTA YGI
-```
+    OT: **THIS IS THE MESSAGE TO SHOW HOW A COLUMNAR TRANSPOSITION WORKS**
+
+    Zapsáno do mřížky 5 sloupců:
+
+    | 1 | 2 | 3 | 4 | 5 |
+    |---|---|---|---|---|
+    | T | H | I | S | I |
+    | S | T | H | E | M |
+    | E | S | S | A | G |
+    | E | T | O | S | H |
+    | O | W | H | O | W |
+    | A | C | O | L | U |
+    | M | N | A | R | T |
+    | R | A | N | S | P |
+    | O | S | I | T | I |
+    | O | N | W | O | R |
+    | K | S | X | X | X |
+
+    Výsledný ŠT (čteme po sloupcích):
+
+    ```
+    TSEEO AMROO KHTST WCNAS NSIHS OHOAN IWXSE ASOLR STOXI MGHWU TPIRX
+    ```
+
+![Transpozice – vizualizace mřížky](../assets/img/prednasky/p01-034.png)
 
 ### Dvojitá transpozice
 
-Aplikujeme transpozici dvakrát (s různými nebo stejnými klíči) → výrazně vyšší bezpečnost.
+Aplikujeme transpozici dvakrát (s různými nebo stejnými klíči) → výrazně vyšší bezpečnost než jednoduchá transpozice.
 
 !!! tip "Zkouška"
     Umět provést transpozici ručně. Vědět, že transpozice = difúze bez konfúze.
@@ -226,16 +481,19 @@ Aplikujeme transpozici dvakrát (s různými nebo stejnými klíči) → výrazn
 
 !!! abstract "Rychlý přehled"
 
-    | Šifra | Klíč | Klíčový prostor | Útok |
-    |-------|------|----------------|------|
-    | Caesar | $k$ | 25 | Hrubá síla, frekv. analýza |
-    | Afinní | $(a,b)$ | 312 | Hrubá síla |
-    | Hill | matice $K$ | velký | Known-plaintext |
-    | Vigenère | slovo délky $V$ | $26^V$ | Kasiski, Friedman + frekv. |
-    | Transpozice | permutace | $n!$ | Frekv. analýza (vzory zachovány) |
+    | Šifra | Typ | Klíč | Klíčový prostor | Hlavní útok |
+    |-------|-----|------|-----------------|-------------|
+    | Caesar | Mono, subst. | $k$ | **25** | Hrubá síla, frekv. analýza |
+    | Afinní | Mono, subst. | $(a,b)$ | **312** | Frekv. analýza → soustava kongr. |
+    | Hill | Poly-gram, subst. | matice $\mathbf{A}$, $n \times n$ | velký | Known-plaintext → matice $\mathbf{A}$ |
+    | Vigenère | Polyalfab., subst. | slovo délky $V$ | $26^V$ | Kasiski + frekv. analýza |
+    | Sloupcová transpozice | Transpoziční | perm. sloupců | $n!$ | Frekv. analýza (vzory zachovány) |
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Zašifrujte „HELLO" Caesarovou šifrou s $k=13$ (ROT13).
+    1. Zašifrujte „HELLO" Caesarovou šifrou s $k = 13$ (ROT13).
     2. Proč musí být $\gcd(a, 26) = 1$ u afinní šifry?
     3. Jak Kasiskiho test odhalí délku klíče Vigenèrovy šifry?
     4. Jaký je rozdíl mezi konfúzí a difúzí? Která platí pro transpozici?
+    5. Vyjmenujte 5 modelů útočníka na šifrovací systémy.
+    6. Proč je Hillova šifra zranitelná na known-plaintext útok?
+    7. Jaký je rozdíl mezi šifrou a kódem?
