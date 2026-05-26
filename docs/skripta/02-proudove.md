@@ -41,6 +41,7 @@ Pro každý klíč $k \in K$ **generátor $G$** vytváří posloupnost hesla $h_
 **Zobrazení $E$ a $D$** každému klíči $k \in K$ přiřazují transformace šifrování $E_k$ a odšifrování $D_k$:
 
 $$c_1 = E_{h_1}(m_1),\quad c_2 = E_{h_2}(m_2),\quad \ldots$$
+
 $$m_1 = D_{h_1}(c_1),\quad m_2 = D_{h_2}(c_2),\quad \ldots \quad \text{kde } D_{h_i} = E_{h_i}^{-1}$$
 
 ### Heslo (keystream)
@@ -243,8 +244,11 @@ Vnitřní stav je tvořen 16 32bitovými slovy v matici $4 \times 4$:
 Základní operací v Salsa20 je **čtvrtinová runda QR(a, b, c, d)**, která vstup tvoří 4 slova a výstupem jsou rovněž 4 slova:
 
 $$b := b \oplus (a \boxplus d) \lll 7$$
+
 $$c := c \oplus (b \boxplus a) \lll 9$$
+
 $$d := d \oplus (c \boxplus b) \lll 13$$
+
 $$a := a \oplus (d \boxplus c) \lll 18$$
 
 kde $\boxplus$ označuje sčítání mod $2^{32}$ a $\lll$ označuje cyklickou rotaci vlevo.
@@ -314,8 +318,11 @@ Konstanta je stejná jako u Salsa20. ChaCha **přeuspořádává** některá slo
 ChaCha nahrazuje čtvrt-rundový QR(a,b,c,d) Salsa20 pomocí:
 
 $$a := a \boxplus b;\quad d := d \oplus a;\quad d \lll= 16$$
+
 $$c := c \boxplus d;\quad b := b \oplus c;\quad b \lll= 12$$
+
 $$a := a \boxplus b;\quad d := d \oplus a;\quad d \lll= 8$$
+
 $$c := c \boxplus d;\quad b := b \oplus c;\quad b \lll= 7$$
 
 Tato verze QR ChaCha **aktualizuje každé slovo $2\times$** (QR verze Salsa20 aktualizuje každé slovo pouze jednou). V průměru se po změně 1 vstupního bitu u QR Salsa20 změní 8 výstupních bitů, zatímco u QR ChaCha se změní 12,5 výstupních bitů.

@@ -241,6 +241,7 @@ SLJFE OLPU
 **L** (22×) odpovídá **E**, **U** (16×) odpovídá **T** v OT. Podle $c = |ap + b|_{26}$:
 
 $$|4a + b|_{26} = 11 \quad \text{(E=4 → L=11)}$$
+
 $$|19a + b|_{26} = 20 \quad \text{(T=19 → U=20)}$$
 
 Řešení: $|a|_{26} = 11$, $|b|_{26} = 19$. Dešifrovací transformace ($|11|^{-1}_{26} = 19$):

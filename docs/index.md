@@ -6,7 +6,7 @@ hide:
 
 # 🔐 BI-KAB – Kryptografie a bezpečnost
 
-**Studijní materiál · ČVUT FIT · prof. Ing. Róbert Lórencz, CSc.**
+**Neoficiální studijní materiál na BI-KAB | Vygenerován pomocí Claude na základě prezentací a obsahu z fit-wiki | Lukáš Matuška 2026**
 
 ---
 

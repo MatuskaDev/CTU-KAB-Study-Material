@@ -94,7 +94,9 @@ Kompaktní referenční tabulky pro rychlé opakování před zkouškou.
 
 ### Klasické šifry
 $$c = (p+k) \bmod 26 \quad\text{(Caesar)}$$
+
 $$c = (ap+b) \bmod 26, \;\gcd(a,26)=1 \quad\text{(Afinní)}$$
+
 $$\vec{c} = K\vec{p} \bmod 26 \quad\text{(Hill)}$$
 
 ### RSA
@@ -105,6 +107,7 @@ $$A = g^a \bmod p, \quad B = g^b \bmod p, \quad K = A^b = B^a = g^{ab} \bmod p$$
 
 ### ECC sčítání bodů
 $$s = \frac{y_Q-y_P}{x_Q-x_P} \bmod p \quad (P\neq Q), \qquad s = \frac{3x_P^2+a}{2y_P} \bmod p \quad (2P)$$
+
 $$x_R = s^2 - x_P - x_Q \bmod p, \qquad y_R = s(x_P-x_R)-y_P \bmod p$$
 
 ### SHA-256
@@ -118,22 +121,3 @@ $$\delta_U = \frac{H(K)}{D}, \quad D = R - r \quad\text{(redundance jazyka)}$$
 
 ### Rabin-Miller
 $$p - 1 = 2^b \cdot m, \quad z = a^m \bmod p, \quad \text{chyba} \leq 4^{-t}$$
-
----
-
-## Časová osa — kompromitované algoritmy
-
-| Rok | Událost |
-|-----|---------|
-| 1997 | DES prolomen hrubou silou (Deep Crack, $22.5h) |
-| 2001 | NIST vyhlásil AES (Rijndael) jako standard |
-| 2004 | MD5 koli – Wang & Yu |
-| 2005 | SHA-1 teoretická kolize – Wang |
-| 2007 | RC4 zakázán pro nové systémy (IETF) |
-| 2009 | A5/1 prolomen (Nohl, Rainbow tables FPGA) |
-| 2012 | Sony PS3 exploit (DSA konstantní k) |
-| 2015 | FREAK útok (export RSA 512b) |
-| 2017 | SHA-1 collision (SHAttered — Google & CWI) |
-| 2019 | RC4 zakázán v TLS (RFC 7465) |
-| 2022 | 3DES deprecated NIST |
-| 2024 | NIST vydal ML-KEM, ML-DSA (post-kvantové standardy) |

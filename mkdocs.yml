@@ -99,11 +99,11 @@ nav:
     - 3. Blokové šifry: skripta/03-blokove.md
     - 4. Hašovací funkce: skripta/04-hash.md
     - 5. Asymetrická kryptografie: skripta/05-asymetricka.md
-    - 6. ECC: skripta/06-ecc.md
+    - 6. Kryptografie eliptických křivek: skripta/06-ecc.md
     - 7. Kvantová kryptografie: skripta/07-kvanty.md
     - 8. Bezpečnost kryptosystémů: skripta/08-bezpecnost.md
-    - 9. Generování klíčů: skripta/09-klice.md
-    - 10. PKI: skripta/10-pki.md
+    - 9. Generátory náhodných čísel: skripta/09-klice.md
+    - 10. Certifikáty: skripta/10-pki.md
     - 11. Čipové karty: skripta/11-cipove-karty.md
   - Přehled algoritmů: prehled.md
   - Zkouška:

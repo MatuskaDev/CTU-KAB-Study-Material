@@ -74,6 +74,7 @@ $$|c^d|_m = |(p^e)^d|_m = |p^{ed}|_m = |p^{k(m-1)+1}|_m = |(p^{m-1})^k \cdot p|_
 ### Modulární aritmetika — klíčové fakty
 
 $$a^{\phi(n)} \equiv 1 \pmod{n} \quad \text{(Eulerova věta, } \gcd(a,n)=1\text{)}$$
+
 $$a^{p-1} \equiv 1 \pmod{p} \quad \text{(Fermatova věta, } p \text{ prvočíslo)}$$
 
 **Eulerova funkce:**
@@ -224,69 +225,120 @@ Pro praktické použití: doporučená délka modulárního prvočísla pro $\ma
 
 ## 5.4 RSA
 
-### Generování klíčů
+### Úvod — Šifrovací systém s veřejným klíčem
 
-1. Zvolíme velká prvočísla $p$ a $q$
-2. $n = p \cdot q$ (modulus)
-3. $\phi(n) = (p-1)(q-1)$
-4. Zvolíme $e$ s $\gcd(e, \phi(n)) = 1$ (typicky $e = 65537 = 2^{16}+1$)
-5. Spočítáme $d = e^{-1} \bmod \phi(n)$
-6. **Veřejný klíč:** $(n, e)$ &emsp; **Soukromý klíč:** $(n, d)$
+**Problém distribuce klíčů v síti:** Zabezpečení utajené komunikace v síti ⇒ každá komunikující dvojice musí používat šifrovací klíč. U symetrické šifry pokud je šifrovací klíč známý ⇒ dešifrovací klíč lze generovat s použitím malého počtu operací.
+
+**Šifrovací systém veřejného klíče (VK)** je řešením tohoto problému:
+
+- Používá **veřejný klíč $VK$** pro šifrování a **soukromý klíč $SK$** pro dešifrování.
+- **Vypočítat $SK$ při znalosti $VK$ je výpočetně neschodné.**
+- Použitím $VK_A$ kdokoliv může poslat Alici zprávu zašifrovanou $VK_A$, ale **POUZE** Alice umí zprávu dešifrovat, protože jen ona zná $SK_A$.
+- Každý subjekt má svůj vlastní $VK$ a $SK$. **Seznam klíčů $VK_1, VK_2, \ldots, VK_n$ je veřejný.**
+
+**Princip RSA šifrovacího systému:**
+
+- Uveden Rivestem, Shamirem a Adlemanem v roce **1970**.
+- RSA je šifrovací systém VK a je **založený na modulárním umocňování**.
+- Dvojice $(e, n)$ je $VK$ klíče; $e$ — exponent a $n$ — modul.
+- $n$ → součin dvou prvočísel $p$ a $q$, tj. $n = pq$ a $\gcd(e, \Phi(n)) = 1$.
+
+![RSA šifrování a autentizace](../assets/img/prednasky/p06-169.png)
+
+### Definice RSA a generování klíčů
+
+!!! info "Definice RSA"
+    - Nechť $p$ a $q$ jsou prvočísla.
+    - Vypočítáme $n = pq$, $\Phi(n) = (p-1)(q-1)$.
+    - Zvolíme $e$, $1 < e < n$, $\gcd(e, \Phi(n)) = 1$ a spočítáme $d = |e^{-1}|_{\Phi(n)}$.
+    - Dvojici $VK = (n, e)$ prohlásíme za **veřejný klíč** (a zveřejníme), dvojici $SK = (n, d)$ prohlásíme za **soukromý klíč**.
+
+**Postup pro generování $VK$ a $SK$:**
+
+- Každý subjekt si náhodně vybere 2 velká náhodná lichá čísla $p$ a $q$ se 340 dekadickými číslicemi. Pravděpodobnost prvočíselnosti: $\approx 2 / \log(10^{340})$, průměrně $\approx 400$ testů.
+- Ke zjištění prvočíselnosti: **Rabinův-Millerův pravděpodobnostní test** pro 100 „svědků". Pravděpodobnost složeného čísla: $\approx 10^{-60}$. Každý subjekt provádí výpočet pouze **dvakrát**.
+- **Doporučení:** zvolit $e$ jako nějaké prvočíslo $> p$ a $q$.
+- Podmínka $2^e > n$ zaručuje, že každý blok OT $m$ je správně zašifrován (nelze dešifrovat pouhým odmocňováním bez modulární redukce).
 
 ### Šifrování a dešifrování
 
-$$c = m^e \bmod n \qquad m = c^d \bmod n$$
+$$E(m) = c = |m^e|_n, \quad 0 < c < n$$
+$$D(c) = m = |c^d|_n$$
 
-**Proč to funguje?** Eulerova věta: $(m^e)^d = m^{ed} = m^{1 + k\phi(n)} = m \cdot (m^{\phi(n)})^k \equiv m \pmod{n}$
+**Formální důkaz dešifrování** (pomocí Eulerovy věty):
+
+$$D(c) = |c^d|_n = |m^{ed}|_n = |m^{k\Phi(n)+1}|_n = |(m^{\Phi(n)})^k \cdot m|_n = |m|_n$$
+
+kde $ed = k\Phi(n) + 1$ pro nějaké celé číslo $k$ a z Eulerovy věty $|p^{\Phi(n)}|_n = 1$ pro $\gcd(p, n) = 1$.
+
+!!! example "Příklad RSA — šifrování textu"
+    **Parametry:** $p = 43$, $q = 59$ ⇒ $n = 2537$, $e = 13$, $\gcd(13, 42 \cdot 58) = 1$ ✓, $\Phi(2537) = 42 \cdot 58 = 2436$
+
+    **OT:** `PUBLIC KEY CRYPTOGRAPHY` (X = 23 je výplň/padding)
+
+    Bloky OT (4-ciferné, tj. $s=2$ písmena, protože $2525 < 2537 < 252525$):
+    ```
+    1520  0111  0802  1004  2402  1724  1519  1406  1700  1507  2423
+    ```
+
+    Šifrování prvního bloku: $c = |1520^{13}|_{2537} = 95$
+
+    Všechny bloky ŠT:
+    ```
+    0095  1648  1410  1299  0811  2333  2132  0370  1185  1457  1084
+    ```
+
+    **Dešifrování:** $d = |13^{-1}|_{2436} = 937$ (Euklidův algoritmus). Dešifrování: $m = |c^{937}|_{2537}$
+
+    Ověření: $|c^{937}|_{2537} = |(m^{13})^{937}|_{2537} = |m \cdot (m^{2436})^5|_{2537} = m$ ✓
 
 ### Digitální podpis RSA
+
+Šifrovací systém RSA lze použít pro vysílání **podepsané zprávy**. Při použití podpisu se příjemce zprávy může ujistit, že zpráva přišla od oprávněného odesílatele, a to na základě nestranného a objektivního testu.
+
+**Princip (přímý RSA podpis):**
+
+Nechť subjekt 1 vysílá podepsanou zprávu $m$ subjektu 2. Subjekt 1 spočítá pro zprávu $m$ OT (podpis):
+
+$$S = D_{SK_1}(m) = |m^{d_1}|_{n_1}$$
+
+kde $SK_1 = (d_1, n_1)$ je soukromý dešifrovací klíč pro subjekt 1. Při $n_2 > n_1$, kde $VK_2 = (e_2, n_2)$ je veřejný šifrovací klíč pro subjekt 2, subjekt 1 zašifruje $S$ pomocí vztahu:
+
+$$c = E_{VK_2}(S) = |S^{e_2}|_{n_2}, \quad 0 < c < n_2$$
+
+**Ověření:** Subjekt 2 nejdříve použije soukromou dešifrovací transformaci $D_{SK_2}$ k získání $S$. K nalezení OT $m$ předpokládáme, že byl vyslán subjektem 1, dále použije veřejnou šifrovací transformaci $E_{VK_1}$, protože $E_{VK_1}(S) = E_{VK_1}(D_{SK_1}(m)) = m$.
+
+![Digitální podpis RSA schéma](../assets/img/prednasky/p06-172.png)
+
+Kombinace OT $m$ a podepsané verze $S$ přesvědčí subjekt 2, že zpráva byla vyslána subjektem 1. Také subjekt 1 **nemůže odepřít**, že on vyslal danou zprávu, protože žádný jiný subjekt než 1 nemůže generovat podepsanou zprávu $S$ z originálního textu zprávy $m$.
+
+**Moderní přístup (hash-then-sign):**
 
 | Krok | Operace |
 |------|---------|
 | Podepisování | $s = H(m)^d \bmod n$ |
 | Ověření | Spočítám $s^e \bmod n$, porovnám s $H(m)$ |
 
-!!! example "Příklad RSA (malá čísla)"
-    - $p=43, q=59 \Rightarrow n=2537, \phi(n)=2436$
-    - $e=13, d=937$ (protože $13 \cdot 937 = 12181 = 5 \cdot 2436 + 1$)
-    - Šifrování: $m=1520 \Rightarrow c = 1520^{13} \bmod 2537 = 95$
-    - Dešifrování: $c=95 \Rightarrow m = 95^{937} \bmod 2537 = 1520$ ✓
+### Bezpečnost RSA a faktorizace
 
-```mermaid
-flowchart LR
-    subgraph ENC["Šifrování"]
-        M["m"] --> CE["c = mᵉ mod n"]
-        VK["VK=(n,e)"] --> CE --> C["c"]
-    end
-    subgraph DEC["Dešifrování"]
-        C2["c"] --> DE["m = cᵈ mod n"]
-        SK["SK=(n,d)"] --> DE --> M2["m"]
-    end
-    subgraph SIGN["Podpis"]
-        MSG["m"] --> H["H(m)"]
-        H --> S["s = H(m)ᵈ mod n"]
-        SKS["SK"] --> S
-    end
-    subgraph VER["Ověření"]
-        SIG["s"] --> SE["sᵉ mod n"]
-        VKV["VK"] --> SE
-        MSG2["m"] --> HV["H(m)"]
-        SE & HV --> CMP["Rovnají se? ✓"]
-    end
-```
+**Modulární umocňování** pro šifrování s VK a $m$ o velikosti $\approx 680$ dekadických číslic probíhá v řádech milisekund a méně.
 
-### Bezpečnostní požadavky RSA
+!!! warning "Problém faktorizace a RSA"
+    - Pokud $p$ a $q$ jsou 100číslicová prvočísla ⇒ $n$ je 200číslicové. Nejrychlejší algoritmy pro faktorizaci potřebují $\approx$ **250 roků počítačového času**.
+    - Naopak, pokud známe $d$, ale neznáme $\Phi(n)$, je možné lehce faktorizovat $n$ (protože $ed - 1$ je násobkem $\Phi(n)$).
+    - **Dosud nebylo prokázáno** dešifrování zprávy zašifrované RSA bez faktorizace $n$!
+    - Výpočetní náročnost je tím větší, čím větší je modul.
 
-!!! warning "Bezpečnostní požadavky"
-    - **Délka klíče:** ≥ 2048 b (dnes doporučeno 3072–4096 b)
-    - **Padding:** Vždy OAEP pro šifrování, PSS pro podpisy — bez paddingu je RSA deterministické a náchylné k útokům
-    - **Bezpečnost spojena s faktorizací** $n = pq$ — kvadratické síto, GNFS (General Number Field Sieve)
-    - $p, q$ musí být náhodná a přibližně stejně velká
+**Požadavky na prvočísla** (ochrana proti speciálním technikám faktorizace):
+
+- $p-1$ a $q-1$ by měly mít velký prvočíselný faktor; $\gcd(p-1, q-1)$ by mělo být malé; $p$ a $q$ se musí dostatečně lišit.
+- FIPS 186-4 požaduje: $|p - q| > 2^{\frac{\Delta n}{2} - 100}$.
 
 !!! danger "Schoolbook RSA"
-    RSA bez paddingu je **nezabezpečená**:
-    - Deterministická (stejný $m$ → stejný $c$)
-    - Náchylná k Håstad's broadcast attack, small exponent attack
+    RSA bez paddingu je **nezabezpečené**:
+    - Deterministické (stejný $m$ → stejný $c$)
+    - Náchylné k Håstad's broadcast attack, small exponent attack
+    - **Padding:** Vždy OAEP pro šifrování, PSS pro podpisy
     
 ---
 
@@ -294,58 +346,148 @@ flowchart LR
 
 ### Motivace
 
-Dešifrování $c^d \bmod n$ je pomalé pro velké $n$. Čínská věta o zbytcích (CRT) to zrychlí 4–8×.
+Pro urychlení šifrování je normou doporučena množina šifrovacích exponentů $e$ s **malou Hammingovou váhou** ⇒ šifrování probíhá rychle v několika krocích, viz modulární umocňování. Například $e = 11_2, 1011_2, 10001_2, 2^{16}+1, \ldots$
 
-### Rozšířený soukromý klíč
+Pro urychlení **dešifrování** se využívá rozklad pomocí Čínské věty o zbytcích — **RSA-CRT**. Na základě tohoto rozkladu se při dešifrování počítá s čísly poloviční délky ⇒ zrychlení 4 až 8 násobné oproti původnímu dešifrovacímu výpočtu.
 
-$$d_p = d \bmod (p-1), \quad d_q = d \bmod (q-1), \quad q_{inv} = q^{-1} \bmod p$$
+### Definice RSA-CRT
 
-### Algoritmus
+!!! info "Formální definice"
+    - Nechť $p$ a $q$ jsou prvočísla. Vypočítáme $n = pq$, $\Phi(n) = (p-1)(q-1)$.
+    - Zvolíme $e$, $\gcd(e, \Phi(n)) = 1$ a spočítáme $d = |e^{-1}|_{\Phi(n)}$.
+    - Vypočítáme $d_p = |d|_{p-1}$, $d_q = |d|_{q-1}$, $q_{inv} = |q^{-1}|_p$.
+    - Dvojici $VK = (n, e)$ prohlásíme za **veřejný klíč**, pětici $SK = (p, q, d_p, d_q, q_{inv})$ za **soukromý klíč**.
+
+Pro **šifrování** platí stejný vztah jako pro RSA: $c = |m^e|_n$.
+
+Pro **dešifrování** v RSA-CRT musí platit pro $d_p$ a $d_q$ následující kongruence:
+
+$$ed_p \equiv 1 \pmod{p-1} \qquad ed_q \equiv 1 \pmod{q-1}$$
+
+### Algoritmus dešifrování
+
+1. Vypočteme $m_1 = |c^{d_p}|_p$ a $m_2 = |c^{d_q}|_q$
+2. Vypočteme $h = |q_{inv}(m_1 - m_2)|_p$
+3. Vypočteme $m = m_2 + hq$
 
 ```mermaid
 flowchart TB
-    C["Ciphertext c"] --> M1["m₁ = c^{d_p} mod p\n(číslo délky p — poloviční!)"]
-    C --> M2["m₂ = c^{d_q} mod q\n(číslo délky q — poloviční!)"]
-    M1 & M2 --> H["h = q_{inv}·(m₁-m₂) mod p"]
-    H --> M["m = m₂ + h·q"]
+    C["Ciphertext c"] --> M1["① m₁ = |c^{dₚ}|ₚ\n(číslo délky p — poloviční!)"]
+    C --> M2["① m₂ = |c^{d_q}|_q\n(číslo délky q — poloviční!)"]
+    M1 & M2 --> H["② h = |q_inv·(m₁-m₂)|ₚ"]
+    H --> M["③ m = m₂ + h·q"]
     style M fill:#1a1d2e,stroke:#34d399
 ```
 
-**Proč je to rychlejší?** Exponenciáty jsou délky $p$ a $q$ (polovina $n$). Exponencování $k$-bitového čísla trvá $O(k^3)$ → polovina délky = $(1/2)^3 = 1/8$ → **~4× rychlejší pro každé exponencování** + $m_1$ a $m_2$ jsou nezávislé → **paralelizovatelné**.
+- Krok 1 je výpočetně nejnáročnější. Počítáme ale s polovičními délkami čísel.
+- Výpočet $m_1$ a $m_2$ je datově nezávislý a lze ho provádět **paralelně**.
+- Krok 2 je nenáročné násobení rozdílu $m_1$ a $m_2$ s předpočítanou konstantou $q_{inv}$ a následná redukce modulo $p$.
+- Poslední krok představuje nejméně náročné násobení a sčítání.
+
+**Proč je to rychlejší?** Exponenciáty jsou délky $p$ a $q$ (polovina $n$). Exponencování $k$-bitového čísla trvá $O(k^3)$ → polovina délky = $(1/2)^3 = 1/8$ → **~4× rychlejší pro každé exponencování** + $m_1$ a $m_2$ jsou nezávislé → **paralelizovatelné** = celkem 4–8× zrychlení.
 
 ---
 
-## 5.6 ElGamal
+## 5.6 Digitální podpis
 
-### Generování klíčů (Alice)
+Digitální podpis je formou **asymetrického kryptografického schématu**:
 
-1. Zvolí prvočíslo $p$ a generátor $g$
-2. Zvolí tajné $k_A \in \{1, \ldots, p-2\}$
-3. $y_A = g^{k_A} \bmod p$ (veřejná hodnota)
-4. Veřejný klíč: $(p, g, y_A)$
+- **Soukromý klíč** — podepisování
+- **Veřejný klíč** — ověření
+
+### Vlastnosti digitálního podpisu
+
+| Vlastnost | Popis |
+|-----------|-------|
+| **Nezfalšovatelnost / autentizace** | Podpis se nedá napodobit jiným subjektem než podepisujícím; ověřitelnost — příjemce dokumentu musí být schopen ověřit, že podpis je platný |
+| **Integrita** | Podepsaná zpráva se nedá změnit, aniž by se zneplatnilo podpis |
+| **Nepopiratelnost** | Podepisující nesmí mít možnost popřít, že dokument podepsal |
+
+Digitální podpis je **skupina bitů**, jejichž hodnoty závisí na celém podepisovaném dokumentu. Využívá informaci, kterou zná jen podepisující (soukromý klíč). Implementace digitálního podpisu by měla být snadná, ale **falšování digitálního podpisu by mělo být výpočetně obtížné**:
+
+- neschůdné vyrobit falešný podpis pro existující zprávu
+- neschůdné vyrobit falešnou zprávu pro existující podpis
+
+### Kategorie digitálních podpisů
+
+**Přímé digitální podpisy (direct digital signature):**
+
+- Mezi dvěma subjekty, příjemce zná VK odesílatele.
+- Problém s popiratelností ⇒ pokud odesílatel popře podepsání zprávy, příjemce ho nemůže usvědčit (není nikdo třetí, kdo by svědčil proti odesílateli).
+
+**Verifikované digitální podpisy (arbitrated digital signature):**
+
+- Využívá důvěryhodnou třetí stranu (arbitra), který ověřuje podpisy všech zpráv.
+
+### DSS (Digital Signature Standard)
+
+![Porovnání RSA a DSS podpisu](../assets/img/prednasky/p06-179.png)
+
+---
+
+## 5.7 ElGamal
+
+**El Gamal** (Taher ElGamal) je algoritmus pro kryptografii s veřejným klíčem. Je **založen na Diffie-Hellmanově výměně klíčů**, resp. problému diskrétního logaritmu (DLP). Podobně jako RSA umožňuje El Gamal šifrování i digitální podpis.
+
+### Připomenutí DH
+
+- Alice (A) a Bob (B) si veřejně dohodnou prvočíslo $m$ a bázi $a$, $1 < a < m$ (přesněji: grupu řádu $m-1$).
+- A si náhodně zvolí číslo $k_A$ takové, že $0 < k_A < m$ a $\gcd(k_A, m-1) = 1$, spočítá $y_A = |a^{k_A}|_m$ a odešle ho B.
+- B si náhodně zvolí číslo $k_B$ takové, že $0 < k_B < m$ a $\gcd(k_B, m-1) = 1$, spočítá $y_B = |a^{k_B}|_m$ a odešle ho A.
+- A i B spočítají sdílený klíč $K = |y_B^{k_A}|_m = |(a^{k_B})^{k_A}|_m = |a^{k_A \cdot k_B}|_m = |(a^{k_A})^{k_B}|_m = |y_A^{k_B}|_m$.
+- DHP (Diffie-Hellmanův problém) je složitější než DLP — ale nevíme jistě, zda je DHP jednodušší než DLP.
+
+### Příprava klíče (Alice)
+
+El Gamal vzniká úpravou DH:
+
+1. Alice zvolí číslo $g$ a prvočíslo $m$, $1 < g < m$ (přesněji: grupu řádu $m-1$ a její generátor $g$).
+2. Alice si náhodně zvolí číslo $k_A$ (soukromý klíč) takové, že $0 < k_A < m$, spočítá $y_A = |g^{k_A}|_m$.
+3. Alice zveřejní uspořádanou trojici $(m, g, y_A)$ jako svůj **veřejný klíč**. $k_A$ je jejím **soukromým klíčem**.
 
 ### Šifrování (Bob → Alice)
 
-1. Zvolí náhodné $k_B$
-2. $y_B = g^{k_B} \bmod p$
-3. Sdílený klíč: $K = y_A^{k_B} \bmod p$
-4. Ciphertext: $c = p_{msg} \cdot K \bmod p$
-5. Odešle $(y_B, c)$
+1. Bob chce Alici poslat zprávu $p$.
+2. Bob si náhodně zvolí číslo $k_B$ takové, že $0 < k_B < m$, spočítá $y_B = |g^{k_B}|_m$.
+3. Bob spočítá sdílený klíč $K = |y_A^{k_B}|_m = |(g^{k_A})^{k_B}|_m = |g^{k_A \cdot k_B}|_m = |(g^{k_B})^{k_A}|_m = |y_B^{k_A}|_m$.
+4. Bob zašifruje zprávu $p$ pomocí vztahu $c = |p \cdot K|_m$.
+5. Bob odešle Alici uspořádanou dvojici $(y_B, c)$.
 
 ### Dešifrování (Alice)
 
-$$K = y_B^{k_A} \bmod p, \quad p_{msg} = c \cdot K^{-1} \bmod p$$
+1. Alice dostala od Boba zprávu $(y_B, c)$.
+2. Alice si spočítá sdílený klíč $K = |y_B^{k_A}|_m = |(g^{k_B})^{k_A}|_m = |g^{k_B \cdot k_A}|_m$.
+3. Alice si spočítá $|K^{-1}|_m$ (Euklidův rozšířený algoritmus).
+4. Alice dešifruje zprávu: $p = |c \cdot K^{-1}|_m = |p \cdot K \cdot K^{-1}|_m = |p|_m = p$.
+
+!!! example "Příklad El Gamal"
+    **Parametry:** $m = 2543$, $g = 5$, $y_A = |g^{k_A}|_m = 505$ (pro $k_A = 10$, ale B nezná).
+
+    **Šifrování:** $k_B = 123$ (náhodná volba)
+    $$y_B = |g^{k_B}|_{2543} = |5^{123}|_{2543} = 308, \quad K = |y_A^{k_B}|_{2543} = |505^{123}|_{2543} = 1883$$
+
+    Zpráva $p =$ `"ELGAMAL RULES"` → $0511, 0701, 1301, 1118, 2111, 0519$
+
+    $$c = |p \cdot K|_{2543} \to 0959, 0166, 0874, 2133, 0304, 0765$$
+
+    Bob odešle A dvojice: $(308, 959), (308, 166), (308, 874), \ldots$
+
+    **Dešifrování:** Alice dostala $(308, 959)$, tzn. $y_B = 308$, $c = 959$
+    $$K = |y_B^{k_A}|_m = |308^{10}|_{2543} = 1883$$
+    $$|K^{-1}|_{2543} = |1883^{-1}|_{2543} = 1337 \quad \text{(Euklidův rozšířený algoritmus)}$$
+    $$p = |959 \cdot 1337|_{2543} = 511 \to \text{"EL"}$$
+    Obdobně pro další bloky zprávy.
 
 !!! danger "Kritická slabina"
     **$k_B$ musí být vždy nové a náhodné!** Pokud se $k_B$ opakuje pro zprávy $c_1, c_2$:
-    
-    $$\frac{c_1}{c_2} = \frac{p_1 \cdot K}{p_2 \cdot K} = \frac{p_1}{p_2} \pmod{p}$$
-    
+
+    $$\frac{c_1}{c_2} = \frac{p_1 \cdot K}{p_2 \cdot K} = \frac{p_1}{p_2} \pmod{m}$$
+
     Poměr plaintextů je přímo znám.
 
 ---
 
-## 5.7 DSA — Digital Signature Algorithm
+## 5.8 DSA — Digital Signature Algorithm
 
 ### Parametry
 
@@ -415,13 +557,18 @@ flowchart LR
     | DSA | DLP | $(x, y)$ | Pouze podpis |
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Popište RSA: generování klíčů, šifrování, dešifrování, podpis.
-    2. Proč je RSA bez paddingu nebezpečné?
-    3. Jak RSA-CRT zrychlí dešifrování?
-    4. Proč musí být $k_B$ v ElGamal vždy nové?
-    5. Vysvětlete Sony PS3 exploit — proč konstantní $k$ kompromituje DSA?
-    6. Jaký je rozdíl mezi DH a ElGamal?
-    7. Co je problém diskrétního logaritmu? Proč je těžký v $\mathbb{Z}_p^*$ ale snadný v $\mathbb{Z}_p$?
-    8. Zašifrujte zprávu exponenciální šifrou ($m = 2633$, $e = 29$, blok 1907).
-    9. Co je slabá instance a silné prvočíslo u exponenciální šifry?
-    10. Jak funguje DH pro 3 subjekty?
+    1. Vysvětlete princip šifrovacího systému VK — jak se liší od symetrické šifry?
+    2. Popište RSA: generování klíčů, šifrování, dešifrování, podpis. Formální důkaz dešifrování.
+    3. Jaký je vztah RSA k problému faktorizace? Proč nebylo prokázáno, že dešifrování RSA vyžaduje faktorizaci?
+    4. Jak funguje RSA-CRT? Jaká je podmínka na $ed_p$ a $ed_q$? Proč je to rychlejší?
+    5. Popište přímý digitální podpis RSA (bez hašování). Jaké vlastnosti digitálního podpisu garantuje?
+    6. Jaký je rozdíl mezi přímým a verifikovaným digitálním podpisem?
+    7. Proč je RSA bez paddingu nebezpečné?
+    8. Co je El Gamal? Jak se liší od DH? Projděte šifrování a dešifrování na příkladu.
+    9. Proč musí být $k_B$ v El Gamal vždy nové a náhodné?
+    10. Vysvětlete Sony PS3 exploit — proč konstantní $k$ kompromituje DSA?
+    11. Jaký je rozdíl mezi DH a El Gamal?
+    12. Co je problém diskrétního logaritmu? Proč je těžký v $\mathbb{Z}_p^*$ ale snadný v $\mathbb{Z}_p$?
+    13. Zašifrujte zprávu exponenciální šifrou ($m = 2633$, $e = 29$, blok 1907).
+    14. Co je slabá instance a silné prvočíslo u exponenciální šifry?
+    15. Jak funguje DH pro 3 subjekty?
