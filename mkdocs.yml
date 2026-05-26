@@ -106,3 +106,6 @@ nav:
     - 10. PKI: skripta/10-pki.md
     - 11. Čipové karty: skripta/11-cipove-karty.md
   - Přehled algoritmů: prehled.md
+  - Zkouška:
+    - Písemný test: pisemka.md
+    - Ústní zkouška: ustni.md
