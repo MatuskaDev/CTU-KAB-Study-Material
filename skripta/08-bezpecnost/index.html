@@ -1,0 +1,2142 @@
+
+<!doctype html>
+<html lang="cs" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Studijní materiál ČVUT FIT 2023 · prof. Ing. Róbert Lórencz, CSc.">
+      
+      
+        <meta name="author" content="ČVUT FIT">
+      
+      
+      
+        <link rel="prev" href="../07-kvanty/">
+      
+      
+        <link rel="next" href="../09-klice/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>8. Bezpečnost kryptosystémů - BI-KAB – Kryptografie a bezpečnost</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#8-bezpecnost-kryptosystemu" class="md-skip">
+          Přeskočit obsah
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Záhlaví">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-header__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BI-KAB – Kryptografie a bezpečnost
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              8. Bezpečnost kryptosystémů
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na světlý režim"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Přepnout na světlý režim" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na tmavý režim"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Přepnout na tmavý režim" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Hledat" placeholder="Hledat" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Vyhledávání">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Sdílet" aria-label="Sdílet" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Vyčistit" aria-label="Vyčistit" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializace vyhledávání
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Karty" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Domů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Skripta
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../prehled/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Přehled algoritmů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../pisemka/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Zkouška
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigace" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-nav__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    BI-KAB – Kryptografie a bezpečnost
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skripta
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Skripta
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-klasicka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Klasická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-proudove/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Proudové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-blokove/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Blokové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-hash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Hašovací funkce
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-asymetricka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Asymetrická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-ecc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Kryptografie eliptických křivek
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-kvanty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Kvantová kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Bezpečnost kryptosystémů
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Bezpečnost kryptosystémů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Obsah stránky">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Obsah stránky
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#81-hodnoceni-odolnosti-sifry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Hodnocení odolnosti šifry
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-typy-bezpecnosti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Typy bezpečnosti
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.2 Typy bezpečnosti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teoreticka-bezpecnost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teoretická bezpečnost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nepodminena-bezpecnost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nepodmíněná bezpečnost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#podminena-bezpecnost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Podmíněná bezpečnost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prokazatelna-bezpecnost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prokazatelná bezpečnost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vypocetni-bezpecnost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Výpočetní bezpečnost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kerckhoffsuv-princip-1885" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kerckhoffsův princip (1885)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83-shannonova-teorie-informace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Shannonova teorie informace
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.3 Shannonova teorie informace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entropie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entropie
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neurcitost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Neurčitost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obsaznost-jazyka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Obsažnost jazyka
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#absolutni-obsaznost-jazyka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Absolutní obsažnost jazyka
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nadbytecnost-jazyka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nadbytečnost jazyka
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vzdalenost-jednoznacnosti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vzdálenost jednoznačnosti
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vzdálenost jednoznačnosti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#odvozeni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Odvození
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definice
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#konfuze-a-difuze" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Konfúze a difúze
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#84-teorie-slozitosti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Teorie složitosti
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.4 Teorie složitosti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-notace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O-notace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#klasifikace-algoritmu-podle-slozitosti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Klasifikace algoritmů podle složitosti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabulka-slozitosti-pro-n-106" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabulka složitosti pro \(n = 10^6\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kategorie-problemu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kategorie problémů
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tridy-slozitosti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Třídy složitosti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagram-trid-slozitosti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagram tříd složitosti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vztah-kryptologie-a-trid-slozitosti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vztah kryptologie a tříd složitosti
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#85-typy-utocniku" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Typy útočníků
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.5 Typy útočníků">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#klasifikace-utocniku-podle-znalosti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Klasifikace útočníků podle znalostí
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shrnuti-kapitoly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shrnutí kapitoly
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-klice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Generátory náhodných čísel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-pki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Certifikáty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-cipove-karty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Čipové karty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prehled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Přehled algoritmů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zkouška
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zkouška
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pisemka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Písemný test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ustni/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ústní zkouška
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigace" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Domů
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Skripta
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="8-bezpecnost-kryptosystemu">8. Bezpečnost kryptosystémů<a class="headerlink" href="#8-bezpecnost-kryptosystemu" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Cíle kapitoly</p>
+<ul>
+<li>Znát typy bezpečnosti kryptosystémů a Kerckhoffsův princip</li>
+<li>Porozumět Shannonově teorii informace — entropie, obsažnost jazyka, nadbytečnost, vzdálenost jednoznačnosti</li>
+<li>Chápat konfúzi a difúzi jako nástroje k potlačení redundance</li>
+<li>Orientovat se v teorii složitosti a zařadit kryptografické problémy do tříd P/NP</li>
+</ul>
+</div>
+<hr />
+<h2 id="81-hodnoceni-odolnosti-sifry">8.1 Hodnocení odolnosti šifry<a class="headerlink" href="#81-hodnoceni-odolnosti-sifry" title="Permanent link">&para;</a></h2>
+<p>Odolnost šifry vůči útokům je určena:</p>
+<ul>
+<li><strong>Vnitřní strukturou šifry</strong> (nelineární prvky, délka klíče, key management, ...)</li>
+<li><strong>Použitou abecedou</strong> → určité bigramy, trigramy, atd. jako např. „XZ", „ZXW" se nevyskytují, což zjednodušuje útok → <strong>teorie informace</strong></li>
+<li><strong>Teoretickou bezpečností</strong> (pseudonáhodné generátory čísel jsou predikovatelné, ...)</li>
+<li><strong>Složitostí matematického problému</strong>, na kterém je šifra postavena → <strong>podmíněná bezpečnost</strong> a <strong>nepodmíněná bezpečnost</strong> v rámci <strong>teorie složitosti</strong></li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Dvě hlavní teorie</p>
+<ul>
+<li><strong>Teorie informace</strong> → za jakých podmínek znalosti (jazykového) kryptografického prostředí lze kryptografický algoritmus rozluštit.</li>
+<li><strong>Teorie složitosti</strong> → s jakou složitostí bude možné kryptografický algoritmus rozluštit.</li>
+</ul>
+</div>
+<hr />
+<h2 id="82-typy-bezpecnosti">8.2 Typy bezpečnosti<a class="headerlink" href="#82-typy-bezpecnosti" title="Permanent link">&para;</a></h2>
+<h3 id="teoreticka-bezpecnost">Teoretická bezpečnost<a class="headerlink" href="#teoreticka-bezpecnost" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Definice — Teoretická bezpečnost</p>
+<p>O teoretické bezpečnosti kryptosystému hovoříme tehdy, pokud při splnění konkrétních podmínek je šifra považována za bezpečnou, ovšem dané podmínky může být v praxi těžké splnit.</p>
+</div>
+<p>Problémy v praxi:
+- distribuce tajného klíče
+- generování náhodných čísel
+- implementace v hardwaru
+- ...</p>
+<div class="admonition example">
+<p class="admonition-title">Příklad — PS3 / ECDSA</p>
+<p>Sony pro generování podpisu u zařízení PS3 použilo algoritmu <em>ECDSA</em>. Soukromý klíč <em>SK</em> byl však napevno nastaven v zařízení, stačily tak dva různé digitální podpisy a klíč <em>SK</em> se dal snadno dopočítat.</p>
+</div>
+<hr />
+<h3 id="nepodminena-bezpecnost">Nepodmíněná bezpečnost<a class="headerlink" href="#nepodminena-bezpecnost" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Definice — Nepodmíněná bezpečnost</p>
+<p>Kryptosystém je nepodmíněně bezpečný, pokud můžeme dokázat, že jej není možné prolomit <strong>bez ohledu na útočníkem použité prostředky</strong>.</p>
+</div>
+<ul>
+<li>Pokud útočník nezíská opakovaným použitím šifry žádnou novou užitečnou informaci, hovoříme o <strong>absolutní bezpečnosti</strong>.</li>
+<li>Protože asymetrické šifry ve svém <em>VK</em> nesou informace pro zjištění <em>SK</em>, nemohou být nikdy <strong>nepodmíněně bezpečné</strong>.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Příklad — Vernamova šifra (OTP)</p>
+<p><em>Vernamova šifra (one-time-pad)</em> provádí posuv každého znaku o náhodný počet míst v použité abecedě. Je jedinou prakticky používanou nepodmíněně bezpečnou šifrou, ovšem za podmínek:
+- klíč délky ≥ délky zprávy
+- klíč náhodný, nikdy nepoužitý znovu
+- šifrování: <span class="arithmatex">\(c = p \oplus k\)</span></p>
+<p><strong>Problém:</strong> klíč musíme tajně distribuovat → stejně těžký problém jako distribuovat zprávu.</p>
+</div>
+<hr />
+<h3 id="podminena-bezpecnost">Podmíněná bezpečnost<a class="headerlink" href="#podminena-bezpecnost" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Definice — Podmíněná bezpečnost</p>
+<p>Kryptosystém je podmíněně bezpečný, pokud jeho prolomení vyžaduje <strong>prostředky, které nemáme</strong> (výpočetní výkon, paměťový prostor, ...).</p>
+</div>
+<ul>
+<li>Podmíněná bezpečnost má velmi striktní podmínky → zavádíme podtřídy: <strong>prokazatelnou</strong> a <strong>výpočetní bezpečnost</strong>.</li>
+<li>Podmíněná bezpečnost je slabší variantou nepodmíněné bezpečnosti — opírá svou bezpečnost o prostředky oproti podstatě šifry.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Příklad — AES</p>
+<p>AES je systémem podmíněně bezpečným, protože při útoku nemáme žádnou informaci o klíči a lze tak provádět pouze útok hrubou silou, což je zatím výpočetně neproveditelné v rozumném čase.</p>
+</div>
+<hr />
+<h3 id="prokazatelna-bezpecnost">Prokazatelná bezpečnost<a class="headerlink" href="#prokazatelna-bezpecnost" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Definice — Prokazatelná bezpečnost</p>
+<p>Kryptosystém je prokazatelně bezpečný, pokud je znám matematický důkaz, který říká, že provést útok znamená vyřešit problém výpočetně ekvivalentní s <strong>problémem třídy NP</strong>.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">NP problém</p>
+<p>Problém neřešitelný v polynomiálním čase deterministickým Turingovým strojem → více v teorii složitosti dále v přednášce.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Příklad — RSA</p>
+<p><em>RSA</em> je systémem prokazatelně bezpečným, protože je založen na problému faktorizace (spadá do třídy NP).</p>
+</div>
+<hr />
+<h3 id="vypocetni-bezpecnost">Výpočetní bezpečnost<a class="headerlink" href="#vypocetni-bezpecnost" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Definice — Výpočetní bezpečnost</p>
+<p>Kryptosystém je výpočetně bezpečný, pokud pro jeho prolomení je třeba vynaložit prostředky nebo čas, které přesahují <strong>cenu respektive životnost informace</strong>.</p>
+</div>
+<p><img alt="Definice výpočetní bezpečnosti a COPACOBANA" src="../../assets/img/prednasky/p08-218.png" /></p>
+<div class="admonition example">
+<p class="admonition-title">Příklad — COPACABANA (2006)</p>
+<p>Prolomení DES na zařízení typu <strong>COPACABANA</strong> (2006) je možné v rámci <strong>7 dní</strong> s náklady na hardware kolem <strong>$10 000</strong>. V takovém případě je šifra výpočetně bezpečná pro informace, které ztrácí význam během kratší doby nebo mají menší hodnotu.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">COPACABANA</p>
+<p>Jedná se o zařízení <strong>založené na FPGA</strong> optimalizované pro běh kryptoanalytických algoritmů, vhodné pro paralelní výpočetní problémy.</p>
+</div>
+<hr />
+<h3 id="kerckhoffsuv-princip-1885">Kerckhoffsův princip (1885)<a class="headerlink" href="#kerckhoffsuv-princip-1885" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Kerckhoffsův princip</p>
+<p>Systém musí být prakticky, pokud ne matematicky, nedešifrovatelný a jeho utajení nesmí být podmínkou jeho bezpečnosti. Dále musí být přenositelný, schopný měnit klíče dle přání uživatele, snadný na používání a nesmí vyžadovat žádné speciální znalosti uživatele.</p>
+</div>
+<p><img alt="Kerckhoffsův princip a bezpečnostní předpoklady" src="../../assets/img/prednasky/p08-219.png" /></p>
+<ul>
+<li>Při posuzování bezpečnosti kryptosystému <strong>předpokládáme, že útočník zná celý kryptosystém</strong> (Shannonovo maximum: <em>"The enemy knows the system"</em>).</li>
+<li>Založení bezpečnosti na <em>security through obscurity</em> je nepřijatelné — může sloužit pouze jako <strong>další bezpečnostní prvek</strong>.</li>
+</ul>
+<hr />
+<h2 id="83-shannonova-teorie-informace">8.3 Shannonova teorie informace<a class="headerlink" href="#83-shannonova-teorie-informace" title="Permanent link">&para;</a></h2>
+<p>V letech 1948 a 1949 C. E. Shannon zveřejněním svých prací položil základy teorie informace a teorie šifrovacích systémů. Stanovil teoretickou míru bezpečnosti šifry pomocí <strong>neurčitosti otevřeného textu (OT)</strong>.</p>
+<ul>
+<li>Mějme ŠT → jestliže se nic nového o OT nedozvíme (například zúžení prostoru možných zpráv), i když přijmeme jakékoliv množství ŠT → šifra dosahuje <strong>absolutní bezpečnosti</strong> (<em>perfect secrecy</em>), tj. ŠT nenese žádnou informaci o OT.</li>
+<li>Zvyšováním počtu znaků ŠT je u většiny praktických šifer (zvlášť u historických šifer) poskytováno více a více <strong>informace o OT</strong>.</li>
+<li>Tato informace nemusí být bezprostředně viditelná.</li>
+<li><strong>Vzdálenost jednoznačnosti</strong> = počet znaků ŠT, pro který množství informace o OT obsažené v ŠT dosáhne takového bodu, že je možný jen jediný OT.</li>
+</ul>
+<hr />
+<h3 id="entropie">Entropie<a class="headerlink" href="#entropie" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Definice — Entropie</p>
+<p>Entropie je množství informace obsažené ve zprávě. Teorie informace měří entropii zprávy průměrným počtem bitů nezbytných k jejímu zakódování při optimálním kódování (minimum bitů).</p>
+<p>Entropie zprávy ze zdroje <span class="arithmatex">\(X\)</span> je:
+$<span class="arithmatex">\(H(X) = -\sum_{i=1}^{n} p_i \log_2 p_i \quad [\text{bitů}]\)</span>$</p>
+<p>kde <span class="arithmatex">\(p_1, \ldots, p_n\)</span> jsou pravděpodobnosti všech zpráv <span class="arithmatex">\(X_1, \ldots, X_n\)</span> zdroje <span class="arithmatex">\(X\)</span> a <span class="arithmatex">\(-p_i \log_2 p_i\)</span> = počet bitů nutných k optimálnímu zakódování zprávy <span class="arithmatex">\(X_i\)</span>.</p>
+</div>
+<p><img alt="Definice entropie" src="../../assets/img/prednasky/p08-222.png" /></p>
+<p>Speciální případ — <span class="arithmatex">\(n\)</span> zpráv se <strong>stejnou pravděpodobností</strong> <span class="arithmatex">\(p = \frac{1}{n}\)</span>:
+$<span class="arithmatex">\(H(X) = -n \left(\frac{1}{n} \log_2 \frac{1}{n}\right) = \log_2 n\)</span>$</p>
+<div class="admonition note">
+<p class="admonition-title">Maximální entropie</p>
+<p>Lze dokázat, že <strong>maximální entropie</strong> nabývá zdroj, který produkuje všechny zprávy se stejnou pravděpodobností. Má-li zdroj <span class="arithmatex">\(n\)</span> zpráv se stejnou pravděpodobností <span class="arithmatex">\(\frac{1}{n}\)</span>, pak dosahuje maximální entropie <span class="arithmatex">\(\log_2 n\)</span>.</p>
+<p><em>Tip:</em> V případě velkých souborů dat lze získat orientační představu a horní odhad pro entropii těchto souborů použitím kvalitního komprimačního programu → entropie souboru ≤ počet bitů komprimovaného souboru.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Příklady výpočtu entropie</p>
+<p><strong>Příklad 1:</strong> Mějme 2 možné zprávy: „panna" nebo „orel" a nechť mají stejnou pravděpodobnost:
+$<span class="arithmatex">\(H(X) = -0.5 \cdot (-1) - 0.5 \cdot (-1) = 1 \text{ bit}\)</span>$</p>
+<p><strong>Příklad 2:</strong> Zdroj vydávající zprávy: „bílý" s pravděpodobností <span class="arithmatex">\(\frac{1}{4}\)</span> a „černý" s pravděpodobností <span class="arithmatex">\(\frac{3}{4}\)</span>:
+$<span class="arithmatex">\(H(X) = 0.25 \cdot \log_2 4 + 0.75 \cdot \log_2 \frac{4}{3} = 0.25 \cdot 2 + 0.75 \cdot 0.41 = 0.81 \text{ b}\)</span>$</p>
+<p><strong>Příklad 3:</strong> Zdroj vydávající pouze jednu zprávu <span class="arithmatex">\(p = 1\)</span>:
+$<span class="arithmatex">\(H(X) = -(1 \cdot 0) = 0 \text{ b}\)</span>$
+Daný zdroj nemá žádnou neurčitost a zprávy z něj nenesou žádnou informaci.</p>
+</div>
+<hr />
+<h3 id="neurcitost">Neurčitost<a class="headerlink" href="#neurcitost" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Neurčitost</p>
+<p>Entropie zprávy vyjadřuje také míru její <strong>neurčitosti</strong>. Tato míra neurčitosti je <strong>počet bitů, které potřebujeme získat luštěním ŠT, s cílem určit OT</strong>.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Příklad</p>
+<p>Například v případě, že část ŠT „4lů9Fg" vyjadřuje buď výsledek „panna" nebo „orel", pak míra neurčitosti této zprávy je rovna právě <strong>1 bitu</strong>.</p>
+</div>
+<hr />
+<h3 id="obsaznost-jazyka">Obsažnost jazyka<a class="headerlink" href="#obsaznost-jazyka" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Definice — Obsažnost jazyka (průměrná entropie)</p>
+<p>Pro daný jazyk uvažujme množinu <span class="arithmatex">\(X\)</span> všech <span class="arithmatex">\(N\)</span>-znakových zpráv. Obsažnost jazyka pro zprávy délky <span class="arithmatex">\(N\)</span> znaků definujeme jako výraz</p>
+<div class="arithmatex">\[R_N = \frac{H(X)}{N}\]</div>
+<p>tj. průměrnou entropii na 1 znak (průměrný počet bitů informace v 1 znaku).</p>
+</div>
+<p><img alt="Obsažnost jazyka a absolutní obsažnost" src="../../assets/img/prednasky/p08-225.png" /></p>
+<ul>
+<li>Máme-li dlouhou zprávu, její další písmeno bývá v řadě případů určeno již jednoznačně nebo je možný jen malý počet variant.</li>
+<li>Například máme-li 13 znakovou zprávu „Zítra odpoled", je pravděpodobné, že pokračuje písmenem „n". U 14. znaku nepřibude žádná entropie.</li>
+<li>U přirozených jazyků výraz <span class="arithmatex">\(R_N\)</span> pro zvyšující se <span class="arithmatex">\(N\)</span> klesá.</li>
+<li>Z předchozího plyne: <span class="arithmatex">\(\lim_{N \to \infty} R_N = r\)</span></li>
+<li>Konstanta <span class="arithmatex">\(r\)</span> je <strong>obsažnost jazyka vzhledem k jednomu písmenu</strong>.</li>
+<li>Pro hovorovou angličtinu je <span class="arithmatex">\(r = 1.3\)</span> až <span class="arithmatex">\(1.5\)</span> bitů/znak.</li>
+</ul>
+<hr />
+<h3 id="absolutni-obsaznost-jazyka">Absolutní obsažnost jazyka<a class="headerlink" href="#absolutni-obsaznost-jazyka" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Definice — Absolutní obsažnost jazyka <span class="arithmatex">\(R\)</span></p>
+<p>Mějme stejně pravděpodobné zprávy tvořené v jazyce s <span class="arithmatex">\(L\)</span> stejně pravděpodobnými znaky:</p>
+<div class="arithmatex">\[R_N = \frac{\log_2 L^N}{N} = \log_2 L = R\]</div>
+<p><span class="arithmatex">\(R\)</span> nazýváme <strong>absolutní obsažnost jazyka</strong>. Absolutní obsažnosti dosahuje takový jazyk, který poskytuje generátor náhodných znaků. Je to maximální neurčitost, kterou přirozené jazyky nemohou dosáhnout, neboť jednotlivé znaky tvoří slova a věty, které mají odlišné pravděpodobnosti.</p>
+</div>
+<hr />
+<h3 id="nadbytecnost-jazyka">Nadbytečnost jazyka<a class="headerlink" href="#nadbytecnost-jazyka" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Definice — Nadbytečnost jazyka <span class="arithmatex">\(D\)</span></p>
+<p>Nadbytečnost (redundance) jazyka vzhledem k jednomu písmenu nám vyjadřuje, kolik bitů je v jednom znaku daného jazyka nadbytečných, a je dána výrazem:</p>
+<div class="arithmatex">\[D = R - r\]</div>
+<p>a číslo <span class="arithmatex">\(\frac{100D}{R}\)</span> pak udává, kolik bitů jazyka je nadbytečných procentuálně.</p>
+</div>
+<p><img alt="Výpočet nadbytečnosti angličtiny" src="../../assets/img/prednasky/p08-227.png" /></p>
+<div class="admonition example">
+<p class="admonition-title">Nadbytečnost angličtiny</p>
+<p>Pro angličtinu máme <span class="arithmatex">\(L = 26\)</span>, <span class="arithmatex">\(R = \log_2 26 = 4.7\)</span> bitů na písmeno, <span class="arithmatex">\(r = 1.5\)</span> bitů/písmeno:</p>
+<div class="arithmatex">\[D = R - r = 4.7 - 1.5 = 3.2 \text{ nadbytečných bitů/písmeno}\]</div>
+<div class="arithmatex">\[\frac{100D}{R} = \frac{100 \cdot 3.2}{4.7} = 68\% \text{ nadbytečných bitů/písmeno}\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">ASCII redundance</p>
+<p>Anglický text v kódu ASCII má v každém bytu 7b informací a 1b parity → 1.5b informace anglického znaku. 8b informace může nést také 8b informace:</p>
+<div class="arithmatex">\[D = R - r = 8 - 1.5 = 6.5 \text{ b redundance}\]</div>
+</div>
+<hr />
+<h3 id="vzdalenost-jednoznacnosti">Vzdálenost jednoznačnosti<a class="headerlink" href="#vzdalenost-jednoznacnosti" title="Permanent link">&para;</a></h3>
+<h4 id="odvozeni">Odvození<a class="headerlink" href="#odvozeni" title="Permanent link">&para;</a></h4>
+<p>Uvažujme pro ilustraci následující úvahu (neplatí pro všechny šifry):</p>
+<ul>
+<li>Mějme množinu zpráv <span class="arithmatex">\(M\)</span>, množinu ŠT <span class="arithmatex">\(C\)</span> a množinu <span class="arithmatex">\(2^{H(K)}\)</span> stejně pravděpodobných klíčů <span class="arithmatex">\(K\)</span>.</li>
+<li>Předpokládejme, že máme ŠT <span class="arithmatex">\(c\)</span> délky <span class="arithmatex">\(N\)</span> znaků a že pro klíče <span class="arithmatex">\(k \in K\)</span> jsou odpovídající OT <span class="arithmatex">\(D_k(c)\)</span> vybírány z množiny všech zpráv <span class="arithmatex">\(M\)</span> nezávisle a náhodně.</li>
+<li>V množině <span class="arithmatex">\(M\)</span> je celkem <span class="arithmatex">\(2^{RN}\)</span> zpráv, z toho je <span class="arithmatex">\(2^{rN}\)</span> smysluplných zpráv a <span class="arithmatex">\(U = 2^{RN} - 2^{rN}\)</span> zpráv nesmysluplných.</li>
+<li>Pokud provedeme dešifrování ŠT <span class="arithmatex">\(c\)</span> všemi možnými <span class="arithmatex">\(2^{H(K)}\)</span> klíči, dostáváme <span class="arithmatex">\(2^{H(K)}\)</span> zpráv. Z nich je smysluplných průměrně pouze:</li>
+</ul>
+<div class="arithmatex">\[S = 2^{H(K)} \cdot \frac{2^{rN}}{2^{RN}} = \frac{2^{H(K)}}{2^{DN}} = 2^{H(K) - DN}\]</div>
+<ul>
+<li>Abychom dostali pouze jednu zprávu — tu, která byla skutečně zašifrována — musí být <span class="arithmatex">\(S = 1\)</span>, tedy <span class="arithmatex">\(H(K) = DN\)</span>.</li>
+</ul>
+<p><img alt="Odvození vzdálenosti jednoznačnosti" src="../../assets/img/prednasky/p08-228.png" /></p>
+<h4 id="definice">Definice<a class="headerlink" href="#definice" title="Permanent link">&para;</a></h4>
+<div class="admonition info">
+<p class="admonition-title">Definice — Vzdálenost jednoznačnosti <span class="arithmatex">\(\delta_U\)</span></p>
+<p>Z předchozího plyne: <span class="arithmatex">\(H(K) = DN\)</span> a <span class="arithmatex">\(N = \frac{H(K)}{D} = \delta_U\)</span>.</p>
+<p>Vzdálenost jednoznačnosti je definována jako:</p>
+<div class="arithmatex">\[\delta_U = \frac{H(K)}{D}\]</div>
+<p>kde <span class="arithmatex">\(H(K)\)</span> je neurčitost klíče a <span class="arithmatex">\(D\)</span> je redundance jazyka otevřené zprávy.</p>
+</div>
+<p><img alt="Definice a příklad vzdálenosti jednoznačnosti" src="../../assets/img/prednasky/p08-229.png" /></p>
+<div class="admonition example">
+<p class="admonition-title">Jednoduchá substituce nad anglickou abecedou</p>
+<p>Vzdálenost jednoznačnosti jednoduché substituce:</p>
+<div class="arithmatex">\[\delta_U = \frac{H(K)}{D} = \frac{\log_2(26!)}{3.2} = \frac{88.3}{3.2} = 27.6\]</div>
+<p>V ŠT o <strong>28 znacích</strong> je tedy dostatečné množství informace na to, aby zbýval v průměru jediný možný OT. K rozluštění jednoduché substituce v angličtině postačí tedy v průměru <strong>28 písmen ŠT</strong>.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Vigenèrova šifra s klíčem délky <span class="arithmatex">\(V\)</span></p>
+<p>Mějme klíč Vigenèrovy šifry o délce <span class="arithmatex">\(V\)</span> náhodných znaků a uvažujme otevřený text z anglické abecedy:</p>
+<div class="arithmatex">\[\delta_U = \frac{H(K)}{D} = \frac{\log_2(26^V)}{3.2} = \frac{V \cdot \log_2(26)}{3.2} = \frac{4.7V}{3.2} = 1.5V\]</div>
+<p>To je na první pohled optimistický výsledek, ale:
+- Mějme ŠT v délce 1.5 násobku hesla, tj. oněch 1.5V znaků. 1. a 3. třetina textu používá stejné heslo, které lze eliminovat odečtením a poté s určitou pravděpodobností vyluštit 1. a 3. třetinu OT.
+- Zůstává neznámá 2. třetina OT, kde je heslo zcela náhodné a neznámé — nemáme tedy z něj žádnou informaci. Zbývá redundance OT, z níž známe 1. a 3. třetinu.
+- <span class="arithmatex">\(\delta_U\)</span> je střední hodnota vzdálenosti jednoznačnosti a nezohledňuje právě takové rozložení informace z OT, které je k dispozici.
+- S ŠT o délce <span class="arithmatex">\(2V\)</span> znaků budeme schopni heslo eliminovat a luštit metodou knižní šifry. Skutečnou vzdálenost jednoznačnosti lze proto v závislosti na konkrétním problému a daném <span class="arithmatex">\(V\)</span> očekávat v rozmezí <strong><span class="arithmatex">\(1.5V\)</span> až <span class="arithmatex">\(2V\)</span></strong>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Upozornění</p>
+<p>Vzdálenost jednoznačnosti je <strong>odhad množství informace</strong> nutného k vyluštění dané úlohy. <strong>Neříká nic o složitosti</strong> takové úlohy. I když máme dostatek informace, prolomení může být výpočetně neproveditelné.</p>
+</div>
+<hr />
+<h3 id="konfuze-a-difuze">Konfúze a difúze<a class="headerlink" href="#konfuze-a-difuze" title="Permanent link">&para;</a></h3>
+<p>Podle Shannona jsou to základní techniky k <strong>potlačení redundance <span class="arithmatex">\(D\)</span></strong> ve zprávě:</p>
+<div class="admonition info">
+<p class="admonition-title">Konfúze</p>
+<p><strong>Konfúze</strong> — maří vztahy mezi ŠT a OT. Ztěžuje studium redundancí a statistických struktur OT.</p>
+<ul>
+<li>Nejjednodušší: <strong>substituce</strong> (Caesarova šifra)</li>
+<li>Proudové šifry: konfúze, pokud také zpětné vazby → i difúze</li>
+<li>Moderní substituční šifry jsou mnohem složitější, nahrazují se dlouhé bloky OT blokem ŠT a mechanizmus substituce se mění s bity klíče nebo OT.</li>
+</ul>
+<p><em>Realizace:</em> S-boxy v DES, SubBytes v AES</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Difúze</p>
+<p><strong>Difúze</strong> — rozprostírá redundanci OT. Vyhledávání rozprostřených redundancí ztěžuje kryptoanalýzu.</p>
+<ul>
+<li>Nejjednodušší: <strong>transpozice</strong></li>
+<li>V současnosti jsou tyto způsoby kombinovány k dokonalejšímu rozptylu redundance.</li>
+<li>Obecně — difúzi lze snadno luštit, ale již ne například po dvojnásobné transpozici.</li>
+</ul>
+<p><em>Realizace:</em> ShiftRows + MixColumns v AES, P-permutace v DES</p>
+</div>
+<p>Dobrá bloková šifra musí mít <strong>obojí</strong>.</p>
+<p><img alt="Konfúze a difúze podle Shannona" src="../../assets/img/prednasky/p08-232.png" /></p>
+<hr />
+<h2 id="84-teorie-slozitosti">8.4 Teorie složitosti<a class="headerlink" href="#84-teorie-slozitosti" title="Permanent link">&para;</a></h2>
+<p>Teorie složitosti je <strong>metodologický základ pro analýzu výpočetní složitosti</strong> kryptografických technik a algoritmů. Porovnává kryptografické techniky a algoritmy a určuje jejich bezpečnost.</p>
+<p><strong>Výpočetní složitost algoritmu</strong> je dána výpočetním výkonem potřebným pro jeho realizaci a zahrnuje:
+- <span class="arithmatex">\(T(n)\)</span> — časovou náročnost
+- <span class="arithmatex">\(S(n)\)</span> — prostorovou náročnost (paměťové požadavky)</p>
+<p>Proměnná <span class="arithmatex">\(n\)</span> je <strong>rozsah vstupu</strong>.</p>
+<hr />
+<h3 id="o-notace">O-notace<a class="headerlink" href="#o-notace" title="Permanent link">&para;</a></h3>
+<p>Výpočetní složitost se vyjadřuje <strong>řádem <span class="arithmatex">\(O\)</span> (Order)</strong> hodnoty výpočetní složitosti:</p>
+<ul>
+<li>Řád složitosti <span class="arithmatex">\(O\)</span> roste nejrychleji v závislosti na <span class="arithmatex">\(n\)</span>.</li>
+<li>Všechny prvky nižšího řádu se zanedbávají → systémově nezávislé vyjádření.</li>
+<li>Příklad: <span class="arithmatex">\(7n^4 + 5n^2 + 6\)</span> je <span class="arithmatex">\(O(n^4)\)</span></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Případ</th>
+<th>Interpretace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(T(n) = O(n)\)</span></td>
+<td>Dvakrát větší vstup → dvakrát větší časová náročnost</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T(n) = O(2^n)\)</span></td>
+<td>Zvětšení vstupu o 1 → prodloužení doby výpočtu dvojnásobně</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T(n) = O(1)\)</span></td>
+<td>Časová složitost je nezávislá na <span class="arithmatex">\(n\)</span> (na vstupech)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="klasifikace-algoritmu-podle-slozitosti">Klasifikace algoritmů podle složitosti<a class="headerlink" href="#klasifikace-algoritmu-podle-slozitosti" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Třída</th>
+<th>O-notace</th>
+<th>Poznámka</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Konstatní</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+<td>Nezávisí na vstupu</td>
+</tr>
+<tr>
+<td>Lineární</td>
+<td><span class="arithmatex">\(O(n)\)</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Polynomiální</td>
+<td><span class="arithmatex">\(O(n^m)\)</span>, <span class="arithmatex">\(m\)</span> konstantní</td>
+<td>Kvadratická <span class="arithmatex">\(O(n^2)\)</span>, kubická <span class="arithmatex">\(O(n^3)\)</span>, ...</td>
+</tr>
+<tr>
+<td>Exponenciální</td>
+<td><span class="arithmatex">\(O(t^{f(n)})\)</span>, <span class="arithmatex">\(t &gt; 1\)</span>, <span class="arithmatex">\(f(n)\)</span> polynomiální</td>
+<td>Příklad: <span class="arithmatex">\(O(2^n)\)</span></td>
+</tr>
+<tr>
+<td>Superpolynomiální</td>
+<td><span class="arithmatex">\(O(t^{f(n)})\)</span>, <span class="arithmatex">\(f(n)\)</span> &gt; konst., <span class="arithmatex">\(f(n)\)</span> &lt; lineární</td>
+<td>Podmnožina exponenciálních</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Důležitá poznámka</p>
+<p>Známé luštitelské algoritmy jsou časově superpolynomiálně složité. Nedá se ale zatím dokázat, že nebude nikdy možné objevit nějaký časově polynomiální luštitelský algoritmus.</p>
+</div>
+<h3 id="tabulka-slozitosti-pro-n-106">Tabulka složitosti pro <span class="arithmatex">\(n = 10^6\)</span><a class="headerlink" href="#tabulka-slozitosti-pro-n-106" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(T(n)\)</span></th>
+<th># operací (<span class="arithmatex">\(n = 10^6\)</span>)</th>
+<th>Čas výpočtu (1 oper. = 0.1 μs)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0.1\ \mu\text{s}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(O(n)\)</span></td>
+<td><span class="arithmatex">\(10^6\)</span></td>
+<td><span class="arithmatex">\(100\ \text{ms}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+<td><span class="arithmatex">\(10^{12}\)</span></td>
+<td><span class="arithmatex">\(1.2\ \text{dne}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(O(n^3)\)</span></td>
+<td><span class="arithmatex">\(10^{18}\)</span></td>
+<td><span class="arithmatex">\(3200\ \text{let}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(O(2^n)\)</span></td>
+<td><span class="arithmatex">\(10^{301030}\)</span></td>
+<td><span class="arithmatex">\(10^{301005} \times \text{věk vesmíru}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Tabulka složitosti algoritmů" src="../../assets/img/prednasky/p08-236.png" /></p>
+<div class="admonition example">
+<p class="admonition-title">56-bitový klíč DES</p>
+<p>Pro <span class="arithmatex">\(n\)</span>-bitový klíč je časová složitost luštění hrubou silou <span class="arithmatex">\(O(2^n)\)</span>.</p>
+<p>Nechť klíč je 56 bitový → <span class="arithmatex">\(O(2^{56}) = 7.2 \cdot 10^{16}\)</span>, čas výpočtu je přibližně <strong>81 000 dní</strong> (1 oper. = 0.1 μs). </p>
+<p>Uvažujme <span class="arithmatex">\(1000 \times \mu\text{PC}\)</span> s tímto výkonem → nám stačí pro luštění čas kratší než <strong>3 měsíce</strong>.</p>
+</div>
+<hr />
+<h3 id="kategorie-problemu">Kategorie problémů<a class="headerlink" href="#kategorie-problemu" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Kategorie</th>
+<th>Popis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Snadno řešitelné</strong></td>
+<td>Dají se řešit časově polynomiálními algoritmy za „přijatelně" dlouhou dobu pro „rozumné" velikosti <span class="arithmatex">\(n\)</span></td>
+</tr>
+<tr>
+<td><strong>Obtížné (těžké)</strong></td>
+<td>Nelze řešit v polynomiálním čase za „přijatelně" dlouhou dobu. Problémy řešitelné pouze superpolynomiálními algoritmy jsou obtížně řešitelné i při malých hodnotách <span class="arithmatex">\(n\)</span></td>
+</tr>
+<tr>
+<td><strong>Nerozhodnutelné</strong></td>
+<td>Pro jejich řešení nelze navrhnout žádný algoritmus, i v případě, že neuvažujeme časovou složitost</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="tridy-slozitosti">Třídy složitosti<a class="headerlink" href="#tridy-slozitosti" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Třída</th>
+<th>Definice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>P</strong></td>
+<td>Problémy mohou být řešeny v polynomiálním čase (deterministickým TS)</td>
+</tr>
+<tr>
+<td><strong>NP</strong></td>
+<td>Problémy mohou být řešeny v polynomiálním čase, ale pouze nedeterministickým TS — může provádět pouze odhad buď správného řešení, nebo paralelně provede všechny odhady (výsledky prověřuje v polynomiálním čase)</td>
+</tr>
+<tr>
+<td><strong>NP-úplný</strong></td>
+<td>Problém, na který lze převést polynomiálním převodem každý problém ve třídě NP (NP-těžký) a náleží do třídy NP</td>
+</tr>
+<tr>
+<td><strong>PSPACE</strong></td>
+<td>Problémy mohou být řešeny v polynomiálním prostoru, ale nikoliv nezbytně v polynomiálním čase</td>
+</tr>
+<tr>
+<td><strong>EXPTIME</strong></td>
+<td>Problémy, které jsou řešitelné v exponenciálním čase</td>
+</tr>
+<tr>
+<td><strong>CoNP</strong></td>
+<td>Zahrnuje problémy, které jsou doplňkem některých problémů NP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="diagram-trid-slozitosti">Diagram tříd složitosti<a class="headerlink" href="#diagram-trid-slozitosti" title="Permanent link">&para;</a></h3>
+<p><img alt="Diagram tříd složitosti" src="../../assets/img/prednasky/p08-239.png" /></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>EXPTIME
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  └─ PSPACE (úplné)
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>       └─ PSPACE
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>            ├─ NP (úplné)     CoNP (úplné)
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            │    └─ NP    ∩    CoNP
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            │         └─ NP ∩ CoNP
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            │               └─ P
+</span></code></pre></div>
+<p><strong>Předpokládané vztahy:</strong> <span class="arithmatex">\(P \subseteq NP \cap CoNP \subseteq NP, CoNP \subseteq PSPACE \subseteq EXPTIME\)</span></p>
+<hr />
+<h3 id="vztah-kryptologie-a-trid-slozitosti">Vztah kryptologie a tříd složitosti<a class="headerlink" href="#vztah-kryptologie-a-trid-slozitosti" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Mnohé symetrické algoritmy a všechny algoritmy veřejného klíče se dají vyluštit v <strong>nedeterministickém polynomiálním čase</strong>.</li>
+<li>Při zadaném ŠT kryptoanalytik odhaduje OT a klíč a v polynomiálním čase nechá zpracovávat šifrovacím algoritmem tento odhad a prověřuje případnou shodu se ŠT.</li>
+<li>Tento postup je důležitý z teoretického hlediska, protože vymezuje <strong>horní mez složitosti kryptoanalýzy</strong> algoritmu.</li>
+<li>V praxi kryptoanalytik hledá <strong>deterministický časově polynomiální algoritmus</strong>.</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Pokud by se dokázalo, že P = NP...</p>
+<ul>
+<li>Hodně šifer lze triviálně luštit v nedeterministickém polynomiálním čase.</li>
+<li>Pokud P = NP, pak tyto šifry budou <strong>luštitelné realizovatelnými deterministickými algoritmy</strong>.</li>
+<li>Celá moderní kryptografie (RSA, ECC, DH, DSA...) by byla v ohrožení.</li>
+</ul>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Relevantní kryptografické problémy</p>
+<table>
+<thead>
+<tr>
+<th>Problém</th>
+<th>Klasická složitost</th>
+<th>Kvantová složitost</th>
+<th>Použití</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Faktorizace <span class="arithmatex">\(n=pq\)</span></td>
+<td>Sub-exp (GNFS)</td>
+<td><strong>Poly (Shor)</strong></td>
+<td>RSA</td>
+</tr>
+<tr>
+<td>DLP mod <span class="arithmatex">\(p\)</span></td>
+<td>Sub-exp (Index calculus)</td>
+<td><strong>Poly (Shor)</strong></td>
+<td>DH, DSA, ElGamal</td>
+</tr>
+<tr>
+<td>ECDLP</td>
+<td>Exp (Pollard <span class="arithmatex">\(\rho\)</span>)</td>
+<td><strong>Poly (Shor)</strong></td>
+<td>ECC</td>
+</tr>
+<tr>
+<td>AES klíč hrubou silou</td>
+<td>Exp <span class="arithmatex">\(O(2^n)\)</span></td>
+<td>Semi-exp (Grover <span class="arithmatex">\(O(2^{n/2})\)</span>)</td>
+<td>AES</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="85-typy-utocniku">8.5 Typy útočníků<a class="headerlink" href="#85-typy-utocniku" title="Permanent link">&para;</a></h2>
+<h3 id="klasifikace-utocniku-podle-znalosti">Klasifikace útočníků podle znalostí<a class="headerlink" href="#klasifikace-utocniku-podle-znalosti" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Co útočník zná</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>COA</strong> — Ciphertext-Only Attack</td>
+<td>Jen šifrový text</td>
+</tr>
+<tr>
+<td><strong>KPA</strong> — Known-Plaintext Attack</td>
+<td>Páry (plaintext, ciphertext)</td>
+</tr>
+<tr>
+<td><strong>CPA</strong> — Chosen-Plaintext Attack</td>
+<td>Může si zvolit plaintexty k zašifrování</td>
+</tr>
+<tr>
+<td><strong>CCA</strong> — Chosen-Ciphertext Attack</td>
+<td>Může si zvolit ciphertexty k dešifrování</td>
+</tr>
+</tbody>
+</table>
+<p>Silnější model = slabší předpoklady pro útočníka = silnější bezpečnostní garance.</p>
+<hr />
+<h2 id="shrnuti-kapitoly">Shrnutí kapitoly<a class="headerlink" href="#shrnuti-kapitoly" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Rychlý přehled</p>
+<ul>
+<li><strong>Kerckhoffs (1885):</strong> bezpečnost = tajnost klíče, ne algoritmu; útočník zná celý systém</li>
+<li><strong>4 typy bezpečnosti:</strong> Teoretická → Nepodmíněná (OTP) → Podmíněná → Prokazatelná (RSA/faktorizace) / Výpočetní (DES/COPACABANA)</li>
+<li><strong>Entropie:</strong> <span class="arithmatex">\(H(X) = -\sum p_i \log_2 p_i\)</span>; maximum při rovnoměrném rozdělení = <span class="arithmatex">\(\log_2 n\)</span></li>
+<li><strong>Obsažnost jazyka:</strong> <span class="arithmatex">\(R_N = H(X)/N\)</span>, limit <span class="arithmatex">\(r\)</span>; angličtina <span class="arithmatex">\(r \approx 1.5\)</span> b/znak</li>
+<li><strong>Absolutní obsažnost:</strong> <span class="arithmatex">\(R = \log_2 L\)</span> (max. entropie pro abecedu velikosti <span class="arithmatex">\(L\)</span>)</li>
+<li><strong>Nadbytečnost:</strong> <span class="arithmatex">\(D = R - r\)</span>; angličtina <span class="arithmatex">\(D = 3.2\)</span> b/znak, 68%</li>
+<li><strong>Vzdálenost jednoznačnosti:</strong> <span class="arithmatex">\(\delta_U = H(K)/D\)</span>; substituce <span class="arithmatex">\(\delta_U \approx 27.6\)</span>; Vigenère <span class="arithmatex">\(\delta_U = 1.5V\)</span></li>
+<li><strong>Konfúze</strong> (substituce) + <strong>Difúze</strong> (transpozice) = základ bezpečných šifer</li>
+<li><strong>P vs NP:</strong> NP-těžké problémy jsou základem asymetrické kryptografie; P=NP by kryptografii zničilo</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Klíčové otázky ke zkoušce</p>
+<ol>
+<li>Formulujte Kerckhoffsův princip. Co znamená „security through obscurity"?</li>
+<li>Jaký je rozdíl mezi nepodmíněnou a podmíněnou bezpečností? Příklady.</li>
+<li>Co je prokazatelná bezpečnost? Jak je RSA prokazatelně bezpečný?</li>
+<li>Co je COPACABANA a jak ilustruje výpočetní bezpečnost?</li>
+<li>Definujte entropii. Kdy je entropie maximální?</li>
+<li>Co je obsažnost jazyka <span class="arithmatex">\(r\)</span>, absolutní obsažnost <span class="arithmatex">\(R\)</span> a nadbytečnost <span class="arithmatex">\(D\)</span>? Hodnoty pro angličtinu.</li>
+<li>Co je vzdálenost jednoznačnosti <span class="arithmatex">\(\delta_U\)</span>? Spočítejte pro jednoduchou substituci a Vigenère.</li>
+<li>Co je konfúze a difúze? Jak jsou realizovány v AES?</li>
+<li>Proč je OTP dokonale bezpečný a proč ho nelze prakticky použít?</li>
+<li>Jaká je třída složitosti faktorizace? Co by znamenalo P=NP pro kryptografii?</li>
+<li>Vyjmenujte třídy složitosti P, NP, NP-úplný, PSPACE, EXPTIME, CoNP a jejich vztahy.</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zpět na začátek
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Zápatí" >
+        
+          
+          <a href="../07-kvanty/" class="md-footer__link md-footer__link--prev" aria-label="Předchozí: 7. Kvantová kryptografie">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Předchozí
+              </span>
+              <div class="md-ellipsis">
+                7. Kvantová kryptografie
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../09-klice/" class="md-footer__link md-footer__link--next" aria-label="Další: 9. Generátory náhodných čísel">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Další
+              </span>
+              <div class="md-ellipsis">
+                9. Generátory náhodných čísel
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Zkop\u00edrov\u00e1no do schr\u00e1nky", "clipboard.copy": "Kop\u00edrovat do schr\u00e1nky", "search.result.more.one": "1 dal\u0161\u00ed na t\u00e9to str\u00e1nce", "search.result.more.other": "# v\u00edce na t\u00e9to str\u00e1nce", "search.result.none": "Nenalezeny \u017e\u00e1dn\u00e9 dokumenty", "search.result.one": "Nalezen\u00fd dokument: 1", "search.result.other": "Nalezen\u00e9 dokumenty: #", "search.result.placeholder": "Pi\u0161te co se m\u00e1 vyhledat", "search.result.term.missing": "Chyb\u011bj\u00edc\u00ed", "select.version": "Vyberte verzi"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+      
+    
+  </body>
+</html>

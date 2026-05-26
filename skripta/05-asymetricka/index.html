@@ -1,0 +1,2389 @@
+
+<!doctype html>
+<html lang="cs" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Studijní materiál ČVUT FIT 2023 · prof. Ing. Róbert Lórencz, CSc.">
+      
+      
+        <meta name="author" content="ČVUT FIT">
+      
+      
+      
+        <link rel="prev" href="../04-hash/">
+      
+      
+        <link rel="next" href="../06-ecc/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>5. Asymetrická kryptografie - BI-KAB – Kryptografie a bezpečnost</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5-asymetricka-kryptografie" class="md-skip">
+          Přeskočit obsah
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Záhlaví">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-header__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BI-KAB – Kryptografie a bezpečnost
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5. Asymetrická kryptografie
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na světlý režim"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Přepnout na světlý režim" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na tmavý režim"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Přepnout na tmavý režim" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Hledat" placeholder="Hledat" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Vyhledávání">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Sdílet" aria-label="Sdílet" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Vyčistit" aria-label="Vyčistit" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializace vyhledávání
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Karty" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Domů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Skripta
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../prehled/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Přehled algoritmů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../pisemka/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Zkouška
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigace" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-nav__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    BI-KAB – Kryptografie a bezpečnost
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skripta
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Skripta
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-klasicka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Klasická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-proudove/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Proudové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-blokove/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Blokové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-hash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Hašovací funkce
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Asymetrická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Asymetrická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Obsah stránky">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Obsah stránky
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#50-exponencialni-sifra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.0 Exponenciální šifra
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.0 Exponenciální šifra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parametry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloky-a-sifrovani" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bloky a šifrování
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priklad-sifrovani-m-2633-e-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Příklad šifrování: \(m = 2633\), \(e = 29\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desifrovani" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dešifrování
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casova-slozitost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Časová složitost
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-matematicke-zaklady" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Matematické základy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 Matematické základy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modularni-aritmetika-klicove-fakty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modulární aritmetika — klíčové fakty
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rozsireny-eukliduv-algoritmus-vypocet-inverzniho-prvku" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rozšířený Euklidův algoritmus (výpočet inverzního prvku)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-diffie-hellman-vymena-klicu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Diffie-Hellman výměna klíčů
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 Diffie-Hellman výměna klíčů">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#protokol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protokol
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bezpecnost-diskretni-logaritmus-dlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bezpečnost — Diskrétní logaritmus (DLP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diffie-hellmanuv-protokol-formalni-popis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diffie-Hellmanův protokol — formální popis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rozsireni-pro-n-subjektu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rozšíření pro \(n\) subjektů
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-problem-diskretniho-logaritmu-dlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Problém diskrétního logaritmu (DLP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 Problém diskrétního logaritmu (DLP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#motivace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Motivace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vlastnosti-diskretniho-logaritmu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vlastnosti diskrétního logaritmu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vypocetni-obtiznost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Výpočetní obtížnost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delka-klice-a-bezpecnostni-kategorie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Délka klíče a bezpečnostní kategorie
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slabe-instance-a-silna-prvocisla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slabé instance a silná prvočísla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vyuziti-dlp-v-kryptografii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Využití DLP v kryptografii
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-rsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 RSA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 RSA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uvod-sifrovaci-system-s-verejnym-klicem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Úvod — Šifrovací systém s veřejným klíčem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definice-rsa-a-generovani-klicu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definice RSA a generování klíčů
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sifrovani-a-desifrovani" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Šifrování a dešifrování
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#digitalni-podpis-rsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Digitální podpis RSA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bezpecnost-rsa-a-faktorizace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bezpečnost RSA a faktorizace
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-rsa-crt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 RSA-CRT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.5 RSA-CRT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#motivace_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Motivace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definice-rsa-crt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definice RSA-CRT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algoritmus-desifrovani" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Algoritmus dešifrování
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56-digitalni-podpis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Digitální podpis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.6 Digitální podpis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vlastnosti-digitalniho-podpisu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vlastnosti digitálního podpisu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kategorie-digitalnich-podpisu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kategorie digitálních podpisů
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dss-digital-signature-standard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DSS (Digital Signature Standard)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#57-elgamal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7 ElGamal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7 ElGamal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pripomenuti-dh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Připomenutí DH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priprava-klice-alice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Příprava klíče (Alice)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sifrovani-bob-alice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Šifrování (Bob → Alice)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desifrovani-alice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dešifrování (Alice)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#58-dsa-digital-signature-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8 DSA — Digital Signature Algorithm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.8 DSA — Digital Signature Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametry_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parametry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#podpis-zpravy-m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Podpis zprávy \(M\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overeni-podpisu-r-s-zpravy-m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ověření podpisu \((r, s)\) zprávy \(M\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shrnuti-kapitoly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shrnutí kapitoly
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-ecc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Kryptografie eliptických křivek
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-kvanty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Kvantová kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-bezpecnost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Bezpečnost kryptosystémů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-klice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Generátory náhodných čísel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-pki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Certifikáty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-cipove-karty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Čipové karty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prehled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Přehled algoritmů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zkouška
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zkouška
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pisemka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Písemný test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ustni/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ústní zkouška
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigace" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Domů
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Skripta
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="5-asymetricka-kryptografie">5. Asymetrická kryptografie<a class="headerlink" href="#5-asymetricka-kryptografie" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Cíle kapitoly</p>
+<ul>
+<li>Porozumět principu asymetrické kryptografie (dvojice klíčů)</li>
+<li>Zvládnout Diffie-Hellman výměnu klíčů a DLP</li>
+<li>Umět ručně projít RSA šifrování, dešifrování a podpis</li>
+<li>Pochopit RSA-CRT, ElGamal a DSA</li>
+<li>Znát běžné útoky a bezpečnostní požadavky</li>
+</ul>
+</div>
+<hr />
+<h2 id="50-exponencialni-sifra">5.0 Exponenciální šifra<a class="headerlink" href="#50-exponencialni-sifra" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Symetrická šifra na modulárním umocňování</p>
+<p>Exponenciální šifry jsou <strong>symetrické</strong> – používají stejný klíč pro šifrování i dešifrování.
+Byly uvedeny v roce <strong>1978 Pohligem a Hellmanem</strong>. Jsou značně odolné vůči kryptoanalýze.</p>
+</div>
+<h3 id="parametry">Parametry<a class="headerlink" href="#parametry" title="Permanent link">&para;</a></h3>
+<ul>
+<li><span class="arithmatex">\(m\)</span> je prvočíslo</li>
+<li><span class="arithmatex">\(e\)</span> je přirozené číslo – <strong>šifrovací klíč</strong>, platí <span class="arithmatex">\(\gcd(e, m-1) = 1\)</span></li>
+<li>OT je nejdříve převeden do dvojciferného číselného ekvivalentu (A=00, B=01, ..., Z=25)</li>
+</ul>
+<h3 id="bloky-a-sifrovani">Bloky a šifrování<a class="headerlink" href="#bloky-a-sifrovani" title="Permanent link">&para;</a></h3>
+<p>Získaná čísla seskupíme do dekadických číslic délky <span class="arithmatex">\(2s\)</span> tvořících číslo, kde <span class="arithmatex">\(s\)</span> je počet písmen v jednom bloku. Tyto bloky tvoří čísla menší než <span class="arithmatex">\(m\)</span>. Kdy <span class="arithmatex">\(2525 &lt; m &lt; 252525\)</span>, potom <span class="arithmatex">\(s = 2\)</span> (bloky po dvou písmenech = 4-ciferná čísla).</p>
+<p>Každý blok <span class="arithmatex">\(p\)</span> s <span class="arithmatex">\(s\)</span> písmeny OT, reprezentující celé číslo s <span class="arithmatex">\(2s\)</span> dekadickými číslicemi, je převeden na blok <span class="arithmatex">\(c\)</span> ŠT vztahem:</p>
+<div class="arithmatex">\[c = |p^e|_m, \quad 0 \le c &lt; m\]</div>
+<h3 id="priklad-sifrovani-m-2633-e-29">Příklad šifrování: <span class="arithmatex">\(m = 2633\)</span>, <span class="arithmatex">\(e = 29\)</span><a class="headerlink" href="#priklad-sifrovani-m-2633-e-29" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(\gcd(29, 2632) = 1\)</span> ✓</p>
+<p>OT: <strong>THIS IS AN EXAMPLE OF AN EXPONENTIATION CIPHER</strong></p>
+<p>Číselné ekvivalenty (4-ciferné bloky po 2 písmenech):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>1907 0818 0818 0013 0423 0012 1511 0414 0500 1304
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>2315 1413 0413 1908 0019 0814 1302 0815 0704 1723
+</span></code></pre></div>
+<p>(Na konec přidáno X = 23 kvůli zarovnání.) Příklad prvního bloku: <span class="arithmatex">\(c = |1907^{29}|_{2633} = 2199\)</span></p>
+<p>ŠT: <code>2199 1745 1745 1209 2437 2425 1729 1619 0935 0960 1072 1541 1721 1553 0735 2064 1351 1741 1741 1459</code></p>
+<h3 id="desifrovani">Dešifrování<a class="headerlink" href="#desifrovani" title="Permanent link">&para;</a></h3>
+<p>K dešifrování bloku <span class="arithmatex">\(c\)</span> ŠT potřebujeme <strong>dešifrovací klíč</strong> <span class="arithmatex">\(d\)</span>:</p>
+<div class="arithmatex">\[de \equiv 1 \pmod{m-1} \implies d = e^{-1} \bmod (m-1)\]</div>
+<p>Dešifrovací vztah — odvozen pomocí <strong>malé Fermatovy věty</strong> (<span class="arithmatex">\(p^{m-1} \equiv 1 \pmod{m}\)</span>):</p>
+<div class="arithmatex">\[|c^d|_m = |(p^e)^d|_m = |p^{ed}|_m = |p^{k(m-1)+1}|_m = |(p^{m-1})^k \cdot p|_m = |p|_m\]</div>
+<div class="admonition example">
+<p class="admonition-title">Příklad dešifrování: <span class="arithmatex">\(m = 2633\)</span>, <span class="arithmatex">\(e = 29\)</span></p>
+<p><span class="arithmatex">\(d = |29^{-1}|_{2632} = 2269\)</span> (výpočet EEA)</p>
+<p>Dešifrování bloku 2199: <span class="arithmatex">\(p = |2199^{2269}|_{2633} = 1907\)</span> ✓</p>
+</div>
+<h3 id="casova-slozitost">Časová složitost<a class="headerlink" href="#casova-slozitost" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Šifrování každého bloku: <span class="arithmatex">\(O(k^3)\)</span> bitových operací algoritmem <strong>Square &amp; Multiply</strong> (<span class="arithmatex">\(k = \lceil \log_2 m \rceil\)</span> bitů)</li>
+<li>Nalezení <span class="arithmatex">\(d\)</span> pomocí EEA: <span class="arithmatex">\(O(\log 2k)\)</span> bitových operací — provede se jednou</li>
+<li>Kryptoanalýza: vyžaduje řešení <strong>problému diskrétního logaritmu</strong> (viz sekce 5.3) — v obecném případě nemůže být vykonána v přijatelné době</li>
+</ul>
+<hr />
+<h2 id="51-matematicke-zaklady">5.1 Matematické základy<a class="headerlink" href="#51-matematicke-zaklady" title="Permanent link">&para;</a></h2>
+<h3 id="modularni-aritmetika-klicove-fakty">Modulární aritmetika — klíčové fakty<a class="headerlink" href="#modularni-aritmetika-klicove-fakty" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[a^{\phi(n)} \equiv 1 \pmod{n} \quad \text{(Eulerova věta, } \gcd(a,n)=1\text{)}\]</div>
+<div class="arithmatex">\[a^{p-1} \equiv 1 \pmod{p} \quad \text{(Fermatova věta, } p \text{ prvočíslo)}\]</div>
+<p><strong>Eulerova funkce:</strong>
+$<span class="arithmatex">\(\phi(p) = p - 1 \quad \phi(n) = (p-1)(q-1) \text{ pro } n = pq\)</span>$</p>
+<h3 id="rozsireny-eukliduv-algoritmus-vypocet-inverzniho-prvku">Rozšířený Euklidův algoritmus (výpočet inverzního prvku)<a class="headerlink" href="#rozsireny-eukliduv-algoritmus-vypocet-inverzniho-prvku" title="Permanent link">&para;</a></h3>
+<p>Pro výpočet <span class="arithmatex">\(a^{-1} \bmod m\)</span> (existuje pokud <span class="arithmatex">\(\gcd(a,m) = 1\)</span>):</p>
+<div class="admonition example">
+<p class="admonition-title">Příklad: <span class="arithmatex">\(5^{-1} \bmod 26\)</span></p>
+<p>Euklidův algoritmus: <span class="arithmatex">\(26 = 5 \cdot 5 + 1\)</span></p>
+<p><span class="arithmatex">\(1 = 26 - 5 \cdot 5\)</span></p>
+<p><span class="arithmatex">\(\Rightarrow 1 \equiv -5 \cdot 5 \pmod{26} \Rightarrow 5^{-1} \equiv -5 \equiv 21 \pmod{26}\)</span></p>
+<p>Ověření: <span class="arithmatex">\(5 \cdot 21 = 105 = 4 \cdot 26 + 1\)</span> ✓</p>
+</div>
+<hr />
+<h2 id="52-diffie-hellman-vymena-klicu">5.2 Diffie-Hellman výměna klíčů<a class="headerlink" href="#52-diffie-hellman-vymena-klicu" title="Permanent link">&para;</a></h2>
+<h3 id="protokol">Protokol<a class="headerlink" href="#protokol" title="Permanent link">&para;</a></h3>
+<p><strong>Veřejné parametry:</strong> prvočíslo <span class="arithmatex">\(p\)</span>, generátor <span class="arithmatex">\(g\)</span> (primitivní kořen mod <span class="arithmatex">\(p\)</span>)</p>
+<table>
+<thead>
+<tr>
+<th>Krok</th>
+<th>Alice</th>
+<th>Bob</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generuje tajné</td>
+<td><span class="arithmatex">\(a \leftarrow \{1, \ldots, p-2\}\)</span></td>
+<td><span class="arithmatex">\(b \leftarrow \{1, \ldots, p-2\}\)</span></td>
+</tr>
+<tr>
+<td>Počítá veřejné</td>
+<td><span class="arithmatex">\(A = g^a \bmod p\)</span></td>
+<td><span class="arithmatex">\(B = g^b \bmod p\)</span></td>
+</tr>
+<tr>
+<td>Pošle</td>
+<td><span class="arithmatex">\(A \to\)</span> Bob</td>
+<td><span class="arithmatex">\(B \to\)</span> Alice</td>
+</tr>
+<tr>
+<td>Sdílený klíč</td>
+<td><span class="arithmatex">\(K = B^a \bmod p\)</span></td>
+<td><span class="arithmatex">\(K = A^b \bmod p\)</span></td>
+</tr>
+<tr>
+<td>Shodnost</td>
+<td><span class="arithmatex">\(K = g^{ab} \bmod p\)</span></td>
+<td><span class="arithmatex">\(K = g^{ab} \bmod p\)</span> ✓</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bezpecnost-diskretni-logaritmus-dlp">Bezpečnost — Diskrétní logaritmus (DLP)<a class="headerlink" href="#bezpecnost-diskretni-logaritmus-dlp" title="Permanent link">&para;</a></h3>
+<p>Útočník zná <span class="arithmatex">\(p, g, A = g^a \bmod p\)</span> a chce najít <span class="arithmatex">\(a\)</span>. To je <strong>Discrete Logarithm Problem (DLP)</strong> — v obecné grupě není znám polynomiální algoritmus.</p>
+<div class="admonition warning">
+<p class="admonition-title">Diffie-Hellman není odolný vůči MITM!</p>
+<p>Útok Man-in-the-Middle: Eve se vloží mezi Alici a Boba, každému nabídne svůj klíč. DH samotný neověřuje identitu — potřebujeme autentizaci (certifikáty, STS protokol).</p>
+</div>
+<h3 id="diffie-hellmanuv-protokol-formalni-popis">Diffie-Hellmanův protokol — formální popis<a class="headerlink" href="#diffie-hellmanuv-protokol-formalni-popis" title="Permanent link">&para;</a></h3>
+<p>Jedná se o aplikaci exponenciální šifry pro zřízení společného klíče. Exponenciální šifra je vhodná pro zřízení <strong>společného klíče</strong> pro dva nebo více subjektů.</p>
+<ol>
+<li><strong>Volba veřejných prvků účastníkem A:</strong> prvočíslo <span class="arithmatex">\(m\)</span> a celé číslo <span class="arithmatex">\(a\)</span> (<span class="arithmatex">\(a\)</span> je generátor grupy <span class="arithmatex">\(\mathbb{Z}_m^*\)</span>)</li>
+<li><strong>Generování parametrů klíče účastníkem A:</strong> volba čísla <span class="arithmatex">\(k_1 &lt; m-1\)</span> a výpočet <span class="arithmatex">\(y_1 = |a^{k_1}|_m\)</span>; A odešle prostřednictvím komunikačního kanálu B čísla <span class="arithmatex">\(a\)</span>, <span class="arithmatex">\(m\)</span> a <span class="arithmatex">\(y_1\)</span></li>
+<li><strong>Generování parametrů klíče účastníkem B:</strong> volba čísla <span class="arithmatex">\(k_2 &lt; m-1\)</span> a výpočet <span class="arithmatex">\(y_2 = |a^{k_2}|_m\)</span>; B odešle prostřednictvím komunikačního kanálu A číslo <span class="arithmatex">\(y_2\)</span></li>
+<li><strong>Dopočítání sdíleného klíče účastníkem A:</strong> <span class="arithmatex">\(K = |y_2^{k_1}|_m\)</span></li>
+<li><strong>Dopočítání sdíleného klíče účastníkem B:</strong> <span class="arithmatex">\(K = |y_1^{k_2}|_m\)</span></li>
+</ol>
+<p>Shodnost: <span class="arithmatex">\(K = |a^{k_1 k_2}|_m\)</span> pro oba účastníky. Neautorizované subjekty nemohou najít <span class="arithmatex">\(K\)</span> v rozumném čase — jsou nuceny hledat logaritmus modulo <span class="arithmatex">\(m\)</span>.</p>
+<div class="admonition example">
+<p class="admonition-title">Příklad: <span class="arithmatex">\(m = 13\)</span>, <span class="arithmatex">\(a = 2\)</span>, <span class="arithmatex">\(k_1 = 7\)</span>, <span class="arithmatex">\(k_2 = 11\)</span></p>
+<ol>
+<li>A pošle B: <span class="arithmatex">\(y_1 = |2^7|_{13} = 11\)</span></li>
+<li>B pošle A: <span class="arithmatex">\(y_2 = |2^{11}|_{13} = 7\)</span></li>
+<li>A vypočítá: <span class="arithmatex">\(K = |7^7|_{13} = 6\)</span></li>
+<li>B vypočítá: <span class="arithmatex">\(K = |11^{11}|_{13} = 6\)</span> ✓</li>
+</ol>
+</div>
+<h3 id="rozsireni-pro-n-subjektu">Rozšíření pro <span class="arithmatex">\(n\)</span> subjektů<a class="headerlink" href="#rozsireni-pro-n-subjektu" title="Permanent link">&para;</a></h3>
+<p>V případě <span class="arithmatex">\(n\)</span> subjektů má každý vlastní klíč <span class="arithmatex">\(k_1, k_2, \ldots, k_n\)</span>. Společný klíč:</p>
+<div class="arithmatex">\[K = |a^{k_1 k_2 \cdots k_n}|_m, \quad 0 &lt; K &lt; m\]</div>
+<div class="admonition tip">
+<p class="admonition-title">Zkouška</p>
+<p>Provést DH na malých číslech ručně. Vysvětlit, proč útočník nemůže spočítat sdílený klíč. Znát formální kroky protokolu.</p>
+</div>
+<hr />
+<h2 id="53-problem-diskretniho-logaritmu-dlp">5.3 Problém diskrétního logaritmu (DLP)<a class="headerlink" href="#53-problem-diskretniho-logaritmu-dlp" title="Permanent link">&para;</a></h2>
+<h3 id="motivace">Motivace<a class="headerlink" href="#motivace" title="Permanent link">&para;</a></h3>
+<p>Při práci s reálnými čísly není výpočet mocniny výrazně jednodušší než výpočet logaritmu. Jiná situace nastává v konečné grupě, např. <span class="arithmatex">\(\mathbb{Z}_n^*\)</span> (s operací násobení modulo <span class="arithmatex">\(n\)</span>), která obsahuje prvky nesoudělné s <span class="arithmatex">\(n\)</span>. S použitím metody „Square &amp; Multiply" je výpočet mocniny v konečné grupě rychlý.</p>
+<p>Ale když máme prvek <span class="arithmatex">\(m \in \mathbb{Z}_n^*\)</span>, o kterém víme, že je ve tvaru <span class="arithmatex">\(b^k\)</span>, kde <span class="arithmatex">\(b \in \mathbb{Z}_n^*\)</span> je známý prvek, tak neznáme rychlý algoritmus na nalezení hodnoty <span class="arithmatex">\(k = \log_b m\)</span>.</p>
+<h3 id="definice">Definice<a class="headerlink" href="#definice" title="Permanent link">&para;</a></h3>
+<p>Nechť <span class="arithmatex">\(G\)</span> je grupa, <span class="arithmatex">\(b \in G\)</span> a <span class="arithmatex">\(y \in G\)</span> je mocninou prvku <span class="arithmatex">\(b\)</span>. Potom <strong>diskrétní logaritmus</strong> prvku <span class="arithmatex">\(y\)</span> o základu <span class="arithmatex">\(b\)</span> je každé číslo <span class="arithmatex">\(k\)</span> takové, že <span class="arithmatex">\(b^k = y\)</span>, značíme ho <span class="arithmatex">\(\log_b y\)</span>.</p>
+<p><strong>Pro libovolné prvky <span class="arithmatex">\(g, h \in G\)</span></strong> nemusí vždy existovat číslo <span class="arithmatex">\(k\)</span> takové, že <span class="arithmatex">\(g^k = h\)</span>. Např. v grupě <span class="arithmatex">\(\mathbb{Z}_{11}^*\)</span> neexistuje číslo <span class="arithmatex">\(k\)</span> takové, že <span class="arithmatex">\(5^k = 7\)</span> (tj. v <span class="arithmatex">\(\mathbb{Z}_{11}^*\)</span> neexistuje <span class="arithmatex">\(\log_5 7\)</span>). Avšak když je grupa <span class="arithmatex">\(G\)</span> cyklická a prvek <span class="arithmatex">\(b \in G\)</span> bude jejím generátorem, tak existence <span class="arithmatex">\(\log_b m\)</span> je garantována pro všechna <span class="arithmatex">\(m \in G\)</span>.</p>
+<h3 id="vlastnosti-diskretniho-logaritmu">Vlastnosti diskrétního logaritmu<a class="headerlink" href="#vlastnosti-diskretniho-logaritmu" title="Permanent link">&para;</a></h3>
+<p>Mějme cyklickou grupu <span class="arithmatex">\(G\)</span> řádu <span class="arithmatex">\(n\)</span> a nechť <span class="arithmatex">\(g\)</span> je její generátor. Pak platí:</p>
+<ol>
+<li><span class="arithmatex">\(\log_g 1 = 0\)</span>, <span class="arithmatex">\(\log_g g^k = k\)</span> pro <span class="arithmatex">\(k \in \mathbb{N}\)</span></li>
+<li><span class="arithmatex">\(\log_g a^k = k \cdot \log_g a\)</span> pro všechna <span class="arithmatex">\(a \in G\)</span>, <span class="arithmatex">\(k \in \mathbb{N}\)</span></li>
+<li><span class="arithmatex">\(\log_g(a \cdot b) = \log_g a + \log_g b\)</span> pro všechna <span class="arithmatex">\(a, b \in G\)</span></li>
+</ol>
+<div class="admonition example">
+<p class="admonition-title">Příklady</p>
+<ol>
+<li>Cyklická grupa <span class="arithmatex">\(\mathbb{Z}_{17}^*\)</span> s operací <strong>násobení</strong> modulo 17, generátor <span class="arithmatex">\(g = 3\)</span>:</li>
+</ol>
+<p><span class="arithmatex">\(\log_3 7 = 11\)</span>, protože <span class="arithmatex">\(3^{11} \equiv 7 \pmod{17}\)</span></p>
+<ol>
+<li>Cyklická grupa <span class="arithmatex">\(\mathbb{Z}_{17}\)</span> s operací <strong>sčítání</strong> modulo 17, generátor <span class="arithmatex">\(g = 3\)</span>:</li>
+</ol>
+<p><span class="arithmatex">\(\log_3 7 = 8\)</span>, protože <span class="arithmatex">\(3 \cdot 8 \equiv 7 \pmod{17}\)</span></p>
+<p>V 1. případě (<span class="arithmatex">\(\mathbb{Z}_p^*\)</span>) neexistuje rychlý algoritmus. Ve 2. případě (<span class="arithmatex">\(\mathbb{Z}_p\)</span>) lze PDL vyřešit pomocí Euklidova algoritmu v polynomiálním čase.</p>
+</div>
+<h3 id="vypocetni-obtiznost">Výpočetní obtížnost<a class="headerlink" href="#vypocetni-obtiznost" title="Permanent link">&para;</a></h3>
+<p>Nejrychlejší algoritmy pro výpočet diskrétního logaritmu v <span class="arithmatex">\(\mathbb{Z}_p^*\)</span> potřebují přibližně <span class="arithmatex">\(\exp(\sqrt{\log m \cdot \log \log m})\)</span> bitových operací — přibližně <strong>stejně jako nejrychlejší algoritmy pro faktorizaci</strong>.</p>
+<p><strong>Útok hrubou silou:</strong> Postupný výpočet <span class="arithmatex">\(g, g^2, g^3, \ldots\)</span> až do <span class="arithmatex">\(g^k = y\)</span>. V nejhorším případě <span class="arithmatex">\(n\)</span> operací → složitost <span class="arithmatex">\(\mathcal{O}(2^d) = \mathcal{O}(n)\)</span>, kde <span class="arithmatex">\(d = \log_2 n\)</span>.</p>
+<p><strong>Efektivnější algoritmy</strong> (všechny stále exponenciální):</p>
+<ul>
+<li>Baby-step giant-step</li>
+<li>Pollardův <span class="arithmatex">\(\rho\)</span> algoritmus</li>
+<li>Pohlig-Hellmanův algoritmus</li>
+<li>Index kalkulus</li>
+<li>Funkční síto (momentálně nejrychlejší)</li>
+</ul>
+<h3 id="delka-klice-a-bezpecnostni-kategorie">Délka klíče a bezpečnostní kategorie<a class="headerlink" href="#delka-klice-a-bezpecnostni-kategorie" title="Permanent link">&para;</a></h3>
+<p><img alt="Tabulka délky klíče pro různé útočníky" src="../../assets/img/prednasky/p02-044.png" /></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>hacker</th>
+<th>firma</th>
+<th>taj. služba</th>
+<th>lidé</th>
+<th>???</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td># µPC</td>
+<td>1</td>
+<td>10³</td>
+<td>10⁵</td>
+<td>10⁸</td>
+<td>10⁵¹</td>
+</tr>
+<tr>
+<td># testů/s</td>
+<td>10⁴</td>
+<td>10⁶</td>
+<td>10⁹</td>
+<td>10¹²</td>
+<td>10¹⁹</td>
+</tr>
+<tr>
+<td>čas [s]</td>
+<td>1 týden</td>
+<td>1 měsíc</td>
+<td>1 rok</td>
+<td>100 let</td>
+<td>1000 let</td>
+</tr>
+<tr>
+<td># operací</td>
+<td>10¹⁰</td>
+<td>10¹⁶</td>
+<td>10²²</td>
+<td>10³⁰</td>
+<td>10⁸¹</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(n\)</span> (bitů)</td>
+<td><strong>34</strong></td>
+<td><strong>54</strong></td>
+<td><strong>73</strong></td>
+<td><strong>100</strong></td>
+<td><strong>269</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Pro praktické použití: doporučená délka modulárního prvočísla pro <span class="arithmatex">\(\mathbb{Z}_p^*\)</span> je <span class="arithmatex">\(p \approx 2^{4096}\)</span>.</p>
+<h3 id="slabe-instance-a-silna-prvocisla">Slabé instance a silná prvočísla<a class="headerlink" href="#slabe-instance-a-silna-prvocisla" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Slabá instance</p>
+<p>Když <span class="arithmatex">\(m\)</span> je prvočíslo a <span class="arithmatex">\(m - 1\)</span> je součinem malých prvočísel (slabá instance) ⇒ lze použít speciálních metod pro nalezení logaritmu modulo <span class="arithmatex">\(m\)</span> s <strong>menším počtem binárních operací</strong> než <span class="arithmatex">\(O(\log_2^2 m)\)</span>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Silné prvočíslo</p>
+<p>Jako modula pro exponenciální šifrovací systémy je vhodné používat čísla <span class="arithmatex">\(m = 2q + 1\)</span>, kde <span class="arithmatex">\(q\)</span> je prvočíslo.</p>
+</div>
+<h3 id="vyuziti-dlp-v-kryptografii">Využití DLP v kryptografii<a class="headerlink" href="#vyuziti-dlp-v-kryptografii" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Diffie-Hellman:</strong> útočník zná <span class="arithmatex">\(g^a\)</span> a <span class="arithmatex">\(g^b\)</span>, ale nemůže rychle spočítat <span class="arithmatex">\(g^{ab}\)</span> bez znalosti <span class="arithmatex">\(a\)</span> nebo <span class="arithmatex">\(b\)</span></li>
+<li><strong>ElGamal</strong> šifrování i podpis</li>
+<li><strong>ECDSA</strong> (Elliptic Curve Digital Signature Algorithm)</li>
+<li>Bezpečnost závisí na zvolené grupě — běžnou volbou jsou cyklické grupy <span class="arithmatex">\(\mathbb{Z}_p^*\)</span> pro dostatečně velká prvočísla</li>
+</ul>
+<hr />
+<h2 id="54-rsa">5.4 RSA<a class="headerlink" href="#54-rsa" title="Permanent link">&para;</a></h2>
+<h3 id="uvod-sifrovaci-system-s-verejnym-klicem">Úvod — Šifrovací systém s veřejným klíčem<a class="headerlink" href="#uvod-sifrovaci-system-s-verejnym-klicem" title="Permanent link">&para;</a></h3>
+<p><strong>Problém distribuce klíčů v síti:</strong> Zabezpečení utajené komunikace v síti ⇒ každá komunikující dvojice musí používat šifrovací klíč. U symetrické šifry pokud je šifrovací klíč známý ⇒ dešifrovací klíč lze generovat s použitím malého počtu operací.</p>
+<p><strong>Šifrovací systém veřejného klíče (VK)</strong> je řešením tohoto problému:</p>
+<ul>
+<li>Používá <strong>veřejný klíč <span class="arithmatex">\(VK\)</span></strong> pro šifrování a <strong>soukromý klíč <span class="arithmatex">\(SK\)</span></strong> pro dešifrování.</li>
+<li><strong>Vypočítat <span class="arithmatex">\(SK\)</span> při znalosti <span class="arithmatex">\(VK\)</span> je výpočetně neschodné.</strong></li>
+<li>Použitím <span class="arithmatex">\(VK_A\)</span> kdokoliv může poslat Alici zprávu zašifrovanou <span class="arithmatex">\(VK_A\)</span>, ale <strong>POUZE</strong> Alice umí zprávu dešifrovat, protože jen ona zná <span class="arithmatex">\(SK_A\)</span>.</li>
+<li>Každý subjekt má svůj vlastní <span class="arithmatex">\(VK\)</span> a <span class="arithmatex">\(SK\)</span>. <strong>Seznam klíčů <span class="arithmatex">\(VK_1, VK_2, \ldots, VK_n\)</span> je veřejný.</strong></li>
+</ul>
+<p><strong>Princip RSA šifrovacího systému:</strong></p>
+<ul>
+<li>Uveden Rivestem, Shamirem a Adlemanem v roce <strong>1970</strong>.</li>
+<li>RSA je šifrovací systém VK a je <strong>založený na modulárním umocňování</strong>.</li>
+<li>Dvojice <span class="arithmatex">\((e, n)\)</span> je <span class="arithmatex">\(VK\)</span> klíče; <span class="arithmatex">\(e\)</span> — exponent a <span class="arithmatex">\(n\)</span> — modul.</li>
+<li><span class="arithmatex">\(n\)</span> → součin dvou prvočísel <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(q\)</span>, tj. <span class="arithmatex">\(n = pq\)</span> a <span class="arithmatex">\(\gcd(e, \Phi(n)) = 1\)</span>.</li>
+</ul>
+<p><img alt="RSA šifrování a autentizace" src="../../assets/img/prednasky/p06-169.png" /></p>
+<h3 id="definice-rsa-a-generovani-klicu">Definice RSA a generování klíčů<a class="headerlink" href="#definice-rsa-a-generovani-klicu" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Definice RSA</p>
+<ul>
+<li>Nechť <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(q\)</span> jsou prvočísla.</li>
+<li>Vypočítáme <span class="arithmatex">\(n = pq\)</span>, <span class="arithmatex">\(\Phi(n) = (p-1)(q-1)\)</span>.</li>
+<li>Zvolíme <span class="arithmatex">\(e\)</span>, <span class="arithmatex">\(1 &lt; e &lt; n\)</span>, <span class="arithmatex">\(\gcd(e, \Phi(n)) = 1\)</span> a spočítáme <span class="arithmatex">\(d = |e^{-1}|_{\Phi(n)}\)</span>.</li>
+<li>Dvojici <span class="arithmatex">\(VK = (n, e)\)</span> prohlásíme za <strong>veřejný klíč</strong> (a zveřejníme), dvojici <span class="arithmatex">\(SK = (n, d)\)</span> prohlásíme za <strong>soukromý klíč</strong>.</li>
+</ul>
+</div>
+<p><strong>Postup pro generování <span class="arithmatex">\(VK\)</span> a <span class="arithmatex">\(SK\)</span>:</strong></p>
+<ul>
+<li>Každý subjekt si náhodně vybere 2 velká náhodná lichá čísla <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(q\)</span> se 340 dekadickými číslicemi. Pravděpodobnost prvočíselnosti: <span class="arithmatex">\(\approx 2 / \log(10^{340})\)</span>, průměrně <span class="arithmatex">\(\approx 400\)</span> testů.</li>
+<li>Ke zjištění prvočíselnosti: <strong>Rabinův-Millerův pravděpodobnostní test</strong> pro 100 „svědků". Pravděpodobnost složeného čísla: <span class="arithmatex">\(\approx 10^{-60}\)</span>. Každý subjekt provádí výpočet pouze <strong>dvakrát</strong>.</li>
+<li><strong>Doporučení:</strong> zvolit <span class="arithmatex">\(e\)</span> jako nějaké prvočíslo <span class="arithmatex">\(&gt; p\)</span> a <span class="arithmatex">\(q\)</span>.</li>
+<li>Podmínka <span class="arithmatex">\(2^e &gt; n\)</span> zaručuje, že každý blok OT <span class="arithmatex">\(m\)</span> je správně zašifrován (nelze dešifrovat pouhým odmocňováním bez modulární redukce).</li>
+</ul>
+<h3 id="sifrovani-a-desifrovani">Šifrování a dešifrování<a class="headerlink" href="#sifrovani-a-desifrovani" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[E(m) = c = |m^e|_n, \quad 0 &lt; c &lt; n$$
+$$D(c) = m = |c^d|_n\]</div>
+<p><strong>Formální důkaz dešifrování</strong> (pomocí Eulerovy věty):</p>
+<div class="arithmatex">\[D(c) = |c^d|_n = |m^{ed}|_n = |m^{k\Phi(n)+1}|_n = |(m^{\Phi(n)})^k \cdot m|_n = |m|_n\]</div>
+<p>kde <span class="arithmatex">\(ed = k\Phi(n) + 1\)</span> pro nějaké celé číslo <span class="arithmatex">\(k\)</span> a z Eulerovy věty <span class="arithmatex">\(|p^{\Phi(n)}|_n = 1\)</span> pro <span class="arithmatex">\(\gcd(p, n) = 1\)</span>.</p>
+<div class="admonition example">
+<p class="admonition-title">Příklad RSA — šifrování textu</p>
+<p><strong>Parametry:</strong> <span class="arithmatex">\(p = 43\)</span>, <span class="arithmatex">\(q = 59\)</span> ⇒ <span class="arithmatex">\(n = 2537\)</span>, <span class="arithmatex">\(e = 13\)</span>, <span class="arithmatex">\(\gcd(13, 42 \cdot 58) = 1\)</span> ✓, <span class="arithmatex">\(\Phi(2537) = 42 \cdot 58 = 2436\)</span></p>
+<p><strong>OT:</strong> <code>PUBLIC KEY CRYPTOGRAPHY</code> (X = 23 je výplň/padding)</p>
+<p>Bloky OT (4-ciferné, tj. <span class="arithmatex">\(s=2\)</span> písmena, protože <span class="arithmatex">\(2525 &lt; 2537 &lt; 252525\)</span>):
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>1520  0111  0802  1004  2402  1724  1519  1406  1700  1507  2423
+</span></code></pre></div></p>
+<p>Šifrování prvního bloku: <span class="arithmatex">\(c = |1520^{13}|_{2537} = 95\)</span></p>
+<p>Všechny bloky ŠT:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>0095  1648  1410  1299  0811  2333  2132  0370  1185  1457  1084
+</span></code></pre></div></p>
+<p><strong>Dešifrování:</strong> <span class="arithmatex">\(d = |13^{-1}|_{2436} = 937\)</span> (Euklidův algoritmus). Dešifrování: <span class="arithmatex">\(m = |c^{937}|_{2537}\)</span></p>
+<p>Ověření: <span class="arithmatex">\(|c^{937}|_{2537} = |(m^{13})^{937}|_{2537} = |m \cdot (m^{2436})^5|_{2537} = m\)</span> ✓</p>
+</div>
+<h3 id="digitalni-podpis-rsa">Digitální podpis RSA<a class="headerlink" href="#digitalni-podpis-rsa" title="Permanent link">&para;</a></h3>
+<p>Šifrovací systém RSA lze použít pro vysílání <strong>podepsané zprávy</strong>. Při použití podpisu se příjemce zprávy může ujistit, že zpráva přišla od oprávněného odesílatele, a to na základě nestranného a objektivního testu.</p>
+<p><strong>Princip (přímý RSA podpis):</strong></p>
+<p>Nechť subjekt 1 vysílá podepsanou zprávu <span class="arithmatex">\(m\)</span> subjektu 2. Subjekt 1 spočítá pro zprávu <span class="arithmatex">\(m\)</span> OT (podpis):</p>
+<div class="arithmatex">\[S = D_{SK_1}(m) = |m^{d_1}|_{n_1}\]</div>
+<p>kde <span class="arithmatex">\(SK_1 = (d_1, n_1)\)</span> je soukromý dešifrovací klíč pro subjekt 1. Při <span class="arithmatex">\(n_2 &gt; n_1\)</span>, kde <span class="arithmatex">\(VK_2 = (e_2, n_2)\)</span> je veřejný šifrovací klíč pro subjekt 2, subjekt 1 zašifruje <span class="arithmatex">\(S\)</span> pomocí vztahu:</p>
+<div class="arithmatex">\[c = E_{VK_2}(S) = |S^{e_2}|_{n_2}, \quad 0 &lt; c &lt; n_2\]</div>
+<p><strong>Ověření:</strong> Subjekt 2 nejdříve použije soukromou dešifrovací transformaci <span class="arithmatex">\(D_{SK_2}\)</span> k získání <span class="arithmatex">\(S\)</span>. K nalezení OT <span class="arithmatex">\(m\)</span> předpokládáme, že byl vyslán subjektem 1, dále použije veřejnou šifrovací transformaci <span class="arithmatex">\(E_{VK_1}\)</span>, protože <span class="arithmatex">\(E_{VK_1}(S) = E_{VK_1}(D_{SK_1}(m)) = m\)</span>.</p>
+<p><img alt="Digitální podpis RSA schéma" src="../../assets/img/prednasky/p06-172.png" /></p>
+<p>Kombinace OT <span class="arithmatex">\(m\)</span> a podepsané verze <span class="arithmatex">\(S\)</span> přesvědčí subjekt 2, že zpráva byla vyslána subjektem 1. Také subjekt 1 <strong>nemůže odepřít</strong>, že on vyslal danou zprávu, protože žádný jiný subjekt než 1 nemůže generovat podepsanou zprávu <span class="arithmatex">\(S\)</span> z originálního textu zprávy <span class="arithmatex">\(m\)</span>.</p>
+<p><strong>Moderní přístup (hash-then-sign):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Krok</th>
+<th>Operace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Podepisování</td>
+<td><span class="arithmatex">\(s = H(m)^d \bmod n\)</span></td>
+</tr>
+<tr>
+<td>Ověření</td>
+<td>Spočítám <span class="arithmatex">\(s^e \bmod n\)</span>, porovnám s <span class="arithmatex">\(H(m)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="bezpecnost-rsa-a-faktorizace">Bezpečnost RSA a faktorizace<a class="headerlink" href="#bezpecnost-rsa-a-faktorizace" title="Permanent link">&para;</a></h3>
+<p><strong>Modulární umocňování</strong> pro šifrování s VK a <span class="arithmatex">\(m\)</span> o velikosti <span class="arithmatex">\(\approx 680\)</span> dekadických číslic probíhá v řádech milisekund a méně.</p>
+<div class="admonition warning">
+<p class="admonition-title">Problém faktorizace a RSA</p>
+<ul>
+<li>Pokud <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(q\)</span> jsou 100číslicová prvočísla ⇒ <span class="arithmatex">\(n\)</span> je 200číslicové. Nejrychlejší algoritmy pro faktorizaci potřebují <span class="arithmatex">\(\approx\)</span> <strong>250 roků počítačového času</strong>.</li>
+<li>Naopak, pokud známe <span class="arithmatex">\(d\)</span>, ale neznáme <span class="arithmatex">\(\Phi(n)\)</span>, je možné lehce faktorizovat <span class="arithmatex">\(n\)</span> (protože <span class="arithmatex">\(ed - 1\)</span> je násobkem <span class="arithmatex">\(\Phi(n)\)</span>).</li>
+<li><strong>Dosud nebylo prokázáno</strong> dešifrování zprávy zašifrované RSA bez faktorizace <span class="arithmatex">\(n\)</span>!</li>
+<li>Výpočetní náročnost je tím větší, čím větší je modul.</li>
+</ul>
+</div>
+<p><strong>Požadavky na prvočísla</strong> (ochrana proti speciálním technikám faktorizace):</p>
+<ul>
+<li><span class="arithmatex">\(p-1\)</span> a <span class="arithmatex">\(q-1\)</span> by měly mít velký prvočíselný faktor; <span class="arithmatex">\(\gcd(p-1, q-1)\)</span> by mělo být malé; <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(q\)</span> se musí dostatečně lišit.</li>
+<li>FIPS 186-4 požaduje: <span class="arithmatex">\(|p - q| &gt; 2^{\frac{\Delta n}{2} - 100}\)</span>.</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Schoolbook RSA</p>
+<p>RSA bez paddingu je <strong>nezabezpečené</strong>:
+- Deterministické (stejný <span class="arithmatex">\(m\)</span> → stejný <span class="arithmatex">\(c\)</span>)
+- Náchylné k Håstad's broadcast attack, small exponent attack
+- <strong>Padding:</strong> Vždy OAEP pro šifrování, PSS pro podpisy</p>
+</div>
+<hr />
+<h2 id="55-rsa-crt">5.5 RSA-CRT<a class="headerlink" href="#55-rsa-crt" title="Permanent link">&para;</a></h2>
+<h3 id="motivace_1">Motivace<a class="headerlink" href="#motivace_1" title="Permanent link">&para;</a></h3>
+<p>Pro urychlení šifrování je normou doporučena množina šifrovacích exponentů <span class="arithmatex">\(e\)</span> s <strong>malou Hammingovou váhou</strong> ⇒ šifrování probíhá rychle v několika krocích, viz modulární umocňování. Například <span class="arithmatex">\(e = 11_2, 1011_2, 10001_2, 2^{16}+1, \ldots\)</span></p>
+<p>Pro urychlení <strong>dešifrování</strong> se využívá rozklad pomocí Čínské věty o zbytcích — <strong>RSA-CRT</strong>. Na základě tohoto rozkladu se při dešifrování počítá s čísly poloviční délky ⇒ zrychlení 4 až 8 násobné oproti původnímu dešifrovacímu výpočtu.</p>
+<h3 id="definice-rsa-crt">Definice RSA-CRT<a class="headerlink" href="#definice-rsa-crt" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Formální definice</p>
+<ul>
+<li>Nechť <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(q\)</span> jsou prvočísla. Vypočítáme <span class="arithmatex">\(n = pq\)</span>, <span class="arithmatex">\(\Phi(n) = (p-1)(q-1)\)</span>.</li>
+<li>Zvolíme <span class="arithmatex">\(e\)</span>, <span class="arithmatex">\(\gcd(e, \Phi(n)) = 1\)</span> a spočítáme <span class="arithmatex">\(d = |e^{-1}|_{\Phi(n)}\)</span>.</li>
+<li>Vypočítáme <span class="arithmatex">\(d_p = |d|_{p-1}\)</span>, <span class="arithmatex">\(d_q = |d|_{q-1}\)</span>, <span class="arithmatex">\(q_{inv} = |q^{-1}|_p\)</span>.</li>
+<li>Dvojici <span class="arithmatex">\(VK = (n, e)\)</span> prohlásíme za <strong>veřejný klíč</strong>, pětici <span class="arithmatex">\(SK = (p, q, d_p, d_q, q_{inv})\)</span> za <strong>soukromý klíč</strong>.</li>
+</ul>
+</div>
+<p>Pro <strong>šifrování</strong> platí stejný vztah jako pro RSA: <span class="arithmatex">\(c = |m^e|_n\)</span>.</p>
+<p>Pro <strong>dešifrování</strong> v RSA-CRT musí platit pro <span class="arithmatex">\(d_p\)</span> a <span class="arithmatex">\(d_q\)</span> následující kongruence:</p>
+<div class="arithmatex">\[ed_p \equiv 1 \pmod{p-1} \qquad ed_q \equiv 1 \pmod{q-1}\]</div>
+<h3 id="algoritmus-desifrovani">Algoritmus dešifrování<a class="headerlink" href="#algoritmus-desifrovani" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Vypočteme <span class="arithmatex">\(m_1 = |c^{d_p}|_p\)</span> a <span class="arithmatex">\(m_2 = |c^{d_q}|_q\)</span></li>
+<li>Vypočteme <span class="arithmatex">\(h = |q_{inv}(m_1 - m_2)|_p\)</span></li>
+<li>Vypočteme <span class="arithmatex">\(m = m_2 + hq\)</span></li>
+</ol>
+<pre class="mermaid"><code>flowchart TB
+    C["Ciphertext c"] --&gt; M1["① m₁ = |c^{dₚ}|ₚ\n(číslo délky p — poloviční!)"]
+    C --&gt; M2["① m₂ = |c^{d_q}|_q\n(číslo délky q — poloviční!)"]
+    M1 &amp; M2 --&gt; H["② h = |q_inv·(m₁-m₂)|ₚ"]
+    H --&gt; M["③ m = m₂ + h·q"]
+    style M fill:#1a1d2e,stroke:#34d399</code></pre>
+<ul>
+<li>Krok 1 je výpočetně nejnáročnější. Počítáme ale s polovičními délkami čísel.</li>
+<li>Výpočet <span class="arithmatex">\(m_1\)</span> a <span class="arithmatex">\(m_2\)</span> je datově nezávislý a lze ho provádět <strong>paralelně</strong>.</li>
+<li>Krok 2 je nenáročné násobení rozdílu <span class="arithmatex">\(m_1\)</span> a <span class="arithmatex">\(m_2\)</span> s předpočítanou konstantou <span class="arithmatex">\(q_{inv}\)</span> a následná redukce modulo <span class="arithmatex">\(p\)</span>.</li>
+<li>Poslední krok představuje nejméně náročné násobení a sčítání.</li>
+</ul>
+<p><strong>Proč je to rychlejší?</strong> Exponenciáty jsou délky <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(q\)</span> (polovina <span class="arithmatex">\(n\)</span>). Exponencování <span class="arithmatex">\(k\)</span>-bitového čísla trvá <span class="arithmatex">\(O(k^3)\)</span> → polovina délky = <span class="arithmatex">\((1/2)^3 = 1/8\)</span> → <strong>~4× rychlejší pro každé exponencování</strong> + <span class="arithmatex">\(m_1\)</span> a <span class="arithmatex">\(m_2\)</span> jsou nezávislé → <strong>paralelizovatelné</strong> = celkem 4–8× zrychlení.</p>
+<hr />
+<h2 id="56-digitalni-podpis">5.6 Digitální podpis<a class="headerlink" href="#56-digitalni-podpis" title="Permanent link">&para;</a></h2>
+<p>Digitální podpis je formou <strong>asymetrického kryptografického schématu</strong>:</p>
+<ul>
+<li><strong>Soukromý klíč</strong> — podepisování</li>
+<li><strong>Veřejný klíč</strong> — ověření</li>
+</ul>
+<h3 id="vlastnosti-digitalniho-podpisu">Vlastnosti digitálního podpisu<a class="headerlink" href="#vlastnosti-digitalniho-podpisu" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Vlastnost</th>
+<th>Popis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nezfalšovatelnost / autentizace</strong></td>
+<td>Podpis se nedá napodobit jiným subjektem než podepisujícím; ověřitelnost — příjemce dokumentu musí být schopen ověřit, že podpis je platný</td>
+</tr>
+<tr>
+<td><strong>Integrita</strong></td>
+<td>Podepsaná zpráva se nedá změnit, aniž by se zneplatnilo podpis</td>
+</tr>
+<tr>
+<td><strong>Nepopiratelnost</strong></td>
+<td>Podepisující nesmí mít možnost popřít, že dokument podepsal</td>
+</tr>
+</tbody>
+</table>
+<p>Digitální podpis je <strong>skupina bitů</strong>, jejichž hodnoty závisí na celém podepisovaném dokumentu. Využívá informaci, kterou zná jen podepisující (soukromý klíč). Implementace digitálního podpisu by měla být snadná, ale <strong>falšování digitálního podpisu by mělo být výpočetně obtížné</strong>:</p>
+<ul>
+<li>neschůdné vyrobit falešný podpis pro existující zprávu</li>
+<li>neschůdné vyrobit falešnou zprávu pro existující podpis</li>
+</ul>
+<h3 id="kategorie-digitalnich-podpisu">Kategorie digitálních podpisů<a class="headerlink" href="#kategorie-digitalnich-podpisu" title="Permanent link">&para;</a></h3>
+<p><strong>Přímé digitální podpisy (direct digital signature):</strong></p>
+<ul>
+<li>Mezi dvěma subjekty, příjemce zná VK odesílatele.</li>
+<li>Problém s popiratelností ⇒ pokud odesílatel popře podepsání zprávy, příjemce ho nemůže usvědčit (není nikdo třetí, kdo by svědčil proti odesílateli).</li>
+</ul>
+<p><strong>Verifikované digitální podpisy (arbitrated digital signature):</strong></p>
+<ul>
+<li>Využívá důvěryhodnou třetí stranu (arbitra), který ověřuje podpisy všech zpráv.</li>
+</ul>
+<h3 id="dss-digital-signature-standard">DSS (Digital Signature Standard)<a class="headerlink" href="#dss-digital-signature-standard" title="Permanent link">&para;</a></h3>
+<p><img alt="Porovnání RSA a DSS podpisu" src="../../assets/img/prednasky/p06-179.png" /></p>
+<hr />
+<h2 id="57-elgamal">5.7 ElGamal<a class="headerlink" href="#57-elgamal" title="Permanent link">&para;</a></h2>
+<p><strong>El Gamal</strong> (Taher ElGamal) je algoritmus pro kryptografii s veřejným klíčem. Je <strong>založen na Diffie-Hellmanově výměně klíčů</strong>, resp. problému diskrétního logaritmu (DLP). Podobně jako RSA umožňuje El Gamal šifrování i digitální podpis.</p>
+<h3 id="pripomenuti-dh">Připomenutí DH<a class="headerlink" href="#pripomenuti-dh" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Alice (A) a Bob (B) si veřejně dohodnou prvočíslo <span class="arithmatex">\(m\)</span> a bázi <span class="arithmatex">\(a\)</span>, <span class="arithmatex">\(1 &lt; a &lt; m\)</span> (přesněji: grupu řádu <span class="arithmatex">\(m-1\)</span>).</li>
+<li>A si náhodně zvolí číslo <span class="arithmatex">\(k_A\)</span> takové, že <span class="arithmatex">\(0 &lt; k_A &lt; m\)</span> a <span class="arithmatex">\(\gcd(k_A, m-1) = 1\)</span>, spočítá <span class="arithmatex">\(y_A = |a^{k_A}|_m\)</span> a odešle ho B.</li>
+<li>B si náhodně zvolí číslo <span class="arithmatex">\(k_B\)</span> takové, že <span class="arithmatex">\(0 &lt; k_B &lt; m\)</span> a <span class="arithmatex">\(\gcd(k_B, m-1) = 1\)</span>, spočítá <span class="arithmatex">\(y_B = |a^{k_B}|_m\)</span> a odešle ho A.</li>
+<li>A i B spočítají sdílený klíč <span class="arithmatex">\(K = |y_B^{k_A}|_m = |(a^{k_B})^{k_A}|_m = |a^{k_A \cdot k_B}|_m = |(a^{k_A})^{k_B}|_m = |y_A^{k_B}|_m\)</span>.</li>
+<li>DHP (Diffie-Hellmanův problém) je složitější než DLP — ale nevíme jistě, zda je DHP jednodušší než DLP.</li>
+</ul>
+<h3 id="priprava-klice-alice">Příprava klíče (Alice)<a class="headerlink" href="#priprava-klice-alice" title="Permanent link">&para;</a></h3>
+<p>El Gamal vzniká úpravou DH:</p>
+<ol>
+<li>Alice zvolí číslo <span class="arithmatex">\(g\)</span> a prvočíslo <span class="arithmatex">\(m\)</span>, <span class="arithmatex">\(1 &lt; g &lt; m\)</span> (přesněji: grupu řádu <span class="arithmatex">\(m-1\)</span> a její generátor <span class="arithmatex">\(g\)</span>).</li>
+<li>Alice si náhodně zvolí číslo <span class="arithmatex">\(k_A\)</span> (soukromý klíč) takové, že <span class="arithmatex">\(0 &lt; k_A &lt; m\)</span>, spočítá <span class="arithmatex">\(y_A = |g^{k_A}|_m\)</span>.</li>
+<li>Alice zveřejní uspořádanou trojici <span class="arithmatex">\((m, g, y_A)\)</span> jako svůj <strong>veřejný klíč</strong>. <span class="arithmatex">\(k_A\)</span> je jejím <strong>soukromým klíčem</strong>.</li>
+</ol>
+<h3 id="sifrovani-bob-alice">Šifrování (Bob → Alice)<a class="headerlink" href="#sifrovani-bob-alice" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Bob chce Alici poslat zprávu <span class="arithmatex">\(p\)</span>.</li>
+<li>Bob si náhodně zvolí číslo <span class="arithmatex">\(k_B\)</span> takové, že <span class="arithmatex">\(0 &lt; k_B &lt; m\)</span>, spočítá <span class="arithmatex">\(y_B = |g^{k_B}|_m\)</span>.</li>
+<li>Bob spočítá sdílený klíč <span class="arithmatex">\(K = |y_A^{k_B}|_m = |(g^{k_A})^{k_B}|_m = |g^{k_A \cdot k_B}|_m = |(g^{k_B})^{k_A}|_m = |y_B^{k_A}|_m\)</span>.</li>
+<li>Bob zašifruje zprávu <span class="arithmatex">\(p\)</span> pomocí vztahu <span class="arithmatex">\(c = |p \cdot K|_m\)</span>.</li>
+<li>Bob odešle Alici uspořádanou dvojici <span class="arithmatex">\((y_B, c)\)</span>.</li>
+</ol>
+<h3 id="desifrovani-alice">Dešifrování (Alice)<a class="headerlink" href="#desifrovani-alice" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Alice dostala od Boba zprávu <span class="arithmatex">\((y_B, c)\)</span>.</li>
+<li>Alice si spočítá sdílený klíč <span class="arithmatex">\(K = |y_B^{k_A}|_m = |(g^{k_B})^{k_A}|_m = |g^{k_B \cdot k_A}|_m\)</span>.</li>
+<li>Alice si spočítá <span class="arithmatex">\(|K^{-1}|_m\)</span> (Euklidův rozšířený algoritmus).</li>
+<li>Alice dešifruje zprávu: <span class="arithmatex">\(p = |c \cdot K^{-1}|_m = |p \cdot K \cdot K^{-1}|_m = |p|_m = p\)</span>.</li>
+</ol>
+<div class="admonition example">
+<p class="admonition-title">Příklad El Gamal</p>
+<p><strong>Parametry:</strong> <span class="arithmatex">\(m = 2543\)</span>, <span class="arithmatex">\(g = 5\)</span>, <span class="arithmatex">\(y_A = |g^{k_A}|_m = 505\)</span> (pro <span class="arithmatex">\(k_A = 10\)</span>, ale B nezná).</p>
+<p><strong>Šifrování:</strong> <span class="arithmatex">\(k_B = 123\)</span> (náhodná volba)
+$<span class="arithmatex">\(y_B = |g^{k_B}|_{2543} = |5^{123}|_{2543} = 308, \quad K = |y_A^{k_B}|_{2543} = |505^{123}|_{2543} = 1883\)</span>$</p>
+<p>Zpráva <span class="arithmatex">\(p =\)</span> <code>"ELGAMAL RULES"</code> → <span class="arithmatex">\(0511, 0701, 1301, 1118, 2111, 0519\)</span></p>
+<div class="arithmatex">\[c = |p \cdot K|_{2543} \to 0959, 0166, 0874, 2133, 0304, 0765\]</div>
+<p>Bob odešle A dvojice: <span class="arithmatex">\((308, 959), (308, 166), (308, 874), \ldots\)</span></p>
+<p><strong>Dešifrování:</strong> Alice dostala <span class="arithmatex">\((308, 959)\)</span>, tzn. <span class="arithmatex">\(y_B = 308\)</span>, <span class="arithmatex">\(c = 959\)</span>
+$<span class="arithmatex">\(K = |y_B^{k_A}|_m = |308^{10}|_{2543} = 1883\)</span>$
+$<span class="arithmatex">\(|K^{-1}|_{2543} = |1883^{-1}|_{2543} = 1337 \quad \text{(Euklidův rozšířený algoritmus)}\)</span>$
+$<span class="arithmatex">\(p = |959 \cdot 1337|_{2543} = 511 \to \text{"EL"}\)</span>$
+Obdobně pro další bloky zprávy.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Kritická slabina</p>
+<p><strong><span class="arithmatex">\(k_B\)</span> musí být vždy nové a náhodné!</strong> Pokud se <span class="arithmatex">\(k_B\)</span> opakuje pro zprávy <span class="arithmatex">\(c_1, c_2\)</span>:</p>
+<div class="arithmatex">\[\frac{c_1}{c_2} = \frac{p_1 \cdot K}{p_2 \cdot K} = \frac{p_1}{p_2} \pmod{m}\]</div>
+<p>Poměr plaintextů je přímo znám.</p>
+</div>
+<hr />
+<h2 id="58-dsa-digital-signature-algorithm">5.8 DSA — Digital Signature Algorithm<a class="headerlink" href="#58-dsa-digital-signature-algorithm" title="Permanent link">&para;</a></h2>
+<h3 id="parametry_1">Parametry<a class="headerlink" href="#parametry_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Prvočíslo <span class="arithmatex">\(p\)</span> (1024–3072 bitů)</li>
+<li>Prvočíslo <span class="arithmatex">\(q\)</span> s <span class="arithmatex">\(q | (p-1)\)</span> (160–256 bitů)</li>
+<li>Generátor <span class="arithmatex">\(g = h^{(p-1)/q} \bmod p\)</span></li>
+<li>Soukromý klíč <span class="arithmatex">\(x\)</span>, veřejný klíč <span class="arithmatex">\(y = g^x \bmod p\)</span></li>
+</ul>
+<h3 id="podpis-zpravy-m">Podpis zprávy <span class="arithmatex">\(M\)</span><a class="headerlink" href="#podpis-zpravy-m" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Zvolíme náhodné <span class="arithmatex">\(k\)</span> (nonce), <span class="arithmatex">\(1 \leq k \leq q-1\)</span></li>
+<li><span class="arithmatex">\(r = (g^k \bmod p) \bmod q\)</span></li>
+<li><span class="arithmatex">\(s = k^{-1}(H(M) + xr) \bmod q\)</span></li>
+<li>Podpis = <span class="arithmatex">\((r, s)\)</span></li>
+</ol>
+<h3 id="overeni-podpisu-r-s-zpravy-m">Ověření podpisu <span class="arithmatex">\((r, s)\)</span> zprávy <span class="arithmatex">\(M\)</span><a class="headerlink" href="#overeni-podpisu-r-s-zpravy-m" title="Permanent link">&para;</a></h3>
+<ol>
+<li><span class="arithmatex">\(w = s^{-1} \bmod q\)</span></li>
+<li><span class="arithmatex">\(u_1 = H(M) \cdot w \bmod q\)</span>, &ensp; <span class="arithmatex">\(u_2 = r \cdot w \bmod q\)</span></li>
+<li><span class="arithmatex">\(v = (g^{u_1} \cdot y^{u_2} \bmod p) \bmod q\)</span></li>
+<li>Platný ↔ <span class="arithmatex">\(v = r\)</span></li>
+</ol>
+<pre class="mermaid"><code>flowchart LR
+    subgraph SIGN["Podepisování"]
+        M1["M"] --&gt; HM["H(M)"]
+        k["nonce k"] --&gt; r["r=(g^k mod p) mod q"]
+        HM &amp; r &amp; x["sk x"] --&gt; s["s=k⁻¹(H(M)+xr) mod q"]
+        r &amp; s --&gt; SIG["(r,s)"]
+    end
+    subgraph VER["Ověření"]
+        SIG2["(r,s)"] --&gt; w["w = s⁻¹ mod q"]
+        M2["M"] --&gt; HM2["H(M)"]
+        w &amp; HM2 --&gt; u1["u₁=H(M)·w mod q"]
+        w &amp; SIG2 --&gt; u2["u₂=r·w mod q"]
+        u1 &amp; u2 &amp; y["pk y"] --&gt; v["v=(g^u₁·y^u₂ mod p) mod q"]
+        v --&gt; OK["v==r? ✓"]
+    end</code></pre>
+<div class="admonition danger">
+<p class="admonition-title">Sony PS3 — kritický příklad</p>
+<p>Sony používalo <strong>konstantní <span class="arithmatex">\(k\)</span></strong> (ne náhodné) pro všechny DSA podpisy firmwaru PS3.</p>
+<p>Ze dvou podpisů <span class="arithmatex">\((r, s_1)\)</span>, <span class="arithmatex">\((r, s_2)\)</span> pro zprávy <span class="arithmatex">\(H(M_1), H(M_2)\)</span>:</p>
+<div class="arithmatex">\[k = \frac{H(M_1) - H(M_2)}{s_1 - s_2} \pmod{q}$$
+$$x = \frac{s_1 k - H(M_1)}{r} \pmod{q}\]</div>
+<p>Hackeři tak získali soukromý klíč a mohli podepisovat libovolný software pro PS3.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Zkouška</p>
+<p>Znát kroky generování DSA podpisu a ověření. Vysvětlit Sony PS3 exploit.</p>
+</div>
+<hr />
+<h2 id="shrnuti-kapitoly">Shrnutí kapitoly<a class="headerlink" href="#shrnuti-kapitoly" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Rychlý přehled</p>
+<table>
+<thead>
+<tr>
+<th>Algoritmus</th>
+<th>Základ</th>
+<th>Klíče</th>
+<th>Použití</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exponenciální šifra</td>
+<td>DLP (sym.)</td>
+<td><span class="arithmatex">\((e, d)\)</span> — <span class="arithmatex">\(de \equiv 1 \pmod{m-1}\)</span></td>
+<td>Symetrické šifrování</td>
+</tr>
+<tr>
+<td>DH</td>
+<td>DLP</td>
+<td><span class="arithmatex">\((g^a, g^b) \to g^{ab}\)</span></td>
+<td>Výměna klíčů</td>
+</tr>
+<tr>
+<td>RSA</td>
+<td>Faktorizace</td>
+<td><span class="arithmatex">\((e,d)\)</span> — <span class="arithmatex">\(ed \equiv 1 \pmod{\phi(n)}\)</span></td>
+<td>Šifrování, podpis</td>
+</tr>
+<tr>
+<td>RSA-CRT</td>
+<td>Faktorizace + CRT</td>
+<td>+ <span class="arithmatex">\((d_p, d_q, q_{inv})\)</span></td>
+<td>Rychlé dešifrování</td>
+</tr>
+<tr>
+<td>ElGamal</td>
+<td>DLP</td>
+<td><span class="arithmatex">\((k_A, y_A)\)</span></td>
+<td>Šifrování, podpis</td>
+</tr>
+<tr>
+<td>DSA</td>
+<td>DLP</td>
+<td><span class="arithmatex">\((x, y)\)</span></td>
+<td>Pouze podpis</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Klíčové otázky ke zkoušce</p>
+<ol>
+<li>Vysvětlete princip šifrovacího systému VK — jak se liší od symetrické šifry?</li>
+<li>Popište RSA: generování klíčů, šifrování, dešifrování, podpis. Formální důkaz dešifrování.</li>
+<li>Jaký je vztah RSA k problému faktorizace? Proč nebylo prokázáno, že dešifrování RSA vyžaduje faktorizaci?</li>
+<li>Jak funguje RSA-CRT? Jaká je podmínka na <span class="arithmatex">\(ed_p\)</span> a <span class="arithmatex">\(ed_q\)</span>? Proč je to rychlejší?</li>
+<li>Popište přímý digitální podpis RSA (bez hašování). Jaké vlastnosti digitálního podpisu garantuje?</li>
+<li>Jaký je rozdíl mezi přímým a verifikovaným digitálním podpisem?</li>
+<li>Proč je RSA bez paddingu nebezpečné?</li>
+<li>Co je El Gamal? Jak se liší od DH? Projděte šifrování a dešifrování na příkladu.</li>
+<li>Proč musí být <span class="arithmatex">\(k_B\)</span> v El Gamal vždy nové a náhodné?</li>
+<li>Vysvětlete Sony PS3 exploit — proč konstantní <span class="arithmatex">\(k\)</span> kompromituje DSA?</li>
+<li>Jaký je rozdíl mezi DH a El Gamal?</li>
+<li>Co je problém diskrétního logaritmu? Proč je těžký v <span class="arithmatex">\(\mathbb{Z}_p^*\)</span> ale snadný v <span class="arithmatex">\(\mathbb{Z}_p\)</span>?</li>
+<li>Zašifrujte zprávu exponenciální šifrou (<span class="arithmatex">\(m = 2633\)</span>, <span class="arithmatex">\(e = 29\)</span>, blok 1907).</li>
+<li>Co je slabá instance a silné prvočíslo u exponenciální šifry?</li>
+<li>Jak funguje DH pro 3 subjekty?</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zpět na začátek
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Zápatí" >
+        
+          
+          <a href="../04-hash/" class="md-footer__link md-footer__link--prev" aria-label="Předchozí: 4. Hašovací funkce">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Předchozí
+              </span>
+              <div class="md-ellipsis">
+                4. Hašovací funkce
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../06-ecc/" class="md-footer__link md-footer__link--next" aria-label="Další: 6. Kryptografie eliptických křivek">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Další
+              </span>
+              <div class="md-ellipsis">
+                6. Kryptografie eliptických křivek
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Zkop\u00edrov\u00e1no do schr\u00e1nky", "clipboard.copy": "Kop\u00edrovat do schr\u00e1nky", "search.result.more.one": "1 dal\u0161\u00ed na t\u00e9to str\u00e1nce", "search.result.more.other": "# v\u00edce na t\u00e9to str\u00e1nce", "search.result.none": "Nenalezeny \u017e\u00e1dn\u00e9 dokumenty", "search.result.one": "Nalezen\u00fd dokument: 1", "search.result.other": "Nalezen\u00e9 dokumenty: #", "search.result.placeholder": "Pi\u0161te co se m\u00e1 vyhledat", "search.result.term.missing": "Chyb\u011bj\u00edc\u00ed", "select.version": "Vyberte verzi"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+      
+    
+  </body>
+</html>

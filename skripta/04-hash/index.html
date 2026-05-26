@@ -1,0 +1,2000 @@
+
+<!doctype html>
+<html lang="cs" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Studijní materiál ČVUT FIT 2023 · prof. Ing. Róbert Lórencz, CSc.">
+      
+      
+        <meta name="author" content="ČVUT FIT">
+      
+      
+      
+        <link rel="prev" href="../03-blokove/">
+      
+      
+        <link rel="next" href="../05-asymetricka/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>4. Hašovací funkce - BI-KAB – Kryptografie a bezpečnost</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-hasovaci-funkce" class="md-skip">
+          Přeskočit obsah
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Záhlaví">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-header__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BI-KAB – Kryptografie a bezpečnost
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Hašovací funkce
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na světlý režim"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Přepnout na světlý režim" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na tmavý režim"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Přepnout na tmavý režim" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Hledat" placeholder="Hledat" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Vyhledávání">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Sdílet" aria-label="Sdílet" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Vyčistit" aria-label="Vyčistit" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializace vyhledávání
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Karty" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Domů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Skripta
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../prehled/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Přehled algoritmů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../pisemka/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Zkouška
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigace" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-nav__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    BI-KAB – Kryptografie a bezpečnost
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skripta
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Skripta
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-klasicka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Klasická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-proudove/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Proudové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-blokove/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Blokové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Hašovací funkce
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Hašovací funkce
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Obsah stránky">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Obsah stránky
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#40-jednosmerne-funkce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.0 Jednosměrné funkce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-kryptograficka-hasovaci-funkce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Kryptografická hašovací funkce
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Kryptografická hašovací funkce">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-nahodneho-orakula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model náhodného orákula
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-bezpecnostni-vlastnosti-a-bezkoliznost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Bezpečnostní vlastnosti a Bezkoliznost
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Bezpečnostní vlastnosti a Bezkoliznost">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tri-bezpecnostni-vlastnosti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tři bezpečnostní vlastnosti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bezkoliznost-a-digitalni-podpisy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bezkoliznost a digitální podpisy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-narozeninovy-paradox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Narozeninový paradox
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Narozeninový paradox">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#formalni-odvozeni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formální odvození
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pojem-bezkoliznosti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pojem bezkoliznosti
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-damgard-merklova-konstrukce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Damgård-Merklova konstrukce
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 Damgård-Merklova konstrukce">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zarovnani-padding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zarovnání (Padding)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#damgard-merklovo-zesileni-doplneni-o-delku-zpravy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Damgård-Merklovo zesílení — doplnění o délku zprávy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#princip-damgard-merklovy-konstrukce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Princip Damgård-Merklovy konstrukce
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bezpecnost-damgard-merklovy-konstrukce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bezpečnost Damgård-Merklovy konstrukce
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#davies-meyerova-kompresni-funkce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Davies-Meyerova kompresní funkce
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-sha-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 SHA-x
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.5 SHA-x">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sha-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SHA-1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#srovnani-sha-variant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Srovnání SHA variant
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sha-256" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SHA-256
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-vyuziti-hasovacich-funkci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 Využití hašovacích funkcí
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-hmac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7 HMAC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.7 HMAC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algoritmus-hmac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Algoritmus HMAC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bezpecnostni-vlastnosti-hmac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bezpečnostní vlastnosti HMAC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prukaz-znalosti-pri-autentizaci-entit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Průkaz znalosti při autentizaci entit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shrnuti-kapitoly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shrnutí kapitoly
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-asymetricka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Asymetrická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-ecc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Kryptografie eliptických křivek
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-kvanty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Kvantová kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-bezpecnost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Bezpečnost kryptosystémů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-klice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Generátory náhodných čísel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-pki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Certifikáty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-cipove-karty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Čipové karty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prehled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Přehled algoritmů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zkouška
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zkouška
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pisemka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Písemný test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ustni/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ústní zkouška
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigace" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Domů
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Skripta
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="4-hasovaci-funkce">4. Hašovací funkce<a class="headerlink" href="#4-hasovaci-funkce" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Cíle kapitoly</p>
+<ul>
+<li>Znát dva typy jednosměrných funkcí a jejich využití</li>
+<li>Znát formální definici kryptografické hašovací funkce a model náhodného orákula</li>
+<li>Rozumět Bezkoliznosti 1. a 2. řádu a narozeninovému paradoxu</li>
+<li>Porozumět Damgård-Merklově konstrukci, zarovnání a Davies-Meyerově kompresní funkci</li>
+<li>Znát strukturu SHA-1 a SHA-256 na úrovni kola</li>
+<li>Vědět, jak funguje HMAC a co zaručuje</li>
+</ul>
+</div>
+<hr />
+<h2 id="40-jednosmerne-funkce">4.0 Jednosměrné funkce<a class="headerlink" href="#40-jednosmerne-funkce" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Definice — Jednosměrná funkce</p>
+<p>Funkce <span class="arithmatex">\(f: X \to Y\)</span> je <strong>jednosměrná</strong>, jestliže:</p>
+<ul>
+<li><strong>Snadný výpočet:</strong> Pro libovolné <span class="arithmatex">\(x \in X\)</span> lze snadno spočítat <span class="arithmatex">\(y = f(x)\)</span>.</li>
+<li><strong>Obtížná inverze:</strong> Pro libovolné (nebo náhodné) <span class="arithmatex">\(y \in Y\)</span> je výpočetně nezvládnutelné nalézt <span class="arithmatex">\(x \in X\)</span> tak, aby <span class="arithmatex">\(f(x) = y\)</span>.</li>
+</ul>
+</div>
+<p>Existují dva typy jednosměrných funkcí:</p>
+<table>
+<thead>
+<tr>
+<th>Typ</th>
+<th>Popis</th>
+<th>Příklad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Typ 1 — Absolutní</strong></td>
+<td>Inverze je výpočetně nezvládnutelná <strong>bez jakékoliv</strong> pomocné informace</td>
+<td>Součin dvou prvočísel <span class="arithmatex">\(p \cdot q\)</span> — faktorizace je těžká</td>
+</tr>
+<tr>
+<td><strong>Typ 2 — Padací dvířka (trapdoor)</strong></td>
+<td>Inverze je obtížná, ale lze ji nalézt se znalostí tajné informace „padacích dvířek"</td>
+<td>Asymetrická kryptografie — soukromý klíč je trapdoor</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Příklad (Typ 1):</strong> Součin dvou velkých prvočísel <span class="arithmatex">\(n = p \cdot q\)</span> je snadný, ale faktorizace <span class="arithmatex">\(n\)</span> zpět na <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(q\)</span> je výpočetně nezvládnutelná.</p>
+<p><strong>Příklad (Typ 2):</strong> V asymetrické kryptografii slouží veřejný klíč k šifrování (snadný výpočet), ale dešifrování vyžaduje soukromý klíč (padací dvířka).</p>
+<hr />
+<h2 id="41-kryptograficka-hasovaci-funkce">4.1 Kryptografická hašovací funkce<a class="headerlink" href="#41-kryptograficka-hasovaci-funkce" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Formální definice</p>
+<p>Nechť <span class="arithmatex">\(d\)</span> je přirozené číslo a <span class="arithmatex">\(X\)</span> je množina binárních řetězců délek <span class="arithmatex">\(0\)</span> až <span class="arithmatex">\(d\)</span>. Funkce <span class="arithmatex">\(h: X \to \{0,1\}^n\)</span> je <strong>kryptografická hašovací funkce</strong>, jestliže:</p>
+<ol>
+<li>Je <strong>jednosměrná</strong> (Typ 1) — nelze ji invertovat bez padacích dvířek.</li>
+<li>Je <strong>bezkolizní</strong> — nelze výpočetně nalézt dvě různé zprávy se stejným hašem.</li>
+</ol>
+</div>
+<p>Hašovací funkce mapuje vstup <strong>libovolné délky</strong> na výstup <strong>pevné délky</strong> <span class="arithmatex">\(n\)</span> bitů.</p>
+<h3 id="model-nahodneho-orakula">Model náhodného orákula<a class="headerlink" href="#model-nahodneho-orakula" title="Permanent link">&para;</a></h3>
+<p><strong>Náhodné orákulum</strong> je idealizovaný bezpečnostní model pro hašovací funkce:</p>
+<ul>
+<li><strong>Orákulum</strong> = stroj, který na dotaz vrátí odpověď (pro stejný vstup vždy stejný výstup).</li>
+<li><strong>Náhodné orákulum</strong> na nový dotaz odpoví <strong>náhodně</strong> zvoleným výstupem z výstupní množiny <span class="arithmatex">\(\{0,1\}^n\)</span>.</li>
+<li>Pro již viděný dotaz vrátí stejný výstup jako dříve.</li>
+</ul>
+<p>Tento model formalizuje požadavek, aby hašovací funkce chovala jako „náhodná funkce" — bez struktury, která by umožnila předvídat výstup z jiných vstupů. Kryptografické analýzy bezpečnosti předpokládají, že <span class="arithmatex">\(h\)</span> se chová jako náhodné orákulum.</p>
+<hr />
+<h2 id="42-bezpecnostni-vlastnosti-a-bezkoliznost">4.2 Bezpečnostní vlastnosti a Bezkoliznost<a class="headerlink" href="#42-bezpecnostni-vlastnosti-a-bezkoliznost" title="Permanent link">&para;</a></h2>
+<h3 id="tri-bezpecnostni-vlastnosti">Tři bezpečnostní vlastnosti<a class="headerlink" href="#tri-bezpecnostni-vlastnosti" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Jednosměrnost (Preimage Resistance)</p>
+<p>Ze zadaného <span class="arithmatex">\(h\)</span> <strong>nelze najít</strong> <span class="arithmatex">\(m\)</span> takové, aby <span class="arithmatex">\(H(m) = h\)</span>.</p>
+<p><strong>Složitost útoku:</strong> <span class="arithmatex">\(\approx 2^n\)</span> — hrubá síla přes <span class="arithmatex">\(2^n\)</span> vstupů.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Bezkoliznost 2. řádu (Second Preimage Resistance)</p>
+<p>Pro zadaný vzor <span class="arithmatex">\(x\)</span> je výpočetně nezvládnutelné nalézt 2. vzor <span class="arithmatex">\(y \neq x\)</span> tak, aby <span class="arithmatex">\(h(x) = h(y)\)</span>.</p>
+<p><strong>Složitost útoku:</strong> <span class="arithmatex">\(\approx 2^n\)</span>.</p>
+<p><em>Útočník zná konkrétní zprávu a snaží se najít jinou zprávu se stejným hašem.</em></p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Bezkoliznost 1. řádu (Collision Resistance)</p>
+<p>Je výpočetně nezvládnutelné nalézt libovolné dvě různé zprávy <span class="arithmatex">\(M\)</span> a <span class="arithmatex">\(M'\)</span> tak, aby <span class="arithmatex">\(h(M) = h(M')\)</span>.</p>
+<p><strong>Složitost útoku:</strong> <span class="arithmatex">\(\approx 2^{n/2}\)</span> — <strong>narozeninový paradox!</strong></p>
+<p><em>Útočník si volí obě zprávy libovolně.</em></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Prolomení hašovací funkce</p>
+<p>Pokud víme, jak vzory nalézat jednoduše, a to buď v případě kolizí 1. nebo 2. řádu, hovoříme o <strong>prolomení hašovací funkce</strong>.</p>
+</div>
+<p><strong>Bezkoliznost se běžně využívá k digitálním podpisům.</strong> Nepodepisuje se přímo zpráva (často dlouhá), ale pouze její haš. Bezkoliznost zaručuje, že není možné nalézt dva dokumenty se stejnou haší — proto můžeme podepisovat haš.</p>
+<h3 id="bezkoliznost-a-digitalni-podpisy">Bezkoliznost a digitální podpisy<a class="headerlink" href="#bezkoliznost-a-digitalni-podpisy" title="Permanent link">&para;</a></h3>
+<p>Bezkoliznost 1. řádu (Collision Resistance) je <strong>silnější</strong> požadavek než Bezkoliznost 2. řádu:</p>
+<ul>
+<li>U <strong>bezkoliznosti 1. řádu</strong> si útočník volí <strong>obě</strong> zprávy libovolně (má větší svobodu).</li>
+<li>U <strong>bezkoliznosti 2. řádu</strong> je jedna zpráva pevně dána (útočník má menší svobodu).</li>
+</ul>
+<p>Proto lze útok na bezkoliznost 1. řádu provést s výrazně menší složitostí (<span class="arithmatex">\(2^{n/2}\)</span> místo <span class="arithmatex">\(2^n\)</span>).</p>
+<hr />
+<h2 id="43-narozeninovy-paradox">4.3 Narozeninový paradox<a class="headerlink" href="#43-narozeninovy-paradox" title="Permanent link">&para;</a></h2>
+<h3 id="formalni-odvozeni">Formální odvození<a class="headerlink" href="#formalni-odvozeni" title="Permanent link">&para;</a></h3>
+<div class="admonition question">
+<p class="admonition-title">Otázka</p>
+<p>Jak velká musí být množina náhodných zpráv, aby v ní s nezanedbatelnou pravděpodobností existovaly dvě různé zprávy se stejnou haší?</p>
+</div>
+<p><strong>Narozeninový paradox</strong> říká, že pro <span class="arithmatex">\(n\)</span>-bitovou hašovací funkci nastává kolize s cca 50% pravděpodobností v množině <span class="arithmatex">\(2^{n/2}\)</span> zpráv, namísto očekávaných <span class="arithmatex">\(2^{n-1}\)</span>.</p>
+<div class="admonition info">
+<p class="admonition-title">Tvrzení</p>
+<p>Mějme množinu <span class="arithmatex">\(M\)</span> o <span class="arithmatex">\(n\)</span> různých prvcích a proveďme výběr <span class="arithmatex">\(k\)</span> prvků po jedné s vracením. Pravděpodobnost, že vybereme některý prvek dvakrát nebo vícekrát, je:</p>
+<div class="arithmatex">\[P(n, k) = 1 - \frac{n(n-1)\cdots(n-k+1)}{n^k}\]</div>
+<p>Pro <span class="arithmatex">\(k = O(n^{\frac{1}{2}})\)</span> a velká <span class="arithmatex">\(n\)</span> platí <span class="arithmatex">\(P(n, k) \approx 1 - \exp\!\left(-\dfrac{k^2}{2n}\right)\)</span>.</p>
+</div>
+<p><strong>Důsledek:</strong> Pro <span class="arithmatex">\(k = (2n \ln 2)^{\frac{1}{2}} \approx n^{\frac{1}{2}}\)</span> prvků z <span class="arithmatex">\(M\)</span> se s cca 50% pravděpodobností naleznou dva shodné. Obecně pro hašovací funkci s <span class="arithmatex">\(b\)</span> bitovým hašovacím kódem postačí zahašovat <span class="arithmatex">\(n^{\frac{1}{2}} = (2^b)^{\frac{1}{2}} = 2^{\frac{b}{2}}\)</span> zpráv, abychom přibližně s 50% pravděpodobností nalezli kolizi.</p>
+<p><strong>Příklady:</strong></p>
+<ul>
+<li><span class="arithmatex">\(P(365, 23) = 0{,}507\)</span> → 23 náhodně vybraných lidí postačí k tomu, aby se mezi nimi s cca 50% pravděpodobností našla dvojice slavící narozeniny tentýž den.</li>
+<li><span class="arithmatex">\(P(365, 30) = 0{,}706\)</span> → u skupiny 30 lidí je pravděpodobnost 70,6%.</li>
+</ul>
+<p>Paradox spočívá v tom, že hledáme <strong>jakoukoliv</strong> dvojici se stejnými narozeninami (Bezkoliznost 1. řádu), nikoli osobu se stejnými narozeninami jako konkrétní člověk (Bezkoliznost 2. řádu).</p>
+<h3 id="pojem-bezkoliznosti">Pojem bezkoliznosti<a class="headerlink" href="#pojem-bezkoliznosti" title="Permanent link">&para;</a></h3>
+<p>Pokud máme hašovací funkci SHA-1 → možných zpráv je mnoho (<span class="arithmatex">\(2^0 + 2^1 + \cdots + 2^d\)</span>), kde <span class="arithmatex">\(d = 2^{64} - 1\)</span>, a hašovacích kódů pouze <span class="arithmatex">\(2^{160}\)</span> → existuje ohromné množství zpráv vedoucích na tentýž hašový kód, v průměru je to řádově <span class="arithmatex">\(2^{d-159}\)</span>.</p>
+<p><strong>Kolizí existuje velké množství, ale nalezení i jediné kolize je nad naše výpočetní možnosti</strong>, i když zohledníme narozeninový paradox.</p>
+<p>Například pro 160 bitový hašový kód bychom očekávali <span class="arithmatex">\(2^{(160-1)}\)</span> zpráv, paradoxně je to pouhých <span class="arithmatex">\(2^{80}\)</span> zpráv.</p>
+<hr />
+<h2 id="44-damgard-merklova-konstrukce">4.4 Damgård-Merklova konstrukce<a class="headerlink" href="#44-damgard-merklova-konstrukce" title="Permanent link">&para;</a></h2>
+<h3 id="zarovnani-padding">Zarovnání (Padding)<a class="headerlink" href="#zarovnani-padding" title="Permanent link">&para;</a></h3>
+<p>U moderních hašovacích funkcí může být zpráva velmi dlouhá, například <span class="arithmatex">\(d = 2^{64} - 1\)</span> bitů. Zpracovává se <strong>po blocích postupně</strong>, ne najednou. Proto je nutné:</p>
+<ol>
+<li><strong>Zarovnání vstupní zprávy na celistvý počet bloků</strong> před hašováním.</li>
+<li>Zarovnání musí být bezkolizní a umožňovat <strong>jednoznačné odejmutí</strong>.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Proč nestačí doplnění nulami?</p>
+<p>Pokud bychom doplnili zprávu nulovými bity, nelze rozeznat, kolik jich bylo doplněno (a zda některé z nich nejsou platnými bity zprávy, pokud zpráva nulovými bity končila). Tyto zprávy by vedly ke kolizi:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>10111001101  0100000...000000000000000000000000
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>10111001101  0100000...0000000000000000000000000
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>10111001101  0100000...00000000000000000000000000
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>...
+</span></code></pre></div>
+</div>
+<p><strong>Zarovnání u hašovacích funkcí</strong> se definuje jako <strong>doplnění bitem 1</strong> a poté potřebným počtem bitů 0 → jednoznačné odejmutí doplňku.</p>
+<h3 id="damgard-merklovo-zesileni-doplneni-o-delku-zpravy">Damgård-Merklovo zesílení — doplnění o délku zprávy<a class="headerlink" href="#damgard-merklovo-zesileni-doplneni-o-delku-zpravy" title="Permanent link">&para;</a></h3>
+<p>Zpráva <span class="arithmatex">\(M\)</span> je nejprve doplněna bitem 1, poté bity 0 (může jich být 0 — 511), aby do celistvého násobku 512 bitů zbývalo ještě 64 bitů. Posledních 64 bitů je vyplněno 64 bitovou hodnotou počtu bitů původní zprávy <span class="arithmatex">\(M\)</span>.</p>
+<p>Délka zprávy je součástí hašovacího procesu. 64 bitů vyjadřující délku zprávy umožňuje hašovat zprávy až do délky <span class="arithmatex">\(d = 2^{64} - 1\)</span> bitů. <strong>Informace o délce původní zprávy v paddingu eliminuje některé útoky.</strong></p>
+<p><img alt="Damgård-Merkle full diagram" src="../../assets/img/prednasky/p05-139.png" /></p>
+<h3 id="princip-damgard-merklovy-konstrukce">Princip Damgård-Merklovy konstrukce<a class="headerlink" href="#princip-damgard-merklovy-konstrukce" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Damgård-Merklova konstrukce</p>
+<div class="arithmatex">\[H_0 = IV, \quad H_i = f(H_{i-1}, M_i), \quad H(M) = H_N\]</div>
+</div>
+<ul>
+<li><span class="arithmatex">\(f\)</span> zpracovává aktuální blok zprávy <span class="arithmatex">\(M_i\)</span> a výsledkem je určitá hodnota — <strong>kontext</strong> <span class="arithmatex">\(H_i\)</span>.</li>
+<li>Hodnota <span class="arithmatex">\(H_i\)</span> nutně tvoří vstup do <span class="arithmatex">\(f\)</span> v dalším kroku. <span class="arithmatex">\(f\)</span> má tedy dva vstupy: <span class="arithmatex">\(H_{i-1}\)</span> a <span class="arithmatex">\(M_i\)</span>, výstupem je nové <span class="arithmatex">\(H_i\)</span>.</li>
+<li><strong>Šíře <span class="arithmatex">\(H_i\)</span></strong> je většinou stejná jako šíře výstupního kódu.</li>
+<li>Počáteční hodnota kontextu <span class="arithmatex">\(H_0\)</span> se nazývá <strong>inicializační hodnota (IV)</strong> — je definována jako konstanta daná v popisu každé iterativní hašovací funkce.</li>
+<li><span class="arithmatex">\(f\)</span> zpracovává širší vstup <span class="arithmatex">\((H_{i-1}, M_i)\)</span> na mnohem kratší <span class="arithmatex">\(H_i\)</span> → <span class="arithmatex">\(f\)</span> je skutečně <strong>kompresní</strong>.</li>
+<li>Blok <span class="arithmatex">\(M_i\)</span> se promítne do <span class="arithmatex">\(H_i\)</span>, ale současně dochází ke ztrátě informace.</li>
+<li>Hašováním posledního bloku <span class="arithmatex">\(M_N\)</span> dostáváme <span class="arithmatex">\(H_N\)</span>, z něhož bereme buď celou délku nebo část jako výslednou haš.</li>
+</ul>
+<p><img alt="Damgård-Merklova kompresní funkce" src="../../assets/img/prednasky/p05-137.png" /></p>
+<h3 id="bezpecnost-damgard-merklovy-konstrukce">Bezpečnost Damgård-Merklovy konstrukce<a class="headerlink" href="#bezpecnost-damgard-merklovy-konstrukce" title="Permanent link">&para;</a></h3>
+<p><strong>Kolize kompresní funkce</strong> <span class="arithmatex">\(f\)</span> spočívá v nalezení inicializační hodnoty <span class="arithmatex">\(H\)</span> a dvou různých bloků <span class="arithmatex">\(B_1\)</span> a <span class="arithmatex">\(B_2\)</span> tak, aby <span class="arithmatex">\(f(H, B_1) = f(H, B_2)\)</span>.</p>
+<div class="admonition success">
+<p class="admonition-title">Bezpečnost DM konstrukce</p>
+<p>Pokud je hašovací funkce bezkolizní, vyplývá odtud i bezkoliznost kompresní funkce. Bylo dokázáno, že pokud je kompresní funkce bezkolizní, je bezkolizní také iterovaná hašovací funkce konstruovaná výše uvedeným postupem.</p>
+<p>Tato vlastnost DM konstrukce je bezpečnostním základem všech moderních hašovacích funkcí → je možné se soustředit na nalezení kvalitní kompresní funkce.</p>
+</div>
+<h3 id="davies-meyerova-kompresni-funkce">Davies-Meyerova kompresní funkce<a class="headerlink" href="#davies-meyerova-kompresni-funkce" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Davies-Meyerova formule</p>
+<div class="arithmatex">\[H_i = f(H_{i-1}, M_i) = E_{M_i}(H_{i-1}) \oplus H_{i-1}\]</div>
+</div>
+<p>Davies-Meyerova konstrukce kompresní funkce zesiluje vlastnost jednosměrnosti ještě přičtením (XOR) vzoru před výstupem:</p>
+<ul>
+<li>Výstup je navíc <strong>maskován vstupem</strong> (XOR s <span class="arithmatex">\(H_{i-1}\)</span>), což ještě více ztěžuje případný zpětný chod.</li>
+<li>Blok zprávy <span class="arithmatex">\(M_i\)</span> je obvykle větší než klíče blokových šifer → se aplikuje bloková šifra <strong>několikrát za sebou v rundách</strong>.</li>
+<li>Rundovní klíč je postupně čerpán z bloku <span class="arithmatex">\(M_i\)</span>.</li>
+</ul>
+<p>Konstruovat kompresní funkce na bázi blokových šifer splňuje požadavek na <strong>jednosměrnost</strong> a požadavek na jejich chování jako <strong>náhodné orákulum</strong> (díky složitosti blokových šifer).</p>
+<pre class="mermaid"><code>flowchart LR
+    M["Zpráva M\n(libovolná délka)"] --&gt; PAD["Padding\n1 + 0...0 + délka (64b)"]
+    PAD --&gt; M1["M₁"] &amp; M2["M₂"] &amp; MT["Mₙ"]
+    IV["IV\n(fixní konstanta)"] --&gt; F1["f(H₀, M₁)"] --&gt; H1["H₁"]
+    M1 --&gt; F1
+    H1 --&gt; F2["f(H₁, M₂)"] --&gt; H2["H₂"]
+    M2 --&gt; F2
+    H2 --&gt; FT["f(Hₙ₋₁, Mₙ)"] --&gt; HT["Haš = Hₙ"]
+    MT --&gt; FT
+    style IV fill:#1a1d2e,stroke:#fbbf24
+    style HT fill:#1a1d2e,stroke:#f87171</code></pre>
+<hr />
+<h2 id="45-sha-x">4.5 SHA-x<a class="headerlink" href="#45-sha-x" title="Permanent link">&para;</a></h2>
+<h3 id="sha-1">SHA-1<a class="headerlink" href="#sha-1" title="Permanent link">&para;</a></h3>
+<p>Algoritmus SHA (Secure Hash Algorithm) byl zaveden NIST a publikovaný v normě <strong>FIPS 180 (1993)</strong>. Revidovaná verze SHA-1 v normě <strong>FIPS 180-1 (1995)</strong>.</p>
+<p>SHA-1 byla prolomena díky <strong>rostoucímu výpočetnímu výkonu</strong> a nalezení <strong>teoretických slabin</strong>.</p>
+<p><strong>Parametry SHA-1:</strong></p>
+<ul>
+<li>Zpracovává zprávu <span class="arithmatex">\(M\)</span> s maximální délkou <span class="arithmatex">\(2^{64} - 1\)</span> bitů.</li>
+<li>Vrací výstupní hašový kód s délkou <strong>160b</strong>.</li>
+<li>Vstupní zpráva <span class="arithmatex">\(M\)</span> je zpracovávána po blocích <span class="arithmatex">\(M_i\)</span> s velikostí <strong>512b</strong>.</li>
+<li>Prostupující kontext se skládá z <span class="arithmatex">\(5 \times 32\)</span> bitových slov <span class="arithmatex">\(A, B, C, D, E\)</span>.</li>
+</ul>
+<p><img alt="SHA-1 struktura" src="../../assets/img/prednasky/p05-144.png" /></p>
+<p><strong>Zpracování bloku <span class="arithmatex">\(M_i\)</span></strong> probíhá v <strong>4 × 20 = 80 rundách</strong>. 160 bitový kontext (s inicializační hodnotou IV) je postupně „zašifrováván" 32b slovem <span class="arithmatex">\(m_0, m_1\)</span> až <span class="arithmatex">\(m_{15}\)</span> pro rundy <span class="arithmatex">\(0, 1, \ldots, 15\)</span> a pro rundy <span class="arithmatex">\(16, 17, \ldots, 79\)</span> 32b slovem <span class="arithmatex">\(w_i\)</span>, pro které platí:</p>
+<div class="arithmatex">\[w_i = \lll_1\!(w_{i-16} \oplus w_{i-14} \oplus w_{i-8} \oplus w_{i-3}), \quad i = 16, 17, \ldots, 79\]</div>
+<p>Na místě funkce <span class="arithmatex">\(F\)</span> v obrázku se po 20 rundách střídají 4 různé funkce (<span class="arithmatex">\(F, G, H, I\)</span>) a v každé rundě se využívá jiná konstanta <span class="arithmatex">\(K_i\)</span>. Pro výpočet hodnot logických funkcí <span class="arithmatex">\(F, G, H, I\)</span> platí:</p>
+<table>
+<thead>
+<tr>
+<th>Funkce</th>
+<th>Definice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(F(b, c, d)\)</span></td>
+<td><span class="arithmatex">\((b \wedge c) \vee (\bar{b} \wedge d)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(G(b, c, d)\)</span></td>
+<td><span class="arithmatex">\(b \oplus c \oplus d\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(H(b, c, d)\)</span></td>
+<td><span class="arithmatex">\((b \wedge c) \vee (b \wedge d) \vee (c \wedge d)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I(b, c, d)\)</span></td>
+<td><span class="arithmatex">\(b \oplus c \oplus d\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Konstanty <span class="arithmatex">\(K_i\)</span>:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Rundy</th>
+<th>Hexadecimální <span class="arithmatex">\(K_i\)</span></th>
+<th>Celočíselná část</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0 \leq i \leq 19\)</span></td>
+<td><code>5A927999</code></td>
+<td><span class="arithmatex">\(2^{30} \times \sqrt{2}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(20 \leq i \leq 39\)</span></td>
+<td><code>6ED9EBA1</code></td>
+<td><span class="arithmatex">\(2^{30} \times \sqrt{3}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(40 \leq i \leq 59\)</span></td>
+<td><code>8F1BBCDC</code></td>
+<td><span class="arithmatex">\(2^{30} \times \sqrt{5}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(60 \leq i \leq 79\)</span></td>
+<td><code>CA62C1D6</code></td>
+<td><span class="arithmatex">\(2^{30} \times \sqrt{10}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Inicializační vektor IV</strong> má hodnoty (hexadecimálně):
+<span class="arithmatex">\(A =\)</span> <code>67452301</code>, <span class="arithmatex">\(B =\)</span> <code>EFCDAB89</code>, <span class="arithmatex">\(C =\)</span> <code>98BADCFE</code>, <span class="arithmatex">\(D =\)</span> <code>10325476</code>, <span class="arithmatex">\(E =\)</span> <code>C3D2E1F0</code></p>
+<p>Po 80 rundách je k výsledku přičten modulo <span class="arithmatex">\(2^{32}\)</span> původní kontext <span class="arithmatex">\(H_{i-1}\)</span> (podle Davies-Meyerovy konstrukce). Přičítání je prováděno po 32b slovech.</p>
+<p><img alt="SHA-1 kompresní funkce detail" src="../../assets/img/prednasky/p05-146.png" /></p>
+<h3 id="srovnani-sha-variant">Srovnání SHA variant<a class="headerlink" href="#srovnani-sha-variant" title="Permanent link">&para;</a></h3>
+<p>Inovací standardu FIPS 180-1 na FIPS 180-2 byly zavedeny 3 nové hašovací algoritmy SHA-2: SHA-256, SHA-384 a SHA-512.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>SHA-1</th>
+<th>SHA-256</th>
+<th>SHA-384</th>
+<th>SHA-512</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Délka haš. kódu</td>
+<td>160</td>
+<td>256</td>
+<td>384</td>
+<td>512</td>
+</tr>
+<tr>
+<td>Délka zprávy</td>
+<td><span class="arithmatex">\(&lt; 2^{64}\)</span></td>
+<td><span class="arithmatex">\(&lt; 2^{64}\)</span></td>
+<td><span class="arithmatex">\(&lt; 2^{128}\)</span></td>
+<td><span class="arithmatex">\(&lt; 2^{128}\)</span></td>
+</tr>
+<tr>
+<td>Velikost bloku</td>
+<td>512</td>
+<td>512</td>
+<td>1024</td>
+<td>1024</td>
+</tr>
+<tr>
+<td>Velikost slova</td>
+<td>32</td>
+<td>32</td>
+<td>64</td>
+<td>64</td>
+</tr>
+<tr>
+<td>Počet rund <span class="arithmatex">\(f\)</span></td>
+<td>80</td>
+<td>64/80</td>
+<td>80</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Bezpečnost v bitech</td>
+<td>80</td>
+<td>128</td>
+<td>192</td>
+<td>256</td>
+</tr>
+</tbody>
+</table>
+<p>Nejvýznamnější rozdíly jsou v délce hašového kódu, který určuje odolnost hašového kódu vůči nalezení kolizí 1. a 2. řádu. Na druhé straně struktura hašovacích funkcí (kompresních funkcí) je téměř stejná.</p>
+<h3 id="sha-256">SHA-256<a class="headerlink" href="#sha-256" title="Permanent link">&para;</a></h3>
+<p>SHA-256 je novější, bezpečná kryptografická hašovací funkce. Od roku 2000 jako nová generace funkcí SHA (2002 standard FIPS). SHA-256 má stejnou základní strukturu a používá stejné typy operací modulární aritmetiky a logických binárních operací jako algoritmus SHA-1, je ale bezpečný.</p>
+<ul>
+<li>Generuje <strong>256bitovou</strong> hašovací hodnotu z bloků zpráv o velikosti <strong>512 bitů</strong> s paddingem totožným s pro SHA-1.</li>
+<li>Původní velikost zprávy je až <span class="arithmatex">\(2^{64} - 1\)</span> bit.</li>
+<li>SHA-256 interně počítá <strong>256bitový kontext</strong> (kvůli bezpečnosti). Výstupní hash lze zkrátit na 196/128 bitů. Zkrácený SHA-256 je praktičtější a není předmětem žádných známých útoků.</li>
+</ul>
+<p><strong>Zpracování bloku <span class="arithmatex">\(M_i\)</span></strong> probíhá v <strong>4 × 16 = 64 rundách</strong>. 256 bitový kontext je postupně „zašifráváván" 32b slovem <span class="arithmatex">\(W_t\)</span>:</p>
+<ul>
+<li>Pro rundy <span class="arithmatex">\(t = 0, 1, \ldots, 15\)</span> je <span class="arithmatex">\(W_t = m_t\)</span> (rozdělení bloku zprávy <span class="arithmatex">\(M_i\)</span>).</li>
+<li>Pro rundy <span class="arithmatex">\(t = 16, 17, \ldots, 63\)</span> je:</li>
+</ul>
+<div class="arithmatex">\[W_t = \sigma_1(W_{t-2}) + W_{t-7} + \sigma_0(W_{t-15}) + W_{t-16}\]</div>
+<p>Pro výpočet hodnot funkcí <span class="arithmatex">\(Ch\)</span>, <span class="arithmatex">\(Ma\)</span>, <span class="arithmatex">\(\Sigma_0\)</span>, <span class="arithmatex">\(\Sigma_1\)</span>, <span class="arithmatex">\(\sigma_0\)</span>, <span class="arithmatex">\(\sigma_1\)</span> platí:</p>
+<table>
+<thead>
+<tr>
+<th>Funkce</th>
+<th>Definice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(Ch(x, y, z)\)</span></td>
+<td><span class="arithmatex">\((x \wedge y) \oplus (\bar{x} \wedge z)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Ma(x, y, z)\)</span></td>
+<td><span class="arithmatex">\((x \wedge y) \oplus (x \wedge z) \oplus (y \wedge z)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Sigma_0(x)\)</span></td>
+<td><span class="arithmatex">\(\ggg\!2\,(x) \oplus \ggg\!13\,(x) \oplus \ggg\!22\,(x)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Sigma_1(x)\)</span></td>
+<td><span class="arithmatex">\(\ggg\!6\,(x) \oplus \ggg\!11\,(x) \oplus \ggg\!25\,(x)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\sigma_0(x)\)</span></td>
+<td><span class="arithmatex">\(\ggg\!7\,(x) \oplus \ggg\!18\,(x) \oplus \gg\!3\,(x)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\sigma_1(x)\)</span></td>
+<td><span class="arithmatex">\(\ggg\!17\,(x) \oplus \ggg\!19\,(x) \oplus \gg\!10\,(x)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Konstanta <span class="arithmatex">\(K_t\)</span> = prvních 32 bitů desetinné části odmocnin prvočísel 2–311.</p>
+<p>Po 64 rundách je k výsledku přičten modulo <span class="arithmatex">\(2^{32}\)</span> původní kontext <span class="arithmatex">\(H_{i-1}\)</span> (Davies-Meyerova konstrukce). Přičítání je prováděno po 32b slovech.</p>
+<p><img alt="SHA-256 kompresní funkce" src="../../assets/img/prednasky/p05-150.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Zkouška</p>
+<p>Znát strukturu kola SHA-256: 8 registrů (A–H), 64 kol, Ch + Ma + Σ operace. Znát formuli pro expanzi slov <span class="arithmatex">\(W_t\)</span>. Vědět rozdíl SHA-1 vs SHA-256 (počet registrů, délka haše, počet kol).</p>
+</div>
+<hr />
+<h2 id="46-vyuziti-hasovacich-funkci">4.6 Využití hašovacích funkcí<a class="headerlink" href="#46-vyuziti-hasovacich-funkci" title="Permanent link">&para;</a></h2>
+<p>Kryptografické využití hašovacích funkcí:</p>
+<ol>
+<li><strong>Kontrola integrity</strong> — kontrola shody velkých souborů dat.</li>
+<li><strong>Ukládání a kontrola přihlašovacích hesel</strong> — Pro vyloučení slovníkových útoků se používá ještě metoda solení. S otiskem hesla se vygeneruje náhodný řetězec „sůl", který je dohromady hašován s heslem. Databáze obsahuje dvojici: <span class="arithmatex">\((sůl, haš(heslo, sůl))\)</span>.</li>
+<li><strong>Jednoznačná identifikace dat</strong> — jednoznačná reprezentace vzoru, digitální otisk dat, jednoznačný identifikátor dat — to vše zejména pro <strong>digitální podpisy</strong>.</li>
+<li><strong>Prokazování znalosti</strong> (zero-knowledge proof).</li>
+<li><strong>Autentizace původu dat.</strong></li>
+<li><strong>Pseudonáhodné generátory, odvozování klíčů.</strong></li>
+</ol>
+<hr />
+<h2 id="47-hmac">4.7 HMAC<a class="headerlink" href="#47-hmac" title="Permanent link">&para;</a></h2>
+<h3 id="algoritmus-hmac">Algoritmus HMAC<a class="headerlink" href="#algoritmus-hmac" title="Permanent link">&para;</a></h3>
+<p><strong>Klíčované hašové autentizační kódy zpráv (HMAC)</strong> zpracovávají nejen zprávu <span class="arithmatex">\(M\)</span>, ale spolu s ní i nějaký tajný klíč <span class="arithmatex">\(K\)</span>.</p>
+<ul>
+<li>Jsou proto podobné autentizačnímu kódu zprávy MAC, ale místo blokové šifry využívají hašovací funkci.</li>
+<li>Používají se jako k nepadělatelné mu zabezpečení zpráv, tak k autentizaci (prokazováním znalosti tajného klíče <span class="arithmatex">\(K\)</span>).</li>
+<li>HMAC je obecná konstrukce, která využívá obecnou hašovací funkci. Podle toho, jakou hašovací funkci používá konkrétně, se označuje výsledek — například HMAC-SHA-1<span class="arithmatex">\((M, K)\)</span> používá SHA-1, <span class="arithmatex">\(M\)</span> je zpráva a <span class="arithmatex">\(K\)</span> je tajný klíč.</li>
+<li><strong>HMAC je definován ve standardu FIPS-PUB-198.</strong> Definice závisí na tom, kolik bajtů má blok kompresní funkce. Například u SHA-1 je to 64B (512b), u SHA-384 a SHA-512 to je 128B (1024b).</li>
+</ul>
+<p><strong>Konstanty:</strong></p>
+<ul>
+<li>Definujeme konstantní řetězce <strong>ipad</strong> jako řetězec <span class="arithmatex">\(b/8\)</span> bajtů s hodnotou <code>0x36</code> (<code>0011 0110</code>) a <strong>opad</strong> jako řetězec <span class="arithmatex">\(b/8\)</span> bajtů s hodnotou <code>0x5C</code> (<code>0101 1100</code>), kde <span class="arithmatex">\(b\)</span> je velikost bloku v bitech.</li>
+<li>Klíč <span class="arithmatex">\(K\)</span> v případě, že <span class="arithmatex">\(\log_2 K &lt; b\)</span>, doplníme bity 0 vlevo od MSB bitu klíče do délky <span class="arithmatex">\(b\)</span>-bitů a označíme ho <span class="arithmatex">\(K^+\)</span>.</li>
+</ul>
+<p><strong>Definujeme hodnotu <span class="arithmatex">\(HMAC_K(M)\)</span> jako:</strong></p>
+<div class="arithmatex">\[HMAC_K(M) = H\!\Bigl(\bigl(K^+ \oplus opad\bigr) \,\|\, H\!\bigl(\bigl(K^+ \oplus ipad\bigr) \,\|\, M\bigr)\Bigr)\]</div>
+<p>kde <span class="arithmatex">\(\|\)</span> označuje zřetězení.</p>
+<p>Operace „doplnění na <span class="arithmatex">\(b\)</span> bitů" je prováděna stejným způsobem jako doplnění zprávy u hašovací funkce do celého bloku. Doplnění bude vždy jenom do 1 bloku, protože při použití SHA-x platí: <strong>délka hašového kódu &lt; velikost bloku − 64 [b]</strong>.</p>
+<p><img alt="HMAC struktura" src="../../assets/img/prednasky/p05-155.png" /></p>
+<h3 id="bezpecnostni-vlastnosti-hmac">Bezpečnostní vlastnosti HMAC<a class="headerlink" href="#bezpecnostni-vlastnosti-hmac" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Nepadělatelný integritní kód, autentizace původu dat</p>
+<ul>
+<li>Zabezpečovací kód <span class="arithmatex">\(HMAC_K(M)\)</span>, pokud je připojen za zprávu <span class="arithmatex">\(M\)</span>, detekuje neúmyslnou chybu při jejím přenosu.</li>
+<li><strong>Zabraňuje útočníkovi změnit zprávu a současně změnit HMAC</strong>, protože bez znalosti klíče <span class="arithmatex">\(K\)</span> nelze nový HMAC vypočítat.</li>
+<li>HMAC — nepadělatelný integritní kód (neposkytuje samotná haš).</li>
+<li>Pro komunikujícího partnera je správný HMAC autentizací původu dat, protože odesílatel musel znát hodnotu tajného klíče <span class="arithmatex">\(K\)</span>.</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">HMAC vs. nepopiratelnost</p>
+<p>HMAC <strong>neposkytuje nepopiratelnost</strong> — obě strany komunikace znají tajný klíč <span class="arithmatex">\(K\)</span>, tedy obě strany by mohly HMAC vytvořit.</p>
+</div>
+<h3 id="prukaz-znalosti-pri-autentizaci-entit">Průkaz znalosti při autentizaci entit<a class="headerlink" href="#prukaz-znalosti-pri-autentizaci-entit" title="Permanent link">&para;</a></h3>
+<p>HMAC může být použit jako průkaz znalosti sdíleného tajemství — tajný klíč <span class="arithmatex">\(K\)</span> — při autentizaci entit:</p>
+<ol>
+<li>Dotazovatel odešle náhodnou výzvu (řetězec) <strong>challenge</strong> prokazateli.</li>
+<li>Od prokazatele obdrží odpověď <strong>response</strong> <span class="arithmatex">\(= HMAC_K(challenge)\)</span>.</li>
+<li>Prokazovatel zná tajný klíč <span class="arithmatex">\(K\)</span>.</li>
+</ol>
+<p>Útočník na komunikačním kanálu z hodnoty response klíč <span class="arithmatex">\(K\)</span> nemůže odvodit.</p>
+<pre class="mermaid"><code>flowchart LR
+    K["Klíč K"] --&gt; KP["K⁺ (zarovnán na délku bloku b)"]
+    KP --&gt; IKEY["K⁺ ⊕ ipad\n(0x36...)"]
+    KP --&gt; OKEY["K⁺ ⊕ opad\n(0x5C...)"]
+    M["Zpráva M"] --&gt; INNER["(K⁺⊕ipad ‖ M)"]
+    IKEY --&gt; INNER
+    INNER --&gt; IH["H(K⁺⊕ipad ‖ M)\n(vnitřní haš)"]
+    IH --&gt; OUTER["(K⁺⊕opad ‖ vnitřní haš)"]
+    OKEY --&gt; OUTER
+    OUTER --&gt; HMAC["HMAC_K(M)"]
+    style HMAC fill:#1a1d2e,stroke:#f87171</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Zkouška</p>
+<p>Znát formuli HMAC. Vědět, co jsou ipad (<code>0x36</code>) a opad (<code>0x5C</code>). Vědět, proč HMAC zaručuje autentizaci původu dat ale <strong>neposkytuje nepopiratelnost</strong>. Umět popsat průkaz znalosti pomocí HMAC (challenge–response).</p>
+</div>
+<hr />
+<h2 id="shrnuti-kapitoly">Shrnutí kapitoly<a class="headerlink" href="#shrnuti-kapitoly" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Rychlý přehled</p>
+<ul>
+<li><strong>Jednosměrné funkce:</strong> Typ 1 (absolutní, např. faktorizace) a Typ 2 (trapdoor, asymetrická kryptografie)</li>
+<li><strong>Jednosměrnost:</strong> <span class="arithmatex">\(O(2^n)\)</span> — haš → zpráva</li>
+<li><strong>Bezkoliznost 2. řádu:</strong> <span class="arithmatex">\(O(2^n)\)</span> — daná zpráva → kolize pro ni</li>
+<li><strong>Bezkoliznost 1. řádu:</strong> <span class="arithmatex">\(O(2^{n/2})\)</span> — libovolná kolize (narozeninový paradox)</li>
+<li><strong>Padding:</strong> bit 1 + nuly + 64b délka; jednoznačné odejmutí</li>
+<li><strong>DM konstrukce:</strong> <span class="arithmatex">\(H_i = f(H_{i-1}, M_i)\)</span>, <span class="arithmatex">\(H_0 = IV\)</span>; bezkolizní pokud je <span class="arithmatex">\(f\)</span> bezkolizní</li>
+<li><strong>Davies-Meyer:</strong> <span class="arithmatex">\(H_i = E_{M_i}(H_{i-1}) \oplus H_{i-1}\)</span></li>
+<li><strong>SHA-1:</strong> 160b, 5×32b (ABCDE), 4×20 kol, funkce F/G/H/I, prolomen</li>
+<li><strong>SHA-256:</strong> 256b, 8×32b (A–H), 64 kol, Ch+Ma+Σ operace, bezpečný</li>
+<li><strong>HMAC:</strong> <span class="arithmatex">\(H((K^+ \oplus opad) \| H((K^+ \oplus ipad) \| M))\)</span>; autentizace původu dat, NE nepopiratelnost</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Klíčové otázky ke zkoušce</p>
+<ol>
+<li>Jaké jsou dva typy jednosměrných funkcí? Příklady každého.</li>
+<li>Jaká jsou tři bezpečnostní vlastnosti hašovací funkce? Jaká je složitost každé?</li>
+<li>Proč <span class="arithmatex">\(O(2^{n/2})\)</span> na kolize 1. řádu, ne <span class="arithmatex">\(O(2^n)\)</span>? (narozeninový paradox)</li>
+<li>Proč nestačí doplnit zprávu nulami? Jak se správně padduje?</li>
+<li>Popište Damgård-Merklovu konstrukci.</li>
+<li>Co je Davies-Meyerova kompresní funkce? Proč XOR?</li>
+<li>Popište strukturu SHA-1 (kontext, počet kol, funkce, konstanty).</li>
+<li>Čím se SHA-256 liší od SHA-1?</li>
+<li>Co je HMAC? Proč neposkytuje nepopiratelnost?</li>
+<li>Jak funguje průkaz znalosti pomocí HMAC?</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zpět na začátek
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Zápatí" >
+        
+          
+          <a href="../03-blokove/" class="md-footer__link md-footer__link--prev" aria-label="Předchozí: 3. Blokové šifry">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Předchozí
+              </span>
+              <div class="md-ellipsis">
+                3. Blokové šifry
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../05-asymetricka/" class="md-footer__link md-footer__link--next" aria-label="Další: 5. Asymetrická kryptografie">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Další
+              </span>
+              <div class="md-ellipsis">
+                5. Asymetrická kryptografie
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Zkop\u00edrov\u00e1no do schr\u00e1nky", "clipboard.copy": "Kop\u00edrovat do schr\u00e1nky", "search.result.more.one": "1 dal\u0161\u00ed na t\u00e9to str\u00e1nce", "search.result.more.other": "# v\u00edce na t\u00e9to str\u00e1nce", "search.result.none": "Nenalezeny \u017e\u00e1dn\u00e9 dokumenty", "search.result.one": "Nalezen\u00fd dokument: 1", "search.result.other": "Nalezen\u00e9 dokumenty: #", "search.result.placeholder": "Pi\u0161te co se m\u00e1 vyhledat", "search.result.term.missing": "Chyb\u011bj\u00edc\u00ed", "select.version": "Vyberte verzi"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+      
+    
+  </body>
+</html>

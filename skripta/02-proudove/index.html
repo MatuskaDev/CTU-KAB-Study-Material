@@ -1,0 +1,2315 @@
+
+<!doctype html>
+<html lang="cs" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Studijní materiál ČVUT FIT 2023 · prof. Ing. Róbert Lórencz, CSc.">
+      
+      
+        <meta name="author" content="ČVUT FIT">
+      
+      
+      
+        <link rel="prev" href="../01-klasicka/">
+      
+      
+        <link rel="next" href="../03-blokove/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>2. Proudové šifry - BI-KAB – Kryptografie a bezpečnost</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2-proudove-sifry" class="md-skip">
+          Přeskočit obsah
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Záhlaví">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-header__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BI-KAB – Kryptografie a bezpečnost
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2. Proudové šifry
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na světlý režim"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Přepnout na světlý režim" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na tmavý režim"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Přepnout na tmavý režim" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Hledat" placeholder="Hledat" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Vyhledávání">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Sdílet" aria-label="Sdílet" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Vyčistit" aria-label="Vyčistit" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializace vyhledávání
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Karty" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Domů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Skripta
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../prehled/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Přehled algoritmů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../pisemka/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Zkouška
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigace" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-nav__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    BI-KAB – Kryptografie a bezpečnost
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skripta
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Skripta
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-klasicka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Klasická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Proudové šifry
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Proudové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Obsah stránky">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Obsah stránky
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#20-rozdeleni-symetrickych-sifer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.0 Rozdělení symetrických šifer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-princip-proudove-sifry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Princip proudové šifry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Princip proudové šifry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proudove-vs-blokove-sifry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proudové vs blokové šifry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formalni-definice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formální definice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heslo-keystream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heslo (keystream)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moderni-proudove-sifry-binarni-abeceda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Moderní proudové šifry — binární abeceda
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-vernamova-sifra-a-absolutni-bezpecnost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Vernamova šifra a absolutní bezpečnost
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Vernamova šifra a absolutní bezpečnost">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vernamova-sifra-otp-one-time-pad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vernamova šifra (OTP — One-Time Pad)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#absolutni-bezpecnost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Absolutní bezpečnost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algoritmicke-proudove-sifry-a-iv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Algoritmické proudové šifry a IV
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-synchronni-a-asynchronni-proudove-sifry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Synchronní a asynchronní proudové šifry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Synchronní a asynchronní proudové šifry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchronni-proudove-sifry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synchronní proudové šifry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asynchronni-samosynchronizujici-proudove-sifry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asynchronní (samosynchronizující) proudové šifry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pouziti-proudovych-sifer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Použití proudových šifer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-rc4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 RC4
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 RC4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kontext-a-parametry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kontext a parametry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#princip-generovani-nahodne-permutace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Princip generování náhodné permutace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ksa-key-scheduling-algorithm-inicializace-s-boxu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        KSA — Key Scheduling Algorithm (inicializace S-boxu)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prga-pseudo-random-generation-algorithm-tvorba-hesla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PRGA — Pseudo-Random Generation Algorithm (tvorba hesla)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dvoji-pouziti-hesla-utok" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dvojí použití hesla (útok)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slabiny-rc4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slabiny RC4
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-salsa20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Salsa20
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 Salsa20">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kontext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kontext
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vnitrni-stav-512-bitu-16-slov-po-32-bitech" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vnitřní stav (512 bitů = 16 slov po 32 bitech)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quarter-round-ctvrtinova-runda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quarter Round (čtvrtinová runda)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#licha-a-suda-runda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lichá a sudá runda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#varianty-salsa20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Varianty Salsa20
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kryptoanalyza-salsa20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kryptoanalýza Salsa20
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-chacha20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 ChaCha20
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.6 ChaCha20">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vznik-a-cil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vznik a cíl
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inicializace-chacha-stav" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicializace ChaCha — stav
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chacha-quarter-round" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ChaCha Quarter Round
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#licha-a-suda-runda-chacha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lichá a sudá runda ChaCha
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nasazeni-chacha20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nasazení ChaCha20
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#salsa20-vs-chacha20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Salsa20 vs ChaCha20
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-a51-gsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 A5/1 (GSM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.7 A5/1 (GSM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uvod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Úvod
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#struktura-sifry-a51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Struktura šifry A5/1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lfsr-linear-feedback-shift-register" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LFSR (Linear Feedback Shift Register)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tri-registry-a51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tři registry A5/1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#majority-taktovani-mechanismus-posunu-registru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Majority taktování (mechanismus posunu registrů)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inicializace-sifry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicializace šifry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sifrovani" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Šifrování
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bezpecnost-a51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bezpečnost A5/1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shrnuti-kapitoly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shrnutí kapitoly
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-blokove/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Blokové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-hash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Hašovací funkce
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-asymetricka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Asymetrická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-ecc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Kryptografie eliptických křivek
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-kvanty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Kvantová kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-bezpecnost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Bezpečnost kryptosystémů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-klice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Generátory náhodných čísel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-pki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Certifikáty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-cipove-karty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Čipové karty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prehled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Přehled algoritmů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zkouška
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zkouška
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pisemka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Písemný test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ustni/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ústní zkouška
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigace" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Domů
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Skripta
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="2-proudove-sifry">2. Proudové šifry<a class="headerlink" href="#2-proudove-sifry" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Cíle kapitoly</p>
+<ul>
+<li>Pochopit formální definici proudové šifry a rozdíl proudové vs blokové</li>
+<li>Znát Vernamovu šifru a princip absolutní bezpečnosti</li>
+<li>Porozumět synchronním vs asynchronním proudovým šifrám</li>
+<li>Znát RC4, Salsa20/ChaCha20 a A5/1 — jak fungují a kde jsou slabiny</li>
+<li>Pochopit LFSR a majority taktování u A5/1</li>
+</ul>
+</div>
+<hr />
+<h2 id="20-rozdeleni-symetrickych-sifer">2.0 Rozdělení symetrických šifer<a class="headerlink" href="#20-rozdeleni-symetrickych-sifer" title="Permanent link">&para;</a></h2>
+<p><img alt="Rozdělení symetrických šifer" src="../../assets/img/prednasky/p03-057.png" /></p>
+<p>Symetrické šifry se dělí na <strong>klasické</strong> (transpoziční a substituční z přednášky 1), <strong>proudové</strong> (A5/1, Salsa20, RC4) a <strong>blokové</strong> (Rijndael/AES, DES).</p>
+<hr />
+<h2 id="21-princip-proudove-sifry">2.1 Princip proudové šifry<a class="headerlink" href="#21-princip-proudove-sifry" title="Permanent link">&para;</a></h2>
+<h3 id="proudove-vs-blokove-sifry">Proudové vs blokové šifry<a class="headerlink" href="#proudove-vs-blokove-sifry" title="Permanent link">&para;</a></h3>
+<p>Z hlediska použití klíče ke zpracování OT rozeznáváme dva základní druhy symetrických šifer – <strong>proudové a blokové</strong>:</p>
+<ul>
+<li>Proudová šifra šifruje jednotlivé znaky abecedy <strong>zvlášť</strong>, zatímco bloková šifra zpracovává najednou <strong>bloky (řetězce) délky <span class="arithmatex">\(t\)</span> znaků</strong></li>
+<li>Podstatné na blokových šifrách je, že všechny bloky jsou šifrovány (dešifrovány) <strong>stejnou transformací</strong> <span class="arithmatex">\(E_k\)</span> (<span class="arithmatex">\(D_k\)</span>), kde <span class="arithmatex">\(k\)</span> je šifrovací klíč</li>
+<li>Ale proudové šifry nejprve z klíče <span class="arithmatex">\(k\)</span> vygenerují posloupnost <span class="arithmatex">\(h_1, h_2, \ldots\)</span> a každý znak otevřeného textu šifrují <strong>jinou transformací</strong> <span class="arithmatex">\(E_{h_i}\)</span></li>
+<li>Proudové šifry by mohly být chápány jako blokové šifry s blokem délky <span class="arithmatex">\(t = 1\)</span>, ale u proudových šifer je každý tento „blok" zpracováván jiným způsobem, jinou substitucí</li>
+</ul>
+<h3 id="formalni-definice">Formální definice<a class="headerlink" href="#formalni-definice" title="Permanent link">&para;</a></h3>
+<p>Nechť <span class="arithmatex">\(A\)</span> je abeceda <span class="arithmatex">\(q\)</span> symbolů, nechť <span class="arithmatex">\(M = C\)</span> je množina všech konečných řetězců nad <span class="arithmatex">\(A\)</span> a nechť <span class="arithmatex">\(K\)</span> je množina klíčů. Proudová šifra se skládá z:</p>
+<ul>
+<li><strong>generátoru</strong> <span class="arithmatex">\(G\)</span> (transformace hesla)</li>
+<li><strong>zobrazení</strong> <span class="arithmatex">\(E\)</span> (šifrování)</li>
+<li><strong>zobrazení</strong> <span class="arithmatex">\(D\)</span> (dešifrování)</li>
+</ul>
+<p>Pro každý klíč <span class="arithmatex">\(k \in K\)</span> <strong>generátor <span class="arithmatex">\(G\)</span></strong> vytváří posloupnost hesla <span class="arithmatex">\(h_1, h_2, \ldots\)</span> přičemž prvky <span class="arithmatex">\(h_i\)</span> reprezentují libovolné substituce <span class="arithmatex">\(E_{h_1}, E_{h_2}, \ldots\)</span> nad abecedou <span class="arithmatex">\(A\)</span>.</p>
+<p><strong>Zobrazení <span class="arithmatex">\(E\)</span> a <span class="arithmatex">\(D\)</span></strong> každému klíči <span class="arithmatex">\(k \in K\)</span> přiřazují transformace šifrování <span class="arithmatex">\(E_k\)</span> a odšifrování <span class="arithmatex">\(D_k\)</span>:</p>
+<div class="arithmatex">\[c_1 = E_{h_1}(m_1),\quad c_2 = E_{h_2}(m_2),\quad \ldots\]</div>
+<div class="arithmatex">\[m_1 = D_{h_1}(c_1),\quad m_2 = D_{h_2}(c_2),\quad \ldots \quad \text{kde } D_{h_i} = E_{h_i}^{-1}\]</div>
+<h3 id="heslo-keystream">Heslo (keystream)<a class="headerlink" href="#heslo-keystream" title="Permanent link">&para;</a></h3>
+<p>Z historických důvodů se <span class="arithmatex">\(G\)</span> nazývá <strong>generátor hesla</strong>, neboť <span class="arithmatex">\(h_1, h_2, \ldots\)</span> bývá proud znaků abecedy <span class="arithmatex">\(A\)</span> a substituce <span class="arithmatex">\(E_{h_i}\)</span> posunem v abecedě <span class="arithmatex">\(A\)</span> o <span class="arithmatex">\(h_i\)</span> pozic, tj. <span class="arithmatex">\(c_i = |m_i + h_i|_q\)</span>.</p>
+<p>V anglické literatuře se <span class="arithmatex">\(h_1, h_2, \ldots\)</span> nazývá <strong>running-key</strong> nebo <strong>key-stream (keystream)</strong>, tj. proud klíče, a i když se jedná o derivát originálního klíče <span class="arithmatex">\(k\)</span>.</p>
+<p>Pokud se proud hesla začne po určité pozice opakovat → <strong>periodická hesla</strong> a periodická šifra (Vigenèrova šifra).</p>
+<h3 id="moderni-proudove-sifry-binarni-abeceda">Moderní proudové šifry — binární abeceda<a class="headerlink" href="#moderni-proudove-sifry-binarni-abeceda" title="Permanent link">&para;</a></h3>
+<p>Moderní proudové šifry pracují nad abecedou <span class="arithmatex">\(A = \{0, 1\}\)</span>, tj. <span class="arithmatex">\(q = 2\)</span>. Sčítání/odčítání modulo 2 je binárním sčítáním/odčítáním — platí <span class="arithmatex">\(|a + b|_2 = |a - b|_2\)</span> a vyjadřuje diferenci bitů: <strong>XOR</strong>, označujeme <span class="arithmatex">\(\oplus\)</span>.</p>
+<p>U moderních proudových šifer ŠT vzniká tak, že <strong>jednotlivé bity proudu hesla jsou postupně sčítány s jednotlivými bity proudu OT</strong> binárním sčítáním. Vzhledem k rovnosti binárního sčítání a odčítání je transformace pro šifrování a odšifrování také stejná.</p>
+<p>Jedinou smysluplnou substitucí <span class="arithmatex">\(E_{h_i}\)</span> nad bitem abecedy <span class="arithmatex">\(m_i\)</span> je <span class="arithmatex">\(E_{h_i}(m_i) = m_i + h_i\)</span> nebo <span class="arithmatex">\(E_{h_i}(m_i) = m_i + h_i + 1\)</span>.</p>
+<hr />
+<h2 id="22-vernamova-sifra-a-absolutni-bezpecnost">2.2 Vernamova šifra a absolutní bezpečnost<a class="headerlink" href="#22-vernamova-sifra-a-absolutni-bezpecnost" title="Permanent link">&para;</a></h2>
+<h3 id="vernamova-sifra-otp-one-time-pad">Vernamova šifra (OTP — One-Time Pad)<a class="headerlink" href="#vernamova-sifra-otp-one-time-pad" title="Permanent link">&para;</a></h3>
+<p>Vernamova šifra používala náhodné heslo <strong>stejně dlouhé jako OT</strong> ⇒ heslo se ničilo (nikdy nebylo použito k šifrování 2 různých OT).</p>
+<p>Na OT (5b na písmeno v 32znakovém Baudotově kódu) se bit po bitu binárně načítá náhodná posloupnost bitů klíče (<strong>děrná páska</strong> = one-time pad).</p>
+<h3 id="absolutni-bezpecnost">Absolutní bezpečnost<a class="headerlink" href="#absolutni-bezpecnost" title="Permanent link">&para;</a></h3>
+<div class="admonition success">
+<p class="admonition-title">Absolutní bezpečnost (perfect secrecy)</p>
+<p>Vernamova šifra má vlastnost <strong>absolutní bezpečnosti</strong>, tj. dokonalého utajení. ŠT nenese žádnou informaci o OT — toto je <strong>definice absolutně bezpečné šifry</strong>.</p>
+<p>Ze zachyceného ŠT není možné odvodit žádnou informaci o OT bez znalosti klíče, nezávisle na výpočetní síle útočníka.</p>
+</div>
+<h3 id="algoritmicke-proudove-sifry-a-iv">Algoritmické proudové šifry a IV<a class="headerlink" href="#algoritmicke-proudove-sifry-a-iv" title="Permanent link">&para;</a></h3>
+<p>Protože distribuce klíče stejně dlouhého jako zpráva je nepraktická, používají moderní proudové šifry <strong>algoritmické generování hesla</strong>:</p>
+<ul>
+<li>Heslo se „vypočítá" na základě tajného šifrovacího klíče (distribuuje se)</li>
+<li>Aby klíč nemusel být příliš použit ⇒ <strong>princip náhodně se měnícího inicializačního vektoru (IV)</strong></li>
+<li>IV pro každou zprávu je vybírán náhodně a je přenášen před ŠT v otevřené podobě</li>
+<li>IV (za účasti tajného klíče nebo bez něj) nastavuje příslušný algoritmus (konečný automat, šifrátor) vždy do <strong>jiného (náhodného) počátečního stavu</strong> ⇒ při stejném tajném klíči je pokaždé jiná heslová posloupnost</li>
+<li><strong>Za různost hesla zodpovídá IV; za utajenost zodpovídá tajný šifrovací klíč</strong> (podobný princip se využívá i v blokových šifrách)</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Zlaté pravidlo</p>
+<p><strong>Keystream nesmí být nikdy použit dvakrát se stejným klíčem!</strong></p>
+<p>Pokud útočník zachytí <span class="arithmatex">\(c_1\)</span> a <span class="arithmatex">\(c_2\)</span> šifrované stejným keystreamem <span class="arithmatex">\(k\)</span>:
+$<span class="arithmatex">\(c_1 \oplus c_2 = (m_1 \oplus k) \oplus (m_2 \oplus k) = m_1 \oplus m_2\)</span>$
+Klíč se vyruší a útočník zná XOR plaintextů — z toho lze rekonstruovat oba texty.</p>
+</div>
+<hr />
+<h2 id="23-synchronni-a-asynchronni-proudove-sifry">2.3 Synchronní a asynchronní proudové šifry<a class="headerlink" href="#23-synchronni-a-asynchronni-proudove-sifry" title="Permanent link">&para;</a></h2>
+<h3 id="synchronni-proudove-sifry">Synchronní proudové šifry<a class="headerlink" href="#synchronni-proudove-sifry" title="Permanent link">&para;</a></h3>
+<p>Pokud proud hesla <strong>nezávisí na OT ani ŠT</strong> ⇒ <strong>synchronní proudové šifry</strong> ⇒ příjemce i odesílatel jsou <strong>přesně synchronizováni</strong> (jinak výpadek jednoho znaku ŠT naruší veškerý následující OT).</p>
+<h3 id="asynchronni-samosynchronizujici-proudove-sifry">Asynchronní (samosynchronizující) proudové šifry<a class="headerlink" href="#asynchronni-samosynchronizujici-proudove-sifry" title="Permanent link">&para;</a></h3>
+<p><strong>Šifry eliminující taktové chyby</strong> — u nich dojde v krátké době k synchronizaci a správné dešifraci zbývajícího OT. To se může docílit například tím, že proud hesla je generován pomocí klíče a <span class="arithmatex">\(n\)</span> předchozích znaků ŠT:</p>
+<div class="arithmatex">\[h_i = f(k,\, c_{i-n},\, \ldots,\, c_{i-1})\]</div>
+<p>K synchronizaci dojde, jakmile se přijme souvislá posloupnost <span class="arithmatex">\(n + 1\)</span> správných znaků ŠT.</p>
+<p><strong>Historická asynchronní šifra — Vigenèrův autoklíč:</strong></p>
+<p><span class="arithmatex">\(h_1 = k\)</span> a <span class="arithmatex">\(c_i = p_i + h_i\)</span>, <span class="arithmatex">\(i = 2, 3, \ldots\)</span>, kde <span class="arithmatex">\(h_i = c_{i-1}\)</span>.</p>
+<h3 id="pouziti-proudovych-sifer">Použití proudových šifer<a class="headerlink" href="#pouziti-proudovych-sifer" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Linkové šifrátory</strong> — do komunikačního kanálu přicházejí jednotlivé znaky v pravidelných nebo nepravidelných časových intervalech ⇒ v daném okamžiku je nutné ten znak okamžitě přenést</li>
+<li>Příklad tzv. terminálového spojení: to, co uživatel píše na klávesnici, se ihned objevuje na monitoru druhého uživatele</li>
+<li>Šifrovací zařízení má omezenou paměť na průchozí data</li>
+<li><strong>Výhodou proudových šifer oproti blokovým je malá „propagace chyby"</strong>: chyba v jednom znaku ŠT se projeví u proudových šifer pouze v jednom odpovídajícím znaku OT, u blokové šifry má vliv na celý blok znaků</li>
+</ul>
+<hr />
+<h2 id="24-rc4">2.4 RC4<a class="headerlink" href="#24-rc4" title="Permanent link">&para;</a></h2>
+<h3 id="kontext-a-parametry">Kontext a parametry<a class="headerlink" href="#kontext-a-parametry" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Vlastnost</th>
+<th>Hodnota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autor</td>
+<td>Ron Rivest, 1987</td>
+</tr>
+<tr>
+<td>Jiný název</td>
+<td>„Arcfour" (z důvodu ochrany autorských práv)</td>
+</tr>
+<tr>
+<td>Klíč</td>
+<td>40–128 bitů (40b a 128b jsou nejpoužívanější)</td>
+</tr>
+<tr>
+<td>Vnitřní stav</td>
+<td>S-box 256 bajtů + ukazatele <span class="arithmatex">\(i, j\)</span></td>
+</tr>
+<tr>
+<td>Protokoly</td>
+<td>S/MIME, SSL (historicky), WEP</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>❌ <strong>PROLOMEN — nepoužívat</strong></td>
+</tr>
+</tbody>
+</table>
+<p>RC4 je jedna z nejpoužívanějších šifer na internetu (Rivest – 1987). Nevyužívá IV ⇒ na každé spojení generuje náhodně nový tajný klíč (pomocí asymetrické metody). Struktura RC4 nebyla oficiálně publikována, ale v roce 1994 byla zveřejněna neznámým hackerem disassemblováním z programu BSAFE společnosti RSA.</p>
+<p>Šifrovací klíč se používá pouze k vygenerování tajné náhodné substituce <span class="arithmatex">\(\{0,\ldots,255\} \to \{0,\ldots,255\}\)</span>, tedy <strong>substituce bajtu za bajt</strong>. Pomocí tabulky <span class="arithmatex">\(S\)</span> pak konečným automatem generujeme jednotlivé bajty hesla <span class="arithmatex">\(h_0, h_1, \ldots\)</span>, které se xorují na OT nebo ŠT.</p>
+<h3 id="princip-generovani-nahodne-permutace">Princip generování náhodné permutace<a class="headerlink" href="#princip-generovani-nahodne-permutace" title="Permanent link">&para;</a></h3>
+<p>Obecná metoda generování náhodné permutace P z posloupnosti r:</p>
+<ol>
+<li>Naplníme identickou permutací: <span class="arithmatex">\(P_i = i\)</span> pro <span class="arithmatex">\(i = 0, 1, 2, \ldots, 255\)</span></li>
+<li>Pomocí posloupnosti <span class="arithmatex">\(r\)</span> promícháme permutaci <span class="arithmatex">\(P\)</span></li>
+<li>Míchání provádíme postupně tak, že v každém kroku <span class="arithmatex">\(i\)</span> (<span class="arithmatex">\(i = 0, 1, 2, \ldots, 255\)</span>) v permutaci <span class="arithmatex">\(P\)</span> vyměníme hodnoty <span class="arithmatex">\(P\)</span> na pozicích <span class="arithmatex">\(i\)</span> a <span class="arithmatex">\(P_{r_i}\)</span>, tj. hodnoty <span class="arithmatex">\(i\)</span> a <span class="arithmatex">\(a_{r_i}\)</span> vzájemně vyměníme</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>P(0)=0, P(1)=1, ..., P(255)=255
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>for i = 0 to 255:
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    vyměň mezi sebou hodnoty P(i) a P(r(i))
+</span></code></pre></div>
+<p><span class="arithmatex">\(P\)</span> zůstává stále permutací. Výsledek je nová permutace závislá na posloupnosti <span class="arithmatex">\(r\)</span>.</p>
+<h3 id="ksa-key-scheduling-algorithm-inicializace-s-boxu">KSA — Key Scheduling Algorithm (inicializace S-boxu)<a class="headerlink" href="#ksa-key-scheduling-algorithm-inicializace-s-boxu" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Inicializace S-boxu jako identita</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">S</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>   <span class="c1"># S[i] = i pro i = 0..255</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">):</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">Key</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">Key</span><span class="p">)])</span> <span class="o">%</span> <span class="mi">256</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>   <span class="c1"># swap</span>
+</span></code></pre></div>
+<h3 id="prga-pseudo-random-generation-algorithm-tvorba-hesla">PRGA — Pseudo-Random Generation Algorithm (tvorba hesla)<a class="headerlink" href="#prga-pseudo-random-generation-algorithm-tvorba-hesla" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>       <span class="c1"># n = délka zprávy</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">256</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">%</span> <span class="mi">256</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>   <span class="c1"># swap</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">h_index</span> <span class="o">=</span> <span class="n">S</span><span class="p">[(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">%</span> <span class="mi">256</span><span class="p">]</span>   <span class="c1"># bajt hesla</span>
+</span></code></pre></div>
+<ul>
+<li>Počítání s bajty ⇒ redukce modulo 256</li>
+<li><span class="arithmatex">\(i\)</span> se systematicky zvyšuje modulo 256</li>
+<li><span class="arithmatex">\(j\)</span> je náhodný na klíči závislý index</li>
+<li>Hodnota <span class="arithmatex">\(h_{index}\)</span> obsahuje heslovou posloupnost generovanou tímto algoritmem</li>
+</ul>
+<p><img alt="RC4 – princip generování náhodné posloupnosti" src="../../assets/img/prednasky/p03-067.png" /></p>
+<h3 id="dvoji-pouziti-hesla-utok">Dvojí použití hesla (útok)<a class="headerlink" href="#dvoji-pouziti-hesla-utok" title="Permanent link">&para;</a></h3>
+<p>U proudových šifer, kde každá parciální substituce je posunem OT v abecedě <span class="arithmatex">\(A\)</span> o <span class="arithmatex">\(h_i\)</span>, postačí k luštění 2 ŠT (<span class="arithmatex">\(c, c'\)</span>), šifrované <strong>tímtéž heslem</strong>. Podobně to platí i pro XOR a další invertibilní operace.</p>
+<p>Mějme <span class="arithmatex">\(c_i = |m_i + h_i|_q\)</span> a <span class="arithmatex">\(c'_i = |m'_i + h_i|_q\)</span>. Odečtením ŠT od sebe eliminujeme heslo:</p>
+<div class="arithmatex">\[|c_i - c'_i|_q = |m_i - m'_i|_q\]</div>
+<p>Z posloupnosti <span class="arithmatex">\(|m_i - m'_i|_q\)</span> pro <span class="arithmatex">\(i = 0, 1, \ldots\)</span> pak luštíme jako při použití knižní šifry, kde v roli původního OT vystupuje <span class="arithmatex">\(m\)</span> a v roli knižního hesla <span class="arithmatex">\(m'\)</span>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Metoda předpokládaného slova (crib dragging)</p>
+<p>Někdy se používá metoda předpokládaného slova, kdy za <span class="arithmatex">\(m'\)</span> zkoušíme nějaké běžné slovo (např. v angličtině <strong>the</strong>) postupně od první do poslední pozice, odpočítáme <span class="arithmatex">\(m\)</span> a sledujeme, zda dává smysl.</p>
+</div>
+<h3 id="slabiny-rc4">Slabiny RC4<a class="headerlink" href="#slabiny-rc4" title="Permanent link">&para;</a></h3>
+<div class="admonition danger">
+<p class="admonition-title">WEP exploit</p>
+<p>Prvních ~256 bajtů keystreamu <strong>statisticky koreluje</strong> s klíčem.</p>
+<p>WEP (Wi-Fi Encryption Protocol) používal RC4 s krátkým IV → po zachycení ~4 milionů paketů lze klíč obnovit. Oprava: přeskočit prvních 256+ bajtů PRGA (ale WEP to nedělal).</p>
+</div>
+<hr />
+<h2 id="25-salsa20">2.5 Salsa20<a class="headerlink" href="#25-salsa20" title="Permanent link">&para;</a></h2>
+<h3 id="kontext">Kontext<a class="headerlink" href="#kontext" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Proudová šifra – <strong>2005 D. J. Bernstein</strong></li>
+<li>Modifikovaná verze Salsa20 o 12 rundách – kandidát projektu <strong>eSTREAM</strong></li>
+<li>eSTREAM (2004–08) – nové proudové šifry Profil 1/Profil 2 – SW/HW<ul>
+<li><strong>Profil 1</strong> – Proudové šifry pro SW aplikace s požadavkem na vysokou propustnost: HC-128, Rabbit, <strong>Salsa20/12</strong>, SOSEMANUK</li>
+<li><strong>Profil 2</strong> – Proudové šifry pro HW aplikace s omezenými prostředky: Grain, MICKEY, Trivium</li>
+</ul>
+</li>
+<li>Salsa20 nabízí rychlosti kolem 4–14 cyklů na B v SW (procesory x86)</li>
+</ul>
+<h3 id="vnitrni-stav-512-bitu-16-slov-po-32-bitech">Vnitřní stav (512 bitů = 16 slov po 32 bitech)<a class="headerlink" href="#vnitrni-stav-512-bitu-16-slov-po-32-bitech" title="Permanent link">&para;</a></h3>
+<p>Základ – pseudonáhodná funkce s operacemi ARX (Add-Rotate-XOR):</p>
+<ul>
+<li>32bitové sčítání, bitové sčítání (XOR) a operace rotace</li>
+<li>Základní funkce mapuje <strong>256bitový klíč, 64bitový nonce a 64bitový čítač na 512bitový blok keystreamu</strong></li>
+</ul>
+<p>Vnitřní stav je tvořen 16 32bitovými slovy v matici <span class="arithmatex">\(4 \times 4\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0</strong></td>
+<td><strong>„expa"</strong></td>
+<td>Key</td>
+<td>Key</td>
+<td>Key</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>Key</td>
+<td><strong>„nd 3"</strong></td>
+<td>Nonce</td>
+<td>Nonce</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Pos.</td>
+<td>Pos.</td>
+<td><strong>„2-by"</strong></td>
+<td>Key</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Key</td>
+<td>Key</td>
+<td>Key</td>
+<td><strong>„te k"</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>4 pevná slova tvoří výraz <strong>"expand 32-byte k"</strong> (zapsáno v ASCII) na hlavní diagonále</li>
+<li>8 klíčových slov (256 bitů)</li>
+<li>2 slova pozice keystreamu (čítač)</li>
+<li>2 slova nonce</li>
+</ul>
+<h3 id="quarter-round-ctvrtinova-runda">Quarter Round (čtvrtinová runda)<a class="headerlink" href="#quarter-round-ctvrtinova-runda" title="Permanent link">&para;</a></h3>
+<p>Základní operací v Salsa20 je <strong>čtvrtinová runda QR(a, b, c, d)</strong>, která vstup tvoří 4 slova a výstupem jsou rovněž 4 slova:</p>
+<div class="arithmatex">\[b := b \oplus (a \boxplus d) \lll 7\]</div>
+<div class="arithmatex">\[c := c \oplus (b \boxplus a) \lll 9\]</div>
+<div class="arithmatex">\[d := d \oplus (c \boxplus b) \lll 13\]</div>
+<div class="arithmatex">\[a := a \oplus (d \boxplus c) \lll 18\]</div>
+<p>kde <span class="arithmatex">\(\boxplus\)</span> označuje sčítání mod <span class="arithmatex">\(2^{32}\)</span> a <span class="arithmatex">\(\lll\)</span> označuje cyklickou rotaci vlevo.</p>
+<p>Použití pouze operací add-rotate-xor <strong>zabraňuje možnosti časových útoků</strong> v SW implementacích.</p>
+<h3 id="licha-a-suda-runda">Lichá a sudá runda<a class="headerlink" href="#licha-a-suda-runda" title="Permanent link">&para;</a></h3>
+<p><strong>Lichá runda</strong> — QR na každý ze 4 sloupců v matici:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>QR( 0,  4,  8, 12)   sloupec 1
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>QR( 5,  9, 13,  1)   sloupec 2
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>QR(10, 14,  2,  6)   sloupec 3
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>QR(15,  3,  7, 11)   sloupec 4
+</span></code></pre></div>
+<p><strong>Sudá runda</strong> — QR na každý ze 4 řádků:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>QR( 0,  1,  2,  3)   řádek 1
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>QR( 5,  6,  7,  4)   řádek 2
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>QR(10, 11,  8,  9)   řádek 3
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>QR(15, 12, 13, 14)   řádek 4
+</span></code></pre></div>
+<p>2 po sobě jdoucí rundy (runda po sloupcích a po řádcích) se nazývají <strong>dvourunda</strong>. Zopakuje se 10 krát → celkem <strong>20 rund</strong>.</p>
+<p>Nakonec se k výsledku <strong>přičte vstup</strong> (přidání originálu znemožňuje obnovení vstupu — stejná technika je používána v hašovacích funkcích). Výstup je <strong>64B keystreamu</strong>.</p>
+<h3 id="varianty-salsa20">Varianty Salsa20<a class="headerlink" href="#varianty-salsa20" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Salsa20/8</strong> (8 rund) a <strong>Salsa20/12</strong> (12 rund) s redukovaným počtem rund — doplňující varianty, neslouží jako náhrada</li>
+<li>V benchmarcích eSTREAM dosahují lepších výsledků než varianta Salsa20, ale s odpovídající nižší bezpečností</li>
+<li><strong>XSalsa20</strong> (Bernstein 2008) – 192bitové nonces, prokazatelně bezpečná vzhledem k bezpečnosti Salsa20 — vhodnější pro aplikace, kde jsou požadovány delší nonces</li>
+</ul>
+<h3 id="kryptoanalyza-salsa20">Kryptoanalýza Salsa20<a class="headerlink" href="#kryptoanalyza-salsa20" title="Permanent link">&para;</a></h3>
+<ul>
+<li>2005 Crowley – útok na Salsa20/5 se složitostí <span class="arithmatex">\(2^{165}\)</span> pomocí zkrácené diferenciální kryptoanalýzy</li>
+<li>2006 Fischer et al. – útok na Salsa20/6 se složitostí <span class="arithmatex">\(\approx 2^{177}\)</span></li>
+<li>2007 Tsunoo et al. – prolomení 8 z 20 rund Salsa20 a obnovení 256 bitů tajného klíče za <span class="arithmatex">\(2^{255}\)</span> párů klíčů (srovnatelné s „brute force attack")</li>
+<li>2013 Mouha et al. – důkaz: <strong>15 rund Salsa20 je 128-bitově bezpečných</strong> proti DC ⇒ nemá žádnou diferenciální charakteristiku s pravděpodobností <span class="arithmatex">\(&gt; 2^{-130}\)</span>, to je víc než <span class="arithmatex">\(2^{128}\)</span> (brute force attack)</li>
+</ul>
+<hr />
+<h2 id="26-chacha20">2.6 ChaCha20<a class="headerlink" href="#26-chacha20" title="Permanent link">&para;</a></h2>
+<h3 id="vznik-a-cil">Vznik a cíl<a class="headerlink" href="#vznik-a-cil" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Proudová šifra – <strong>2008 D. J. Bernstein</strong></li>
+<li>Cíl: <strong>zvýšení rozptylu</strong> v jedné rundě při zachování nebo vylepšení výkonu</li>
+<li>Stejně jako Salsa20 obsahuje počáteční stav 128bitovou konstantu, 256bitový klíč, 64bitový čítač a 64bitovou nonce → celkem 512 bitů v matici <span class="arithmatex">\(4 \times 4\)</span></li>
+</ul>
+<h3 id="inicializace-chacha-stav">Inicializace ChaCha — stav<a class="headerlink" href="#inicializace-chacha-stav" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0</strong></td>
+<td><strong>„expa"</strong></td>
+<td><strong>„nd 3"</strong></td>
+<td><strong>„2-by"</strong></td>
+<td><strong>„te k"</strong></td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>Key</td>
+<td>Key</td>
+<td>Key</td>
+<td>Key</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Key</td>
+<td>Key</td>
+<td>Key</td>
+<td>Key</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Count.</td>
+<td>Count.</td>
+<td>Nonce</td>
+<td>Nonce</td>
+</tr>
+</tbody>
+</table>
+<p>Konstanta je stejná jako u Salsa20. ChaCha <strong>přeuspořádává</strong> některá slova v počátečním stavu — konstanty jsou v prvním řádku (vs na diagonále u Salsa20).</p>
+<h3 id="chacha-quarter-round">ChaCha Quarter Round<a class="headerlink" href="#chacha-quarter-round" title="Permanent link">&para;</a></h3>
+<p>ChaCha nahrazuje čtvrt-rundový QR(a,b,c,d) Salsa20 pomocí:</p>
+<div class="arithmatex">\[a := a \boxplus b;\quad d := d \oplus a;\quad d \lll= 16\]</div>
+<div class="arithmatex">\[c := c \boxplus d;\quad b := b \oplus c;\quad b \lll= 12\]</div>
+<div class="arithmatex">\[a := a \boxplus b;\quad d := d \oplus a;\quad d \lll= 8\]</div>
+<div class="arithmatex">\[c := c \boxplus d;\quad b := b \oplus c;\quad b \lll= 7\]</div>
+<p>Tato verze QR ChaCha <strong>aktualizuje každé slovo <span class="arithmatex">\(2\times\)</span></strong> (QR verze Salsa20 aktualizuje každé slovo pouze jednou). V průměru se po změně 1 vstupního bitu u QR Salsa20 změní 8 výstupních bitů, zatímco u QR ChaCha se změní 12,5 výstupních bitů.</p>
+<p>QR ChaCha má stejný počet sčítání, xorů a bitových rotací jako QR Salsa20. 2 z rotací jsou násobky 8 ⇒ malá optimalizace na některých architekturách včetně x86.</p>
+<h3 id="licha-a-suda-runda-chacha">Lichá a sudá runda ChaCha<a class="headerlink" href="#licha-a-suda-runda-chacha" title="Permanent link">&para;</a></h3>
+<p><strong>Lichá runda</strong> — QR na každý ze 4 sloupců (stejné indexy jako Salsa20):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>QR(0, 4, 8, 12)   sloupec 1
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>QR(1, 5, 9, 13)   sloupec 2
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>QR(2, 6,10, 14)   sloupec 3
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>QR(3, 7,11, 15)   sloupec 4
+</span></code></pre></div>
+<p><strong>Sudá runda</strong> — QR na každou ze 4 diagonál:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>QR( 0,  5, 10, 15)   diagonála 1 (hlavní)
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>QR( 1,  6, 11, 12)   diagonála 2
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>QR( 2,  7,  8, 13)   diagonála 3
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>QR( 3,  4,  9, 14)   diagonála 4
+</span></code></pre></div>
+<p>32bitová slova jsou do QR plněná po sloupcích a po úhlopříčkách (bez posuvu pro jednotlivá plnění). Výstup je <strong>64B keystreamu</strong>.</p>
+<h3 id="nasazeni-chacha20">Nasazení ChaCha20<a class="headerlink" href="#nasazeni-chacha20" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>BLAKE / BLAKE2 / BLAKE3</strong> — základem hashovací funkce BLAKE, finalisty soutěže hašovacích funkcí NIST</li>
+<li><strong>ChaCha20-Poly1305</strong> — Google vybral pro ověřování zpráv, používán v protokolu <strong>QUIC (součást HTTP/3)</strong> a v šifře <strong>chacha20-poly1305@openssh.com</strong> v OpenSSH</li>
+<li><strong>arc4random</strong> — generátor náhodných čísel pro Free/Open/NetBSD (nahradil RC4)</li>
+<li><strong>Bez HW akcelerace AES</strong> — ChaCha20 nahrazuje AES v systémech, kde procesor nemá akceleraci AES (mobilní zařízení s procesory ARM)</li>
+</ul>
+<h3 id="salsa20-vs-chacha20">Salsa20 vs ChaCha20<a class="headerlink" href="#salsa20-vs-chacha20" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Salsa20</th>
+<th>ChaCha20</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autor</td>
+<td>Bernstein 2005</td>
+<td>Bernstein 2008</td>
+</tr>
+<tr>
+<td>Kola</td>
+<td>20 (10× dvourunda)</td>
+<td>20 (10× dvourunda)</td>
+</tr>
+<tr>
+<td>Konstanty ve stavu</td>
+<td>na diagonále</td>
+<td>v prvním řádku</td>
+</tr>
+<tr>
+<td>QR difúze</td>
+<td>pomalejší</td>
+<td>rychlejší (každé slovo 2×)</td>
+</tr>
+<tr>
+<td>eSTREAM</td>
+<td>finalist (Salsa20/12)</td>
+<td>–</td>
+</tr>
+<tr>
+<td>Standard</td>
+<td>–</td>
+<td><strong>TLS 1.3, RFC 8439</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="27-a51-gsm">2.7 A5/1 (GSM)<a class="headerlink" href="#27-a51-gsm" title="Permanent link">&para;</a></h2>
+<h3 id="uvod">Úvod<a class="headerlink" href="#uvod" title="Permanent link">&para;</a></h3>
+<p>A5/1 je <strong>synchronní proudová šifra</strong>, která se používá na zabezpečení komunikace mobilních telefonů v souladu se standardem GSM.</p>
+<ul>
+<li>Šifra vznikla v roce <strong>1987</strong> a dlouhou dobu byla její struktura utajována</li>
+<li>Až v roce <strong>1999</strong> byla pomocí reverzní analýzy kompletně zrekonstruována</li>
+<li>Skládá se z kombinace <strong>tří LFSR</strong> (Linear Feedback Shift Register) a <strong>nelineárního mechanizmu</strong> určujícího posunutí registrů v daném čase</li>
+</ul>
+<h3 id="struktura-sifry-a51">Struktura šifry A5/1<a class="headerlink" href="#struktura-sifry-a51" title="Permanent link">&para;</a></h3>
+<p><img alt="Struktura šifry A5/1" src="../../assets/img/prednasky/p03-084.png" /></p>
+<h3 id="lfsr-linear-feedback-shift-register">LFSR (Linear Feedback Shift Register)<a class="headerlink" href="#lfsr-linear-feedback-shift-register" title="Permanent link">&para;</a></h3>
+<p>LFSR je posuvný registr, kde nový bit se spočítá jako XOR vybraných bitů (tapů — bity zpětné vazby). Aktualizace registrů je určena bity zpětné vazby, které jsou dány koeficienty <strong>primitivního polynomu</strong> — to zaručuje <strong>maximální možnou periodu</strong> výstupní posloupnosti registru.</p>
+<h3 id="tri-registry-a51">Tři registry A5/1<a class="headerlink" href="#tri-registry-a51" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Registr</th>
+<th>Délka</th>
+<th>Taktovací bit</th>
+<th>Bity zpětné vazby</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(R_1\)</span></td>
+<td>19 bitů</td>
+<td>bit 8</td>
+<td>{18, 17, 16, 13}</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(R_2\)</span></td>
+<td>22 bitů</td>
+<td>bit 10</td>
+<td>{20, 21}</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(R_3\)</span></td>
+<td>23 bitů</td>
+<td>bit 10</td>
+<td>{22, 21, 20, 7}</td>
+</tr>
+</tbody>
+</table>
+<h3 id="majority-taktovani-mechanismus-posunu-registru">Majority taktování (mechanismus posunu registrů)<a class="headerlink" href="#majority-taktovani-mechanismus-posunu-registru" title="Permanent link">&para;</a></h3>
+<p>Zvýrazněné bity <span class="arithmatex">\(R_1[8]\)</span>, <span class="arithmatex">\(R_2[10]\)</span> a <span class="arithmatex">\(R_3[10]\)</span> z obrázku se nazývají <strong>taktovací bity</strong> a na jejich hodnotách závisí, které registry se v následujícím taktu posunou.</p>
+<p>Je zřejmé, že mohou-li tři bity nabývat každý jen dvou hodnot, musí jedna hodnota převládat. V každém taktu se posunou jen ty registry, ve kterých hodnota taktovacího bitu <strong>převládá</strong>. Tento mechanizmus posunu registrů je <strong>jediným nelineárním prvkem</strong> šifry.</p>
+<div class="admonition info">
+<p class="admonition-title">Takt šifry</p>
+<p>V jednom taktu se vyprodukuje jeden bit keystreamu:</p>
+<ol>
+<li>Spočítá se <strong>většinová hodnota <span class="arithmatex">\(h\)</span></strong> taktovacích bitů <span class="arithmatex">\(R_1[8]\)</span>, <span class="arithmatex">\(R_2[10]\)</span>, <span class="arithmatex">\(R_3[10]\)</span></li>
+<li>Posunou se ty registry, u kterých je taktovací bit rovný <span class="arithmatex">\(h\)</span></li>
+<li>Výstupní bit keystreamu: <span class="arithmatex">\(k_i = R_1[18] \oplus R_2[21] \oplus R_3[22]\)</span></li>
+</ol>
+</div>
+<p><strong>Příklad:</strong> Když <span class="arithmatex">\(R_1[8] = 0\)</span>, <span class="arithmatex">\(R_2[10] = 0\)</span> a <span class="arithmatex">\(R_3[10] = 1\)</span> → převládá hodnota 0 → posunou se <span class="arithmatex">\(R_1\)</span> a <span class="arithmatex">\(R_2\)</span>, <span class="arithmatex">\(R_3\)</span> stojí.</p>
+<p>Šifrový text se získá tak, že na otevřený text <span class="arithmatex">\(p\)</span> „naxorujeme" keystream <span class="arithmatex">\(k\)</span>, tj. <span class="arithmatex">\(c_i = p_i \oplus k_i\)</span>.</p>
+<h3 id="inicializace-sifry">Inicializace šifry<a class="headerlink" href="#inicializace-sifry" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>1:  Nastav všechna políčka všech tří registrů na nulu.
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>2:  for i = 0 to 63 do
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>3:      R₁[0] = R₁[0] ⊕ K[i]
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>4:      R₂[0] = R₂[0] ⊕ K[i]
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>5:      R₃[0] = R₃[0] ⊕ K[i]
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>6:      Posuň všechny tři registry.
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>7:  end for
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>8:  for i = 0 to 21 do
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>9:      R₁[0] = R₁[0] ⊕ IV[i]
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>10:     R₂[0] = R₂[0] ⊕ IV[i]
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>11:     R₃[0] = R₃[0] ⊕ IV[i]
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>12:     Posuň všechny tři registry.
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>13: end for
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>14: for i = 0 to 99 do
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>15:     Vykonaj takt šifry (s použitím Majoritní funkce).
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>16: end for
+</span></code></pre></div>
+<h3 id="sifrovani">Šifrování<a class="headerlink" href="#sifrovani" title="Permanent link">&para;</a></h3>
+<p>Komunikace spočívá v přenosu posloupnosti rámců, každý délky <strong>228 bitů</strong>, přičemž:</p>
+<ul>
+<li>114 bitů se využívá na zašifrování dat vyslaných z GSM centra k uživatelskému mobilnímu telefonu</li>
+<li>Pomocí dalších 114 bitů se zašifrují data vyslané z mobilního telefonu do centra</li>
+</ul>
+<p>Pro jeden rámec (frame) se vykonají následující kroky:</p>
+<ol>
+<li>Na začátku proběhne <strong>inicializační fáze</strong>, ve které se registry naplní tajným klíčem a inicializačním vektorem a 100-krát se vykoná takt šifry se zahodím výstupního bitu šifry</li>
+<li>Pak se vykoná <strong>228 taktů</strong> a vyprodukuje se 228 bitů keystreamu, které se použijí k šifrování</li>
+</ol>
+<p>Keystream z jednoho rámce zabezpečí řádově milisekundy hovoru. Pro <strong>další rámec</strong> stejného hovoru se použije jiný inicializační vektor, ale stejný tajný klíč.</p>
+<h3 id="bezpecnost-a51">Bezpečnost A5/1<a class="headerlink" href="#bezpecnost-a51" title="Permanent link">&para;</a></h3>
+<div class="admonition danger">
+<p class="admonition-title">Prolomen 2009</p>
+<ul>
+<li>Teoretická bezpečnost: <strong>64 bitů</strong> (délka klíče)</li>
+<li>Efektivní bezpečnost: cca <span class="arithmatex">\(2^{40.2}\)</span> (nepravidelné taktování snižuje entropii)</li>
+<li><strong>2009:</strong> Karsten Nohl &amp; spol. — prolomen pomocí <strong>time-memory trade-off</strong> (Rainbow tables) v reálném čase pomocí FPGA</li>
+<li>Útok vyžadoval ~2 TB předpočítaných dat</li>
+</ul>
+<p>Tento mechanizmus posunu registrů je jediným nelineárním prvkem šifry a <strong>na něm je postavena bezpečnost šifry</strong>.</p>
+</div>
+<hr />
+<h2 id="shrnuti-kapitoly">Shrnutí kapitoly<a class="headerlink" href="#shrnuti-kapitoly" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Rychlý přehled</p>
+<table>
+<thead>
+<tr>
+<th>Šifra</th>
+<th>Klíč</th>
+<th>Stav</th>
+<th>Kde se používá</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vernam (OTP)</td>
+<td>stejně dlouhý jako OT</td>
+<td>—</td>
+<td>historicky</td>
+<td>✅ Absolutně bezpečný</td>
+</tr>
+<tr>
+<td>RC4</td>
+<td>40–128 b</td>
+<td>256 B S-box</td>
+<td>WEP (hist.), SSL (hist.)</td>
+<td>❌ PROLOMEN</td>
+</tr>
+<tr>
+<td>Salsa20</td>
+<td>256 b</td>
+<td>512 b, 4×4</td>
+<td>NaCl, eSTREAM</td>
+<td>✅ Bezpečný</td>
+</tr>
+<tr>
+<td>ChaCha20</td>
+<td>256 b</td>
+<td>512 b, 4×4</td>
+<td>TLS 1.3, QUIC, OpenSSH</td>
+<td>✅ Bezpečný</td>
+</tr>
+<tr>
+<td>A5/1</td>
+<td>64 b</td>
+<td>3 LFSR (~64 b)</td>
+<td>GSM</td>
+<td>❌ PROLOMEN</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Klíčové otázky ke zkoušce</p>
+<ol>
+<li>Co je keystream a proč ho nelze použít dvakrát?</li>
+<li>Co je absolutní bezpečnost (Vernam)? Jakou má nevýhodu?</li>
+<li>Jaký je rozdíl mezi synchronní a asynchronní proudovou šifrou?</li>
+<li>Popište KSA a PRGA u RC4. Jaká je slabina RC4 ve WEP?</li>
+<li>Co je útok dvojím použitím hesla (crib dragging)?</li>
+<li>Jak vypadá vnitřní stav Salsa20 (matice 4×4)?</li>
+<li>Co je QR (Quarter Round) a jaký je rozdíl mezi sloupcovými a diagonálními rundy u ChaCha?</li>
+<li>Jak funguje majority taktování A5/1? Proč je to jediný nelineární prvek?</li>
+<li>Popište inicializaci A5/1.</li>
+<li>Co je eSTREAM a pro které profily (SW/HW) jsou šifry navrženy?</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zpět na začátek
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Zápatí" >
+        
+          
+          <a href="../01-klasicka/" class="md-footer__link md-footer__link--prev" aria-label="Předchozí: 1. Klasická kryptografie">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Předchozí
+              </span>
+              <div class="md-ellipsis">
+                1. Klasická kryptografie
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../03-blokove/" class="md-footer__link md-footer__link--next" aria-label="Další: 3. Blokové šifry">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Další
+              </span>
+              <div class="md-ellipsis">
+                3. Blokové šifry
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Zkop\u00edrov\u00e1no do schr\u00e1nky", "clipboard.copy": "Kop\u00edrovat do schr\u00e1nky", "search.result.more.one": "1 dal\u0161\u00ed na t\u00e9to str\u00e1nce", "search.result.more.other": "# v\u00edce na t\u00e9to str\u00e1nce", "search.result.none": "Nenalezeny \u017e\u00e1dn\u00e9 dokumenty", "search.result.one": "Nalezen\u00fd dokument: 1", "search.result.other": "Nalezen\u00e9 dokumenty: #", "search.result.placeholder": "Pi\u0161te co se m\u00e1 vyhledat", "search.result.term.missing": "Chyb\u011bj\u00edc\u00ed", "select.version": "Vyberte verzi"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+      
+    
+  </body>
+</html>

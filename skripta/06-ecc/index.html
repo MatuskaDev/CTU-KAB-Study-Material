@@ -1,0 +1,1732 @@
+
+<!doctype html>
+<html lang="cs" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Studijní materiál ČVUT FIT 2023 · prof. Ing. Róbert Lórencz, CSc.">
+      
+      
+        <meta name="author" content="ČVUT FIT">
+      
+      
+      
+        <link rel="prev" href="../05-asymetricka/">
+      
+      
+        <link rel="next" href="../07-kvanty/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>6. Kryptografie eliptických křivek - BI-KAB – Kryptografie a bezpečnost</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-ecc-kryptografie-eliptickych-krivek" class="md-skip">
+          Přeskočit obsah
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Záhlaví">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-header__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BI-KAB – Kryptografie a bezpečnost
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6. Kryptografie eliptických křivek
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na světlý režim"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Přepnout na světlý režim" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na tmavý režim"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Přepnout na tmavý režim" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Hledat" placeholder="Hledat" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Vyhledávání">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Sdílet" aria-label="Sdílet" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Vyčistit" aria-label="Vyčistit" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializace vyhledávání
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Karty" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Domů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Skripta
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../prehled/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Přehled algoritmů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../pisemka/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Zkouška
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigace" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-nav__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    BI-KAB – Kryptografie a bezpečnost
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skripta
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Skripta
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-klasicka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Klasická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-proudove/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Proudové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-blokove/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Blokové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-hash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Hašovací funkce
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-asymetricka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Asymetrická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Kryptografie eliptických křivek
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Kryptografie eliptických křivek
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Obsah stránky">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Obsah stránky
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61-historie-a-motivace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Historie a motivace
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-matematicky-zaklad-realne-krivky" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Matematický základ — reálné křivky
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Matematický základ — reálné křivky">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rovnice-a-geometrie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rovnice a geometrie
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bod-v-nekonecnu-nulovy-prvek" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bod v nekonečnu (nulový prvek)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-elipticka-krivka-nad-telesem-gfp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Eliptická křivka nad tělesem GF(p)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 Eliptická křivka nad tělesem GF(p)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vyuziti-pro-sifrovani" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Využití pro šifrování
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grupove-operace-nad-gfp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grupové operace nad GF(p)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-scitani-bodu-priklad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Sčítání bodů — příklad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65-ecdlp-elliptic-curve-discrete-logarithm-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 ECDLP — Elliptic Curve Discrete Logarithm Problem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 ECDLP — Elliptic Curve Discrete Logarithm Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rad-bodu-a-rad-krivky" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Řád bodu a řád křivky
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definice-ecdlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definice ECDLP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proc-je-ecdlp-tezsi-nez-dlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proč je ECDLP těžší než DLP?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skalarni-nasobeni-double-and-add" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skalární násobení — double-and-add
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66-sifrovani-s-ecc-ecdh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 Šifrování s ECC — ECDH
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.6 Šifrování s ECC — ECDH">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#protokol-ecdh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protokol ECDH
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#67-ecdsa-elliptic-curve-dsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 ECDSA — Elliptic Curve DSA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#68-srovnani-rsa-vs-ecc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8 Srovnání RSA vs. ECC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shrnuti-kapitoly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shrnutí kapitoly
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-kvanty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Kvantová kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-bezpecnost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Bezpečnost kryptosystémů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-klice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Generátory náhodných čísel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-pki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Certifikáty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-cipove-karty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Čipové karty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prehled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Přehled algoritmů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zkouška
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zkouška
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pisemka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Písemný test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ustni/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ústní zkouška
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigace" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Domů
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Skripta
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6-ecc-kryptografie-eliptickych-krivek">6. ECC — Kryptografie eliptických křivek<a class="headerlink" href="#6-ecc-kryptografie-eliptickych-krivek" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Cíle kapitoly</p>
+<ul>
+<li>Znát historii a motivaci ECC jako alternativy k RSA</li>
+<li>Znát rovnici eliptické křivky a podmínku hladkosti nad GF(p)</li>
+<li>Umět ručně sečíst dva body na křivce (P+Q i 2P)</li>
+<li>Pochopit ECDLP — řád bodu, řád křivky, kofaktor</li>
+<li>Znát ECDH a srovnání s RSA</li>
+</ul>
+</div>
+<hr />
+<h2 id="61-historie-a-motivace">6.1 Historie a motivace<a class="headerlink" href="#61-historie-a-motivace" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Kryptografie eliptických křivek (ECC) je moderním a rozšířeným směrem současné kryptografie.</li>
+<li>ECC je další možností pro realizaci <strong>elektronického podpisu</strong>.</li>
+<li>ECC v některých ukazatelích dává lepší výsledky než předtím běžně používané kryptosystémy.</li>
+<li>V současnosti jsou eliptické kryptosystémy v řadě světových standardů a staly se <strong>alternativou k RSA</strong>.</li>
+<li>ECC má výhodu v <strong>rychlosti a menší náročnosti na hardware</strong>.</li>
+<li>Eliptické křivky jsou speciální podtřídou kubických křivek.</li>
+<li>Název „eliptické" vznikl proto, že kubické rovinné funkce se v minulosti používaly k výpočtu obvodu elipsy.</li>
+<li>Zkoumáním vlastností eliptických křivek se nejvíce zabýval německý matematik <strong>K. T. W. Weierstrass (1815–1897)</strong>.</li>
+<li><strong>V. Miller</strong> a <strong>N. Koblitz</strong> přišli nezávisle na sobě na možnost použití eliptických křivek v rámci kryptosystému veřejného klíče <strong>(1985)</strong>.</li>
+</ul>
+<hr />
+<h2 id="62-matematicky-zaklad-realne-krivky">6.2 Matematický základ — reálné křivky<a class="headerlink" href="#62-matematicky-zaklad-realne-krivky" title="Permanent link">&para;</a></h2>
+<h3 id="rovnice-a-geometrie">Rovnice a geometrie<a class="headerlink" href="#rovnice-a-geometrie" title="Permanent link">&para;</a></h3>
+<p>Eliptická křivka E je množina bodů v rovině, která vyhovuje rovnici:</p>
+<div class="arithmatex">\[y^2 = x^3 + ax + b \tag{1}\]</div>
+<p><img alt="Matematický základ ECC — geometrická interpretace" src="../../assets/img/prednasky/p09-244.png" /></p>
+<p><strong>Sčítání dvou různých bodů P a Q:</strong></p>
+<ul>
+<li>Spojíme body <span class="arithmatex">\(P = [x_P, y_P]\)</span> a <span class="arithmatex">\(Q = [x_O, y_O]\)</span> přímkou — ta protne křivku E v bodě <span class="arithmatex">\(-R\)</span>.</li>
+<li>Výsledkem sčítání je bod <span class="arithmatex">\(R\)</span>, který je <strong>symetrický k <span class="arithmatex">\(-R\)</span> podle osy <span class="arithmatex">\(x\)</span></strong>. Body symetrické podle osy <span class="arithmatex">\(x\)</span> nazýváme <strong>opačné</strong>.</li>
+</ul>
+<div class="arithmatex">\[\text{Směrnice přímky: } s = \frac{y_Q - y_P}{x_Q - x_P} \tag{2}\]</div>
+<div class="arithmatex">\[x_R = s^2 - x_P - x_Q, \quad y_R = s(x_P - x_R) - y_P \tag{3}\]</div>
+<p><strong>Zdvojení bodu <span class="arithmatex">\(2P\)</span> (tečna):</strong></p>
+<p>Když <span class="arithmatex">\(P = Q\)</span> → jejich spojnice je tečna k E a její směrnice je rovna:</p>
+<div class="arithmatex">\[s = \frac{3x_P^2 + a}{2y_P} \tag{4}\]</div>
+<h3 id="bod-v-nekonecnu-nulovy-prvek">Bod v nekonečnu (nulový prvek)<a class="headerlink" href="#bod-v-nekonecnu-nulovy-prvek" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Sčítáním 2 opačných bodů (<span class="arithmatex">\(P = -Q\)</span>) bychom měli dostat „0 bod".</li>
+<li>Taková přímka nám dá bod E už neprotnout, resp. jí protne v <span class="arithmatex">\(\infty\)</span> → definitoricky k E přidáme bod v <span class="arithmatex">\(\infty\)</span> → sčítání 2 opačných bodů definujeme: <span class="arithmatex">\(P + (-P) = O\)</span>.</li>
+<li><strong>Bod <span class="arithmatex">\(v \infty\)</span></strong> je název „0 bodu" křivky E.</li>
+<li>Dododefinujeme sčítání pro <span class="arithmatex">\(O\)</span>: <span class="arithmatex">\(P + O = P\)</span>, <span class="arithmatex">\(O + O = -O = O\)</span> a <span class="arithmatex">\(A = -O\)</span>.</li>
+<li>Takto je definováno sčítání pro <span class="arithmatex">\(\forall\)</span> dvojice bodů na E včetně O.</li>
+</ul>
+<hr />
+<h2 id="63-elipticka-krivka-nad-telesem-gfp">6.3 Eliptická křivka nad tělesem GF(p)<a class="headerlink" href="#63-elipticka-krivka-nad-telesem-gfp" title="Permanent link">&para;</a></h2>
+<h3 id="vyuziti-pro-sifrovani">Využití pro šifrování<a class="headerlink" href="#vyuziti-pro-sifrovani" title="Permanent link">&para;</a></h3>
+<p>Při využití eliptických křivek pro šifrování pracujeme v oblasti diskrétních hodnot (celých čísel, bitových řetězců, <span class="arithmatex">\(m\)</span>-tice bitů). Uvažujeme těleso <span class="arithmatex">\(\text{GF}(2^m)\)</span> a těleso <span class="arithmatex">\(\text{GF}(p)\)</span>, kde <span class="arithmatex">\(p\)</span> je prvočíslo. Obě tělesa jsou v praxi využívaná — každé z nich má své přednosti. Pro jednoduchost výkladu dále jen operace nad tělesem <span class="arithmatex">\(\text{GF}(p)\)</span>.</p>
+<div class="admonition info">
+<p class="admonition-title">Definice — Eliptická křivka nad GF(p)</p>
+<p>Eliptická křivka nad tělesem <span class="arithmatex">\(\text{GF}(p)\)</span> je definována jako bod <span class="arithmatex">\(O\)</span> v <span class="arithmatex">\(\infty\)</span> společně s množinou bodů <span class="arithmatex">\(P = [x, y]\)</span>, kde <span class="arithmatex">\(x\)</span> a <span class="arithmatex">\(y\)</span> jsou z tělesa <span class="arithmatex">\(\text{GF}(p)\)</span> a vyhovují rovnici <span class="arithmatex">\(y^2 = x^3 + ax + b\)</span> v <span class="arithmatex">\(\text{GF}(p)\)</span>, tj.</p>
+<div class="arithmatex">\[y^2 \equiv x^3 + ax + b \pmod{p} \tag{5}\]</div>
+</div>
+<p>Koeficienty <span class="arithmatex">\(a\)</span> a <span class="arithmatex">\(b\)</span> jsou také prvky tělesa <span class="arithmatex">\(\text{GF}(p)\)</span> a musí splňovat podmínku:</p>
+<div class="arithmatex">\[|4a^3 + 27b^2|_p \neq 0 \tag{6}\]</div>
+<p>Takto definovaná množina bodů tvoří grupu; koeficienty <span class="arithmatex">\(a\)</span> a <span class="arithmatex">\(b\)</span> volíme libovolně (veřejné parametry příslušného kryptosystému).</p>
+<h3 id="grupove-operace-nad-gfp">Grupové operace nad GF(p)<a class="headerlink" href="#grupove-operace-nad-gfp" title="Permanent link">&para;</a></h3>
+<p>V této grupě definujeme opačný bod k <span class="arithmatex">\(O\)</span> jako <span class="arithmatex">\(O\)</span>. Pro ostatní nenulové body <span class="arithmatex">\(P = [x_P, y_P] \in E\)</span> definujeme <span class="arithmatex">\(-P = [x_P, \;|-y_P|_p]\)</span>; dále pro všechny body <span class="arithmatex">\(P \in E\)</span> definujeme <span class="arithmatex">\(P + (-P) = O\)</span> a <span class="arithmatex">\(P + O = P\)</span>.</p>
+<p><strong>Bod v nekonečnu</strong> nazýváme také nulovým bodem, vzhledem k jeho roli při sčítání v grupě E.</p>
+<p>Sčítání stejných nenulových bodů <span class="arithmatex">\(P + P\)</span> definujeme jako <span class="arithmatex">\(R = P + P = [x_R, y_R]\)</span>, kde směrnice <span class="arithmatex">\(s\)</span> je rovna:</p>
+<div class="arithmatex">\[s = \left|\frac{3x_P^2 + a}{2y_P}\right|_p \tag{7}\]</div>
+<p>a souřadnice bodu <span class="arithmatex">\(R\)</span>:</p>
+<div class="arithmatex">\[x_R = \left|s^2 - x_P - x_Q\right|_p \quad \text{a} \quad y_R = \left|s(x_P - x_R) - y_P\right|_p \tag{8}\]</div>
+<p>Sčítání různých nenulových a vzájemně neinverzních bodů <span class="arithmatex">\(P = [x_P, y_P]\)</span> a <span class="arithmatex">\(Q = [x_Q, y_Q]\)</span> křivky E definujeme jako <span class="arithmatex">\(P + Q = R = [x_R, y_R]\)</span>, kde směrnice <span class="arithmatex">\(s\)</span> je rovna:</p>
+<div class="arithmatex">\[s = \left|\frac{y_Q - y_P}{x_Q - x_P}\right|_p \tag{9}\]</div>
+<p>a souřadnice bodu <span class="arithmatex">\(R\)</span>:</p>
+<div class="arithmatex">\[x_R = \left|s^2 - x_P - x_Q\right|_p \quad \text{a} \quad y_R = \left|s(x_P - x_R) - y_P\right|_p \tag{10}\]</div>
+<p><img alt="Eliptická křivka nad GF(p) — příklad 28 bodů" src="../../assets/img/prednasky/p09-250.png" /></p>
+<div class="admonition example">
+<p class="admonition-title">28 bodů eliptické křivky <span class="arithmatex">\(y^2 = x^3 + x + 1\)</span> nad <span class="arithmatex">\(\text{GF}(23)\)</span></p>
+<p>Křivka <span class="arithmatex">\(E: y^2 \equiv x^3 + x + 1 \pmod{23}\)</span> má 28 bodů (včetně bodu <span class="arithmatex">\(O\)</span> v <span class="arithmatex">\(\infty\)</span>). Všechny celočíselné body jsou vidět v tabulce — souřadnice jsou vždy z množiny <span class="arithmatex">\(\{0, 1, \ldots, 22\}\)</span>.</p>
+</div>
+<hr />
+<h2 id="64-scitani-bodu-priklad">6.4 Sčítání bodů — příklad<a class="headerlink" href="#64-scitani-bodu-priklad" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Numerický příklad — zdvojení bodu <span class="arithmatex">\(2P\)</span></p>
+<p>Křivka: <span class="arithmatex">\(E: y^2 \equiv x^3 + 2x + 2 \pmod{17}\)</span>, bod <span class="arithmatex">\(P = [5, 1]\)</span>, hledáme <span class="arithmatex">\(2P = ?\)</span></p>
+<p><strong>Krok 1 — směrnice tečny:</strong></p>
+<div class="arithmatex">\[s = \left|\frac{3x_P^2 + a}{2y_P}\right|_{17} = \left|(2 \cdot 1)^{-1} \cdot (3 \cdot 5^2 + 2)\right|_{17} = |9 \cdot 9|_{17} = |81|_{17} = 13\]</div>
+<p><strong>Krok 2 — souřadnice <span class="arithmatex">\(2P\)</span>:</strong></p>
+<div class="arithmatex">\[x_{2P} = \left|s^2 - x_P - x_P\right|_{17} = \left|13^2 - 5 - 5\right|_{17} = |159|_{17} = 6\]</div>
+<div class="arithmatex">\[y_{2P} = \left|s(x_P - x_{2P}) - y_P\right|_{17} = \left|13(5 - 6) - 1\right|_{17} = |-14|_{17} = 3\]</div>
+<p><span class="arithmatex">\(\Rightarrow 2P = [6, 3]\)</span> ✓</p>
+<p><strong>Zkouška:</strong> <span class="arithmatex">\(3^2 \equiv 6^3 + 2 \cdot 6 + 2 \pmod{17}\)</span> → <span class="arithmatex">\(9 \equiv 12 + 12 + 2 \pmod{17}\)</span> → <span class="arithmatex">\(9 = 9\)</span> ✓</p>
+</div>
+<p><img alt="Příklad výpočtu 2P na eliptické křivce" src="../../assets/img/prednasky/p09-251.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Zkouška</p>
+<p>Na zkoušce budete počítat sčítání bodů ručně. Naučte se oba vzorce (<span class="arithmatex">\(P+Q\)</span> a <span class="arithmatex">\(2P\)</span>) nazpaměť a procvičte výpočet inverzního prvku mod p (rozšířený Euklidův algoritmus nebo malá Fermatova věta: <span class="arithmatex">\(a^{-1} \equiv a^{p-2} \pmod p\)</span>).</p>
+</div>
+<hr />
+<h2 id="65-ecdlp-elliptic-curve-discrete-logarithm-problem">6.5 ECDLP — Elliptic Curve Discrete Logarithm Problem<a class="headerlink" href="#65-ecdlp-elliptic-curve-discrete-logarithm-problem" title="Permanent link">&para;</a></h2>
+<h3 id="rad-bodu-a-rad-krivky">Řád bodu a řád křivky<a class="headerlink" href="#rad-bodu-a-rad-krivky" title="Permanent link">&para;</a></h3>
+<p>Pro pochopení podstaty šifrování a podepisování v ECC je důležité využití tzv. <strong>problému diskrétního logaritmu</strong>.</p>
+<p>Pro určitý bod <span class="arithmatex">\(P\)</span> na křivce <span class="arithmatex">\(E\)</span> postupně vypočítáme body <span class="arithmatex">\(2P, 3P, 4P, 5P, 6P\)</span> atd., čímž dostaneme obecně různé body <span class="arithmatex">\(xP\)</span> na E. Protože křivka má konečný počet bodů, označíme ho <span class="arithmatex">\(\#P\)</span>; po určitém kroku <span class="arithmatex">\(m\)</span> se nám musí tato posloupnost opakovat.</p>
+<ul>
+<li>V bodě opakování <span class="arithmatex">\(mP = nP\)</span>, kde <span class="arithmatex">\(nP\)</span> je některý z předešlých bodů. Odtud definujeme <span class="arithmatex">\(mP - nP = O\)</span>.</li>
+<li>Existuje tedy nějaké <span class="arithmatex">\(r = m - n\)</span>, <span class="arithmatex">\(r &lt; m\)</span> takové, že <span class="arithmatex">\(rP = O\)</span>.</li>
+<li>Z toho plyne, že v posloupnosti <span class="arithmatex">\(P, 2P, 3P, 4P, 5P, \ldots\)</span> se vždy dostaneme k bodu <span class="arithmatex">\(O\)</span>, a poté cyklus začíná znovu od bodu <span class="arithmatex">\(P\)</span>, protože <span class="arithmatex">\((r+1)P = rP + P = O + P = P\)</span>.</li>
+<li><strong>Nejmenší takové <span class="arithmatex">\(r\)</span></strong>, pro které <span class="arithmatex">\(rP = O\)</span>, nazýváme <strong>řád bodu</strong> P.</li>
+</ul>
+<p>Lze dále dokázat, že řád bodu dělí řád křivky, přičemž <strong>řádem křivky</strong> nazýváme počet bodů na křivce <span class="arithmatex">\(\#E\)</span>.</p>
+<p>Body na křivce <span class="arithmatex">\(E\)</span> mají různý řád. V kryptografii vybíráme takové body, jejichž řád je roven největšímu prvočíslu v rozkladu čísla <span class="arithmatex">\(\#E\)</span> nebo jeho násobku. <strong>Kofaktor</strong> je podíl: řád křivky / řád počátečního bodu a měl by být malý.</p>
+<p>U bodu řádu <span class="arithmatex">\(r\)</span> máme zaručeno, že dojde k opakování v posloupnosti <span class="arithmatex">\(P, 2P, 3P, \ldots\)</span> až po <span class="arithmatex">\(r\)</span>-tém kroku. V případě, že <span class="arithmatex">\(r\)</span> je velké číslo, např. <span class="arithmatex">\(2^{256}\)</span>, je to skutečně dlouhá posloupnost.</p>
+<p>Právě při šifrování a elektronickém podepisování se využívá tak velké posloupnosti a to právě v souvislosti s tzv. <strong>problémem diskrétního logaritmu</strong>.</p>
+<p><img alt="ECC a problém diskrétního logaritmu" src="../../assets/img/prednasky/p09-252.png" /></p>
+<h3 id="definice-ecdlp">Definice ECDLP<a class="headerlink" href="#definice-ecdlp" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">ECDLP — Elliptic Curve Discrete Logarithm Problem</p>
+<p><strong>Problém diskrétního logaritmu</strong> je úloha: jak z bodů <span class="arithmatex">\(P\)</span> a <span class="arithmatex">\(Q\)</span> získat tajné číslo <span class="arithmatex">\(k\)</span> tak, aby platilo <span class="arithmatex">\(Q = kP\)</span>.</p>
+</div>
+<ul>
+<li>Je zřejmé, že pro malý řád bodu <span class="arithmatex">\(P\)</span> je úloha triviální.</li>
+<li>Pro velké <span class="arithmatex">\(r\)</span> je tato úloha, která se nedá řešit efektivně, tj. v polynomiálním čase.</li>
+<li>Z tohoto důvodu mohou být oba body <span class="arithmatex">\(P\)</span> a <span class="arithmatex">\(Q\)</span> zveřejněny.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Pollardova <span class="arithmatex">\(\rho\)</span> metoda</p>
+<p>Dosud nejúčinnější metodou pro řešení takto definovaného problému diskrétního logaritmu je tzv. <strong>Pollardova <span class="arithmatex">\(\rho\)</span> metoda</strong>, jejíž složitost je řádově <span class="arithmatex">\(\left(\pi r/2\right)^{1/2}\)</span> kroků.</p>
+<ul>
+<li>Pokud máme <span class="arithmatex">\(r = 2^{256}\)</span>, dostáváme <span class="arithmatex">\(\approx 2^{128}\)</span> kroků, což je zhruba na úrovni luštitelnosti symetrické blokové šifry se 128 bitovým klíčem.</li>
+<li>Pro nás je to z výpočetního hlediska neřešitelné, a tedy příslušná šifra je <strong>výpočetně bezpečná</strong>.</li>
+</ul>
+</div>
+<h3 id="proc-je-ecdlp-tezsi-nez-dlp">Proč je ECDLP těžší než DLP?<a class="headerlink" href="#proc-je-ecdlp-tezsi-nez-dlp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>DLP (mod <span class="arithmatex">\(p\)</span>)</th>
+<th>ECDLP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nejlepší útok</td>
+<td>Index calculus</td>
+<td>Pollardova <span class="arithmatex">\(\rho\)</span></td>
+</tr>
+<tr>
+<td>Složitost</td>
+<td><span class="arithmatex">\(O(e^{(\ln p)^{1/3}})\)</span> — sub-exponenciální</td>
+<td><span class="arithmatex">\(O\left(\sqrt{\pi r/2}\right)\)</span> — <strong>plně exponenciální</strong></td>
+</tr>
+<tr>
+<td>Klíč pro 128b bezpečnost</td>
+<td>3072 bitů</td>
+<td><strong>256 bitů</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Index calculus nelze aplikovat na ECC</strong> — bodové sčítání nevytváří vhodnou algebraickou strukturu pro smoothness útoky.</p>
+<h3 id="skalarni-nasobeni-double-and-add">Skalární násobení — double-and-add<a class="headerlink" href="#skalarni-nasobeni-double-and-add" title="Permanent link">&para;</a></h3>
+<p>Pro výpočet <span class="arithmatex">\(kP\)</span> efektivně (analogie square-and-multiply pro RSA):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>výsledek = O (bod v nekonečnu)
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pro každý bit k od nejvyššího:
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    výsledek = 2 × výsledek       (zdvojení)
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    pokud bit = 1:
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        výsledek = výsledek + P   (přičtení)
+</span></code></pre></div>
+<p>Složitost: <span class="arithmatex">\(O(\log k)\)</span> zdvojení + přičtení.</p>
+<hr />
+<h2 id="66-sifrovani-s-ecc-ecdh">6.6 Šifrování s ECC — ECDH<a class="headerlink" href="#66-sifrovani-s-ecc-ecdh" title="Permanent link">&para;</a></h2>
+<p>Podstatu šifrování pomocí ECC si ukážeme na analogii <strong>Diffie-Hellmanova schématu výměny klíče</strong>.</p>
+<p>Strana <span class="arithmatex">\(i\)</span> a <span class="arithmatex">\(j\)</span> si chtějí vyměnit tajnou informaci přes veřejný kanál. Každá strana má důvěryhodnou cestou získaný veřejný klíč protistrany. V případě ECC ještě navíc předpokládáme, že oba sdílejí stejnou křivku E a její bod <span class="arithmatex">\(P\)</span>.</p>
+<h3 id="protokol-ecdh">Protokol ECDH<a class="headerlink" href="#protokol-ecdh" title="Permanent link">&para;</a></h3>
+<p><strong>Veřejné parametry:</strong> křivka <span class="arithmatex">\(E\)</span>, bod <span class="arithmatex">\(P\)</span> (generátor skupiny řádu <span class="arithmatex">\(r\)</span>)</p>
+<table>
+<thead>
+<tr>
+<th>Krok</th>
+<th>Strana <span class="arithmatex">\(i\)</span> (Alice)</th>
+<th>Strana <span class="arithmatex">\(j\)</span> (Bob)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Privátní klíč</td>
+<td><span class="arithmatex">\(d_i \in \{1, \ldots, r-1\}\)</span></td>
+<td><span class="arithmatex">\(d_j \in \{1, \ldots, r-1\}\)</span></td>
+</tr>
+<tr>
+<td>Veřejný klíč</td>
+<td><span class="arithmatex">\(Q_i = d_i \cdot P\)</span></td>
+<td><span class="arithmatex">\(Q_j = d_j \cdot P\)</span></td>
+</tr>
+<tr>
+<td>Pošle</td>
+<td><span class="arithmatex">\(Q_i \to\)</span> Bob</td>
+<td><span class="arithmatex">\(Q_j \to\)</span> Alice</td>
+</tr>
+<tr>
+<td>Sdílený klíč</td>
+<td><span class="arithmatex">\(Z = d_i \cdot Q_j\)</span></td>
+<td><span class="arithmatex">\(Z = d_j \cdot Q_i\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Strana <span class="arithmatex">\(i\)</span> vypočte bod <span class="arithmatex">\(Z\)</span> jako <span class="arithmatex">\(d_i Q_j\)</span> a strana <span class="arithmatex">\(j\)</span> jako <span class="arithmatex">\(d_j Q_i\)</span>. Tyto body jsou ve skutečnosti stejné, protože:</p>
+<div class="arithmatex">\[Z = d_i Q_j = d_i(d_j P) = (d_i d_j)P\]</div>
+<p>a současně:</p>
+<div class="arithmatex">\[Z = d_j Q_i = d_j(d_i P) = (d_j d_i)P\]</div>
+<p>Tedy každá strana vezme veřejný klíč protistrany a sečte ho <span class="arithmatex">\(n\)</span>-krát, kde <span class="arithmatex">\(n\)</span> je privátní klíč. Protože obě strany vycházejí ze stejného bodu <span class="arithmatex">\(P\)</span>, dospějí do stejného bodu <span class="arithmatex">\(Z\)</span>.</p>
+<p><img alt="Šifrování s ECC — analogie DH" src="../../assets/img/prednasky/p09-255.png" /></p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph ECDH["ECDH — sdílený klíč"]
+        PUB["Veřejné: E, P, r"] --&gt; A["Alice: dA, QA=dA·P"]
+        PUB --&gt; B["Bob: dB, QB=dB·P"]
+        A --&gt;|"Pošle QA"| B
+        B --&gt;|"Pošle QB"| A
+        A --&gt; ZA["Z = dA·QB = dA·dB·P"]
+        B --&gt; ZB["Z = dB·QA = dB·dA·P"]
+        ZA &amp; ZB --&gt; SAME["Stejný bod Z ✓"]
+    end</code></pre>
+<hr />
+<h2 id="67-ecdsa-elliptic-curve-dsa">6.7 ECDSA — Elliptic Curve DSA<a class="headerlink" href="#67-ecdsa-elliptic-curve-dsa" title="Permanent link">&para;</a></h2>
+<p>Analogie DSA na eliptické křivce:</p>
+<p><strong>Podpis:</strong> nonce <span class="arithmatex">\(k\)</span> → <span class="arithmatex">\(R = k \cdot P\)</span>, <span class="arithmatex">\(r = R_x \bmod n\)</span>, <span class="arithmatex">\(s = k^{-1}(H(M) + d_A \cdot r) \bmod n\)</span></p>
+<p><strong>Ověření:</strong> <span class="arithmatex">\(u_1 = H(M) \cdot s^{-1}\)</span>, <span class="arithmatex">\(u_2 = r \cdot s^{-1}\)</span>, zkontrolujeme <span class="arithmatex">\(x\)</span>-souřadnici <span class="arithmatex">\(u_1 P + u_2 Q_A\)</span></p>
+<div class="admonition danger">
+<p class="admonition-title">Stejná slabina jako DSA</p>
+<p>Opakované nebo předvídatelné <span class="arithmatex">\(k\)</span> → kompromitace soukromého klíče (stejný Sony PS3 exploit platí i pro ECDSA — viz kap. 8.2).</p>
+</div>
+<hr />
+<h2 id="68-srovnani-rsa-vs-ecc">6.8 Srovnání RSA vs. ECC<a class="headerlink" href="#68-srovnani-rsa-vs-ecc" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Symetrická bezpečnost</th>
+<th>RSA/DH</th>
+<th>ECC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>80 bitů</td>
+<td>1024 b</td>
+<td>160 b</td>
+</tr>
+<tr>
+<td>112 bitů</td>
+<td>2048 b</td>
+<td>224 b</td>
+</tr>
+<tr>
+<td>128 bitů</td>
+<td>3072 b</td>
+<td>256 b</td>
+</tr>
+<tr>
+<td>192 bitů</td>
+<td>7680 b</td>
+<td>384 b</td>
+</tr>
+<tr>
+<td>256 bitů</td>
+<td>15360 b</td>
+<td>521 b</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition success">
+<p class="admonition-title">Výhody ECC</p>
+<ul>
+<li><strong>6–10× kratší klíče</strong> při stejné bezpečnosti → rychlejší výpočty, méně paměti</li>
+<li>Ideální pro: IoT, čipové karty, mobilní zařízení, TLS (ECDHE)</li>
+<li>Standardy: <strong>NIST P-256</strong> (secp256r1), Curve25519 (X25519), secp256k1 (Bitcoin)</li>
+<li>ECC má výhodu v rychlosti a menší náročnosti na hardware</li>
+</ul>
+</div>
+<hr />
+<h2 id="shrnuti-kapitoly">Shrnutí kapitoly<a class="headerlink" href="#shrnuti-kapitoly" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Rychlý přehled</p>
+<ul>
+<li>Eliptická křivka (reálná): <span class="arithmatex">\(y^2 = x^3 + ax + b\)</span>; sčítání geometricky — průsečík + odraz</li>
+<li>ECC nad <span class="arithmatex">\(\text{GF}(p)\)</span>: <span class="arithmatex">\(y^2 \equiv x^3 + ax + b \pmod{p}\)</span>, podmínka <span class="arithmatex">\(|4a^3+27b^2|_p \neq 0\)</span></li>
+<li><strong>Řád bodu</strong> <span class="arithmatex">\(r\)</span>: nejmenší <span class="arithmatex">\(r\)</span> tak, že <span class="arithmatex">\(rP = O\)</span>; <strong>kofaktor</strong> = <span class="arithmatex">\(\#E / r\)</span>, má být malý</li>
+<li><strong>ECDLP</strong>: dáno <span class="arithmatex">\(P\)</span> a <span class="arithmatex">\(Q = kP\)</span>, najdi <span class="arithmatex">\(k\)</span>; Pollard <span class="arithmatex">\(\rho\)</span> → složitost <span class="arithmatex">\(\approx 2^{128}\)</span> pro <span class="arithmatex">\(r = 2^{256}\)</span></li>
+<li><strong>ECDH</strong>: sdílený klíč <span class="arithmatex">\(Z = d_i \cdot Q_j = d_j \cdot Q_i\)</span> (analogie DH)</li>
+<li><strong>ECDSA</strong>: analogie DSA — nebezpečí při opakování nonce <span class="arithmatex">\(k\)</span></li>
+<li><strong>ECC vs RSA</strong>: 128-bit bezpečnost → ECC 256 b vs RSA 3072 b</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Klíčové otázky ke zkoušce</p>
+<ol>
+<li>Nakreslete schéma sčítání dvou různých bodů na eliptické křivce (geometrie).</li>
+<li>Jaký je vzorec pro <span class="arithmatex">\(P + Q\)</span> a pro <span class="arithmatex">\(2P\)</span> nad <span class="arithmatex">\(\text{GF}(p)\)</span>? (s mod operacemi)</li>
+<li>Definujte řád bodu a řád křivky. Co je kofaktor?</li>
+<li>Co je ECDLP a proč je výpočetně neřešitelný? Pollardova <span class="arithmatex">\(\rho\)</span> metoda.</li>
+<li>Proč je ECDLP těžší než DLP a co to znamená pro délky klíčů?</li>
+<li>Popište ECDH protokol — kdo co posílá, jak se vypočítá sdílený klíč?</li>
+<li>Jaká je složitost Pollardovy <span class="arithmatex">\(\rho\)</span> metody pro <span class="arithmatex">\(r = 2^{256}\)</span>?</li>
+<li>Porovnejte délky klíčů RSA a ECC při 128bitové bezpečnosti.</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zpět na začátek
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Zápatí" >
+        
+          
+          <a href="../05-asymetricka/" class="md-footer__link md-footer__link--prev" aria-label="Předchozí: 5. Asymetrická kryptografie">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Předchozí
+              </span>
+              <div class="md-ellipsis">
+                5. Asymetrická kryptografie
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../07-kvanty/" class="md-footer__link md-footer__link--next" aria-label="Další: 7. Kvantová kryptografie">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Další
+              </span>
+              <div class="md-ellipsis">
+                7. Kvantová kryptografie
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Zkop\u00edrov\u00e1no do schr\u00e1nky", "clipboard.copy": "Kop\u00edrovat do schr\u00e1nky", "search.result.more.one": "1 dal\u0161\u00ed na t\u00e9to str\u00e1nce", "search.result.more.other": "# v\u00edce na t\u00e9to str\u00e1nce", "search.result.none": "Nenalezeny \u017e\u00e1dn\u00e9 dokumenty", "search.result.one": "Nalezen\u00fd dokument: 1", "search.result.other": "Nalezen\u00e9 dokumenty: #", "search.result.placeholder": "Pi\u0161te co se m\u00e1 vyhledat", "search.result.term.missing": "Chyb\u011bj\u00edc\u00ed", "select.version": "Vyberte verzi"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+      
+    
+  </body>
+</html>

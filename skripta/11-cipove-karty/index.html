@@ -1,0 +1,2311 @@
+
+<!doctype html>
+<html lang="cs" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Studijní materiál ČVUT FIT 2023 · prof. Ing. Róbert Lórencz, CSc.">
+      
+      
+        <meta name="author" content="ČVUT FIT">
+      
+      
+      
+        <link rel="prev" href="../10-pki/">
+      
+      
+        <link rel="next" href="../../prehled/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>11. Čipové karty - BI-KAB – Kryptografie a bezpečnost</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#11-cipove-karty" class="md-skip">
+          Přeskočit obsah
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Záhlaví">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-header__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BI-KAB – Kryptografie a bezpečnost
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              11. Čipové karty
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na světlý režim"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Přepnout na světlý režim" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Přepnout na tmavý režim"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Přepnout na tmavý režim" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Hledat" placeholder="Hledat" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Vyhledávání">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Sdílet" aria-label="Sdílet" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Vyčistit" aria-label="Vyčistit" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializace vyhledávání
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Karty" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Domů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Skripta
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../prehled/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Přehled algoritmů
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../pisemka/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Zkouška
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigace" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BI-KAB – Kryptografie a bezpečnost" class="md-nav__button md-logo" aria-label="BI-KAB – Kryptografie a bezpečnost" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    BI-KAB – Kryptografie a bezpečnost
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skripta
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Skripta
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-klasicka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Klasická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-proudove/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Proudové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-blokove/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Blokové šifry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-hash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Hašovací funkce
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-asymetricka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Asymetrická kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-ecc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Kryptografie eliptických křivek
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-kvanty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Kvantová kryptografie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-bezpecnost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Bezpečnost kryptosystémů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-klice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Generátory náhodných čísel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-pki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Certifikáty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Čipové karty
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Čipové karty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Obsah stránky">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Obsah stránky
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#111-proc-cipove-karty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Proč čipové karty
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.1 Proč čipové karty">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vicefaktorova-autentizace-mfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vícefaktorová autentizace (MFA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priklady-cipovych-karet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Příklady čipových karet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-rozhrani" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Rozhraní
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.2 Rozhraní">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bezkontaktni-rozhrani-frekvence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bezkontaktní rozhraní — frekvence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iso-14443" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ISO 14443
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113-co-je-uvnitr-cipove-karty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Co je uvnitř čipové karty
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.3 Co je uvnitř čipové karty">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pametove-karty-ne-smart-v-uzsim-smyslu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paměťové karty (ne „smart" v užším smyslu)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pocitac-true-smart-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Počítač (true smart card)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#114-system-s-cipovymi-kartami-klientserver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Systém s čipovými kartami — klient/server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#115-ovladani-cipovych-karet-prikazy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.5 Ovládání čipových karet — příkazy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#116-apdu-application-protocol-data-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.6 APDU — Application Protocol Data Unit
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.6 APDU — Application Protocol Data Unit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-apdu-c-apdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command APDU (C-APDU)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response-apdu-r-apdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response APDU (R-APDU)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-words-nejdulezitejsi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status Words — nejdůležitější
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priklad-select-aplikace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Příklad — SELECT aplikace
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#117-prvky-zabezpeceni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.7 Prvky zabezpečení
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.7 Prvky zabezpečení">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fyzicka-bezpecnost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fyzická bezpečnost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symetricka-autentizace-a-sifrovani" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Symetrická autentizace a šifrování
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asymetricka-schemata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asymetrická schémata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diverzifikace-klicu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diverzifikace klíčů
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#118-secure-messaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.8 Secure Messaging
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.8 Secure Messaging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#secure-messaging-s-mac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secure Messaging s MAC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-messaging-s-mac-sifrovani" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secure Messaging s MAC + šifrování
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlv-kodovani" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLV kódování
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#119-souborovy-system-iso-7816-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.9 Souborový systém ISO 7816-4
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.9 Souborový systém ISO 7816-4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jmena-souboru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jména souborů
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operace-se-soubory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operace se soubory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1110-java-karty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.10 Java karty
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.10 Java karty">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rysy-jazyka-java-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rysy jazyka Java Card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behove-prostredi-appletu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Běhové prostředí appletů
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shrnuti-kapitoly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shrnutí kapitoly
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prehled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Přehled algoritmů
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zkouška
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zkouška
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pisemka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Písemný test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ustni/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ústní zkouška
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigace" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Domů
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Skripta
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="11-cipove-karty">11. Čipové karty<a class="headerlink" href="#11-cipove-karty" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Cíle kapitoly</p>
+<ul>
+<li>Znát důvody nasazení čipových karet a princip vícefaktorové autentizace</li>
+<li>Orientovat se v rozhraních (kontaktní vs. bezkontaktní, ISO 14443)</li>
+<li>Popsat vnitřní architekturu čipové karty a klient/server systém</li>
+<li>Znát formát APDU příkazu a odpovědi a 4 případy command APDU</li>
+<li>Orientovat se v souborovém systému ISO 7816-4</li>
+<li>Pochopit princip diverzifikace klíčů a Secure Messaging</li>
+<li>Znát specifika Java karet</li>
+</ul>
+</div>
+<hr />
+<h2 id="111-proc-cipove-karty">11.1 Proč čipové karty<a class="headerlink" href="#111-proc-cipove-karty" title="Permanent link">&para;</a></h2>
+<p><strong>Čipová (smart) karta</strong> — obvykle plastová kartička obsahující integrovaný obvod. Nosič informace spojené s nějakým užitečným účelem — <strong>token</strong>.</p>
+<p>Důvody nasazení:</p>
+<ul>
+<li><strong>Bezpečná identifikace a autentizace</strong></li>
+<li><strong>Uchování a zpracování dat</strong> (kryptografické operace)</li>
+<li><strong>Odolnost proti padělání</strong> (tamper resistance)</li>
+<li><strong>Vícefaktorová autentizace</strong> — druhý faktor</li>
+</ul>
+<h3 id="vicefaktorova-autentizace-mfa">Vícefaktorová autentizace (MFA)<a class="headerlink" href="#vicefaktorova-autentizace-mfa" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Faktor</th>
+<th>Princip</th>
+<th>Příklad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Co víme</strong></td>
+<td>Znalost (heslo, PIN)</td>
+<td>Heslo, PIN</td>
+</tr>
+<tr>
+<td><strong>Co máme</strong></td>
+<td>Vlastnictví (ČK)</td>
+<td>Čipová karta, token</td>
+</tr>
+<tr>
+<td><strong>Co jsme</strong></td>
+<td>Inherence, biometrie</td>
+<td>Prst, duhovka, sítnice, obličej, hlas</td>
+</tr>
+</tbody>
+</table>
+<h3 id="priklady-cipovych-karet">Příklady čipových karet<a class="headerlink" href="#priklady-cipovych-karet" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Předplacená telefonní karta</strong> (minulé tisíciletí)</li>
+<li><strong>SIM</strong> — Subscriber Identification Module (GSM); UICC — Universal Integrated Circuit Card (UMTS); R-UIM — Removable User Identity Module (CDMA)</li>
+<li><strong>VISA/MC/EMV</strong> — bankovní platební karta</li>
+<li><strong>Elektronická peněženka</strong> (drobné nákupy, platby za služby)</li>
+<li><strong>Elektronická jízdenka, vstupenka</strong></li>
+<li><strong>Průkaz na slevu, věrnostní karta</strong></li>
+<li><strong>Průkaz pro vstup do budovy</strong></li>
+<li><strong>Karta pro digitální podpis, dešifrování</strong> (soukromý klíč, certifikát)</li>
+<li><strong>NFC</strong> — Secure Element v mobilním telefonu nebo SW emulace</li>
+<li>„Čipování" — označení zvířete nebo člověka (?)</li>
+</ul>
+<hr />
+<h2 id="112-rozhrani">11.2 Rozhraní<a class="headerlink" href="#112-rozhrani" title="Permanent link">&para;</a></h2>
+<p>Napájecí a komunikační rozhraní čipové karty může být zejména:</p>
+<ul>
+<li><strong>Kontaktní</strong> (např. ISO 7816-2, USB...)</li>
+<li><strong>Bezkontaktní</strong> (např. ISO 14443) ⇒ typ RFID (Rádiofrekvenční identifikace), základ NFC</li>
+</ul>
+<p><strong>Kombinace:</strong> hybridní (dva čipy), duální (jeden čip, dvě rozhraní)</p>
+<p>Napájení a přenos dat:</p>
+<table>
+<thead>
+<tr>
+<th>Princip</th>
+<th>Použití</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elektrický</td>
+<td>Pro kontaktní rozhraní</td>
+</tr>
+<tr>
+<td>Elektromagnetický</td>
+<td>Pro bezkontaktní rozhraní — rádiové signály, indukční vazba</td>
+</tr>
+<tr>
+<td>Optický</td>
+<td>Potisk, záznam — čárové kódy, MRZ (Machine Readable Zone)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bezkontaktni-rozhrani-frekvence">Bezkontaktní rozhraní — frekvence<a class="headerlink" href="#bezkontaktni-rozhrani-frekvence" title="Permanent link">&para;</a></h3>
+<p>Mnoho různých proprietárních i standardních druhů:</p>
+<table>
+<thead>
+<tr>
+<th>Pásmo</th>
+<th>Frekvence</th>
+<th>Příklady</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LF</strong> (nízkofrekvenční)</td>
+<td>125 kHz, 135 kHz</td>
+<td>EM 4102, TI tagIT</td>
+</tr>
+<tr>
+<td><strong>HF</strong> s vazbou na blízko (proximity)</td>
+<td>13,56 MHz</td>
+<td><strong>ISO 14443</strong></td>
+</tr>
+<tr>
+<td><strong>HF</strong> s vazbou na dálku (vicinity)</td>
+<td>13,56 MHz</td>
+<td>ISO 15693</td>
+</tr>
+<tr>
+<td><strong>UHF</strong></td>
+<td>868–928 MHz</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<p>Z hlediska procesorových karet s kryptografickými funkcemi nás zajímá zejména <strong>ISO 14443</strong>.</p>
+<p>Příklady karet na ISO 14443:</p>
+<ul>
+<li>Studentský, zaměstnanecký průkaz ČVUT — <strong>MIFARE 1K (Classic)</strong> (proprietární protokol nad ISO 14443, ne podle ISO 7816-4)</li>
+<li>Opencard, In-karta ČD — <strong>MIFARE DESFire, DESFire EV1</strong></li>
+<li>Biometrický pas — <strong>ICAO</strong> (International Civil Aviation Organization)</li>
+<li><strong>Platební karty</strong> — Visa payWave, MC PayPass...</li>
+</ul>
+<h3 id="iso-14443">ISO 14443<a class="headerlink" href="#iso-14443" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Frekvence <strong>13,56 MHz</strong>, indukční vazba</li>
+<li>Dva typy modulace: <strong>Typ A</strong> (častější) a <strong>Typ B</strong></li>
+</ul>
+<hr />
+<h2 id="113-co-je-uvnitr-cipove-karty">11.3 Co je uvnitř čipové karty<a class="headerlink" href="#113-co-je-uvnitr-cipove-karty" title="Permanent link">&para;</a></h2>
+<h3 id="pametove-karty-ne-smart-v-uzsim-smyslu">Paměťové karty (ne „smart" v užším smyslu)<a class="headerlink" href="#pametove-karty-ne-smart-v-uzsim-smyslu" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Nic (skoro)</strong> — jen propojené kontakty, rezonanční obvod apod. (není <em>smart</em> ani <em>čipová</em>)</li>
+<li><strong>Paměť:</strong><ul>
+<li>ROM s unikátním sériovým číslem</li>
+<li>EEPROM</li>
+<li>Zabezpečená paměť (např. Philips/NXP <strong>MIFARE Classic</strong>) — paměť s funkcí autentizace a šifrování, řízení přístupu k datům</li>
+<li>Ani ta ještě není <em>smart</em> v užším smyslu</li>
+</ul>
+</li>
+</ul>
+<h3 id="pocitac-true-smart-card">Počítač (true smart card)<a class="headerlink" href="#pocitac-true-smart-card" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Konfigurovatelný pomocí API</strong> — programovaný při výrobě</li>
+<li><strong>Programovatelný v terénu</strong> — např. Java Cards (Standard GlobalPlatform — správa aplikací)</li>
+</ul>
+<p><strong>Vnitřní struktura čipové karty:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Komponenta</th>
+<th>Popis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>Výpočetní jednotka</td>
+</tr>
+<tr>
+<td>Kryptografický koprocesor</td>
+<td>Akcelerace RSA, ECC, AES</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>Pracovní paměť (ztracena při vypnutí)</td>
+</tr>
+<tr>
+<td>ROM</td>
+<td>OS, trvalá paměť</td>
+</tr>
+<tr>
+<td>EEPROM</td>
+<td>Data, klíče (perzistentní, mazatelná)</td>
+</tr>
+<tr>
+<td>Komunikační rozhraní</td>
+<td>ISO 7816 kontakty nebo bezkontaktní</td>
+</tr>
+<tr>
+<td>Obvody napájení, senzory</td>
+<td>Ochrana, detekce útoků</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="114-system-s-cipovymi-kartami-klientserver">11.4 Systém s čipovými kartami — klient/server<a class="headerlink" href="#114-system-s-cipovymi-kartami-klientserver" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    subgraph CARD["Čipová karta / token"]
+        DATA["Data + aplikace\n(klíče, certifikáty)"]
+    end
+    subgraph READER["Čtečka — terminál"]
+        CONN["Připojení k řídícímu počítači\n(sériová linka, USB CCID class...)"]
+        OS_API["API operačního systému\n(Windows PC/SC, Linux PCSC-Lite...)"]
+    end
+    subgraph MIDDLEWARE["Middleware — knihovna"]
+        API["Standardní crypto token API\n(PKCS#11, Windows Crypto API CSP)"]
+    end
+    APP["Uživatelská aplikace\n(mail klient, webový prohlížeč...)"]
+    SERVER["Server"]
+
+    CARD &lt;--&gt; READER
+    READER --&gt; MIDDLEWARE
+    MIDDLEWARE --&gt; APP
+    APP &lt;--&gt; SERVER</code></pre>
+<hr />
+<h2 id="115-ovladani-cipovych-karet-prikazy">11.5 Ovládání čipových karet — příkazy<a class="headerlink" href="#115-ovladani-cipovych-karet-prikazy" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Oblast</th>
+<th>Standardy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Obecné</strong></td>
+<td>ISO/IEC 7816-4, -7, -8, -9...; GlobalPlatform — správa aplikací</td>
+</tr>
+<tr>
+<td><strong>Platební systémy</strong></td>
+<td>EMV (Europay, MasterCard, Visa); EN 1546, CEPS — elektronické peněženky</td>
+</tr>
+<tr>
+<td><strong>Telekomunikace</strong></td>
+<td>GSM 11.11, 11.14 (SIM); TS 31.102, 31.111... (UICC, USIM)</td>
+</tr>
+<tr>
+<td><strong>Další</strong></td>
+<td>Standardizované nebo proprietární</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="116-apdu-application-protocol-data-unit">11.6 APDU — Application Protocol Data Unit<a class="headerlink" href="#116-apdu-application-protocol-data-unit" title="Permanent link">&para;</a></h2>
+<h3 id="command-apdu-c-apdu">Command APDU (C-APDU)<a class="headerlink" href="#command-apdu-c-apdu" title="Permanent link">&para;</a></h3>
+<p><strong>APDU = Application Protocol Data Unit</strong> je základní komunikační jednotka mezi kartou a terminálem (ISO 7816).</p>
+<p><img alt="APDU struktura" src="../../assets/img/prednasky/p07-197.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Pole</th>
+<th>Povinnost</th>
+<th>Velikost</th>
+<th>Popis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CLA</strong></td>
+<td>povinné</td>
+<td>1 B</td>
+<td>Třída instrukce (00 = ISO standard)</td>
+</tr>
+<tr>
+<td><strong>INS</strong></td>
+<td>povinné</td>
+<td>1 B</td>
+<td>Kód instrukce</td>
+</tr>
+<tr>
+<td><strong>P1</strong></td>
+<td>povinné</td>
+<td>1 B</td>
+<td>Parametr 1</td>
+</tr>
+<tr>
+<td><strong>P2</strong></td>
+<td>povinné</td>
+<td>1 B</td>
+<td>Parametr 2</td>
+</tr>
+<tr>
+<td><strong>Lc</strong></td>
+<td>volitelné</td>
+<td>0/1/3 B</td>
+<td>Délka datového pole</td>
+</tr>
+<tr>
+<td><strong>Data</strong></td>
+<td>volitelné</td>
+<td>Lc B</td>
+<td>Data příkazu</td>
+</tr>
+<tr>
+<td><strong>Le</strong></td>
+<td>volitelné</td>
+<td>0/1/3 B</td>
+<td>Očekávaná délka odpovědi</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4 případy Command APDU:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Případ</th>
+<th>CLA INS P1 P2</th>
+<th>Lc</th>
+<th>Data</th>
+<th>Le</th>
+<th>Popis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Case 1</td>
+<td>✓</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Žádná data, žádná odpověď</td>
+</tr>
+<tr>
+<td>Case 2</td>
+<td>✓</td>
+<td>—</td>
+<td>—</td>
+<td>✓</td>
+<td>Žádná data, odpověď</td>
+</tr>
+<tr>
+<td>Case 3</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+<td>Data, žádná odpověď</td>
+</tr>
+<tr>
+<td>Case 4</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>Data, odpověď</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response-apdu-r-apdu">Response APDU (R-APDU)<a class="headerlink" href="#response-apdu-r-apdu" title="Permanent link">&para;</a></h3>
+<p><img alt="APDU odpověď" src="../../assets/img/prednasky/p07-198.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Pole</th>
+<th>Povinnost</th>
+<th>Popis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data</strong></td>
+<td>volitelné</td>
+<td>Data odpovědi</td>
+</tr>
+<tr>
+<td><strong>SW1</strong></td>
+<td>povinné</td>
+<td>Status Word byte 1</td>
+</tr>
+<tr>
+<td><strong>SW2</strong></td>
+<td>povinné</td>
+<td>Status Word byte 2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="status-words-nejdulezitejsi">Status Words — nejdůležitější<a class="headerlink" href="#status-words-nejdulezitejsi" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>SW1 SW2</th>
+<th>Hex</th>
+<th>Význam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>90 00</code></td>
+<td>9000</td>
+<td>✅ Úspěch</td>
+</tr>
+<tr>
+<td><code>61 xx</code></td>
+<td>—</td>
+<td>Odpověď dostupná (xx bytů)</td>
+</tr>
+<tr>
+<td><code>67 00</code></td>
+<td>6700</td>
+<td>Špatná délka</td>
+</tr>
+<tr>
+<td><code>69 82</code></td>
+<td>6982</td>
+<td>Přístup zamítnut</td>
+</tr>
+<tr>
+<td><code>69 83</code></td>
+<td>6983</td>
+<td>Autentizace blokována (PIN locked)</td>
+</tr>
+<tr>
+<td><code>6A 82</code></td>
+<td>6A82</td>
+<td>Soubor nenalezen</td>
+</tr>
+<tr>
+<td><code>6A 86</code></td>
+<td>6A86</td>
+<td>Nesprávné P1/P2</td>
+</tr>
+<tr>
+<td><code>63 Cx</code></td>
+<td>—</td>
+<td>Ověření selhalo, zbývá x pokusů</td>
+</tr>
+</tbody>
+</table>
+<h3 id="priklad-select-aplikace">Příklad — SELECT aplikace<a class="headerlink" href="#priklad-select-aplikace" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>→ 00  A4  04  00  06  41 42 43 44 45 46
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>   │   │   │   │   │   └─────────────── AID data (6 B = číslo aplikace)
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>   │   │   │   │   └────────────────── Lc = 06 (délka datového pole s AID)
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>   │   │   │   └───────────────────── P2 = 00 (vrať nepovinnou FCI)
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>   │   │   └──────────────────────── P1 = 04 (výběr podle jména/AID)
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>   │   └─────────────────────────── INS = A4 (SELECT)
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   └────────────────────────────── CLA = 00 (standardní příkaz ISO 7816)
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>← 90 00   (OK)
+</span></code></pre></div>
+<hr />
+<h2 id="117-prvky-zabezpeceni">11.7 Prvky zabezpečení<a class="headerlink" href="#117-prvky-zabezpeceni" title="Permanent link">&para;</a></h2>
+<h3 id="fyzicka-bezpecnost">Fyzická bezpečnost<a class="headerlink" href="#fyzicka-bezpecnost" title="Permanent link">&para;</a></h3>
+<p><strong>Nic</strong> — doufáme, že nikdo neposlouchá, nenahrává, neopakuje. Spoléháme se, že nevzniknou klony, emulátory.</p>
+<h3 id="symetricka-autentizace-a-sifrovani">Symetrická autentizace a šifrování<a class="headerlink" href="#symetricka-autentizace-a-sifrovani" title="Permanent link">&para;</a></h3>
+<p>Klíč je tajný, sdílený mezi kartou a terminálem. Možno použít odvozování (<strong>diverzifikaci</strong>) klíčů.</p>
+<ul>
+<li><strong>KDF</strong> (Key Derivation Function) — jednosměrná funkce (např. HMAC, MAC)</li>
+<li>Princip: <span class="arithmatex">\(k = \text{KDF}(\text{MasterKey}, \text{SerialNo})\)</span></li>
+<li>Různé karty budou mít různé klíče <span class="arithmatex">\(k\)</span></li>
+<li>Jednosměrnost KDF ⇒ prolomení <span class="arithmatex">\(k\)</span> neprozradí MasterKey</li>
+<li>MasterKey stačí jen jeden (pro jednu sérii karet)</li>
+</ul>
+<h3 id="asymetricka-schemata">Asymetrická schémata<a class="headerlink" href="#asymetricka-schemata" title="Permanent link">&para;</a></h3>
+<p>Veřejný a soukromý klíč, PKI, certifikáty, řetěz důvěry:</p>
+<ul>
+<li>Každá karta má soukromý klíč a odpovídající veřejný klíč</li>
+<li>Může mít VK certifikát → PKI</li>
+</ul>
+<h3 id="diverzifikace-klicu">Diverzifikace klíčů<a class="headerlink" href="#diverzifikace-klicu" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Vstup:</strong> Hlavní klíč (Master Key) + diverzifikační data (číslo karty, identifikace systému, identifikace aplikace...)</li>
+<li><strong>Výstup:</strong> Odvozený klíč (Diversified Key)</li>
+<li><strong>Jednosměrnost:</strong> Z odvozeného klíče je výpočetně neschůdné zjistit hlavní klíč</li>
+</ul>
+<p><img alt="Diverzifikace klíčů" src="../../assets/img/prednasky/p07-201.png" /></p>
+<hr />
+<h2 id="118-secure-messaging">11.8 Secure Messaging<a class="headerlink" href="#118-secure-messaging" title="Permanent link">&para;</a></h2>
+<p>Secure Messaging chrání APDU komunikaci. Různé úrovně zabezpečení:</p>
+<table>
+<thead>
+<tr>
+<th>Úroveň</th>
+<th>Popis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bez autentizace, bez utajení</strong></td>
+<td>Plaintext komunikace</td>
+</tr>
+<tr>
+<td><strong>MAC</strong></td>
+<td>Zabezpečení proti modifikaci zprávy (autentizace MAC)</td>
+</tr>
+<tr>
+<td><strong>MAC + šifrování</strong></td>
+<td>MAC + utajení zprávy (šifrování např. 3DES, AES)</td>
+</tr>
+</tbody>
+</table>
+<p>Princip „zabalení" do struktur typu <strong>TLV</strong> — Tag, Length, Value.</p>
+<h3 id="secure-messaging-s-mac">Secure Messaging s MAC<a class="headerlink" href="#secure-messaging-s-mac" title="Permanent link">&para;</a></h3>
+<p>Zabezpečení proti modifikaci zprávy:</p>
+<p><img alt="Secure Messaging MAC" src="../../assets/img/prednasky/p07-203.png" /></p>
+<h3 id="secure-messaging-s-mac-sifrovani">Secure Messaging s MAC + šifrování<a class="headerlink" href="#secure-messaging-s-mac-sifrovani" title="Permanent link">&para;</a></h3>
+<p>MAC + utajení zprávy:</p>
+<p><img alt="Secure Messaging MAC + šifrování" src="../../assets/img/prednasky/p07-204.png" /></p>
+<h3 id="tlv-kodovani">TLV kódování<a class="headerlink" href="#tlv-kodovani" title="Permanent link">&para;</a></h3>
+<p>Každé pole APDU je zakódováno jako:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[TAG (1-3 B)] [LENGTH (1-3 B)] [VALUE (LENGTH B)]
+</span></code></pre></div></p>
+<p>Příklad šifrovaného APDU:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>87 11 01 &lt;16 bytů AES šifrovaných dat&gt;   ← šifrovaná data
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>8E 08    &lt;8 bytů CMAC&gt;                    ← MAC integrity
+</span></code></pre></div></p>
+<hr />
+<h2 id="119-souborovy-system-iso-7816-4">11.9 Souborový systém ISO 7816-4<a class="headerlink" href="#119-souborovy-system-iso-7816-4" title="Permanent link">&para;</a></h2>
+<p>Data na kartě jsou organizována jako <strong>souborový systém podle ISO 7816-4</strong>:</p>
+<p><img alt="Souborový systém ISO 7816-4" src="../../assets/img/prednasky/p07-205.png" /></p>
+<ul>
+<li><strong>MF</strong> — Master File (kořen, FID = 3F 00)</li>
+<li><strong>DF</strong> — Dedicated File (Directory File = adresář / aplikace)</li>
+<li><strong>EF</strong> — Elementary File (soubor s daty)</li>
+</ul>
+<h3 id="jmena-souboru">Jména souborů<a class="headerlink" href="#jmena-souboru" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Identifikátor</th>
+<th>Velikost</th>
+<th>Použití</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FID</strong> (File Identifier)</td>
+<td>2 byty</td>
+<td>Identifikuje MF, DF i EF; MF = 3F 00; výběr: SELECT (P1=0)</td>
+</tr>
+<tr>
+<td><strong>SFI</strong> (Short File Identifier)</td>
+<td>5 bitů</td>
+<td>Identifikuje EF; přímý výběr v příkazech pro manipulaci s daty; čtení s implicitním výběrem — READ BINARY (P1=100sssss)</td>
+</tr>
+<tr>
+<td><strong>DF name / AID</strong></td>
+<td>až 16 bytů</td>
+<td>Identifikuje DF (nebo aplikaci); může obsahovat AID → Java karty; výběr: SELECT (P1=4)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="operace-se-soubory">Operace se soubory<a class="headerlink" href="#operace-se-soubory" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operace</th>
+<th>Příkaz</th>
+<th>Hex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Výběr</strong> (MF, DF nebo EF)</td>
+<td>SELECT</td>
+<td><code>00 A4 ...</code></td>
+</tr>
+<tr>
+<td>Čtení transparentního souboru</td>
+<td>READ BINARY</td>
+<td><code>00 B0 ...</code></td>
+</tr>
+<tr>
+<td>Zápis transparentního souboru</td>
+<td>UPDATE BINARY</td>
+<td><code>00 D6 ...</code></td>
+</tr>
+<tr>
+<td>Čtení záznamu</td>
+<td>READ RECORD</td>
+<td><code>00 B2 ...</code></td>
+</tr>
+<tr>
+<td>Zápis záznamu</td>
+<td>UPDATE RECORD</td>
+<td><code>00 DC ...</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Typy Elementary Files:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Typ</th>
+<th>Popis</th>
+<th>Operace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Transparentní</strong></td>
+<td>Binární blob bez vnitřní struktury</td>
+<td>READ BINARY, UPDATE BINARY</td>
+</tr>
+<tr>
+<td><strong>Záznamy pevné délky</strong></td>
+<td>Záznamy pevné délky</td>
+<td>READ RECORD, APPEND RECORD</td>
+</tr>
+<tr>
+<td><strong>Záznamy variabilní délky</strong></td>
+<td>Záznamy proměnné délky</td>
+<td>READ RECORD, APPEND RECORD</td>
+</tr>
+<tr>
+<td><strong>Cyklické</strong></td>
+<td>Cyklické soubory (pevná délka záznamu)</td>
+<td>READ RECORD (poslední záznam)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1110-java-karty">11.10 Java karty<a class="headerlink" href="#1110-java-karty" title="Permanent link">&para;</a></h2>
+<p><strong>Java karta</strong> obsahuje <strong>CPU + Java VM</strong> (virtuální stroj jazyka Java):</p>
+<ul>
+<li>Podmnožina jazyka Java</li>
+<li>Zjednodušený VM, předzpracování (konverze)</li>
+<li>Java interpreter (většinou částečná HW podpora)</li>
+<li><strong>Java Card Framework</strong>, runtime</li>
+<li>Persistence dat — „heap je v EEPROM"</li>
+<li>Podpora transakčního zpracování</li>
+<li>Na Java kartách: Aplikace → <strong>Applet</strong></li>
+</ul>
+<h3 id="rysy-jazyka-java-card">Rysy jazyka Java Card<a class="headerlink" href="#rysy-jazyka-java-card" title="Permanent link">&para;</a></h3>
+<p><strong>Podporované typy:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Typ</th>
+<th>Bitů</th>
+<th>Podpora</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>byte</code></td>
+<td>8</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td>16</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td>32</td>
+<td>⚠️ nepovinně</td>
+</tr>
+<tr>
+<td><code>long</code>, <code>float</code>, <code>double</code></td>
+<td>—</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nepodporováno:</strong> znaky, řetězce, vícerozměrná pole, dynamické nahrávání tříd, GC a finalizace, serializace, klonování objektů.</p>
+<p><strong>Runtime knihovny:</strong> <code>java.lang</code>, <code>javacard.framework</code>, <code>javacard.security</code>, <code>javacardx.crypto</code>, (<code>java.rmi</code>...). V novějších verzích i float, řetězce, servlety.</p>
+<h3 id="behove-prostredi-appletu">Běhové prostředí appletů<a class="headerlink" href="#behove-prostredi-appletu" title="Permanent link">&para;</a></h3>
+<p><img alt="Java Card runtime prostředí" src="../../assets/img/prednasky/p07-210.png" /></p>
+<p>Vrstvová architektura (od hardwaru nahoru):</p>
+<ol>
+<li><strong>Hardware</strong> — fyzický čip</li>
+<li><strong>HAL</strong> — Hardware Abstraction Layer</li>
+<li><strong>Native services</strong> — transmission protocols, cryptographic algorithms, memory management</li>
+<li><strong>JCVM</strong> — Java Card Virtual Machine</li>
+<li><strong>JCRE</strong> — Java Card Runtime Environment</li>
+<li><strong>API vrstvy</strong> — OpenPlatform API, Java Card API, Other APIs</li>
+<li><strong>Aplikace</strong> — Card Manager, Applet 1, Applet 2, ..., firewall</li>
+</ol>
+<hr />
+<h2 id="shrnuti-kapitoly">Shrnutí kapitoly<a class="headerlink" href="#shrnuti-kapitoly" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Rychlý přehled</p>
+<ul>
+<li><strong>MFA:</strong> Co víme (heslo/PIN), Co máme (čipová karta), Co jsme (biometrie)</li>
+<li><strong>Rozhraní:</strong> Kontaktní (ISO 7816-2), Bezkontaktní (ISO 14443 @ 13,56 MHz)</li>
+<li><strong>APDU:</strong> CLA INS P1 P2 [Lc Data Le] → [Data] SW1 SW2; 4 případy</li>
+<li><strong>SW 9000</strong> = OK; <strong>SW 6983</strong> = PIN locked; <strong>SW 6A82</strong> = file not found</li>
+<li><strong>MF → DF → EF</strong> hierarchie souborů (ISO 7816-4)</li>
+<li><strong>Diverzifikace klíčů:</strong> <span class="arithmatex">\(k = \text{KDF}(\text{MasterKey}, \text{SerialNo})\)</span> — jednosměrná</li>
+<li><strong>Secure Messaging:</strong> bez/MAC/MAC+šifrování; TLV kódování</li>
+<li><strong>Java Card:</strong> CPU+JVM, Applet, EEPROM heap, JCRE/JCVM architektura</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Klíčové otázky ke zkoušce</p>
+<ol>
+<li>Co je vícefaktorová autentizace? Jaké jsou tři faktory?</li>
+<li>Jaký je rozdíl mezi kontaktním a bezkontaktním rozhraním? Jaký standard se používá pro NFC platební karty?</li>
+<li>Jaký je formát Command APDU? Popište každé pole. Jaké jsou 4 případy?</li>
+<li>Co jsou SW1 a SW2? Co znamená SW = 9000? A SW = 63Cx?</li>
+<li>Nakreslete hierarchii souborového systému ISO 7816-4 (MF/DF/EF).</li>
+<li>Co je FID, SFI a AID? Kdy se každý používá?</li>
+<li>Co je Secure Messaging? Jaké jsou tři úrovně zabezpečení?</li>
+<li>Co je Key Diversification? Jaká je výhoda oproti sdílení jednoho klíče?</li>
+<li>Co je Java karta? Jaké jsou specifika jazyka Java Card?</li>
+<li>Popište vrstvovou architekturu Java Card runtime prostředí.</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zpět na začátek
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Zápatí" >
+        
+          
+          <a href="../10-pki/" class="md-footer__link md-footer__link--prev" aria-label="Předchozí: 10. Certifikáty">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Předchozí
+              </span>
+              <div class="md-ellipsis">
+                10. Certifikáty
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../prehled/" class="md-footer__link md-footer__link--next" aria-label="Další: Přehled algoritmů">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Další
+              </span>
+              <div class="md-ellipsis">
+                Přehled algoritmů
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Zkop\u00edrov\u00e1no do schr\u00e1nky", "clipboard.copy": "Kop\u00edrovat do schr\u00e1nky", "search.result.more.one": "1 dal\u0161\u00ed na t\u00e9to str\u00e1nce", "search.result.more.other": "# v\u00edce na t\u00e9to str\u00e1nce", "search.result.none": "Nenalezeny \u017e\u00e1dn\u00e9 dokumenty", "search.result.one": "Nalezen\u00fd dokument: 1", "search.result.other": "Nalezen\u00e9 dokumenty: #", "search.result.placeholder": "Pi\u0161te co se m\u00e1 vyhledat", "search.result.term.missing": "Chyb\u011bj\u00edc\u00ed", "select.version": "Vyberte verzi"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,55 @@
+/* ── Exam tip admonition styling ── */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-color: #00b0a0;
+}
+.md-typeset .tip > .admonition-title,
+.md-typeset .tip > summary {
+  background-color: rgba(0, 176, 160, 0.1);
+}
+
+/* ── Question admonition ── */
+.md-typeset .admonition.question,
+.md-typeset details.question {
+  border-color: #7c4dff;
+}
+.md-typeset .question > .admonition-title,
+.md-typeset .question > summary {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+/* ── Formula highlight ── */
+.formula-box {
+  background: var(--md-code-bg-color);
+  border-left: 4px solid var(--md-primary-fg-color);
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin: 12px 0;
+}
+
+/* ── Chapter end navigation ── */
+.md-footer-nav__link {
+  font-size: 0.9rem;
+}
+
+/* ── Wider content on large screens ── */
+@media screen and (min-width: 76.25em) {
+  .md-grid {
+    max-width: 1400px;
+  }
+}
+
+/* ── Table improvements ── */
+.md-typeset table:not([class]) {
+  font-size: 0.82rem;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color--light);
+  color: var(--md-primary-bg-color);
+}
+
+/* ── Mermaid diagram centering ── */
+.mermaid {
+  text-align: center;
+}
