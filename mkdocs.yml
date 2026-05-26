@@ -1,0 +1,108 @@
+site_name: BI-KAB – Kryptografie a bezpečnost
+site_description: Studijní materiál ČVUT FIT 2023 · prof. Ing. Róbert Lórencz, CSc.
+site_author: ČVUT FIT
+
+theme:
+  name: material
+  language: cs
+  palette:
+    - scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Přepnout na světlý režim
+    - scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Přepnout na tmavý režim
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - toc.follow
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tooltips
+  icon:
+    logo: material/lock-outline
+    repo: fontawesome/brands/github
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.keys
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+      title: Obsah stránky
+  - def_list
+  - footnotes
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Domů: index.md
+  - Skripta:
+    - skripta/index.md
+    - 1. Klasická kryptografie: skripta/01-klasicka.md
+    - 2. Proudové šifry: skripta/02-proudove.md
+    - 3. Blokové šifry: skripta/03-blokove.md
+    - 4. Hašovací funkce: skripta/04-hash.md
+    - 5. Asymetrická kryptografie: skripta/05-asymetricka.md
+    - 6. ECC: skripta/06-ecc.md
+    - 7. Kvantová kryptografie: skripta/07-kvanty.md
+    - 8. Bezpečnost kryptosystémů: skripta/08-bezpecnost.md
+    - 9. Generování klíčů: skripta/09-klice.md
+    - 10. PKI: skripta/10-pki.md
+    - 11. Čipové karty: skripta/11-cipove-karty.md
+  - Přehled algoritmů: prehled.md
