@@ -1650,12 +1650,12 @@ Příklad chyby: <span class="arithmatex">\(m=29\)</span>, <span class="arithmat
 <details class="success">
 <summary>Odpověď</summary>
 <ul>
-<li>(1) ✓ – obě jsou asymetrické</li>
+<li>(1) ✗ – RSA je asymetrická šifra, ale <strong>exponenciální šifra je symetrická</strong> (obě strany sdílejí tajný exponent)</li>
 <li>(2) ✓ – Square and Multiply urychluje modulární umocňování <span class="arithmatex">\(m^e \bmod n\)</span></li>
 <li>(3) ✓ – je to běžné (např. <span class="arithmatex">\(e = 65537\)</span>); pozor na Hastadův útok při malém <span class="arithmatex">\(e\)</span> a více příjemcích se stejnou zprávou</li>
 <li>(4) ✓ – šifrování exponentem <span class="arithmatex">\(e\)</span> (veřejný), dešifrování exponentem <span class="arithmatex">\(d\)</span> (soukromý)</li>
 </ul>
-<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#54-rsa">5.4 – RSA</a></em></p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#54-rsa">5.4 – RSA</a>, <a href="../skripta/05-asymetricka/#50-exponencialni-sifra">5.0 – Exponenciální šifra</a></em></p>
 </details>
 <hr />
 <p><strong>Určete pravdivost tvrzení o proudových a blokových šifrách:</strong></p>
@@ -2514,10 +2514,10 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
 </span></code></pre></div>
 <p><span class="arithmatex">\(d = -79 \bmod 264 = \mathbf{185}\)</span> (ověř: <span class="arithmatex">\(137 \cdot 185 = 25345 = 96 \cdot 264 + 1\)</span> ✓)</p>
 <p><strong>Krok 3: RSA-CRT parametry</strong></p>
-<p>$<span class="arithmatex">\(d_p = d \bmod (p-1) = 185 \bmod 12 = \mathbf{5}\)</span>$
-$<span class="arithmatex">\(d_q = d \bmod (q-1) = 185 \bmod 22 = \mathbf{9}\)</span>$
-$<span class="arithmatex">\(q_{\text{inv}} = q^{-1} \bmod p = 23^{-1} \bmod 13 = 10^{-1} \bmod 13 = \mathbf{4}\)</span>$
-(ověř: <span class="arithmatex">\(10 \cdot 4 = 40 = 3 \cdot 13 + 1\)</span> ✓)</p>
+<div class="arithmatex">\[d_p = d \bmod (p-1) = 185 \bmod 12 = \mathbf{5}\]</div>
+<div class="arithmatex">\[d_q = d \bmod (q-1) = 185 \bmod 22 = \mathbf{9}\]</div>
+<div class="arithmatex">\[q_{\text{inv}} = q^{-1} \bmod p = 23^{-1} \bmod 13 = 10^{-1} \bmod 13 = \mathbf{4}\]</div>
+<p>(ověř: <span class="arithmatex">\(10 \cdot 4 = 40 = 3 \cdot 13 + 1\)</span> ✓)</p>
 <p><strong>Soukromý klíč RSA-CRT:</strong> <span class="arithmatex">\((p=13,\ q=23,\ d_p=5,\ d_q=9,\ q_{\text{inv}}=4)\)</span></p>
 <p><em>→ Skripta: <a href="../skripta/05-asymetricka/#55-rsa-crt">5.5 – RSA-CRT</a></em></p>
 </details>
