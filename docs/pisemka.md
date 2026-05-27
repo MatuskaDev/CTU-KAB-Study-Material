@@ -1033,13 +1033,6 @@ RNG   →    3 b  → SHA-256 → ? b  →────────────�
 
 ---
 
-**Model bezpečnosti OSI zahrnuje ___ bezpečnosti, ___ bezpečnosti a ___ bezpečnost.**
-
-??? success "Odpověď"
-    **Služby** bezpečnosti · **Mechanismy** bezpečnosti · **Útoky na** bezpečnost
-
-    *→ Skripta: [8.2 – Typy bezpečnosti](skripta/08-bezpecnost.md#82-typy-bezpecnosti)*
-
 ---
 
 **Jaké jsou 2 hlavní faktory rizika v informační bezpečnosti?**

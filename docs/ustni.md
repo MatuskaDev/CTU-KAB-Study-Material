@@ -557,29 +557,6 @@ Stručné odpovědi na všechny otázky ústní části zkoušky BI-KAB/BI-BEZ (
 
 ---
 
-## Bezpečnostní architektura
-
-??? question "9. Útoky v OSI modelu"
-
-    **Pasivní** (těžko detekovatelné):
-    - Odkrývání obsahu zpráv (plaintext odposlech)
-    - Analýza toku dat (i šifrovaných – délky, frekvence)
-
-    **Aktivní** (evidentní efekt):
-    - Podvrhnutí identity (MitM)
-    - Útok opakováním (replay)
-    - Modifikace zprávy
-    - Odmítnutí služby (DoS/DDoS)
-
-    *→ Skripta: [8.5 – Typy útočníků](skripta/08-bezpecnost.md#85-typy-utocniku)*
-
-??? question "18. Mechanismy bezpečnosti OSI"
-
-    Digitální podpis · Šifrování · Vyplňování mezer · Řízení směrování · Integrita dat · Osvědčení třetím subjektem · Výměna autentizační informace
-
-    *→ Skripta: [8.1 – Hodnocení odolnosti šifry](skripta/08-bezpecnost.md#81-hodnoceni-odolnosti-sifry)*
-
----
 
 ## ECC a kvantová kryptografie
 
