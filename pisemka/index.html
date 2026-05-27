@@ -1296,6 +1296,44 @@
 <p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#82-typy-bezpecnosti">8.2 – Typy bezpečnosti</a></em></p>
 </details>
 <hr />
+<p><strong>Digitální podpis NEzajišťuje (označte správné – tj. co podpis NEPOSKYTUJE):</strong></p>
+<ol>
+<li>Integritu</li>
+<li>Nepopiratelnost</li>
+<li>Dostupnost</li>
+<li>Utajení</li>
+</ol>
+<details class="success">
+<summary>Odpověď</summary>
+<p>✅ <strong>(3) a (4)</strong></p>
+<ul>
+<li>(1) ✗ – digitální podpis <strong>zajišťuje</strong> integritu</li>
+<li>(2) ✗ – digitální podpis <strong>zajišťuje</strong> nepopiratelnost</li>
+<li>(3) ✓ – dostupnost (availability) není vlastností digitálního podpisu</li>
+<li>(4) ✓ – utajení (důvěrnost) zajišťuje <strong>šifrování</strong>, nikoliv podpis</li>
+</ul>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#57-digitalni-podpis">5.7 – Digitální podpis</a></em></p>
+</details>
+<hr />
+<p><strong>Vlastnost integrity elektronického podpisu znamená:</strong></p>
+<ol>
+<li>Podepsanou zprávu nelze změnit bez zneplatnění podpisu.</li>
+<li>Digitální podpis je vydán pouze důvěryhodné osobě.</li>
+<li>Podepisující nemá možnost dodatečně popřít, že podpis vytvořil.</li>
+<li>Platný podpis zprávy může vytvořit pouze vlastník správného <strong>veřejného</strong> klíče.</li>
+</ol>
+<details class="success">
+<summary>Odpověď</summary>
+<p>✅ <strong>(1)</strong></p>
+<ul>
+<li>(1) ✓ – přesná definice <strong>integrity</strong>: podpis zaručuje, že zpráva nebyla pozměněna</li>
+<li>(2) ✗ – toto popisuje vlastnost certifikační autority / procesu vydávání certifikátů</li>
+<li>(3) ✗ – toto popisuje <strong>nepopiratelnost</strong> (non-repudiation)</li>
+<li>(4) ✗ – podpis <strong>vytváří</strong> vlastník <strong>soukromého</strong> klíče; ověřuje se veřejným klíčem</li>
+</ul>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#57-digitalni-podpis">5.7 – Digitální podpis</a></em></p>
+</details>
+<hr />
 <h2 id="modularni-aritmetika-a-teorie-cisel">Modulární aritmetika a teorie čísel<a class="headerlink" href="#modularni-aritmetika-a-teorie-cisel" title="Permanent link">&para;</a></h2>
 <p><strong>Spočtěte:</strong> <span class="arithmatex">\(\left|10000000000000000000003^{888888888888888888889}\right|_{10}\)</span></p>
 <details class="success">
@@ -1361,6 +1399,23 @@
 <li>(2) platí jen pokud <span class="arithmatex">\(0 \le b &lt; m\)</span></li>
 </ul>
 <p><em>→ Skripta: <a href="../skripta/05-asymetricka/#51-matematicke-zaklady">5.1 – Matematické základy</a></em></p>
+</details>
+<hr />
+<p><strong>Soustava kongruencí: <span class="arithmatex">\(x \equiv 6 \pmod{7}\)</span> a <span class="arithmatex">\(x \equiv 10 \pmod{11}\)</span>. Jaká je hodnota <span class="arithmatex">\(|x|_{77}\)</span>? Napište 2 algoritmy používané pro výpočet soustav kongruencí.</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<p><strong>Výsledek: 76</strong></p>
+<p>CRT: <span class="arithmatex">\(M = 77\)</span>, <span class="arithmatex">\(M_1 = 11\)</span>, <span class="arithmatex">\(M_2 = 7\)</span></p>
+<p><span class="arithmatex">\(y_1 = M_1^{-1} \bmod 7 = 11^{-1} \bmod 7 = 4^{-1} \bmod 7 = 2\quad\)</span> (ověř: <span class="arithmatex">\(4 \cdot 2 = 8 \equiv 1 \pmod{7}\)</span> ✓)</p>
+<p><span class="arithmatex">\(y_2 = M_2^{-1} \bmod 11 = 7^{-1} \bmod 11 = 8\quad\)</span> (ověř: <span class="arithmatex">\(7 \cdot 8 = 56 = 5 \cdot 11 + 1\)</span> ✓)</p>
+<div class="arithmatex">\[x = (6 \cdot 11 \cdot 2 + 10 \cdot 7 \cdot 8) \bmod 77 = (132 + 560) \bmod 77 = 692 \bmod 77 = \mathbf{76}\]</div>
+<p>Ověření: <span class="arithmatex">\(76 \bmod 7 = 6\)</span> ✓, <span class="arithmatex">\(76 \bmod 11 = 10\)</span> ✓</p>
+<p><strong>Algoritmy:</strong></p>
+<ol>
+<li><strong>Čínská věta o zbytcích (CRT)</strong> – přímý výpočet přes <span class="arithmatex">\(M_i\)</span> a jejich inverze</li>
+<li><strong>Rozšířený Eukleidův algoritmus</strong> – pro výpočet modulárních inverzí <span class="arithmatex">\(y_i\)</span></li>
+</ol>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#91-cinska-veta-o-zbytcich-crt">9.1 – CRT</a></em></p>
 </details>
 <hr />
 <h2 id="sifry-a-operacni-mody">Šifry a operační módy<a class="headerlink" href="#sifry-a-operacni-mody" title="Permanent link">&para;</a></h2>
@@ -1548,6 +1603,160 @@ Příklad chyby: <span class="arithmatex">\(m=29\)</span>, <span class="arithmat
 <p><em>→ Skripta: <a href="../skripta/05-asymetricka/#54-rsa">5.4 – RSA</a></em></p>
 </details>
 <hr />
+<p><strong>Transpoziční šifru lze kryptoanalyticky řešit:</strong></p>
+<ol>
+<li>Faktorizací délky šifrového textu</li>
+<li>Hledáním bigramů v šifrovém textu</li>
+<li>Frekvenční analýzou šifrového textu</li>
+<li>Frekvenční analýzou otevřeného textu</li>
+</ol>
+<details class="success">
+<summary>Odpověď</summary>
+<p>✅ <strong>(1) a (2)</strong></p>
+<ul>
+<li>(1) ✓ – délka ŠT musí být dělitelná délkou klíče; faktorizace odhalí možné délky klíče</li>
+<li>(2) ✓ – bigramy v ŠT prozrazují vzory transpoziční šifry</li>
+<li>(3) ✗ – transpoziční šifra <strong>zachovává četnosti písmen</strong> (pouze mění pořadí); frekvenční analýza jednotlivých znaků klíč neodhalí</li>
+<li>(4) ✗ – frekvenční analýza OT nepomáhá při útoku pouze na ŠT</li>
+</ul>
+<p><em>→ Skripta: <a href="../skripta/01-klasicka/#15-transpozicni-sifry">1.5 – Transpoziční šifry</a></em></p>
+</details>
+<hr />
+<p><strong>Vyberte pravdivá/nepravdivá tvrzení o Hillově šifře:</strong></p>
+<ol>
+<li>Je monoalfabetická (polygrafická substituční šifra).</li>
+<li>Velikost klíče je nezávislá na velikosti bloku.</li>
+<li>Dá se luštit pomocí frekvenční kryptoanalýzy (analýzy n-gramů).</li>
+<li>Jako klíč se dá použít libovolná matice <span class="arithmatex">\(\mathbb{Z}_L^{N \times N}\)</span>, kde <span class="arithmatex">\(L\)</span> je velikost abecedy a <span class="arithmatex">\(N\)</span> velikost bloku.</li>
+</ol>
+<details class="success">
+<summary>Odpověď</summary>
+<ul>
+<li>(1) ✓ – každý blok <span class="arithmatex">\(N\)</span> znaků se vždy zobrazí na tentýž blok ŠT (monoalfabetická na úrovni n-gramů)</li>
+<li>(2) ✗ – klíč je matice <span class="arithmatex">\(N \times N\)</span>; pro <span class="arithmatex">\(N=2\)</span> má 4 prvky, pro <span class="arithmatex">\(N=3\)</span> má 9 prvků → <strong>závisí na <span class="arithmatex">\(N\)</span></strong></li>
+<li>(3) ✓ – frekvenční analýza n-gramů funguje pro malé <span class="arithmatex">\(N\)</span></li>
+<li>(4) ✗ – matice musí splňovat <span class="arithmatex">\(\gcd(\det A,\, L) = 1\)</span>; libovolná matice nemusí být invertovatelná mod <span class="arithmatex">\(L\)</span></li>
+</ul>
+<p><em>→ Skripta: <a href="../skripta/01-klasicka/#13-polygraficke-substitucni-sifry-hillova-sifra">1.3 – Hillova šifra</a></em></p>
+</details>
+<hr />
+<p><strong>Vyberte pravdivá/nepravdivá tvrzení o RSA a exponenciální šifře:</strong></p>
+<ol>
+<li>Jedná se o asymetrické šifry.</li>
+<li>K urychlení výpočtu lze použít algoritmus Square and Multiply.</li>
+<li>Můžeme použít stejný exponent <span class="arithmatex">\(e\)</span> pro více lidí.</li>
+<li>Používá se různý exponent pro šifrování a dešifrování.</li>
+</ol>
+<details class="success">
+<summary>Odpověď</summary>
+<ul>
+<li>(1) ✓ – obě jsou asymetrické</li>
+<li>(2) ✓ – Square and Multiply urychluje modulární umocňování <span class="arithmatex">\(m^e \bmod n\)</span></li>
+<li>(3) ✓ – je to běžné (např. <span class="arithmatex">\(e = 65537\)</span>); pozor na Hastadův útok při malém <span class="arithmatex">\(e\)</span> a více příjemcích se stejnou zprávou</li>
+<li>(4) ✓ – šifrování exponentem <span class="arithmatex">\(e\)</span> (veřejný), dešifrování exponentem <span class="arithmatex">\(d\)</span> (soukromý)</li>
+</ul>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#54-rsa">5.4 – RSA</a></em></p>
+</details>
+<hr />
+<p><strong>Určete pravdivost tvrzení o proudových a blokových šifrách:</strong></p>
+<ol>
+<li>U proudových šifer heslo (keystream) závisí pouze na klíči.</li>
+<li>Operační mód stanovuje, jak probíhá šifrování více bloků OT.</li>
+<li>Bloková šifra zpracovává OT vždy po jednotlivých znacích, kdežto proudová vždy po jednotlivých bitech.</li>
+<li>Využitím synchronní proudové šifry docílíme větší difuze oproti asynchronní.</li>
+</ol>
+<details class="success">
+<summary>Odpověď</summary>
+<ul>
+<li>(1) ✗ – platí pouze pro <strong>synchronní</strong> proudové šifry; u <strong>asynchronních</strong> závisí keystream i na šifrovém textu</li>
+<li>(2) ✓ – přesná definice operačního módu</li>
+<li>(3) ✗ – je to <strong>naopak</strong>: bloková šifra zpracovává pevné <strong>bloky</strong>, proudová zpracovává po bitech nebo bytech</li>
+<li>(4) ✗ – synchronní proudová šifra má <strong>nulovou difuzi</strong> (čistý XOR); větší difuzi má asynchronní varianta</li>
+</ul>
+<p><em>→ Skripta: <a href="../skripta/02-proudove/">2.1 – Proudové šifry</a>, <a href="../skripta/03-blokove/#36-provozni-mody-blokovych-sifer">3.6 – Provozní módy</a></em></p>
+</details>
+<hr />
+<p><strong>Máme hybridní šifru: RSA s modulem délky 2048 bitů a AES-256 v módu CBC. Rozhodněte:</strong></p>
+<ol>
+<li>IV bude mít délku 256 bitů.</li>
+<li>Pro šifrování klíče AES lze použít certifikát adresáta.</li>
+<li>Zašifrovaný klíč pro AES bude mít délku 2048 bitů.</li>
+<li>Zašifrovaný klíč pro AES bude mít délku 256 bitů.</li>
+</ol>
+<details class="success">
+<summary>Odpověď</summary>
+<ul>
+<li>(1) ✗ – AES pracuje s <strong>128bitovým blokem</strong> bez ohledu na délku klíče; <strong>IV = 128 bitů</strong></li>
+<li>(2) ✓ – certifikát adresáta obsahuje jeho <strong>VK</strong>, kterým zašifrujeme symetrický klíč AES</li>
+<li>(3) ✓ – výstup RSA má délku <strong>modulu</strong> = 2048 bitů</li>
+<li>(4) ✗ – výstup RSA = délka modulu (2048 b), ne délka šifrovaného klíče (256 b)</li>
+</ul>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#54-rsa">5.4 – RSA</a>, <a href="../skripta/03-blokove/">3.5 – AES</a></em></p>
+</details>
+<hr />
+<p><strong>Zpráva <span class="arithmatex">\(m\)</span> je zašifrována RSA s parametry <span class="arithmatex">\((n = 143,\, e = 17)\)</span>. Zašifrovanou zprávu <span class="arithmatex">\(c\)</span> vynásobíme <span class="arithmatex">\(|6^{17}|_{143} = 41\)</span>. Jak se změní původní zpráva <span class="arithmatex">\(m\)</span> po dešifrování?</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<p>Výsledná dešifrovaná zpráva bude <span class="arithmatex">\(m' = m \cdot 6 \bmod 143\)</span>.</p>
+<p><strong>Proč:</strong> RSA je <strong>multiplikativně homomorfní</strong>:</p>
+<div class="arithmatex">\[c' = c \cdot 41 \bmod 143\]</div>
+<p>Po dešifrování: <span class="arithmatex">\(m' = (c')^d = c^d \cdot 41^d = m \cdot (6^{17})^d = m \cdot 6^{17d} \bmod n\)</span></p>
+<p>Protože <span class="arithmatex">\(17d \equiv 1 \pmod{\varphi(n)}\)</span>, platí <span class="arithmatex">\(6^{17d} \equiv 6 \pmod{n}\)</span>, tedy <span class="arithmatex">\(m' = m \cdot 6 \bmod 143\)</span>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Multiplikativní homomorfismus RSA</p>
+<p>Tato vlastnost je důvodem, proč se RSA <strong>bez paddingu nepoužívá</strong> pro přímé šifrování dat.</p>
+</div>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#54-rsa">5.4 – RSA</a></em></p>
+</details>
+<hr />
+<p><strong>FEL a FS komunikují pomocí symetrické šifry s nízkou entropií klíče. V ŠT se některé bloky opakují a poslední blok je vždy stejný. Délka bloku je 16 bajtů. Doplňte:</strong></p>
+<ul>
+<li>Pravděpodobná použitá šifra</li>
+<li>Použitý operační mód</li>
+<li>Proč je na konci vždy stejný blok</li>
+<li>Jakým způsobem by mohlo dojít k prolomení šifrování</li>
+</ul>
+<details class="success">
+<summary>Odpověď</summary>
+<ul>
+<li><strong>Šifra: AES</strong> – bloková šifra s délkou bloku 128 bitů = 16 bajtů</li>
+<li><strong>Mód: ECB</strong> – v ECB platí: stejný blok OT + stejný klíč → vždy stejný blok ŠT; proto opakující se bloky OT → opakující se bloky ŠT</li>
+<li><strong>Stejný poslední blok:</strong> zprávy mají pravděpodobně stejné zakončení a padding (PKCS#7); poslední blok šifrovaný stejným klíčem = vždy stejný výstup</li>
+<li><strong>Prolomení:</strong><ul>
+<li>Frekvenční analýza bloků ŠT (slovníkový útok)</li>
+<li>Known-plaintext attack – znalost části OT umožní mapování bloků OT↔ŠT</li>
+<li>Brute-force na klíč (nízká entropie!)</li>
+</ul>
+</li>
+</ul>
+<p><em>→ Skripta: <a href="../skripta/03-blokove/#36-provozni-mody-blokovych-sifer">3.6 – Provozní módy</a></em></p>
+</details>
+<hr />
+<p><strong>Uvažujme blokovou šifru pracující v módech a) CTR a b) CBC. Jak ovlivní chyba v jednom bloku ŠT okolní bloky OT?</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<p><strong>a) CTR:</strong></p>
+<ul>
+<li>Chyba v bloku <span class="arithmatex">\(\hat{C}_i\)</span> se projeví <strong>pouze</strong> v odpovídajícím bloku <span class="arithmatex">\(P_i\)</span></li>
+<li>Konkrétně: pouze <strong>bity na stejných pozicích</strong> jako chyba jsou poškozeny (XOR s keystream)</li>
+<li>Ostatní bloky <strong>nejsou ovlivněny</strong> (keystream závisí na čítači, ne na ŠT)</li>
+</ul>
+<p><strong>b) CBC:</strong></p>
+<ul>
+<li>Chyba v bloku <span class="arithmatex">\(\hat{C}_i\)</span> ovlivní <strong>dva bloky OT</strong>:<ul>
+<li><span class="arithmatex">\(P_i\)</span>: celý blok je chybný (výstup <span class="arithmatex">\(D_K(\hat{C}_i)\)</span> je nepředvídatelný)</li>
+<li><span class="arithmatex">\(P_{i+1}\)</span>: chybné jsou <strong>přesně ty bity</strong>, kde byl error v <span class="arithmatex">\(\hat{C}_i\)</span> (protože <span class="arithmatex">\(P_{i+1} = D_K(C_{i+1}) \oplus \hat{C}_i\)</span>)</li>
+</ul>
+</li>
+<li>Bloky <span class="arithmatex">\(P_{i+2}, P_{i+3}, \ldots\)</span> jsou <strong>správné</strong></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Shrnutí</p>
+<p>CTR: chyba → 1 blok, jen odpovídající bity. CBC: chyba → celý blok <span class="arithmatex">\(i\)</span> + konkrétní bity bloku <span class="arithmatex">\(i+1\)</span>.</p>
+</div>
+<p><em>→ Skripta: <a href="../skripta/03-blokove/#36-provozni-mody-blokovych-sifer">3.6 – Provozní módy</a></em></p>
+</details>
+<hr />
 <h2 id="algoritmy-pro-zrizeni-spolecneho-klice">Algoritmy pro zřízení společného klíče<a class="headerlink" href="#algoritmy-pro-zrizeni-spolecneho-klice" title="Permanent link">&para;</a></h2>
 <p><strong>Diffie-Hellman. Jak vypočítáme veřejný klíč <span class="arithmatex">\(Y_A\)</span> a sdílený klíč <span class="arithmatex">\(K\)</span>?</strong></p>
 <details class="success">
@@ -1589,6 +1798,57 @@ Příklad chyby: <span class="arithmatex">\(m=29\)</span>, <span class="arithmat
 <li>(4) ✗ – se <strong>správnou</strong> bází je P = <strong>100 %</strong>; 50 % nastává při špatné bázi</li>
 </ul>
 <p><em>→ Skripta: <a href="../skripta/07-kvanty/#76-protokol-bb84-benett-brassard-1984">7.6 – Protokol BB84</a></em></p>
+</details>
+<hr />
+<p><strong>Popište algoritmy Diffie-Hellman (DH) a ECDH. Zaměřte se na rozdíly mezi nimi.</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<p><strong>Diffie-Hellman (klasický DH):</strong></p>
+<ul>
+<li>Pracuje v multiplikativní grupě <span class="arithmatex">\(\mathbb{Z}_p^*\)</span> (modulo prvočíslo <span class="arithmatex">\(p\)</span>)</li>
+<li><span class="arithmatex">\(Y_A = g^a \bmod p\)</span>, <span class="arithmatex">\(Y_B = g^b \bmod p\)</span>, sdílený klíč <span class="arithmatex">\(K = g^{ab} \bmod p\)</span></li>
+<li>Bezpečnost: těžkost <strong>problému diskrétního logaritmu (DLP)</strong> v <span class="arithmatex">\(\mathbb{Z}_p^*\)</span></li>
+<li>Typická délka klíče: 2048–4096 bitů</li>
+</ul>
+<p><strong>ECDH (Elliptic Curve DH):</strong></p>
+<ul>
+<li>Pracuje na <strong>eliptické křivce</strong> nad konečným polem <span class="arithmatex">\(\mathbb{F}_q\)</span></li>
+<li><span class="arithmatex">\(A = a \cdot G\)</span>, <span class="arithmatex">\(B = b \cdot G\)</span>, sdílený klíč <span class="arithmatex">\(K = ab \cdot G\)</span> (skalární násobení bodu)</li>
+<li>Bezpečnost: těžkost <strong>ECDLP</strong> (problému diskrétního logaritmu na eliptické křivce)</li>
+</ul>
+<p><strong>Klíčové rozdíly:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>DH</th>
+<th>ECDH</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Matematická struktura</td>
+<td>Multiplikativní grupa <span class="arithmatex">\(\mathbb{Z}_p^*\)</span></td>
+<td>Aditivní grupa bodů eliptické křivky</td>
+</tr>
+<tr>
+<td>Bezpečnostní problém</td>
+<td>DLP</td>
+<td>ECDLP</td>
+</tr>
+<tr>
+<td>Délka klíče pro 128b bezpečnost</td>
+<td>~3072 b</td>
+<td>~256 b</td>
+</tr>
+<tr>
+<td>Efektivita</td>
+<td>Pomalejší (velká čísla)</td>
+<td>Rychlejší (kratší klíče)</td>
+</tr>
+</tbody>
+</table>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#52-diffie-hellman-vymena-klicu">5.2 – Diffie-Hellman</a>, <a href="../skripta/06-ecc/">6. – ECC</a></em></p>
 </details>
 <hr />
 <h2 id="hasovaci-funkce">Hašovací funkce<a class="headerlink" href="#hasovaci-funkce" title="Permanent link">&para;</a></h2>
@@ -1706,6 +1966,84 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
 <summary>Odpověď</summary>
 <div class="arithmatex">\[H = \tfrac{1}{2}{\cdot}1 + \tfrac{1}{4}{\cdot}2 + \tfrac{1}{8}{\cdot}3 + \tfrac{1}{16}{\cdot}4 + \tfrac{1}{16}{\cdot}4 = 0{,}5 + 0{,}5 + 0{,}375 + 0{,}25 + 0{,}25 = \mathbf{1{,}875 \text{ b}}\]</div>
 <p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#entropie">8.3 – Entropie</a></em></p>
+</details>
+<hr />
+<p><strong>Šifra má entropii klíče 1200 bitů. Znak jazyka je kódován 19 bity. Zpráva má 80 znaků a ŠT je přesně tak dlouhý, že je na základě OT možný pouze jeden OT (unicity distance). Jaká je obsažnost tohoto jazyka na 1 písmeno?</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<p><strong>Obsažnost jazyka: <span class="arithmatex">\(r = 4\)</span> bity/znak</strong></p>
+<ol>
+<li>Vzdálenost jednoznačnosti = délce zprávy: <span class="arithmatex">\(\delta_U = 80\)</span> znaků</li>
+<li><span class="arithmatex">\(\delta_U = H(K) / D \implies D = 1200 / 80 = 15\)</span> b/znak</li>
+<li>Maximální entropie znaku: <span class="arithmatex">\(R = 19\)</span> b/znak (19bitové kódování → <span class="arithmatex">\(2^{19}\)</span> možných symbolů)</li>
+<li>Redundance: <span class="arithmatex">\(D = R - r \implies r = R - D = 19 - 15 = \mathbf{4}\)</span> b/znak</li>
+</ol>
+<p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#vzdalenost-jednoznacnosti">8.3 – Vzdálenost jednoznačnosti</a></em></p>
+</details>
+<hr />
+<p><strong>Generátor RNG generuje: řetězec 000 s <span class="arithmatex">\(P = \frac{1}{4}\)</span>, řetězec 001 s <span class="arithmatex">\(P = \frac{1}{4}\)</span>, ostatních 6 řetězců každý s <span class="arithmatex">\(P = \frac{1}{12}\)</span>. Spočtěte entropii tohoto zdroje.</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<div class="arithmatex">\[H = -2 \cdot \tfrac{1}{4} \log_2 \tfrac{1}{4} - 6 \cdot \tfrac{1}{12} \log_2 \tfrac{1}{12}\]</div>
+<div class="arithmatex">\[= 2 \cdot \tfrac{1}{4} \cdot 2 + 6 \cdot \tfrac{1}{12} \cdot \log_2 12 = 1 + \tfrac{1}{2}(2 + \log_2 3) \approx 1 + \tfrac{1}{2} \cdot 3{,}585 \approx \mathbf{2{,}79 \text{ b}}\]</div>
+<p>Kontrola: <span class="arithmatex">\(2 \cdot \tfrac{1}{4} + 6 \cdot \tfrac{1}{12} = \tfrac{1}{2} + \tfrac{1}{2} = 1\)</span> ✓</p>
+<p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#entropie">8.3 – Entropie</a></em></p>
+</details>
+<hr />
+<p><strong>Generátor RNG (3bitové řetězce: P(000) = P(001) = 1/4, ostatní 6 řetězců každý P = 1/12) vstupuje do SHA-256. TRNG generuje 127 bitů. Oba výstupy jsou spojeny (concat) a předány SHA-1. Doplňte schéma – počty bitů a entropie na každém místě:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>TRNG  →  127 b  →─────────────────────────────┐
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                               concat → ? b → SHA-1 → ? b
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>RNG   →    3 b  → SHA-256 → ? b  →────────────┘
+</span></code></pre></div>
+<details class="success">
+<summary>Odpověď</summary>
+<table>
+<thead>
+<tr>
+<th>Místo</th>
+<th>Počet bitů</th>
+<th>Entropie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TRNG výstup</td>
+<td><strong>127 b</strong></td>
+<td><strong>127 b</strong> (TRNG je skutečně náhodný)</td>
+</tr>
+<tr>
+<td>RNG výstup</td>
+<td><strong>3 b</strong></td>
+<td><strong>≈ 2,79 b</strong> (viz výpočet výše)</td>
+</tr>
+<tr>
+<td>SHA-256 výstup</td>
+<td><strong>256 b</strong></td>
+<td><strong>≈ 2,79 b</strong></td>
+</tr>
+<tr>
+<td>concat výstup</td>
+<td><strong>383 b</strong></td>
+<td><strong>≈ 129,79 b</strong></td>
+</tr>
+<tr>
+<td>SHA-1 výstup</td>
+<td><strong>160 b</strong></td>
+<td><strong>≈ 129,79 b</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Zdůvodnění:</strong></p>
+<ul>
+<li><strong>SHA-256(RNG):</strong> deterministická funkce nemůže zvýšit entropii; entropie výstupu = entropie vstupu = 2,79 b (i přesto, že výstup má 256 bitů)</li>
+<li><strong>concat:</strong> za předpokladu nezávislosti TRNG a RNG: <span class="arithmatex">\(H = 127 + 2{,}79 = 129{,}79\)</span> b</li>
+<li><strong>SHA-1(concat):</strong> výstup 160 b; entropie vstupu 129,79 b <span class="arithmatex">\(&lt;\)</span> 160 b <span class="arithmatex">\(\Rightarrow\)</span> entropie se <strong>zachová</strong>: <span class="arithmatex">\(H_{\text{out}} \approx 129{,}79\)</span> b</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Klíčové pravidlo</p>
+<p>Deterministická funkce (hash) <strong>nemůže zvýšit entropii</strong> vstupu; může ji nejvýše zachovat nebo snížit.</p>
+</div>
+<p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#entropie">8.3 – Entropie</a>, <a href="../skripta/09-klice/">9.9 – BBS / PRNG</a></em></p>
 </details>
 <hr />
 <h2 id="generatory-nahodnych-cisel">Generátory náhodných čísel<a class="headerlink" href="#generatory-nahodnych-cisel" title="Permanent link">&para;</a></h2>
@@ -1844,6 +2182,112 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
 <p><em>→ Skripta: <a href="../skripta/09-klice/#910-skutecne-nahodne-generatory-trng">9.10 – TRNG</a></em></p>
 </details>
 <hr />
+<p><strong>Vyberte pravdivá tvrzení o generátoru Blum-Blum-Shub (BBS):</strong></p>
+<ol>
+<li>Pokud známe prvních <span class="arithmatex">\(k\)</span> bitů, neexistuje algoritmus s polynomiální složitostí, který by dokázal předpovědět <span class="arithmatex">\((k+1)\)</span>. bit s pravděpodobností <span class="arithmatex">\(&gt; \frac{1}{2}\)</span>.</li>
+<li>Algoritmus má periodu <span class="arithmatex">\(+\infty\)</span>.</li>
+<li>Díky tomu, že je kryptograficky bezpečný, nevyžaduje počáteční seed.</li>
+<li>Čísla se musí generovat sekvenčně (nelze přeskočit na <span class="arithmatex">\(k\)</span>-tý prvek).</li>
+</ol>
+<details class="success">
+<summary>Odpověď</summary>
+<p>✅ <strong>(1)</strong></p>
+<ul>
+<li>(1) ✓ – <strong>next-bit security</strong>: za předpokladu těžkosti faktorizace <span class="arithmatex">\(m = p \cdot q\)</span> je BBS next-bit bezpečný</li>
+<li>(2) ✗ – perioda je <strong>konečná</strong> a závisí na volbě <span class="arithmatex">\(m\)</span></li>
+<li>(3) ✗ – BBS <strong>vždy vyžaduje seed</strong> <span class="arithmatex">\(x_0\)</span>; kryptografická bezpečnost nesouvisí s potřebou seedu</li>
+<li>(4) ✗ – <span class="arithmatex">\(k\)</span>-tý prvek lze vypočítat přímo jako <span class="arithmatex">\(x_k = x_0^{2^k} \bmod m\)</span> pomocí rychlého umocňování</li>
+</ul>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#99-blum-blum-shub-bbs">9.9 – BBS</a></em></p>
+</details>
+<hr />
+<p><strong>BBS generátor: <span class="arithmatex">\(m = 77\)</span>, seed <span class="arithmatex">\(= 11\)</span>. Z každého vygenerovaného čísla vybereme 3. LSB (bit na pozici 2). Jaká bude výsledná sekvence po 8 iteracích? Je generátor kryptograficky bezpečný?</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<p>Výpočet (<span class="arithmatex">\(x_{i+1} = x_i^2 \bmod 77\)</span>, start <span class="arithmatex">\(x_0 = 11\)</span>):</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(i\)</span></th>
+<th><span class="arithmatex">\(x_i\)</span></th>
+<th>binárně</th>
+<th>bit 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>44</td>
+<td><code>00101100</code></td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>11</td>
+<td><code>00001011</code></td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>44</td>
+<td><code>00101100</code></td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>11</td>
+<td><code>00001011</code></td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>44</td>
+<td><code>00101100</code></td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>11</td>
+<td><code>00001011</code></td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td>44</td>
+<td><code>00101100</code></td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>8</td>
+<td>11</td>
+<td><code>00001011</code></td>
+<td><strong>0</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Sekvence: <strong><code>10101010</code></strong></p>
+<p><strong>Kryptograficky bezpečná: NE.</strong> Generátor okamžitě vstoupí do cyklu délky 2 (<span class="arithmatex">\(11 \leftrightarrow 44\)</span>); výstup je čistě periodický → porušení next-bit testu.</p>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#99-blum-blum-shub-bbs">9.9 – BBS</a></em></p>
+</details>
+<hr />
+<p><strong>Navrhněte pseudonáhodný generátor čísel s pomocí blokové šifry AES. Popište jeho vlastnosti.</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<p><strong>AES-CTR PRNG</strong> (standard NIST SP 800-90A: AES-CTR-DRBG):</p>
+<div class="arithmatex">\[x_i = \text{AES}_K(\text{nonce} \| i), \quad i = 0, 1, 2, \ldots\]</div>
+<p>Alternativně <strong>AES v OFB módu</strong>: <span class="arithmatex">\(x_{i+1} = \text{AES}_K(x_i)\)</span></p>
+<p><strong>Vlastnosti:</strong></p>
+<ul>
+<li>Kryptograficky bezpečný (za předpokladu bezpečnosti AES a tajnosti <span class="arithmatex">\(K\)</span>)</li>
+<li>Deterministický (DPRNG) – stejný klíč + nonce → stejná sekvence</li>
+<li>Obrovská perioda (<span class="arithmatex">\(2^{128}\)</span> pro AES-128 v CTR)</li>
+<li>Rychlý – využívá HW akceleraci AES</li>
+<li>Vyžaduje bezpečně vygenerovaný klíč <span class="arithmatex">\(K\)</span> (z TRNG)</li>
+<li><strong>Nonce se nesmí opakovat</strong> se stejným klíčem!</li>
+</ul>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#98-pseudonahodne-generatory-prng">9.8 – PRNG</a></em></p>
+</details>
+<hr />
 <h2 id="alice-a-bob-bezpecna-komunikace">Alice a Bob – bezpečná komunikace<a class="headerlink" href="#alice-a-bob-bezpecna-komunikace" title="Permanent link">&para;</a></h2>
 <p><strong>Alice a Bob mají certifikáty ze stejného stromu a chtějí bezpečně komunikovat v prostředí s aktivními i pasivními útoky. Popište postup zřízení sdíleného klíče a výměnu zpráv.</strong></p>
 <details class="success">
@@ -1930,15 +2374,108 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
 <p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#82-typy-bezpecnosti">8.2 – Typy bezpečnosti</a></em></p>
 </details>
 <hr />
+<p><strong>Vygeneruješ si VK a SK pomocí RSA. Lze (bez újmy na bezpečnosti) zaměnit soukromý a veřejný klíč předtím, než kterýkoli klíč zveřejníš?</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<p><strong>Matematicky ANO</strong> – RSA je symetrické v obou směrech:</p>
+<div class="arithmatex">\[c = m^e \bmod n,\quad m = c^d \bmod n \quad \Leftrightarrow \quad c = m^d \bmod n,\quad m = c^e \bmod n\]</div>
+<p>Toto je základ <strong>digitálního podpisu</strong> (podepisujeme soukromým klíčem, ověřujeme veřejným).</p>
+<p><strong>Prakticky NE</strong> – ze dvou důvodů:</p>
+<ol>
+<li>Znalost <span class="arithmatex">\(d\)</span> a <span class="arithmatex">\(n\)</span> umožňuje s vysokou pravděpodobností <strong>faktorizovat <span class="arithmatex">\(n\)</span></strong> → <span class="arithmatex">\(d\)</span> nelze zveřejnit</li>
+<li><span class="arithmatex">\(e\)</span> je standardně malé číslo (65537) kvůli efektivitě šifrování; zveřejnění velkého <span class="arithmatex">\(d\)</span> jako „VK" by bylo velmi pomalé</li>
+</ol>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#54-rsa">5.4 – RSA</a></em></p>
+</details>
+<hr />
+<p><strong>Výpis RSA z OpenSSL obsahuje: <code>publicExponent</code> (<span class="arithmatex">\(e\)</span>), <code>privateExponent</code> (<span class="arithmatex">\(d\)</span>), <code>prime1</code> (<span class="arithmatex">\(p\)</span>), <code>prime2</code> (<span class="arithmatex">\(q\)</span>), <code>exponent1</code> (<span class="arithmatex">\(d_p\)</span>), <code>exponent2</code> (<span class="arithmatex">\(d_q\)</span>), <code>coefficient</code> (<span class="arithmatex">\(q_{\text{inv}}\)</span>). Určete:</strong></p>
+<ol>
+<li>Co je potřeba pro šifrování / dešifrování.</li>
+<li>Co je potřeba pro dešifrování pomocí RSA-CRT.</li>
+<li>Je potřeba pro 2025bitový modul použít prvočísla délky <span class="arithmatex">\(45 \times 45\)</span> bitů?</li>
+</ol>
+<details class="success">
+<summary>Odpověď</summary>
+<p><strong>Šifrování:</strong> <span class="arithmatex">\((n,\, e)\)</span> – <code>publicExponent</code> + <span class="arithmatex">\(n\)</span> (= <code>prime1</code> × <code>prime2</code>)</p>
+<p><strong>Dešifrování (standardní):</strong> <span class="arithmatex">\((n,\, d)\)</span> – <code>privateExponent</code></p>
+<p><strong>Dešifrování (RSA-CRT):</strong> <code>prime1</code> (<span class="arithmatex">\(p\)</span>), <code>prime2</code> (<span class="arithmatex">\(q\)</span>), <code>exponent1</code> (<span class="arithmatex">\(d_p\)</span>), <code>exponent2</code> (<span class="arithmatex">\(d_q\)</span>), <code>coefficient</code> (<span class="arithmatex">\(q_{\text{inv}}\)</span>)</p>
+<p><strong>Pro 2025bitový modul, prvočísla délky <span class="arithmatex">\(45 \times 45\)</span> bitů:</strong>
+✗ <strong>NE.</strong> Pro <span class="arithmatex">\(|n| \approx 2025\)</span> bitů potřebujeme dvě prvočísla přibližně <strong>poloviční délky</strong> (<span class="arithmatex">\(p \approx q \approx 1012\)</span> bitů).</p>
+<div class="admonition warning">
+<p class="admonition-title">Pozor</p>
+<p><span class="arithmatex">\(45 \times 45 = 2025\)</span> je <span class="arithmatex">\(45^2\)</span>, ale délka modulu ≈ délka(<span class="arithmatex">\(p\)</span>) + délka(<span class="arithmatex">\(q\)</span>); dvě 45bitová prvočísla dávají ~90bitový modul, nikoli 2025bitový!</p>
+</div>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#54-rsa">5.4 – RSA</a>, <a href="../skripta/05-asymetricka/#55-rsa-crt">5.5 – RSA-CRT</a></em></p>
+</details>
+<hr />
+<p><strong>Proč musí mít výstupní buffer funkce <code>EVP_EncryptUpdate</code> velikost <span class="arithmatex">\(n + \text{block\_size} - 1\)</span>, pokud vstupní buffer má velikost <span class="arithmatex">\(n\)</span>? Ukažte na jednoduchém příkladu.</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<p><strong>Důvod:</strong> <code>EVP_EncryptUpdate</code> drží <strong>interní buffer</strong> pro neúplné bloky. Pokud v bufferu zbývalo z předchozího volání až <span class="arithmatex">\(\text{block\_size} - 1\)</span> bajtů, přidání <span class="arithmatex">\(n\)</span> nových bajtů může vyvolat výstup až <span class="arithmatex">\(n + \text{block\_size} - 1\)</span> bajtů.</p>
+<p><strong>Příklad</strong> (AES-128, <code>block_size = 16</code>):</p>
+<ul>
+<li>Interní buffer po předchozím volání: <strong>15 bajtů</strong></li>
+<li>Nové volání přidá: <strong>1 bajt</strong></li>
+<li>Interní buffer nyní: <span class="arithmatex">\(15 + 1 = 16\)</span> bajtů → celý blok se zpracuje → výstup = <strong>16 bajtů</strong></li>
+<li>Kontrola: <span class="arithmatex">\(n + \text{block\_size} - 1 = 1 + 16 - 1 = 16\)</span> ✓</li>
+</ul>
+<p><em>→ Skripta: <a href="../skripta/03-blokove/">3.5 – AES</a></em></p>
+</details>
+<hr />
+<p><strong>Certifikáty: CA1 je kořenová CA, CA2 vydává certifikáty uživatelům. Popište postup vydání certifikátu pro Alici. Popište obsah certifikátů a řetězec potřebný pro validaci.</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<p><strong>Postup vydání:</strong></p>
+<ol>
+<li>Alice vygeneruje pár klíčů <span class="arithmatex">\((VK_A, SK_A)\)</span></li>
+<li>Alice vytvoří <strong>CSR</strong> (Certificate Signing Request): obsahuje <span class="arithmatex">\(VK_A\)</span>, identitu, podpis <span class="arithmatex">\(SK_A\)</span></li>
+<li>CA2 ověří identitu Alice a podepíše CSR svým <span class="arithmatex">\(SK_{CA2}\)</span> → vznikne certifikát <span class="arithmatex">\(C_A\)</span></li>
+</ol>
+<p><strong>Obsah certifikátů:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Certifikát</th>
+<th>Vydavatel</th>
+<th>Předmět</th>
+<th>Podpis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(C_A\)</span></td>
+<td>CA2</td>
+<td>Alice + <span class="arithmatex">\(VK_A\)</span> + doba platnosti</td>
+<td><span class="arithmatex">\(SK_{CA2}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(C_{CA2}\)</span></td>
+<td>CA1</td>
+<td>CA2 + <span class="arithmatex">\(VK_{CA2}\)</span> + doba platnosti</td>
+<td><span class="arithmatex">\(SK_{CA1}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(C_{CA1}\)</span></td>
+<td>CA1 (self-signed)</td>
+<td>CA1 + <span class="arithmatex">\(VK_{CA1}\)</span></td>
+<td><span class="arithmatex">\(SK_{CA1}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Řetězec validace:</strong></p>
+<div class="arithmatex">\[C_A \xrightarrow{\text{ověř } VK_{CA2}} C_{CA2} \xrightarrow{\text{ověř } VK_{CA1}} C_{CA1} \text{ (důvěryhodný kořen, předinstalovaný)}\]</div>
+<p><em>→ Skripta: <a href="../skripta/10-pki/#102-formaty-certifikatu-podle-x509">10.2 – Formáty certifikátů X.509</a></em></p>
+</details>
+<hr />
 <h2 id="komplexni-otazky-10-b">Komplexní otázky (10 b)<a class="headerlink" href="#komplexni-otazky-10-b" title="Permanent link">&para;</a></h2>
 <p><strong>Napište pseudokód Rabin-Millerova testu. Testujte <span class="arithmatex">\(p = 17\)</span>, báze <span class="arithmatex">\(a = 8\)</span>. Zhodnoťte výsledek.</strong></p>
 <details class="success">
 <summary>Odpověď</summary>
 <p>Rozklad: <span class="arithmatex">\(p - 1 = 16 = 2^4 \cdot 1 \implies b = 4,\; m = 1\)</span></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>z ← 8^1 mod 17 = 8
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a># z ≠ 1 ani 16, pokračuj:
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>z ← 8² mod 17 = 64 mod 17 = 13    # ≠ 16, pokračuj
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>z ← 13² mod 17 = 169 mod 17 = 16  # = p-1 → STOP
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>z ← 8^1 mod 17 = 8
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a># z ≠ 1 ani 16, pokračuj:
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>z ← 8² mod 17 = 64 mod 17 = 13    # ≠ 16, pokračuj
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>z ← 13² mod 17 = 169 mod 17 = 16  # = p-1 → STOP
 </span></code></pre></div>
 <p><strong>Výsledek:</strong> 17 je <strong>pravděpodobně prvočíslo</strong> ✓</p>
 <p><em>→ Skripta: <a href="../skripta/09-klice/#96-testy-prvociselnosti">9.6 – Testy prvočíselnosti</a></em></p>
@@ -1956,6 +2493,33 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
 <li>Nonce se <strong>nesmí opakovat</strong> se stejným klíčem</li>
 </ul>
 <p><em>→ Skripta: <a href="../skripta/03-blokove/#36-provozni-mody-blokovych-sifer">3.6 – Provozní módy</a></em></p>
+</details>
+<hr />
+<p><strong>RSA-CRT: <span class="arithmatex">\(p = 13\)</span>, <span class="arithmatex">\(q = 23\)</span>, <span class="arithmatex">\(e = 137\)</span>. Spočtěte hodnoty soukromého klíče.</strong></p>
+<details class="success">
+<summary>Odpověď</summary>
+<p><strong>Krok 1: Parametry RSA</strong></p>
+<ul>
+<li><span class="arithmatex">\(n = p \cdot q = 13 \cdot 23 = 299\)</span></li>
+<li><span class="arithmatex">\(\varphi(n) = (p-1)(q-1) = 12 \cdot 22 = 264\)</span></li>
+</ul>
+<p><strong>Krok 2: Soukromý exponent</strong> <span class="arithmatex">\(d = e^{-1} \bmod \varphi(n) = 137^{-1} \bmod 264\)</span></p>
+<p>Rozšířený Eukleidův algoritmus:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>264 = 1·137 + 127
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>137 = 1·127 + 10
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>127 = 12·10 + 7
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>10  = 1·7   + 3
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>7   = 2·3   + 1
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>→ zpětná substituce: 1 = 41·264 − 79·137
+</span></code></pre></div>
+<p><span class="arithmatex">\(d = -79 \bmod 264 = \mathbf{185}\)</span> (ověř: <span class="arithmatex">\(137 \cdot 185 = 25345 = 96 \cdot 264 + 1\)</span> ✓)</p>
+<p><strong>Krok 3: RSA-CRT parametry</strong></p>
+<p>$<span class="arithmatex">\(d_p = d \bmod (p-1) = 185 \bmod 12 = \mathbf{5}\)</span>$
+$<span class="arithmatex">\(d_q = d \bmod (q-1) = 185 \bmod 22 = \mathbf{9}\)</span>$
+$<span class="arithmatex">\(q_{\text{inv}} = q^{-1} \bmod p = 23^{-1} \bmod 13 = 10^{-1} \bmod 13 = \mathbf{4}\)</span>$
+(ověř: <span class="arithmatex">\(10 \cdot 4 = 40 = 3 \cdot 13 + 1\)</span> ✓)</p>
+<p><strong>Soukromý klíč RSA-CRT:</strong> <span class="arithmatex">\((p=13,\ q=23,\ d_p=5,\ d_q=9,\ q_{\text{inv}}=4)\)</span></p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#55-rsa-crt">5.5 – RSA-CRT</a></em></p>
 </details>
 
 
