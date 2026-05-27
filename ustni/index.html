@@ -1139,17 +1139,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bezpecnostni-architektura" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Bezpečnostní architektura
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#ecc-a-kvantova-kryptografie" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1874,25 +1863,6 @@ Dešifruje: <span class="arithmatex">\(p = c \cdot K^{-1} \bmod m\)</span>.</p>
 <summary>52. Solení IV</summary>
 <p>U CBC/OFB/CFB/CTR: partnerovi se pošle <span class="arithmatex">\(IV\)</span>, ale k šifrování se použije <span class="arithmatex">\(IV' = f(IV, K)\)</span> (např. <span class="arithmatex">\(H(IV \| K)\)</span>). Skutečně použitý IV se nikdy neobjeví na komunikačním kanálu.</p>
 <p><em>→ Skripta: <a href="../skripta/03-blokove/#metoda-soleni-iv">3.6 – Metoda solení IV</a></em></p>
-</details>
-<hr />
-<h2 id="bezpecnostni-architektura">Bezpečnostní architektura<a class="headerlink" href="#bezpecnostni-architektura" title="Permanent link">&para;</a></h2>
-<details class="question">
-<summary>9. Útoky v OSI modelu</summary>
-<p><strong>Pasivní</strong> (těžko detekovatelné):
-- Odkrývání obsahu zpráv (plaintext odposlech)
-- Analýza toku dat (i šifrovaných – délky, frekvence)</p>
-<p><strong>Aktivní</strong> (evidentní efekt):
-- Podvrhnutí identity (MitM)
-- Útok opakováním (replay)
-- Modifikace zprávy
-- Odmítnutí služby (DoS/DDoS)</p>
-<p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#85-typy-utocniku">8.5 – Typy útočníků</a></em></p>
-</details>
-<details class="question">
-<summary>18. Mechanismy bezpečnosti OSI</summary>
-<p>Digitální podpis · Šifrování · Vyplňování mezer · Řízení směrování · Integrita dat · Osvědčení třetím subjektem · Výměna autentizační informace</p>
-<p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#81-hodnoceni-odolnosti-sifry">8.1 – Hodnocení odolnosti šifry</a></em></p>
 </details>
 <hr />
 <h2 id="ecc-a-kvantova-kryptografie">ECC a kvantová kryptografie<a class="headerlink" href="#ecc-a-kvantova-kryptografie" title="Permanent link">&para;</a></h2>
