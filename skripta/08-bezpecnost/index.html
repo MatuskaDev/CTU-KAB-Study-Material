@@ -969,17 +969,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#definice" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Definice
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1543,7 +1532,6 @@
 <p class="admonition-title">Definice — Výpočetní bezpečnost</p>
 <p>Kryptosystém je výpočetně bezpečný, pokud pro jeho prolomení je třeba vynaložit prostředky nebo čas, které přesahují <strong>cenu respektive životnost informace</strong>.</p>
 </div>
-<p><img alt="Definice výpočetní bezpečnosti a COPACOBANA" src="../../assets/img/prednasky/p08-218.png" /></p>
 <div class="admonition example">
 <p class="admonition-title">Příklad — COPACABANA (2006)</p>
 <p>Prolomení DES na zařízení typu <strong>COPACABANA</strong> (2006) je možné v rámci <strong>7 dní</strong> s náklady na hardware kolem <strong>$10 000</strong>. V takovém případě je šifra výpočetně bezpečná pro informace, které ztrácí význam během kratší doby nebo mají menší hodnotu.</p>
@@ -1558,7 +1546,6 @@
 <p class="admonition-title">Kerckhoffsův princip</p>
 <p>Systém musí být prakticky, pokud ne matematicky, nedešifrovatelný a jeho utajení nesmí být podmínkou jeho bezpečnosti. Dále musí být přenositelný, schopný měnit klíče dle přání uživatele, snadný na používání a nesmí vyžadovat žádné speciální znalosti uživatele.</p>
 </div>
-<p><img alt="Kerckhoffsův princip a bezpečnostní předpoklady" src="../../assets/img/prednasky/p08-219.png" /></p>
 <ul>
 <li>Při posuzování bezpečnosti kryptosystému <strong>předpokládáme, že útočník zná celý kryptosystém</strong> (Shannonovo maximum: <em>"The enemy knows the system"</em>).</li>
 <li>Založení bezpečnosti na <em>security through obscurity</em> je nepřijatelné — může sloužit pouze jako <strong>další bezpečnostní prvek</strong>.</li>
@@ -1577,13 +1564,12 @@
 <div class="admonition info">
 <p class="admonition-title">Definice — Entropie</p>
 <p>Entropie je množství informace obsažené ve zprávě. Teorie informace měří entropii zprávy průměrným počtem bitů nezbytných k jejímu zakódování při optimálním kódování (minimum bitů).</p>
-<p>Entropie zprávy ze zdroje <span class="arithmatex">\(X\)</span> je:
-$<span class="arithmatex">\(H(X) = -\sum_{i=1}^{n} p_i \log_2 p_i \quad [\text{bitů}]\)</span>$</p>
+<p>Entropie zprávy ze zdroje <span class="arithmatex">\(X\)</span> je:</p>
+<div class="arithmatex">\[H(X) = -\sum_{i=1}^{n} p_i \log_2 p_i \quad [\text{bitů}]\]</div>
 <p>kde <span class="arithmatex">\(p_1, \ldots, p_n\)</span> jsou pravděpodobnosti všech zpráv <span class="arithmatex">\(X_1, \ldots, X_n\)</span> zdroje <span class="arithmatex">\(X\)</span> a <span class="arithmatex">\(-p_i \log_2 p_i\)</span> = počet bitů nutných k optimálnímu zakódování zprávy <span class="arithmatex">\(X_i\)</span>.</p>
 </div>
-<p><img alt="Definice entropie" src="../../assets/img/prednasky/p08-222.png" /></p>
-<p>Speciální případ — <span class="arithmatex">\(n\)</span> zpráv se <strong>stejnou pravděpodobností</strong> <span class="arithmatex">\(p = \frac{1}{n}\)</span>:
-$<span class="arithmatex">\(H(X) = -n \left(\frac{1}{n} \log_2 \frac{1}{n}\right) = \log_2 n\)</span>$</p>
+<p>Speciální případ — <span class="arithmatex">\(n\)</span> zpráv se <strong>stejnou pravděpodobností</strong> <span class="arithmatex">\(p = \frac{1}{n}\)</span>:</p>
+<div class="arithmatex">\[H(X) = -n \left(\frac{1}{n} \log_2 \frac{1}{n}\right) = \log_2 n\]</div>
 <div class="admonition note">
 <p class="admonition-title">Maximální entropie</p>
 <p>Lze dokázat, že <strong>maximální entropie</strong> nabývá zdroj, který produkuje všechny zprávy se stejnou pravděpodobností. Má-li zdroj <span class="arithmatex">\(n\)</span> zpráv se stejnou pravděpodobností <span class="arithmatex">\(\frac{1}{n}\)</span>, pak dosahuje maximální entropie <span class="arithmatex">\(\log_2 n\)</span>.</p>
@@ -1591,13 +1577,13 @@ $<span class="arithmatex">\(H(X) = -n \left(\frac{1}{n} \log_2 \frac{1}{n}\right
 </div>
 <div class="admonition example">
 <p class="admonition-title">Příklady výpočtu entropie</p>
-<p><strong>Příklad 1:</strong> Mějme 2 možné zprávy: „panna" nebo „orel" a nechť mají stejnou pravděpodobnost:
-$<span class="arithmatex">\(H(X) = -0.5 \cdot (-1) - 0.5 \cdot (-1) = 1 \text{ bit}\)</span>$</p>
-<p><strong>Příklad 2:</strong> Zdroj vydávající zprávy: „bílý" s pravděpodobností <span class="arithmatex">\(\frac{1}{4}\)</span> a „černý" s pravděpodobností <span class="arithmatex">\(\frac{3}{4}\)</span>:
-$<span class="arithmatex">\(H(X) = 0.25 \cdot \log_2 4 + 0.75 \cdot \log_2 \frac{4}{3} = 0.25 \cdot 2 + 0.75 \cdot 0.41 = 0.81 \text{ b}\)</span>$</p>
-<p><strong>Příklad 3:</strong> Zdroj vydávající pouze jednu zprávu <span class="arithmatex">\(p = 1\)</span>:
-$<span class="arithmatex">\(H(X) = -(1 \cdot 0) = 0 \text{ b}\)</span>$
-Daný zdroj nemá žádnou neurčitost a zprávy z něj nenesou žádnou informaci.</p>
+<p><strong>Příklad 1:</strong> Mějme 2 možné zprávy: „panna" nebo „orel" a nechť mají stejnou pravděpodobnost:</p>
+<div class="arithmatex">\[H(X) = -0.5 \cdot (-1) - 0.5 \cdot (-1) = 1 \text{ bit}\]</div>
+<p><strong>Příklad 2:</strong> Zdroj vydávající zprávy: „bílý" s pravděpodobností <span class="arithmatex">\(\frac{1}{4}\)</span> a „černý" s pravděpodobností <span class="arithmatex">\(\frac{3}{4}\)</span>:</p>
+<div class="arithmatex">\[H(X) = 0.25 \cdot \log_2 4 + 0.75 \cdot \log_2 \frac{4}{3} = 0.25 \cdot 2 + 0.75 \cdot 0.41 = 0.81 \text{ b}\]</div>
+<p><strong>Příklad 3:</strong> Zdroj vydávající pouze jednu zprávu <span class="arithmatex">\(p = 1\)</span>:</p>
+<div class="arithmatex">\[H(X) = -(1 \cdot 0) = 0 \text{ b}\]</div>
+<p>Daný zdroj nemá žádnou neurčitost a zprávy z něj nenesou žádnou informaci.</p>
 </div>
 <hr />
 <h3 id="neurcitost">Neurčitost<a class="headerlink" href="#neurcitost" title="Permanent link">&para;</a></h3>
@@ -1617,7 +1603,6 @@ Daný zdroj nemá žádnou neurčitost a zprávy z něj nenesou žádnou informa
 <div class="arithmatex">\[R_N = \frac{H(X)}{N}\]</div>
 <p>tj. průměrnou entropii na 1 znak (průměrný počet bitů informace v 1 znaku).</p>
 </div>
-<p><img alt="Obsažnost jazyka a absolutní obsažnost" src="../../assets/img/prednasky/p08-225.png" /></p>
 <ul>
 <li>Máme-li dlouhou zprávu, její další písmeno bývá v řadě případů určeno již jednoznačně nebo je možný jen malý počet variant.</li>
 <li>Například máme-li 13 znakovou zprávu „Zítra odpoled", je pravděpodobné, že pokračuje písmenem „n". U 14. znaku nepřibude žádná entropie.</li>
@@ -1642,7 +1627,6 @@ Daný zdroj nemá žádnou neurčitost a zprávy z něj nenesou žádnou informa
 <div class="arithmatex">\[D = R - r\]</div>
 <p>a číslo <span class="arithmatex">\(\frac{100D}{R}\)</span> pak udává, kolik bitů jazyka je nadbytečných procentuálně.</p>
 </div>
-<p><img alt="Výpočet nadbytečnosti angličtiny" src="../../assets/img/prednasky/p08-227.png" /></p>
 <div class="admonition example">
 <p class="admonition-title">Nadbytečnost angličtiny</p>
 <p>Pro angličtinu máme <span class="arithmatex">\(L = 26\)</span>, <span class="arithmatex">\(R = \log_2 26 = 4.7\)</span> bitů na písmeno, <span class="arithmatex">\(r = 1.5\)</span> bitů/písmeno:</p>
@@ -1668,8 +1652,6 @@ Daný zdroj nemá žádnou neurčitost a zprávy z něj nenesou žádnou informa
 <ul>
 <li>Abychom dostali pouze jednu zprávu — tu, která byla skutečně zašifrována — musí být <span class="arithmatex">\(S = 1\)</span>, tedy <span class="arithmatex">\(H(K) = DN\)</span>.</li>
 </ul>
-<p><img alt="Odvození vzdálenosti jednoznačnosti" src="../../assets/img/prednasky/p08-228.png" /></p>
-<h4 id="definice">Definice<a class="headerlink" href="#definice" title="Permanent link">&para;</a></h4>
 <div class="admonition info">
 <p class="admonition-title">Definice — Vzdálenost jednoznačnosti <span class="arithmatex">\(\delta_U\)</span></p>
 <p>Z předchozího plyne: <span class="arithmatex">\(H(K) = DN\)</span> a <span class="arithmatex">\(N = \frac{H(K)}{D} = \delta_U\)</span>.</p>
@@ -1677,7 +1659,6 @@ Daný zdroj nemá žádnou neurčitost a zprávy z něj nenesou žádnou informa
 <div class="arithmatex">\[\delta_U = \frac{H(K)}{D}\]</div>
 <p>kde <span class="arithmatex">\(H(K)\)</span> je neurčitost klíče a <span class="arithmatex">\(D\)</span> je redundance jazyka otevřené zprávy.</p>
 </div>
-<p><img alt="Definice a příklad vzdálenosti jednoznačnosti" src="../../assets/img/prednasky/p08-229.png" /></p>
 <div class="admonition example">
 <p class="admonition-title">Jednoduchá substituce nad anglickou abecedou</p>
 <p>Vzdálenost jednoznačnosti jednoduché substituce:</p>
@@ -1722,7 +1703,6 @@ Daný zdroj nemá žádnou neurčitost a zprávy z něj nenesou žádnou informa
 <p><em>Realizace:</em> ShiftRows + MixColumns v AES, P-permutace v DES</p>
 </div>
 <p>Dobrá bloková šifra musí mít <strong>obojí</strong>.</p>
-<p><img alt="Konfúze a difúze podle Shannona" src="../../assets/img/prednasky/p08-232.png" /></p>
 <hr />
 <h2 id="84-teorie-slozitosti">8.4 Teorie složitosti<a class="headerlink" href="#84-teorie-slozitosti" title="Permanent link">&para;</a></h2>
 <p>Teorie složitosti je <strong>metodologický základ pro analýzu výpočetní složitosti</strong> kryptografických technik a algoritmů. Porovnává kryptografické techniky a algoritmy a určuje jejich bezpečnost.</p>
@@ -1838,7 +1818,6 @@ Daný zdroj nemá žádnou neurčitost a zprávy z něj nenesou žádnou informa
 </tr>
 </tbody>
 </table>
-<p><img alt="Tabulka složitosti algoritmů" src="../../assets/img/prednasky/p08-236.png" /></p>
 <div class="admonition example">
 <p class="admonition-title">56-bitový klíč DES</p>
 <p>Pro <span class="arithmatex">\(n\)</span>-bitový klíč je časová složitost luštění hrubou silou <span class="arithmatex">\(O(2^n)\)</span>.</p>
@@ -1907,15 +1886,6 @@ Daný zdroj nemá žádnou neurčitost a zprávy z něj nenesou žádnou informa
 </table>
 <h3 id="diagram-trid-slozitosti">Diagram tříd složitosti<a class="headerlink" href="#diagram-trid-slozitosti" title="Permanent link">&para;</a></h3>
 <p><img alt="Diagram tříd složitosti" src="../../assets/img/prednasky/p08-239.png" /></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>EXPTIME
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  └─ PSPACE (úplné)
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>       └─ PSPACE
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>            ├─ NP (úplné)     CoNP (úplné)
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            │    └─ NP    ∩    CoNP
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            │         └─ NP ∩ CoNP
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            │               └─ P
-</span></code></pre></div>
-<p><strong>Předpokládané vztahy:</strong> <span class="arithmatex">\(P \subseteq NP \cap CoNP \subseteq NP, CoNP \subseteq PSPACE \subseteq EXPTIME\)</span></p>
 <hr />
 <h3 id="vztah-kryptologie-a-trid-slozitosti">Vztah kryptologie a tříd složitosti<a class="headerlink" href="#vztah-kryptologie-a-trid-slozitosti" title="Permanent link">&para;</a></h3>
 <ul>

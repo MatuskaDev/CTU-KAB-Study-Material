@@ -959,17 +959,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prubeh-protokolu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Průběh protokolu
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#krok-za-krokem-priklad-z-prednasky" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1046,17 +1035,6 @@
     <span class="md-ellipsis">
       
         Aplikační aspekty
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#experimentalni-vysledky" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Experimentální výsledky
       
     </span>
   </a>
@@ -1559,14 +1537,14 @@
 </thead>
 <tbody>
 <tr>
-<td>$</td>
-<td>0\rangle_{(r)}$</td>
-<td><code>\|</code></td>
+<td><span class="arithmatex">\(\vert 0\rangle_{(r)}\)</span></td>
+<td><code>|</code></td>
+<td>0° (vertikální)</td>
 </tr>
 <tr>
-<td>$</td>
-<td>1\rangle_{(r)}$</td>
+<td><span class="arithmatex">\(\vert 1\rangle_{(r)}\)</span></td>
 <td><code>—</code></td>
+<td>90° (horizontální)</td>
 </tr>
 </tbody>
 </table>
@@ -1582,14 +1560,14 @@
 </thead>
 <tbody>
 <tr>
-<td>$</td>
-<td>0\rangle_{(d)}$</td>
+<td><span class="arithmatex">\(\vert 0\rangle_{(d)}\)</span></td>
 <td><code>\</code></td>
+<td>135°</td>
 </tr>
 <tr>
-<td>$</td>
-<td>1\rangle_{(d)}$</td>
+<td><span class="arithmatex">\(\vert 1\rangle_{(d)}\)</span></td>
 <td><code>/</code></td>
+<td>45°</td>
 </tr>
 </tbody>
 </table>
@@ -1603,7 +1581,6 @@
 <div class="arithmatex">\[|1\rangle_{(r)} = \frac{1}{\sqrt{2}}\left(|0\rangle_{(d)} - |1\rangle_{(d)}\right)\]</div>
 <p><strong>Interpretace:</strong> Čím určitější je stav vzhledem k lineární bázi, tím méně určitý je vzhledem k diagonální bázi a naopak.</p>
 <p>Pokud měříme fotón ve <strong>špatné bázi</strong> (fotón je v bázi <code>+</code>, měříme bází <code>×</code>), výsledek je <strong>náhodný</strong> a původní stav je destruován.</p>
-<p><img alt="Polarizační kódování fotonů" src="../../assets/img/prednasky/p09-260.png" /></p>
 <hr />
 <h2 id="76-protokol-bb84-benett-brassard-1984">7.6 Protokol BB84 (Benett-Brassard 1984)<a class="headerlink" href="#76-protokol-bb84-benett-brassard-1984" title="Permanent link">&para;</a></h2>
 <h3 id="motivace">Motivace<a class="headerlink" href="#motivace" title="Permanent link">&para;</a></h3>
@@ -1618,198 +1595,8 @@
 <li>S mírnými obměnami je BB84 používán a rozvíjen dodnes.</li>
 </ul>
 </div>
-<h3 id="prubeh-protokolu">Průběh protokolu<a class="headerlink" href="#prubeh-protokolu" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>sequenceDiagram
-    participant A as Alice
-    participant Q as Kvantový kanál
-    participant E as Eva (útočník?)
-    participant B as Bob
-    participant C as Klasický aut. kanál
-
-    A-&gt;&gt;Q: Fotony s náhodnou polarizací (báze +/×, bit 0/1)
-    Q-&gt;&gt;E: Eva případně odposlechne a přepošle
-    E-&gt;&gt;B: Přeposlaný fotón (Eva změní stav!)
-    A-&gt;&gt;C: Oznámí použité báze (NE hodnoty bitů!)
-    B-&gt;&gt;C: Oznámí použité báze
-    note over A,B: Ponechají bity kde se báze shodují (~50% bitů = sieved key)
-    A-&gt;&gt;C: Odhalí náhodný vzorek bitů klíče
-    B-&gt;&gt;C: Porovná stejné pozice
-    note over A,B: QBER &gt; práh (~11%) → Eva detekována → klíč zahodit
-    note over A,B: Jinak: Error Correction + Privacy Amplification → OTP klíč</code></pre>
 <h3 id="krok-za-krokem-priklad-z-prednasky">Krok za krokem — příklad z přednášky<a class="headerlink" href="#krok-za-krokem-priklad-z-prednasky" title="Permanent link">&para;</a></h3>
 <p><img alt="Příklad průběhu BB84 komunikace" src="../../assets/img/prednasky/p09-262.png" /></p>
-<p><strong>① Odesílatel (Alice):</strong> Generuje náhodnou binární posloupnost a provádí její polarizační kódování dle náhodně volené báze.</p>
-<table>
-<thead>
-<tr>
-<th>Alicin bit</th>
-<th>1</th>
-<th>1</th>
-<th>1</th>
-<th>1</th>
-<th>1</th>
-<th>0</th>
-<th>0</th>
-<th>1</th>
-<th>0</th>
-<th>1</th>
-<th>0</th>
-<th>0</th>
-<th>0</th>
-<th>0</th>
-<th>1</th>
-<th>0</th>
-<th>0</th>
-<th>0</th>
-<th>0</th>
-<th>0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Báze</td>
-<td>X</td>
-<td>+</td>
-<td>X</td>
-<td>X</td>
-<td>X</td>
-<td>+</td>
-<td>+</td>
-<td>X</td>
-<td>X</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>X</td>
-<td>+</td>
-<td>X</td>
-<td>+</td>
-<td>+</td>
-<td>X</td>
-<td>X</td>
-<td>+</td>
-</tr>
-<tr>
-<td>Polarizace</td>
-<td>/</td>
-<td>—</td>
-<td>/</td>
-<td>/</td>
-<td>/</td>
-<td>|</td>
-<td>|</td>
-<td>/</td>
-<td>\</td>
-<td>—</td>
-<td>|</td>
-<td>|</td>
-<td>\</td>
-<td>|</td>
-<td>/</td>
-<td>|</td>
-<td>|</td>
-<td>\</td>
-<td>\</td>
-<td>|</td>
-</tr>
-</tbody>
-</table>
-<p><strong>② Příjemce (Bob):</strong> Dekóduje přijaté fotony dle náhodně volené báze.</p>
-<table>
-<thead>
-<tr>
-<th>Bobova báze</th>
-<th>/</th>
-<th>—</th>
-<th>/</th>
-<th>/</th>
-<th>/</th>
-<th>|</th>
-<th>|</th>
-<th>/</th>
-<th>\</th>
-<th>—</th>
-<th>|</th>
-<th>|</th>
-<th>\</th>
-<th>|</th>
-<th>/</th>
-<th>|</th>
-<th>|</th>
-<th>\</th>
-<th>\</th>
-<th>|</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Přijatý bit</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>③ Odesílatel (Alice):</strong> Oznámí Bobovi (veřejně, ovšem s autentizací původu zprávy), jakou bázi v daném kroku použila. To samé učiní Bob. Bity, kde se oba shodli, budou použity pro symetrický klíč.</p>
-<table>
-<thead>
-<tr>
-<th>Shoda báze</th>
-<th>✓</th>
-<th></th>
-<th>✓</th>
-<th>✓</th>
-<th></th>
-<th></th>
-<th>✓</th>
-<th></th>
-<th></th>
-<th>✓</th>
-<th>✓</th>
-<th>✓</th>
-<th></th>
-<th>✓</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Výsledný klíč</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 <h3 id="proc-eva-nemuze-odposlechnout">Proč Eva nemůže odposlechnout?<a class="headerlink" href="#proc-eva-nemuze-odposlechnout" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
 <p class="admonition-title">Princip detekce odposlechu</p>
@@ -1895,10 +1682,6 @@
 </tr>
 </tbody>
 </table>
-<h3 id="experimentalni-vysledky">Experimentální výsledky<a class="headerlink" href="#experimentalni-vysledky" title="Permanent link">&para;</a></h3>
-<p><img alt="Experimentální výsledky — Geneva Lake" src="../../assets/img/prednasky/p09-267.png" /></p>
-<p><strong>Muller et al. 1995–96, Ribordy et al. 1998, 2000</strong> (foto: Gisin et al. 2001)</p>
-<p>Dohoda na klíči na vzdálenost <strong>23 km</strong> pomocí optického kabelu Swisscom pod dnem Ženevského jezera (entre Nyon a Ženevou).</p>
 <hr />
 <h2 id="79-post-kvantova-kryptografie">7.9 Post-kvantová kryptografie<a class="headerlink" href="#79-post-kvantova-kryptografie" title="Permanent link">&para;</a></h2>
 <h3 id="kvantove-hrozby-pro-klasicke-algoritmy">Kvantové hrozby pro klasické algoritmy<a class="headerlink" href="#kvantove-hrozby-pro-klasicke-algoritmy" title="Permanent link">&para;</a></h3>

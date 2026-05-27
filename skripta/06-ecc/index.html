@@ -1411,7 +1411,6 @@
 <p><span class="arithmatex">\(\Rightarrow 2P = [6, 3]\)</span> ✓</p>
 <p><strong>Zkouška:</strong> <span class="arithmatex">\(3^2 \equiv 6^3 + 2 \cdot 6 + 2 \pmod{17}\)</span> → <span class="arithmatex">\(9 \equiv 12 + 12 + 2 \pmod{17}\)</span> → <span class="arithmatex">\(9 = 9\)</span> ✓</p>
 </div>
-<p><img alt="Příklad výpočtu 2P na eliptické křivce" src="../../assets/img/prednasky/p09-251.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Zkouška</p>
 <p>Na zkoušce budete počítat sčítání bodů ručně. Naučte se oba vzorce (<span class="arithmatex">\(P+Q\)</span> a <span class="arithmatex">\(2P\)</span>) nazpaměť a procvičte výpočet inverzního prvku mod p (rozšířený Euklidův algoritmus nebo malá Fermatova věta: <span class="arithmatex">\(a^{-1} \equiv a^{p-2} \pmod p\)</span>).</p>
@@ -1431,7 +1430,6 @@
 <p>Body na křivce <span class="arithmatex">\(E\)</span> mají různý řád. V kryptografii vybíráme takové body, jejichž řád je roven největšímu prvočíslu v rozkladu čísla <span class="arithmatex">\(\#E\)</span> nebo jeho násobku. <strong>Kofaktor</strong> je podíl: řád křivky / řád počátečního bodu a měl by být malý.</p>
 <p>U bodu řádu <span class="arithmatex">\(r\)</span> máme zaručeno, že dojde k opakování v posloupnosti <span class="arithmatex">\(P, 2P, 3P, \ldots\)</span> až po <span class="arithmatex">\(r\)</span>-tém kroku. V případě, že <span class="arithmatex">\(r\)</span> je velké číslo, např. <span class="arithmatex">\(2^{256}\)</span>, je to skutečně dlouhá posloupnost.</p>
 <p>Právě při šifrování a elektronickém podepisování se využívá tak velké posloupnosti a to právě v souvislosti s tzv. <strong>problémem diskrétního logaritmu</strong>.</p>
-<p><img alt="ECC a problém diskrétního logaritmu" src="../../assets/img/prednasky/p09-252.png" /></p>
 <h3 id="definice-ecdlp">Definice ECDLP<a class="headerlink" href="#definice-ecdlp" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
 <p class="admonition-title">ECDLP — Elliptic Curve Discrete Logarithm Problem</p>
@@ -1529,17 +1527,6 @@
 <p>a současně:</p>
 <div class="arithmatex">\[Z = d_j Q_i = d_j(d_i P) = (d_j d_i)P\]</div>
 <p>Tedy každá strana vezme veřejný klíč protistrany a sečte ho <span class="arithmatex">\(n\)</span>-krát, kde <span class="arithmatex">\(n\)</span> je privátní klíč. Protože obě strany vycházejí ze stejného bodu <span class="arithmatex">\(P\)</span>, dospějí do stejného bodu <span class="arithmatex">\(Z\)</span>.</p>
-<p><img alt="Šifrování s ECC — analogie DH" src="../../assets/img/prednasky/p09-255.png" /></p>
-<pre class="mermaid"><code>flowchart LR
-    subgraph ECDH["ECDH — sdílený klíč"]
-        PUB["Veřejné: E, P, r"] --&gt; A["Alice: dA, QA=dA·P"]
-        PUB --&gt; B["Bob: dB, QB=dB·P"]
-        A --&gt;|"Pošle QA"| B
-        B --&gt;|"Pošle QB"| A
-        A --&gt; ZA["Z = dA·QB = dA·dB·P"]
-        B --&gt; ZB["Z = dB·QA = dB·dA·P"]
-        ZA &amp; ZB --&gt; SAME["Stejný bod Z ✓"]
-    end</code></pre>
 <hr />
 <h2 id="67-ecdsa-elliptic-curve-dsa">6.7 ECDSA — Elliptic Curve DSA<a class="headerlink" href="#67-ecdsa-elliptic-curve-dsa" title="Permanent link">&para;</a></h2>
 <p>Analogie DSA na eliptické křivce:</p>

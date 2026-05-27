@@ -757,17 +757,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#priklad-a-7-b-10-desifrovani" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Příklad: \(a = 7\), \(b = 10\), dešifrování
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1837,17 +1826,12 @@
 <p><strong>Velikost klíčového prostoru:</strong> <span class="arithmatex">\(12 \times 26 = \mathbf{312}\)</span> klíčů</p>
 <h4 id="priklad-a-7-b-10-sifrovani-please-send-money">Příklad: <span class="arithmatex">\(a = 7\)</span>, <span class="arithmatex">\(b = 10\)</span>, šifrování „PLEASE SEND MONEY"<a class="headerlink" href="#priklad-a-7-b-10-sifrovani-please-send-money" title="Permanent link">&para;</a></h4>
 <p><span class="arithmatex">\(c = |7p + 10|_{26}\)</span> → ŠT: <strong>LJMKG MGMXF QEXMW</strong></p>
-<p>Pro dešifrování: <span class="arithmatex">\(a^{-1} = |7|^{-1}_{26} = 15\)</span> (protože <span class="arithmatex">\(7 \times 15 = 105 = 4 \times 26 + 1\)</span>), tedy <span class="arithmatex">\(p = |15(c - 10)|_{26} = |15c + 6|_{26}\)</span>.</p>
-<p>Vzájemný vztah písmen pro šifru <span class="arithmatex">\(c = |7p + 10|_{26}\)</span>:</p>
-<p><img alt="Bijekce afinní šifry c=|7p+10|₂₆" src="../../assets/img/prednasky/p01-014.png" /></p>
-<h4 id="priklad-a-7-b-10-desifrovani">Příklad: <span class="arithmatex">\(a = 7\)</span>, <span class="arithmatex">\(b = 10\)</span>, dešifrování<a class="headerlink" href="#priklad-a-7-b-10-desifrovani" title="Permanent link">&para;</a></h4>
-<p>ŠT „FEXEN ZMBMK JNHMG MYZMN" → OT: <strong>DO NOT REVEAL THE SECRET</strong></p>
+<p>Pro dešifrování: <span class="arithmatex">\(a^{-1} = |7|^{-1}_{26} = 15\)</span>, tedy <span class="arithmatex">\(p = |15(c - 10)|_{26} = |15c + 6|_{26}\)</span>.</p>
 <hr />
 <h2 id="12-kryptoanalyza-monoalfabetickych-sifer">1.2 Kryptoanalýza monoalfabetických šifer<a class="headerlink" href="#12-kryptoanalyza-monoalfabetickych-sifer" title="Permanent link">&para;</a></h2>
 <h3 id="frekvencni-analyza">Frekvenční analýza<a class="headerlink" href="#frekvencni-analyza" title="Permanent link">&para;</a></h3>
 <p>Pokus prolomit znakovou šifru může začít porovnáním četnosti výskytu písmen v ŠT a OT.</p>
-<p><strong>Četnost výskytu jednotlivých písmen v běžném anglickém textu:</strong></p>
-<p><img alt="Četnost písmen v anglickém textu" src="../../assets/img/prednasky/p01-015.png" /></p>
+<p><strong>Četnost výskytu jednotlivých písmen v běžném anglickém textu: (v %)</strong></p>
 <table>
 <thead>
 <tr>
@@ -2106,8 +2090,8 @@
 <p>Klíčová transformace:</p>
 <div class="arithmatex">\[c_1 = |5p_1 + 17p_2|_{26}, \qquad c_2 = |4p_1 + 15p_2|_{26}\]</div>
 <p>První blok (19, 7):</p>
-<div class="arithmatex">\[c_1 = |5 \cdot 19 + 17 \cdot 7|_{26} = |214|_{26} = 6$$
-$$c_2 = |4 \cdot 19 + 15 \cdot 7|_{26} = |181|_{26} = 25\]</div>
+<div class="arithmatex">\[c_1 = |5 \cdot 19 + 17 \cdot 7|_{26} = |214|_{26} = 6\]</div>
+<div class="arithmatex">\[c_2 = |4 \cdot 19 + 15 \cdot 7|_{26} = |181|_{26} = 25\]</div>
 </div>
 <p>Celý zašifrovaný text převodem na písmena: <strong>GZ SC XN VC DJ ZX EO VC RC LS RC</strong></p>
 <h3 id="hillova-sifra-maticovy-zapis">Hillova šifra – maticový zápis<a class="headerlink" href="#hillova-sifra-maticovy-zapis" title="Permanent link">&para;</a></h3>
@@ -2391,7 +2375,6 @@ $$c_2 = |4 \cdot 19 + 15 \cdot 7|_{26} = |181|_{26} = 25\]</div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>TSEEO AMROO KHTST WCNAS NSIHS OHOAN IWXSE ASOLR STOXI MGHWU TPIRX
 </span></code></pre></div>
 </div>
-<p><img alt="Transpozice – vizualizace mřížky" src="../../assets/img/prednasky/p01-034.png" /></p>
 <h3 id="dvojita-transpozice">Dvojitá transpozice<a class="headerlink" href="#dvojita-transpozice" title="Permanent link">&para;</a></h3>
 <p>Aplikujeme transpozici dvakrát (s různými nebo stejnými klíči) → výrazně vyšší bezpečnost než jednoduchá transpozice.</p>
 <div class="admonition tip">

@@ -1273,26 +1273,29 @@
 <dt><strong>Kódování</strong> – úprava zprávy pro <em>přenos po kanálu</em> nebo <em>reprezentaci dat</em>, bez záměru utajit.</dt>
 <dd>Příklady: ASCII, Unicode, Hammingův kód, paritní bity</dd>
 </dl>
+<p><em>→ Skripta: <a href="../skripta/01-klasicka/#10-zakladni-pojmy-v-kryptologii">1.0 – Základní pojmy</a></em></p>
 </details>
 <details class="question">
 <summary>2. Malá Fermatova věta (MFV) a Eulerova věta (EV)</summary>
-<p><strong>MFV:</strong> Pro prvočíslo <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(\gcd(a, p) = 1\)</span>:
-$<span class="arithmatex">\(a^{p-1} \equiv 1 \pmod{p}\)</span>$</p>
-<p><strong>EV:</strong> Pro <span class="arithmatex">\(\gcd(a, m) = 1\)</span>:
-$<span class="arithmatex">\(a^{\varphi(m)} \equiv 1 \pmod{m}\)</span>$</p>
+<p><strong>MFV:</strong> Pro prvočíslo <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(\gcd(a, p) = 1\)</span>:</p>
+<div class="arithmatex">\[a^{p-1} \equiv 1 \pmod{p}\]</div>
+<p><strong>EV:</strong> Pro <span class="arithmatex">\(\gcd(a, m) = 1\)</span>:</p>
+<div class="arithmatex">\[a^{\varphi(m)} \equiv 1 \pmod{m}\]</div>
 <p>MFV je speciální případ EV pro <span class="arithmatex">\(m = p\)</span> (prvočíslo), kde <span class="arithmatex">\(\varphi(p) = p - 1\)</span>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Praktické využití</p>
 <p>Při výpočtu <span class="arithmatex">\(|a^e|_m\)</span> lze exponent redukovat: <span class="arithmatex">\(a^e \equiv a^{e \bmod \varphi(m)} \pmod{m}\)</span></p>
 </div>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#51-matematicke-zaklady">5.1 – Matematické základy</a></em></p>
 </details>
 <details class="question">
 <summary>3. Eulerova funkce</summary>
 <p><span class="arithmatex">\(\varphi(n)\)</span> = počet přirozených čísel <span class="arithmatex">\(\leq n\)</span> nesoudělných s <span class="arithmatex">\(n\)</span>.</p>
-<p>Pro prvočíselný rozklad <span class="arithmatex">\(n = p_1^{a_1} \cdots p_k^{a_k}\)</span>:
-$<span class="arithmatex">\(\varphi(n) = n \cdot \prod_{i=1}^{k}\!\left(1 - \frac{1}{p_i}\right)\)</span>$</p>
+<p>Pro prvočíselný rozklad <span class="arithmatex">\(n = p_1^{a_1} \cdots p_k^{a_k}\)</span>:</p>
+<div class="arithmatex">\[\varphi(n) = n \cdot \prod_{i=1}^{k}\!\left(1 - \frac{1}{p_i}\right)\]</div>
 <p>Speciálně: <span class="arithmatex">\(\varphi(p) = p-1\)</span>, <span class="arithmatex">\(\quad \varphi(p \cdot q) = (p-1)(q-1)\)</span> pro různá prvočísla, <span class="arithmatex">\(\quad \varphi(p^k) = p^k - p^{k-1}\)</span>.</p>
 <p>Příklad: <span class="arithmatex">\(\varphi(100) = \varphi(4)\cdot\varphi(25) = 2 \cdot 20 = 40\)</span></p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#51-matematicke-zaklady">5.1 – Matematické základy</a></em></p>
 </details>
 <details class="question">
 <summary>7. Modulární počítání</summary>
@@ -1301,37 +1304,44 @@ $<span class="arithmatex">\(\varphi(n) = n \cdot \prod_{i=1}^{k}\!\left(1 - \fra
 <li><strong>Mult. inverze:</strong> <span class="arithmatex">\(b^{-1} \pmod{m}\)</span> existuje ⟺ <span class="arithmatex">\(\gcd(b, m) = 1\)</span>; hledá se rozšířeným Euklidovým algoritmem</li>
 <li><strong>Euklid.:</strong> <span class="arithmatex">\(\gcd(a, b) = \gcd(b, a \bmod b)\)</span>; <span class="arithmatex">\(\text{lcm}(a, b) = ab/\gcd(a, b)\)</span></li>
 </ul>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#51-matematicke-zaklady">5.1 – Matematické základy</a></em></p>
 </details>
 <details class="question">
 <summary>12. Vztah EV a MFV</summary>
 <p>MFV je <strong>speciálním případem</strong> EV pro prvočíselný modul. Eulerova věta je <strong>zobecněním</strong> MFV na složené moduly. Pro <span class="arithmatex">\(m = p\)</span> je <span class="arithmatex">\(\varphi(p) = p-1\)</span>, tedy EV se redukuje na MFV.</p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#51-matematicke-zaklady">5.1 – Matematické základy</a></em></p>
 </details>
 <details class="question">
 <summary>19. Multiplikativní inverze mod m</summary>
 <p><span class="arithmatex">\(c\)</span> je multiplikativní inverze <span class="arithmatex">\(a\)</span> v modulu <span class="arithmatex">\(m\)</span>, pokud <span class="arithmatex">\(a \cdot c \equiv 1 \pmod{m}\)</span>.</p>
 <p><strong>Existence:</strong> právě tehdy, když <span class="arithmatex">\(\gcd(a, m) = 1\)</span> a <span class="arithmatex">\(a \not\equiv 0 \pmod{m}\)</span>.</p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#51-matematicke-zaklady">5.1 – Matematické základy</a></em></p>
 </details>
 <details class="question">
 <summary>33. Generátor mod p</summary>
 <p>Číslo <span class="arithmatex">\(g\)</span> je generátor (primitivní kořen) modulo <span class="arithmatex">\(p\)</span>, pokud <span class="arithmatex">\(\{g^1, g^2, \ldots, g^{p-1}\} = \{1, \ldots, p-1\}\)</span>.</p>
 <p>Příklad: <span class="arithmatex">\(3\)</span> je generátor mod <span class="arithmatex">\(7\)</span>:
 <span class="arithmatex">\(3^1=3,\ 3^2=2,\ 3^3=6,\ 3^4=4,\ 3^5=5,\ 3^6=1 \pmod{7}\)</span></p>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#94-generatory-primitivni-koreny">9.4 – Generátory</a></em></p>
 </details>
 <details class="question">
 <summary>39. Základní věta aritmetiky</summary>
 <p>Každé přirozené číslo <span class="arithmatex">\(&gt; 1\)</span> lze <strong>jednoznačně</strong> rozložit na součin prvočísel (seřazených neklesajícně).</p>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#95-rozklad-slozenych-cisel">9.5 – Rozklad složených čísel</a></em></p>
 </details>
 <details class="question">
 <summary>40. Funkce π(x)</summary>
-<p><span class="arithmatex">\(\pi(x)\)</span> = počet prvočísel <span class="arithmatex">\(\leq x\)</span>. Aproximace:
-$<span class="arithmatex">\(\pi(x) \approx \frac{x}{\ln x}\)</span>$</p>
+<p><span class="arithmatex">\(\pi(x)\)</span> = počet prvočísel <span class="arithmatex">\(\leq x\)</span>. Aproximace:</p>
+<div class="arithmatex">\[\pi(x) \approx \frac{x}{\ln x}\]</div>
 <p>Důležité proto, abychom věděli, že prvočísel je dostatek a útočník si nemůže předpočítat všechna.</p>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#95-rozklad-slozenych-cisel">9.5 – Rozklad složených čísel</a></em></p>
 </details>
 <details class="question">
 <summary>41. Nadbytečnost jazyka</summary>
 <div class="arithmatex">\[D = R - r, \qquad R = \log_2 L\]</div>
 <p>kde <span class="arithmatex">\(L\)</span> = počet znaků abecedy, <span class="arithmatex">\(r\)</span> = obsažnost jazyka (angličtina <span class="arithmatex">\(\approx 1{,}5\)</span> b/znak).</p>
 <p>Příklad: angličtina, abeceda 26 znaků: <span class="arithmatex">\(R = 4{,}7\)</span> b/znak, <span class="arithmatex">\(D = 3{,}2\)</span> b/znak.</p>
+<p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#nadbytecnost-jazyka">8.3 – Nadbytečnost jazyka</a></em></p>
 </details>
 <hr />
 <h2 id="klasicke-sifry">Klasické šifry<a class="headerlink" href="#klasicke-sifry" title="Permanent link">&para;</a></h2>
@@ -1340,6 +1350,7 @@ $<span class="arithmatex">\(\pi(x) \approx \frac{x}{\ln x}\)</span>$</p>
 <p>Záměna <strong>pořadí znaků</strong> OT (ne jejich hodnot). Cílem je <strong>difúze</strong>.</p>
 <p>Příklady: sloupcová transpozice (zápis do matice po řádcích, čtení po sloupcích), přesmyčky, lišťovky.</p>
 <p>Odolná vůči frekvenční analýze; lze luštit analýzou vzdáleností bigram.</p>
+<p><em>→ Skripta: <a href="../skripta/01-klasicka/#15-transpozicni-sifry">1.5 – Transpoziční šifry</a></em></p>
 </details>
 <details class="question">
 <summary>11. Substituční šifry</summary>
@@ -1375,24 +1386,28 @@ $<span class="arithmatex">\(\pi(x) \approx \frac{x}{\ln x}\)</span>$</p>
 </tr>
 </tbody>
 </table>
+<p><em>→ Skripta: <a href="../skripta/01-klasicka/#11-monoalfabeticke-substitucni-sifry">1.1 – Substituční šifry</a></em></p>
 </details>
 <details class="question">
 <summary>13. Vigenèrův autokláv</summary>
-<p><strong>Asynchronní proudová šifra.</strong> Klíč = 1 počáteční znak; každý další znak hesla = předchozí znak ŠT:
-$<span class="arithmatex">\(c_1 = p_1 + h_1, \qquad c_i = p_i + c_{i-1} \quad (i \geq 2)\)</span>$</p>
+<p><strong>Asynchronní proudová šifra.</strong> Klíč = 1 počáteční znak; každý další znak hesla = předchozí znak ŠT:</p>
+<div class="arithmatex">\[c_1 = p_1 + h_1, \qquad c_i = p_i + c_{i-1} \quad (i \geq 2)\]</div>
 <p>Nevýhoda: znalost jediného znaku klíče + ŠT umožňuje dešifrovat celý text.</p>
+<p><em>→ Skripta: <a href="../skripta/02-proudove/#23-synchronni-a-asynchronni-proudove-sifry">2.3 – Synchronní a asynchronní šifry</a></em></p>
 </details>
 <details class="question">
 <summary>16. Exponenciální šifra</summary>
 <p>Symetrická šifra. Podmínky: <span class="arithmatex">\(m\)</span> prvočíslo, <span class="arithmatex">\(0 &lt; e &lt; m-1\)</span>, <span class="arithmatex">\(\gcd(e, m-1) = 1\)</span>.</p>
 <div class="arithmatex">\[c = p^e \bmod m, \quad p = c^d \bmod m, \quad d = e^{-1} \bmod (m-1)\]</div>
 <p>Bezpečnost stojí na problému <strong>diskrétního logaritmu</strong>. Šifrování i dešifrování = umocňování.</p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#50-exponencialni-sifra">5.0 – Exponenciální šifra</a></em></p>
 </details>
 <details class="question">
 <summary>20. Vernamova šifra (One-time pad)</summary>
 <p>Podmínky: klíč <strong>skutečně náhodný</strong> (TRNG), <strong>stejně dlouhý</strong> jako OT, použit <strong>jen jednou</strong>.</p>
 <div class="arithmatex">\[c_i = p_i \oplus k_i\]</div>
 <p>Poskytuje <strong>absolutní (informačně-teoretickou) bezpečnost</strong> – ŠT neobsahuje žádnou informaci o OT.</p>
+<p><em>→ Skripta: <a href="../skripta/02-proudove/#22-vernamova-sifra-a-absolutni-bezpecnost">2.2 – Vernamova šifra</a></em></p>
 </details>
 <details class="question">
 <summary>22. Konfúze a difúze</summary>
@@ -1418,14 +1433,16 @@ $<span class="arithmatex">\(c_1 = p_1 + h_1, \qquad c_i = p_i + c_{i-1} \quad (i
 </tbody>
 </table>
 <p>Moderní šifry kombinují obojí (Feistelova struktura, AES).</p>
+<p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#konfuze-a-difuze">8.3 – Konfúze a difúze</a></em></p>
 </details>
 <hr />
 <h2 id="blokove-sifry">Blokové šifry<a class="headerlink" href="#blokove-sifry" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>6. Feistelova šifra</summary>
-<p>Základní struktura mnoha blokových šifer (DES). Blok se rozdělí na <span class="arithmatex">\(L_0, R_0\)</span>; každá runda:
-$<span class="arithmatex">\(L_{i+1} = R_i, \qquad R_{i+1} = L_i \oplus f(R_i, k_i)\)</span>$</p>
+<p>Základní struktura mnoha blokových šifer (DES). Blok se rozdělí na <span class="arithmatex">\(L_0, R_0\)</span>; každá runda:</p>
+<div class="arithmatex">\[L_{i+1} = R_i, \qquad R_{i+1} = L_i \oplus f(R_i, k_i)\]</div>
 <p>Dešifrování = šifrování s podklíči v <strong>opačném pořadí</strong>. Šifrování ≈ dešifrování → nižší implementační náklady.</p>
+<p><em>→ Skripta: <a href="../skripta/03-blokove/#32-feistelova-sit">3.2 – Feistelova síť</a></em></p>
 </details>
 <details class="question">
 <summary>14. DES</summary>
@@ -1434,6 +1451,7 @@ $<span class="arithmatex">\(L_{i+1} = R_i, \qquad R_{i+1} = L_i \oplus f(R_i, k_
 <li>16 rund</li>
 <li>Dnes bezpečnostně nedostatečný (56b klíč, exhaustive search)</li>
 </ul>
+<p><em>→ Skripta: <a href="../skripta/03-blokove/#33-des-data-encryption-standard">3.3 – DES</a></em></p>
 </details>
 <details class="question">
 <summary>15. 3DES</summary>
@@ -1460,6 +1478,7 @@ $<span class="arithmatex">\(L_{i+1} = R_i, \qquad R_{i+1} = L_i \oplus f(R_i, k_
 </tbody>
 </table>
 <p>EDE umožňuje kompatibilitu s DES (pro <span class="arithmatex">\(K_1 = K_2 = K_3\)</span> je výsledek čistý DES).</p>
+<p><em>→ Skripta: <a href="../skripta/03-blokove/#34-3des-triple-des">3.4 – 3DES</a></em></p>
 </details>
 <details class="question">
 <summary>23. AES (Advanced Encryption Standard / Rijndael)</summary>
@@ -1469,6 +1488,7 @@ $<span class="arithmatex">\(L_{i+1} = R_i, \qquad R_{i+1} = L_i \oplus f(R_i, k_
 <li>Každá runda: <strong>SubBytes</strong> → <strong>ShiftRows</strong> → <strong>MixColumns</strong> → <strong>AddRoundKey</strong></li>
 <li>Nahradil DES; dnes standard (např. WPA2)</li>
 </ul>
+<p><em>→ Skripta: <a href="../skripta/03-blokove/#35-aes-rijndael">3.5 – AES / Rijndael</a></em></p>
 </details>
 <hr />
 <h2 id="operacni-mody-blokovych-sifer">Operační módy blokových šifer<a class="headerlink" href="#operacni-mody-blokovych-sifer" title="Permanent link">&para;</a></h2>
@@ -1476,11 +1496,13 @@ $<span class="arithmatex">\(L_{i+1} = R_i, \qquad R_{i+1} = L_i \oplus f(R_i, k_
 <summary>36. CBC (Cipher Block Chaining)</summary>
 <div class="arithmatex">\[C_i = E_K(P_i \oplus C_{i-1}), \quad C_0 = IV\]</div>
 <p>Rozšiřuje difúzi přes celou zprávu. Nejpoužívanější mód. Paralelní dešifrování ✓, šifrování ✗.</p>
+<p><em>→ Skripta: <a href="../skripta/03-blokove/#36-provozni-mody-blokovych-sifer">3.6 – CBC</a></em></p>
 </details>
 <details class="question">
 <summary>43. CTR (Counter Mode)</summary>
 <div class="arithmatex">\[C_i = E_K(\text{nonce} \| i) \oplus P_i\]</div>
 <p>Převádí blokovou šifru na <strong>synchronní proudovou šifru</strong>. Plně paralelizovatelný v obou směrech. Umožňuje náhodný přístup k blokům.</p>
+<p><em>→ Skripta: <a href="../skripta/03-blokove/#36-provozni-mody-blokovych-sifer">3.6 – CTR</a></em></p>
 </details>
 <details class="question">
 <summary>46. Přehled módů</summary>
@@ -1526,6 +1548,7 @@ $<span class="arithmatex">\(L_{i+1} = R_i, \qquad R_{i+1} = L_i \oplus f(R_i, k_
 </tr>
 </tbody>
 </table>
+<p><em>→ Skripta: <a href="../skripta/03-blokove/#36-provozni-mody-blokovych-sifer">3.6 – Provozní módy</a></em></p>
 </details>
 <hr />
 <h2 id="proudove-sifry">Proudové šifry<a class="headerlink" href="#proudove-sifry" title="Permanent link">&para;</a></h2>
@@ -1541,10 +1564,12 @@ $<span class="arithmatex">\(L_{i+1} = R_i, \qquad R_{i+1} = L_i \oplus f(R_i, k_
 <li>Příklady: Vigenèrův autokláv, CBC jako proudová šifra (CFB)</li>
 <li>Při výpadku bitu ovlivněno jen <span class="arithmatex">\(n\)</span> následujících bitů → samooprava</li>
 </ul>
+<p><em>→ Skripta: <a href="../skripta/02-proudove/#23-synchronni-a-asynchronni-proudove-sifry">2.3 – Synchronní a asynchronní šifry</a></em></p>
 </details>
 <details class="question">
 <summary>10. RC4 – heslo</summary>
 <p>Inicializace permutace <span class="arithmatex">\(S[0..255]\)</span> dle klíče (KSA – Key Scheduling Algorithm). Pak pseudonáhodné generování bajtů hesla (PRGA), XOR s OT. Pracuje s bajty modulo 256.</p>
+<p><em>→ Skripta: <a href="../skripta/02-proudove/#24-rc4">2.4 – RC4</a></em></p>
 </details>
 <hr />
 <h2 id="hasovaci-funkce">Hašovací funkce<a class="headerlink" href="#hasovaci-funkce" title="Permanent link">&para;</a></h2>
@@ -1584,6 +1609,7 @@ Iterace: <span class="arithmatex">\(H_i = f(H_{i-1}, M_i)\)</span>, <span class=
 </tr>
 </tbody>
 </table>
+<p><em>→ Skripta: <a href="../skripta/04-hash/#44-damgard-merklova-konstrukce">4.4 – Damgård-Merklova konstrukce</a></em></p>
 </details>
 <details class="question">
 <summary>25. Hašovací funkce – definice</summary>
@@ -1593,6 +1619,7 @@ Iterace: <span class="arithmatex">\(H_i = f(H_{i-1}, M_i)\)</span>, <span class=
 <li><strong>Bezkoliznost 2. řádu</strong> – těžké najít <span class="arithmatex">\(x' \neq x\)</span> takové, že <span class="arithmatex">\(h(x') = h(x)\)</span>; složitost <span class="arithmatex">\(2^n\)</span></li>
 <li><strong>Bezkoliznost 1. řádu</strong> – těžké najít libovolné <span class="arithmatex">\(x \neq x'\)</span> se stejným hashem; složitost <span class="arithmatex">\(2^{n/2}\)</span></li>
 </ol>
+<p><em>→ Skripta: <a href="../skripta/04-hash/#41-kryptograficka-hasovaci-funkce">4.1 – Kryptografická hašovací funkce</a></em></p>
 </details>
 <details class="question">
 <summary>26–27. Kolize 1. a 2. řádu</summary>
@@ -1617,27 +1644,32 @@ Iterace: <span class="arithmatex">\(H_i = f(H_{i-1}, M_i)\)</span>, <span class=
 </tr>
 </tbody>
 </table>
+<p><em>→ Skripta: <a href="../skripta/04-hash/#42-bezpecnostni-vlastnosti-a-bezkoliznost">4.2 – Bezpečnostní vlastnosti</a></em></p>
 </details>
 <details class="question">
 <summary>28. Narozeninový paradox</summary>
 <p>Ve skupině 23 lidí je <span class="arithmatex">\(&gt;50\,\%\)</span> pravděpodobnost, že dvě osoby mají narozeniny ve stejný den.</p>
 <p>Zobecnění: pro množinu <span class="arithmatex">\(m\)</span> hodnot stačí <span class="arithmatex">\(\approx\!\sqrt{m}\)</span> pokusů k nalezení kolize s 50 % pravděpodobností.</p>
 <p><span class="arithmatex">\(\Rightarrow\)</span> u hashe délky <span class="arithmatex">\(n\)</span> bitů: <span class="arithmatex">\(2^{n/2}\)</span> hashů k nalezení <strong>kolize 1. řádu</strong> (nás v kryptografii zajímá nejvíce).</p>
+<p><em>→ Skripta: <a href="../skripta/04-hash/#43-narozeninovy-paradox">4.3 – Narozeninový paradox</a></em></p>
 </details>
 <details class="question">
 <summary>47. HMAC</summary>
-<p>HMAC = hash-based MAC s tajným klíčem:
-$<span class="arithmatex">\(\text{HMAC}_K(M) = H\bigl((K \oplus \text{opad}) \,\|\, H\bigl((K \oplus \text{ipad}) \,\|\, M\bigr)\bigr)\)</span>$</p>
+<p>HMAC = hash-based MAC s tajným klíčem:</p>
+<div class="arithmatex">\[\text{HMAC}_K(M) = H\bigl((K \oplus \text{opad}) \,\|\, H\bigl((K \oplus \text{ipad}) \,\|\, M\bigr)\bigr)\]</div>
 <p>Oproti MAC (poslední blok ŠT) používá hašovací funkci místo blokové šifry, je odolnější vůči length-extension útokům.</p>
 <p>Zajišťuje <strong>autentizaci původu dat</strong>, <strong>nikoliv</strong> nepopiratelnost.</p>
+<p><em>→ Skripta: <a href="../skripta/04-hash/#47-hmac">4.7 – HMAC</a></em></p>
 </details>
 <details class="question">
 <summary>48. Orákulum</summary>
 <p>Deterministický stroj podivuhodných vlastností: na stejný vstup vždy stejný výstup.</p>
+<p><em>→ Skripta: <a href="../skripta/04-hash/#model-nahodneho-orakula">4.1 – Model náhodného orákula</a></em></p>
 </details>
 <details class="question">
 <summary>49. Náhodné orákulum</summary>
 <p>Na <strong>nový</strong> vstup odpovídá náhodně zvoleným výstupem z množiny možných výstupů; na dříve viděný vstup odpovídá stejně jako poprvé. Matematický model ideální hašovací funkce.</p>
+<p><em>→ Skripta: <a href="../skripta/04-hash/#model-nahodneho-orakula">4.1 – Model náhodného orákula</a></em></p>
 </details>
 <hr />
 <h2 id="asymetricka-kryptografie">Asymetrická kryptografie<a class="headerlink" href="#asymetricka-kryptografie" title="Permanent link">&para;</a></h2>
@@ -1651,6 +1683,7 @@ $<span class="arithmatex">\(\text{HMAC}_K(M) = H\bigl((K \oplus \text{opad}) \,\
 <li>Šifrování: <span class="arithmatex">\(c = m^e \bmod n\)</span> | Dešifrování: <span class="arithmatex">\(m = c^d \bmod n\)</span></li>
 </ol>
 <p><strong>Bezpečnost:</strong> faktorizace <span class="arithmatex">\(n = p \cdot q\)</span> je výpočetně těžký problém (RSA je prokazatelně bezpečný).</p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#54-rsa">5.4 – RSA</a></em></p>
 </details>
 <details class="question">
 <summary>37. Exponenciální šifra vs. RSA</summary>
@@ -1681,25 +1714,46 @@ $<span class="arithmatex">\(\text{HMAC}_K(M) = H\bigl((K \oplus \text{opad}) \,\
 </tbody>
 </table>
 <p>Bezpečnost obou je provázaná – jsou přibližně stejně obtížné.</p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#50-exponencialni-sifra">5.0 – Exponenciální šifra</a></em></p>
 </details>
 <details class="question">
 <summary>38. RSA-CRT (pomocí Čínské věty o zbytcích)</summary>
 <p>Soukromý klíč: <span class="arithmatex">\((p,\, q,\, d_p,\, d_q,\, q_{\text{inv}})\)</span></p>
 <div class="arithmatex">\[d_p = d \bmod (p-1), \quad d_q = d \bmod (q-1), \quad q_{\text{inv}} = q^{-1} \bmod p\]</div>
-<p>Dešifrování ve 2 paralelních větvích (s prvočísly <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(q\)</span>) → <strong>4× rychlejší</strong> dešifrování než klasické RSA (<span class="arithmatex">\(O((L/2)^3)\)</span> místo <span class="arithmatex">\(O(L^3)\)</span>, 2 paralelní větve).</p>
+<p><strong>Algoritmus dešifrování</strong> (ze šifrového textu <span class="arithmatex">\(c\)</span>):</p>
+<ol>
+<li><span class="arithmatex">\(m_1 = c^{d_p} \bmod p\)</span></li>
+<li><span class="arithmatex">\(m_2 = c^{d_q} \bmod q\)</span></li>
+<li><span class="arithmatex">\(h = q_{\text{inv}}\,(m_1 - m_2) \bmod p\)</span></li>
+<li><span class="arithmatex">\(m = m_2 + h \cdot q\)</span></li>
+</ol>
+<p>Kroky 1 a 2 jsou datově nezávislé → lze počítat <strong>paralelně</strong>. Výpočet probíhá s čísly poloviční délky → <strong>4× rychlejší</strong> dešifrování než klasické RSA (<span class="arithmatex">\(O((L/2)^3)\)</span> místo <span class="arithmatex">\(O(L^3)\)</span>, 2 paralelní větve).</p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#55-rsa-crt">5.5 – RSA-CRT</a></em></p>
 </details>
 <details class="question">
 <summary>44. Jednosměrná funkce s padacími vrátky</summary>
 <p>Jednosměrná funkce snadno invertovatelná pouze s <strong>tajnou dodatečnou informací</strong> (soukromým klíčem).</p>
 <p>Analogie: poštovní schránka – vložit může kdokoli (šifrování VK), vybírat jen vlastník klíče (dešifrování SK).</p>
 <p>Základ asymetrické kryptografie (RSA, El Gamal, ECC).</p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#54-rsa">5.4 – RSA</a></em></p>
 </details>
 <details class="question">
 <summary>51. El Gamal</summary>
-<p>Asymetrická šifra. Veřejné parametry: prvočíslo <span class="arithmatex">\(q\)</span>, generátor <span class="arithmatex">\(g\)</span>.<br />
-Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="arithmatex">\(y_i = g^{x_i} \bmod q\)</span>.</p>
-<p>Odesílatel volí náhodné <span class="arithmatex">\(k\)</span>, pošle <span class="arithmatex">\(\bigl(g^k \bmod q,\; M \cdot y_B^k \bmod q\bigr)\)</span>.</p>
-<p>Bezpečnost: <strong>diskrétní logaritmus</strong>.</p>
+<p>Asymetrická šifra. Vychází z Diffie-Hellmanovy výměny klíče.</p>
+<p><strong>Příprava klíče (Alice = příjemce):</strong><br />
+Zvolí prvočíslo <span class="arithmatex">\(m\)</span>, generátor <span class="arithmatex">\(g\)</span>, tajný klíč <span class="arithmatex">\(k_A\)</span>.<br />
+Zveřejní trojici <span class="arithmatex">\((m,\, g,\, y_A)\)</span>, kde <span class="arithmatex">\(y_A = g^{k_A} \bmod m\)</span>.</p>
+<p><strong>Šifrování (Bob):</strong><br />
+Zvolí náhodné <span class="arithmatex">\(k_B\)</span>, spočítá <span class="arithmatex">\(y_B = g^{k_B} \bmod m\)</span>.<br />
+Spočítá sdílený klíč <span class="arithmatex">\(K = y_A^{k_B} \bmod m\)</span>.<br />
+Zašifruje: <span class="arithmatex">\(c = p \cdot K \bmod m\)</span>.<br />
+Odešle Alici dvojici <span class="arithmatex">\((y_B,\, c)\)</span>.</p>
+<p><strong>Dešifrování (Alice):</strong><br />
+Spočítá sdílený klíč <span class="arithmatex">\(K = y_B^{k_A} \bmod m = g^{k_A \cdot k_B} \bmod m\)</span>.<br />
+Spočítá <span class="arithmatex">\(K^{-1} \bmod m\)</span> (rozšířeným Euklidovým algoritmem).<br />
+Dešifruje: <span class="arithmatex">\(p = c \cdot K^{-1} \bmod m\)</span>.</p>
+<p>Bezpečnost: <strong>diskrétní logaritmus</strong> (z <span class="arithmatex">\(y_A = g^{k_A}\)</span> nelze snadno získat <span class="arithmatex">\(k_A\)</span>).</p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#56-elgamal">5.6 – ElGamal</a></em></p>
 </details>
 <hr />
 <h2 id="dohoda-na-klici">Dohoda na klíči<a class="headerlink" href="#dohoda-na-klici" title="Permanent link">&para;</a></h2>
@@ -1708,6 +1762,7 @@ Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="
 <p>Veřejné: prvočíslo <span class="arithmatex">\(m\)</span>, generátor <span class="arithmatex">\(a\)</span>. Tajné klíče: <span class="arithmatex">\(k_A, k_B, k_C\)</span>.</p>
 <p>Probíhá ve 3 kolech výměny, každý v každém kole přidá svůj exponent. Společný klíč: <span class="arithmatex">\(K = a^{k_A k_B k_C} \bmod m\)</span>.</p>
 <p>Podmínky na klíče: <span class="arithmatex">\(\gcd(k_i, m-1) = 1\)</span> (doporučeno, zvyšuje bezpečnost).</p>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#52-diffie-hellman-vymena-klicu">5.2 – Diffie-Hellman</a></em></p>
 </details>
 <hr />
 <h2 id="generovani-klicu-a-nahodnost">Generování klíčů a náhodnost<a class="headerlink" href="#generovani-klicu-a-nahodnost" title="Permanent link">&para;</a></h2>
@@ -1722,12 +1777,14 @@ Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>return SLOŽENÉ
 </span></code></pre></div>
 <p>Pro libovolné složené <span class="arithmatex">\(n\)</span> jsou alespoň <span class="arithmatex">\(\frac{3}{4}\)</span> bází svědky složenosti → opakováním snižujeme chybovost.</p>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#96-testy-prvociselnosti">9.6 – Testy prvočíselnosti</a></em></p>
 </details>
 <details class="question">
 <summary>55. Fermatův test prvočíselnosti</summary>
 <p>Z MFV: <span class="arithmatex">\(a^{p-1} \not\equiv 1 \pmod{p}\)</span> → <span class="arithmatex">\(p\)</span> <strong>určitě není prvočíslo</strong>.<br />
 <span class="arithmatex">\(a^{p-1} \equiv 1 \pmod{p}\)</span> → <span class="arithmatex">\(p\)</span> <strong>pravděpodobně</strong> je prvočíslo.</p>
 <p>Slabina: <strong>Carmichaelova čísla</strong> projdou testem pro každou bázi, přesto jsou složená.</p>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#96-testy-prvociselnosti">9.6 – Testy prvočíselnosti</a></em></p>
 </details>
 <details class="question">
 <summary>54. John von Neumannův dekorelátor</summary>
@@ -1755,6 +1812,7 @@ Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="
 </tbody>
 </table>
 <p>Příklad: vstup <code>00 01 11 01 10 01</code> → zahodíme 00, 11 → výstup: <strong>0, 0, 1, 0</strong> = <code>0010</code></p>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#910-skutecne-nahodne-generatory-trng">9.10 – TRNG</a></em></p>
 </details>
 <details class="question">
 <summary>57. Jak efektivně získat prvočíslo</summary>
@@ -1763,6 +1821,7 @@ Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="
 <li>Otestuj dělitelnost malými prvočísly <span class="arithmatex">\(&lt; 256\)</span> (vyloučí 80 % složených)</li>
 <li>Proveď Rabin-Millerův test ≥ 5×</li>
 </ol>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#96-testy-prvociselnosti">9.6 – Testy prvočíselnosti</a></em></p>
 </details>
 <hr />
 <h2 id="entropie-a-informace">Entropie a informace<a class="headerlink" href="#entropie-a-informace" title="Permanent link">&para;</a></h2>
@@ -1773,12 +1832,14 @@ Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="
 <li><strong>Minimum:</strong> <span class="arithmatex">\(H(X) = 0\)</span> → zdroj vysílá jednu zprávu s <span class="arithmatex">\(p = 1\)</span> (nic se nedozvíme)</li>
 <li><strong>Maximum:</strong> <span class="arithmatex">\(H(X) = \log_2 n\)</span> → všech <span class="arithmatex">\(n\)</span> zpráv stejně pravděpodobných</li>
 </ul>
+<p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#entropie">8.3 – Entropie</a></em></p>
 </details>
 <details class="question">
 <summary>32. Vzdálenost jednoznačnosti</summary>
 <div class="arithmatex">\[\delta_U = \frac{H(K)}{D}, \qquad D = R - r, \qquad R = \log_2 L\]</div>
 <p><span class="arithmatex">\(H(K)\)</span> = entropie klíče, <span class="arithmatex">\(D\)</span> = redundance jazyka OT, <span class="arithmatex">\(L\)</span> = velikost abecedy, <span class="arithmatex">\(r\)</span> = obsažnost jazyka.</p>
 <p>= minimální délka OT, při které lze (teoreticky) jednoznačně určit klíč.</p>
+<p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#vzdalenost-jednoznacnosti">8.3 – Vzdálenost jednoznačnosti</a></em></p>
 </details>
 <hr />
 <h2 id="pki-a-certifikaty">PKI a certifikáty<a class="headerlink" href="#pki-a-certifikaty" title="Permanent link">&para;</a></h2>
@@ -1786,6 +1847,7 @@ Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="
 <summary>4. Křížová certifikace</summary>
 <p>Umožňuje důvěru mezi <strong>dvěma různými stromy certifikátů</strong>. Kořenové CA si vzájemně podepíší křížové certifikáty → účastníci různých stromů si mohou navzájem ověřovat certifikáty.</p>
 <p>Typy: jednosměrná (A věří B, ne nutně B věří A), obousměrná.</p>
+<p><em>→ Skripta: <a href="../skripta/10-pki/#103-certifikacni-strom">10.3 – Certifikační strom</a></em></p>
 </details>
 <details class="question">
 <summary>34. Metody zveřejnění veřejných klíčů</summary>
@@ -1795,6 +1857,7 @@ Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="
 <li><strong>Autorita pro VK</strong> – účastníci žádají o VK ostatních; nonce pro ověření aktuálnosti</li>
 <li><strong>Certifikace</strong> – CA vydá certifikát; stačí si vyměnit certifikáty (nejpoužívanější)</li>
 </ol>
+<p><em>→ Skripta: <a href="../skripta/10-pki/#101-distribuce-verejnych-klicu">10.1 – Distribuce veřejných klíčů</a></em></p>
 </details>
 <details class="question">
 <summary>50. Certifikát X.509 – klíčové součásti</summary>
@@ -1805,10 +1868,12 @@ Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="
 <li>Veřejný klíč držitele</li>
 <li>Digitální podpis CA</li>
 </ul>
+<p><em>→ Skripta: <a href="../skripta/10-pki/#102-formaty-certifikatu-podle-x509">10.2 – Formáty certifikátů X.509</a></em></p>
 </details>
 <details class="question">
 <summary>52. Solení IV</summary>
 <p>U CBC/OFB/CFB/CTR: partnerovi se pošle <span class="arithmatex">\(IV\)</span>, ale k šifrování se použije <span class="arithmatex">\(IV' = f(IV, K)\)</span> (např. <span class="arithmatex">\(H(IV \| K)\)</span>). Skutečně použitý IV se nikdy neobjeví na komunikačním kanálu.</p>
+<p><em>→ Skripta: <a href="../skripta/03-blokove/#metoda-soleni-iv">3.6 – Metoda solení IV</a></em></p>
 </details>
 <hr />
 <h2 id="bezpecnostni-architektura">Bezpečnostní architektura<a class="headerlink" href="#bezpecnostni-architektura" title="Permanent link">&para;</a></h2>
@@ -1822,21 +1887,25 @@ Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="
 - Útok opakováním (replay)
 - Modifikace zprávy
 - Odmítnutí služby (DoS/DDoS)</p>
+<p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#85-typy-utocniku">8.5 – Typy útočníků</a></em></p>
 </details>
 <details class="question">
 <summary>18. Mechanismy bezpečnosti OSI</summary>
 <p>Digitální podpis · Šifrování · Vyplňování mezer · Řízení směrování · Integrita dat · Osvědčení třetím subjektem · Výměna autentizační informace</p>
+<p><em>→ Skripta: <a href="../skripta/08-bezpecnost/#81-hodnoceni-odolnosti-sifry">8.1 – Hodnocení odolnosti šifry</a></em></p>
 </details>
 <hr />
 <h2 id="ecc-a-kvantova-kryptografie">ECC a kvantová kryptografie<a class="headerlink" href="#ecc-a-kvantova-kryptografie" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>45. Řád křivky</summary>
 <p>Celkový počet bodů na eliptické křivce <span class="arithmatex">\(y^2 = x^3 + ax + b \pmod{p}\)</span> (včetně bodu v nekonečnu <span class="arithmatex">\(\mathcal{O}\)</span>).</p>
+<p><em>→ Skripta: <a href="../skripta/06-ecc/#65-ecdlp-elliptic-curve-discrete-logarithm-problem">6.5 – ECDLP</a></em></p>
 </details>
 <details class="question">
 <summary>53. Heisenbergův princip neurčitosti</summary>
 <p><span class="arithmatex">\(\Delta x \cdot \Delta p \geq \hbar/2\)</span> – nelze současně přesně změřit polohu i hybnost.</p>
 <p>V BB84: nelze určit stav qubitu vůči oběma bázím najednou → <strong>odposlech je fyzicky detekovatelný</strong>.</p>
+<p><em>→ Skripta: <a href="../skripta/07-kvanty/#76-protokol-bb84-benett-brassard-1984">7.6 – Protokol BB84</a></em></p>
 </details>
 <hr />
 <h2 id="ostatni">Ostatní<a class="headerlink" href="#ostatni" title="Permanent link">&para;</a></h2>
@@ -1844,6 +1913,7 @@ Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="
 <summary>21. Solení hesla</summary>
 <p>Sůl = náhodně vygenerovaný řetězec přidávaný k heslu před hašováním. Ukládá se dvojice <span class="arithmatex">\((sůl,\, h(\text{heslo} \| sůl))\)</span>.</p>
 <p><strong>Účel:</strong> Obrana proti rainbow tables a slovníkovým útokům; dva uživatelé se stejným heslem mají odlišné hašované hodnoty.</p>
+<p><em>→ Skripta: <a href="../skripta/04-hash/#46-vyuziti-hasovacich-funkci">4.6 – Využití hašovacích funkcí</a></em></p>
 </details>
 <details class="question">
 <summary>29. Symetrické vs. asymetrické šifrování</summary>
@@ -1878,20 +1948,24 @@ Klíče: tajný <span class="arithmatex">\(x_i\)</span>, veřejný <span class="
 </tr>
 </tbody>
 </table>
+<p><em>→ Skripta: <a href="../skripta/05-asymetricka/#54-rsa">5.4 – RSA</a></em></p>
 </details>
 <details class="question">
 <summary>30. Kvadratická residua a nonresidua</summary>
 <p><span class="arithmatex">\(a\)</span> je kvadratické reziduum mod <span class="arithmatex">\(n\)</span>, pokud <span class="arithmatex">\(\exists x: x^2 \equiv a \pmod{n}\)</span>.</p>
 <p>Základ Rabinovy funkce – výpočet odmocniny mod <span class="arithmatex">\(n = p \cdot q\)</span> je výpočetně ekvivalentní faktorizaci <span class="arithmatex">\(n\)</span> → kandidát na jednosměrnou funkci.</p>
+<p><em>→ Skripta: <a href="../skripta/09-klice/#92-kvadraticka-residua">9.2 – Kvadratická residua</a></em></p>
 </details>
 <details class="question">
 <summary>56. Útoky postranními kanály</summary>
 <p>Neohrožují matematiku algoritmu, ale <strong>fyzickou implementaci</strong>: časování výpočtu, spotřeba energie, elektromagnetické záření, akustika, světelné emise.</p>
 <p>Cíle: klíč, informace o šifrovacím algoritmu, PIN apod.</p>
+<p><em>→ Skripta: <a href="../skripta/11-cipove-karty/#117-prvky-zabezpeceni">11.7 – Prvky zabezpečení</a></em></p>
 </details>
 <details class="question">
 <summary>58. Typy čipových karet</summary>
 <p>Kontaktní · Bezkontaktní · Kombinované (kontaktní + bezkontaktní) · Elektrické · Elektromagnetické · Optické</p>
+<p><em>→ Skripta: <a href="../skripta/11-cipove-karty/#112-rozhrani">11.2 – Rozhraní</a></em></p>
 </details>
 
 

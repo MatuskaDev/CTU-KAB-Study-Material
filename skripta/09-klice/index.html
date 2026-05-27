@@ -1545,8 +1545,8 @@
 </div>
 <div class="admonition example">
 <p class="admonition-title">Příklad pro <span class="arithmatex">\(p = 7\)</span></p>
-<div class="arithmatex">\[|1^2|_7 = |1|_7, \quad |2^2|_7 = |4|_7, \quad |3^2|_7 = |2|_7$$
-$$|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7\]</div>
+<div class="arithmatex">\[|1^2|_7 = |1|_7, \quad |2^2|_7 = |4|_7, \quad |3^2|_7 = |2|_7\]</div>
+<div class="arithmatex">\[|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7\]</div>
 <p>Každé kvadratické residuum se vyskytuje <strong>2×</strong>. Kvadratická residua mod 7: {1, 2, 4}. Kvadratická nonresiduua mod 7: {3, 5, 6}.</p>
 </div>
 <h3 id="vlastnosti">Vlastnosti<a class="headerlink" href="#vlastnosti" title="Permanent link">&para;</a></h3>
@@ -1567,11 +1567,36 @@ $$|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7\]</div>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Příklad: <span class="arithmatex">\(x^2 \equiv a \pmod{15}\)</span>, kde <span class="arithmatex">\(15 = 5 \cdot 3\)</span></p>
-<p>| <span class="arithmatex">\(|x^2|_{15}\)</span> | <span class="arithmatex">\(|x^2|_5\)</span> | <span class="arithmatex">\(|x^2|_3\)</span> | kořeny |
-|---|---|---|---|
-| <span class="arithmatex">\(|1^2|_{15}=1\)</span> | <span class="arithmatex">\(|1|_5\)</span> → 1. kořen | <span class="arithmatex">\(|1^2|_3=|1|_3\)</span> → 1. kořen | <span class="arithmatex">\(\gcd(1,15)=1\)</span> → QR |
-| <span class="arithmatex">\(|4^2|_{15}=1\)</span> | <span class="arithmatex">\(|1|_5\)</span> → 1. kořen | <span class="arithmatex">\(|4^2|_3=|1|_3\)</span> → 1. kořen | |
-| <span class="arithmatex">\(|9^2|_{15}=|6|_{15}\)</span> | <span class="arithmatex">\(\gcd(6,15)=3\)</span> | | nevyhovuje <span class="arithmatex">\(\gcd(a,n)=1\)</span> |</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\lvert x^2\rvert_{15}\)</span></th>
+<th><span class="arithmatex">\(\lvert x^2\rvert_5\)</span></th>
+<th><span class="arithmatex">\(\lvert x^2\rvert_3\)</span></th>
+<th>kořeny</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\lvert 1^2\rvert_{15}=1\)</span></td>
+<td><span class="arithmatex">\(\lvert 1\rvert_5\)</span> → 1. kořen</td>
+<td><span class="arithmatex">\(\lvert 1^2\rvert_3=\lvert 1\rvert_3\)</span> → 1. kořen</td>
+<td><span class="arithmatex">\(\gcd(1,15)=1\)</span> → QR</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lvert 4^2\rvert_{15}=1\)</span></td>
+<td><span class="arithmatex">\(\lvert 1\rvert_5\)</span> → 1. kořen</td>
+<td><span class="arithmatex">\(\lvert 4^2\rvert_3=\lvert 1\rvert_3\)</span> → 1. kořen</td>
+<td></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lvert 9^2\rvert_{15}=\lvert 6\rvert_{15}\)</span></td>
+<td><span class="arithmatex">\(\gcd(6,15)=3\)</span></td>
+<td></td>
+<td>nevyhovuje <span class="arithmatex">\(\gcd(a,n)=1\)</span></td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>1, 4 jsou 4-násobná kvadratická residua; 9, 10, 6 nesplňují podmínku <span class="arithmatex">\(\gcd(a,n) = 1\)</span></li>
 <li>2, 3, 5, 7, 8, 11, 12, 13, 14 jsou kvadratická nonresiduua</li>
@@ -1709,15 +1734,14 @@ $$|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7\]</div>
 <li>Když <span class="arithmatex">\(\gcd(a, p) \neq 1\)</span> → <span class="arithmatex">\(p\)</span> <strong>není prvočíslo</strong>.</li>
 <li>Vypočítáme <span class="arithmatex">\(j = \left|a^{\frac{p-1}{2}}\right|_p\)</span>.</li>
 <li>Když <span class="arithmatex">\(j \neq \left(\frac{a}{p}\right)\)</span> → <span class="arithmatex">\(p\)</span> <strong>určitě není prvočíslo</strong>.</li>
-<li>
-<p>Když <span class="arithmatex">\(j = \left(\frac{a}{p}\right)\)</span> → <strong>pravděpodobnost</strong>, že <span class="arithmatex">\(p\)</span> je složené, je <span class="arithmatex">\(\leq 50\%\)</span>.</p>
-</li>
-<li>
-<p><span class="arithmatex">\(a\)</span>, které dosvědčí, že <span class="arithmatex">\(p\)</span> není prvočíslo, říkáme <strong>svědek</strong> (<em>Witness</em>).</p>
-</li>
+<li>Když <span class="arithmatex">\(j = \left(\frac{a}{p}\right)\)</span> → <strong>pravděpodobnost</strong>, že <span class="arithmatex">\(p\)</span> je složené, je <span class="arithmatex">\(\leq 50\%\)</span>.</li>
+</ol>
+<hr />
+<ul>
+<li><span class="arithmatex">\(a\)</span>, které dosvědčí, že <span class="arithmatex">\(p\)</span> není prvočíslo, říkáme <strong>svědek</strong> (<em>Witness</em>).</li>
 <li>Když <span class="arithmatex">\(p\)</span> je složené → pravděpodobnost vystupování náhodného čísla <span class="arithmatex">\(a\)</span> jako svědka je <span class="arithmatex">\(\geq 50\%\)</span>.</li>
 <li>Opakováním testu <span class="arithmatex">\(t\)</span> krát pokaždé s jinou hodnotou <span class="arithmatex">\(a\)</span> docílíme, že pravděpodobnost toho, že složené <span class="arithmatex">\(p\)</span> projde všemi testy jako prvočíslo, je menší než <span class="arithmatex">\(2^{-t}\)</span>.</li>
-</ol>
+</ul>
 <hr />
 <h3 id="lehmannuv-test">Lehmannův test<a class="headerlink" href="#lehmannuv-test" title="Permanent link">&para;</a></h3>
 <p>Test čísla <span class="arithmatex">\(p\)</span> na prvočíselnost:</p>
@@ -1725,14 +1749,13 @@ $$|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7\]</div>
 <li>Vybereme náhodné liché <span class="arithmatex">\(a &lt; p\)</span>.</li>
 <li>Vypočítáme <span class="arithmatex">\(j = \left|a^{\frac{p-1}{2}}\right|_p\)</span>.</li>
 <li>Když <span class="arithmatex">\(j \not\equiv \pm 1 \pmod{p}\)</span> → <span class="arithmatex">\(p\)</span> <strong>určitě není prvočíslo</strong>.</li>
-<li>
-<p>Když <span class="arithmatex">\(j \equiv \pm 1 \pmod{p}\)</span> → pravděpodobnost, že <span class="arithmatex">\(p\)</span> je složené, je <span class="arithmatex">\(\leq 50\%\)</span>.</p>
-</li>
-<li>
-<p>Jednoduší test na prvočíselnost.</p>
-</li>
-<li>Opět: pravděpodobnost composite p passing t tests &lt; <span class="arithmatex">\(2^{-t}\)</span>; přitom se musí vyskytnout minimálně jednou hodnota <span class="arithmatex">\(-1\)</span> (krok 2 až 4).</li>
+<li>Když <span class="arithmatex">\(j \equiv \pm 1 \pmod{p}\)</span> → pravděpodobnost, že <span class="arithmatex">\(p\)</span> je složené, je <span class="arithmatex">\(\leq 50\%\)</span>.</li>
 </ol>
+<hr />
+<ul>
+<li>Jednoduší test na prvočíselnost.</li>
+<li>Opět: pravděpodobnost composite p passing t tests &lt; <span class="arithmatex">\(2^{-t}\)</span>; přitom se musí vyskytnout minimálně jednou hodnota <span class="arithmatex">\(-1\)</span> (krok 2 až 4).</li>
+</ul>
 <hr />
 <h3 id="rabin-milleruv-test">Rabin-Millerův test<a class="headerlink" href="#rabin-milleruv-test" title="Permanent link">&para;</a></h3>
 <p>Zvolíme náhodně <span class="arithmatex">\(p\)</span> a spočítáme <span class="arithmatex">\(b\)</span> a <span class="arithmatex">\(m\)</span> tak, aby platilo: <span class="arithmatex">\(p = 1 + 2^b m\)</span>, kde <span class="arithmatex">\(m\)</span> musí být liché.</p>
@@ -1743,18 +1766,7 @@ $$|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7\]</div>
 <li>Dokud <span class="arithmatex">\(z \neq p - 1\)</span> a <span class="arithmatex">\(j \leq b - 2\)</span> → opakuj <span class="arithmatex">\(z \leftarrow |z^2|_p\)</span>, <span class="arithmatex">\(j \leftarrow j + 1\)</span>.</li>
 <li>Když <span class="arithmatex">\(z \neq p - 1\)</span> → <span class="arithmatex">\(p\)</span> <strong>určitě není prvočíslo</strong>.</li>
 </ol>
-<pre class="mermaid"><code>flowchart TD
-    START["p=1+2ᵇm (m liché)\nZáklad a, 1 &lt; a &lt; p"] --&gt; Z["z = aᵐ mod p, j=0"]
-    Z --&gt; IF1{"z == 1?"}
-    IF1 --&gt;|"Ano"| PASS["Pravděpodobně prvočíslo ✓"]
-    IF1 --&gt;|"Ne"| LOOP{"z == p−1?"}
-    LOOP --&gt;|"Ano"| PASS
-    LOOP --&gt;|"Ne"| IF2{"j &gt; b−2?"}
-    IF2 --&gt;|"Ano"| COMP["JISTĚ SLOŽENÉ ✗"]
-    IF2 --&gt;|"Ne"| SQ["z = z² mod p\nj++"]
-    SQ --&gt; LOOP
-    style COMP fill:#450a0a,stroke:#f87171,color:#e2e8f0
-    style PASS fill:#064e3b,stroke:#34d399,color:#e2e8f0</code></pre>
+<hr />
 <ul>
 <li>Zjednodušená verze testu na prvočíselnost doporučeného normou DSS.</li>
 <li>Pravděpodobnost průchodu složeného čísla testem jako prvočísla <strong>klesá rychleji</strong> než u předchozích testů.</li>
@@ -1819,14 +1831,18 @@ $$|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7\]</div>
 <hr />
 <h2 id="97-nahodna-cisla-v-kryptografii">9.7 Náhodná čísla v kryptografii<a class="headerlink" href="#97-nahodna-cisla-v-kryptografii" title="Permanent link">&para;</a></h2>
 <h3 id="motivace">Motivace<a class="headerlink" href="#motivace" title="Permanent link">&para;</a></h3>
-<p>Mnoho kryptografických aplikací vyžaduje <strong>náhodná čísla</strong>:
-- Generování kryptografických klíčů
-- Generování čísel <em>nonce</em>, <em>salt</em>, výplní (<em>padding</em>)
-- Vernamova šifra (<em>one-time pad</em>)</p>
-<p>Vyžadovaná „kvalita" náhodnosti se u různých aplikací liší:
-- <em>Nonce</em> v některých protokolech stačí <strong>jedinečné</strong>
-- Generování klíčů vyžaduje <strong>vyšší kvalitu</strong>
-- Záruka nerozluštitelnosti Vernamovy šifry platí jen v případě, že klíč byl získán ze skutečně náhodného zdroje s <strong>vysokou entropií</strong></p>
+<p>Mnoho kryptografických aplikací vyžaduje <strong>náhodná čísla</strong>:</p>
+<ul>
+<li>Generování kryptografických klíčů</li>
+<li>Generování čísel <em>nonce</em>, <em>salt</em>, výplní (<em>padding</em>)</li>
+<li>Vernamova šifra (<em>one-time pad</em>)</li>
+</ul>
+<p>Vyžadovaná „kvalita" náhodnosti se u různých aplikací liší:</p>
+<ul>
+<li><em>Nonce</em> v některých protokolech stačí <strong>jedinečné</strong></li>
+<li>Generování klíčů vyžaduje <strong>vyšší kvalitu</strong></li>
+<li>Záruka nerozluštitelnosti Vernamovy šifry platí jen v případě, že klíč byl získán ze skutečně náhodného zdroje s <strong>vysokou entropií</strong></li>
+</ul>
 <div class="admonition danger">
 <p class="admonition-title">Základní princip</p>
 <p>„<strong>Kryptosystém je jen tak silný, jak silný je jeho nejslabší článek.</strong>"</p>
@@ -1838,9 +1854,11 @@ $$|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7\]</div>
 <li>V počítači se čísla reprezentují pomocí bitů → často pracujeme s <strong>náhodnými bity</strong> resp. <em>generátory náhodných bitů</em> a <em>posloupnostmi (řetězci) náhodných bitů</em>.</li>
 </ul>
 <h3 id="statisticke-vlastnosti-nahodnych-posloupnosti">Statistické vlastnosti náhodných posloupností<a class="headerlink" href="#statisticke-vlastnosti-nahodnych-posloupnosti" title="Permanent link">&para;</a></h3>
-<p>Od náhodných posloupností očekáváme <strong>dobré statistické vlastnosti</strong>:
-- <strong>Rovnoměrné rozdělení</strong> — všechny hodnoty jsou generovány se stejnou pravděpodobností
-- <strong>Nezávislost</strong> — jednotlivé generované hodnoty jsou <em>nezávislé</em> — není mezi nimi žádná korelace</p>
+<p>Od náhodných posloupností očekáváme <strong>dobré statistické vlastnosti</strong>:</p>
+<ul>
+<li><strong>Rovnoměrné rozdělení</strong> — všechny hodnoty jsou generovány se stejnou pravděpodobností</li>
+<li><strong>Nezávislost</strong> — jednotlivé generované hodnoty jsou <em>nezávislé</em> — není mezi nimi žádná korelace</li>
+</ul>
 <p>Důležitým pojmem je <strong>entropie</strong>.</p>
 <h3 id="entropie-generatoru">Entropie generátorů<a class="headerlink" href="#entropie-generatoru" title="Permanent link">&para;</a></h3>
 <p>Veličina <em>entropie</em> popisuje <strong>míru náhodnosti</strong> — jak obtížné je hodnotu (náhodné číslo, náhodnou posloupnost, řetězec náhodných bitů) uhodnout.</p>
@@ -1856,19 +1874,23 @@ $$|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7\]</div>
 <p class="admonition-title">Generátor pseudonáhodných čísel (PRNG)</p>
 <p>Algoritmus, jehož výstupem je posloupnost, která sice ve skutečnosti <strong>není</strong> náhodná, ale která se <strong>zdá být</strong> náhodná, pokud útočníkovi nejsou známy některé parametry generátoru.</p>
 </div>
-<p>Vlastnosti:
-- Algoritmické → snadno realizovatelné
-- Obvykle <strong>rychlé</strong>
-- Zpravidla mají dobré statistické vlastnosti
-- Ale: výstup je <strong>předvídatelný</strong></p>
+<p>Vlastnosti:</p>
+<ul>
+<li>Algoritmické → snadno realizovatelné</li>
+<li>Obvykle <strong>rychlé</strong></li>
+<li>Zpravidla mají dobré statistické vlastnosti</li>
+<li>Ale: výstup je <strong>předvídatelný</strong></li>
+</ul>
 <h3 id="linearni-kongruencni-generator-lcg">Lineární kongruenční generátor (LCG)<a class="headerlink" href="#linearni-kongruencni-generator-lcg" title="Permanent link">&para;</a></h3>
 <p>Jeden z nejstarších a nejznámějších způsobů generování pseudonáhodných čísel je <strong>lineární kongruenční generátor</strong>:</p>
 <div class="arithmatex">\[X_{n+1} = (aX_n + c) \bmod m \tag{1}\]</div>
 <p>kde <span class="arithmatex">\(X\)</span> je posloupnost pseudonáhodných čísel, <span class="arithmatex">\(m &gt; 0\)</span> je modul (často mocnina dvou), <span class="arithmatex">\(a\)</span> je násobitel, <span class="arithmatex">\(c\)</span> je inkrement a <span class="arithmatex">\(X_0\)</span> je počáteční hodnota (<em>seed</em>).</p>
-<p>Pseudonáhodná posloupnost <span class="arithmatex">\(X\)</span> se opakuje nejvýše po <span class="arithmatex">\(m\)</span> iteracích. Tohoto maxima dosáhneme, pokud jsou splněny:
-- Čísla <span class="arithmatex">\(c\)</span> a <span class="arithmatex">\(m\)</span> jsou nesoudělná
-- <span class="arithmatex">\(a - 1\)</span> je dělitelné všemi prvočiniteli <span class="arithmatex">\(m\)</span>
-- Pokud <span class="arithmatex">\(4 | m\)</span>, pak také <span class="arithmatex">\(4 | a - 1\)</span></p>
+<p>Pseudonáhodná posloupnost <span class="arithmatex">\(X\)</span> se opakuje nejvýše po <span class="arithmatex">\(m\)</span> iteracích. Tohoto maxima dosáhneme, pokud jsou splněny:</p>
+<ul>
+<li>Čísla <span class="arithmatex">\(c\)</span> a <span class="arithmatex">\(m\)</span> jsou nesoudělná</li>
+<li><span class="arithmatex">\(a - 1\)</span> je dělitelné všemi prvočiniteli <span class="arithmatex">\(m\)</span></li>
+<li>Pokud <span class="arithmatex">\(4 | m\)</span>, pak také <span class="arithmatex">\(4 | a - 1\)</span></li>
+</ul>
 <div class="admonition danger">
 <p class="admonition-title">LCG není kryptograficky bezpečný</p>
 <ul>
@@ -1883,11 +1905,13 @@ $$|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7\]</div>
 <li><strong>„Next-bit test"</strong>: Je-li známo prvních <span class="arithmatex">\(k\)</span> bitů náhodné posloupnosti, neexistuje žádný algoritmus s polynomiální složitostí, který by dokázal předpovědět <span class="arithmatex">\((k+1)\)</span>-tý bit s pravděpodobností úspěchu vyšší než <span class="arithmatex">\(\frac{1}{2}\)</span>.</li>
 <li><strong>„State compromise"</strong>: I když je zjištěn vnitřní stav generátoru (ať už celý nebo zčásti), nelze zpětně zrekonstruovat dosavadní vygenerovanou náhodnou posloupnost. Navíc, pokud do generátoru za běhu vstupuje další entropie, nemělo by být možné ze znalosti vnitřního stavu předpovědět vnitřní stav v následujících iteracích.</li>
 </ul>
-<p>Příklady realizace kryptograficky bezpečných PRNG:
-- <strong>Bezpečná bloková šifra v režimu čítače</strong>: Náhodně zvolit klíč (<em>seed</em>) a počáteční hodnotu čítače <span class="arithmatex">\(i\)</span>. Postupně šifrovat hodnoty <span class="arithmatex">\(i, i+1\)</span>, atd.
-- <strong>Kryptograficky bezpečná hešovací funkce aplikovaná na čítač</strong>: Náhodně zvolit počáteční hodnotu čítače <span class="arithmatex">\(i\)</span>. Postupně hashovat <span class="arithmatex">\(i, i+1\)</span>, atd.
-- <strong>Proudové šifry</strong> jsou v zásadě PRNG, s jejichž výstupem se XORuje plaintext.
-- <strong>Algoritmy založené na teorii čísel</strong>, u kterých byl proveden (alespoň nějaký) důkaz bezpečnosti.</p>
+<p>Příklady realizace kryptograficky bezpečných PRNG:</p>
+<ul>
+<li><strong>Bezpečná bloková šifra v režimu čítače</strong>: Náhodně zvolit klíč (<em>seed</em>) a počáteční hodnotu čítače <span class="arithmatex">\(i\)</span>. Postupně šifrovat hodnoty <span class="arithmatex">\(i, i+1\)</span>, atd.</li>
+<li><strong>Kryptograficky bezpečná hešovací funkce aplikovaná na čítač</strong>: Náhodně zvolit počáteční hodnotu čítače <span class="arithmatex">\(i\)</span>. Postupně hashovat <span class="arithmatex">\(i, i+1\)</span>, atd.</li>
+<li><strong>Proudové šifry</strong> jsou v zásadě PRNG, s jejichž výstupem se XORuje plaintext.</li>
+<li><strong>Algoritmy založené na teorii čísel</strong>, u kterých byl proveden (alespoň nějaký) důkaz bezpečnosti.</li>
+</ul>
 <hr />
 <h2 id="99-blum-blum-shub-bbs">9.9 Blum-Blum-Shub (BBS)<a class="headerlink" href="#99-blum-blum-shub-bbs" title="Permanent link">&para;</a></h2>
 <p>Příkladem PRNG, u kterého se má za to, že je kryptograficky bezpečný, je algoritmus <strong>Blum-Blum-Shub</strong>:</p>
@@ -1897,42 +1921,50 @@ $$|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7\]</div>
 <li>Počáteční prvek (<em>seed</em>) je <span class="arithmatex">\(X_0 &gt; 1\)</span>. Mělo by platit, že <span class="arithmatex">\(p, q \equiv 3 \pmod{4}\)</span> a <span class="arithmatex">\(\gcd(\varphi(p-1), \varphi(q-1))\)</span> by měl být malý.</li>
 <li>Výstupem zpravidla není přímo hodnota <span class="arithmatex">\(X_n\)</span>, ale její <strong>parita nebo několik nejméně významných bitů</strong>.</li>
 </ul>
-<p><strong>Vlastnosti:</strong>
-- <strong>Pomalý</strong>
-- Poměrně silný důkaz bezpečnosti (spojuje ji s výpočetní náročností faktorizace celých čísel)
-- Lze přímo spočítat <span class="arithmatex">\(i\)</span>-tý prvek posloupnosti:
-$<span class="arithmatex">\(X_i = \left(X_0^{2^i \bmod (p-1)(q-1)}\right) \bmod m \tag{3}\)</span>$</p>
+<p><strong>Vlastnosti:</strong></p>
+<ul>
+<li><strong>Pomalý</strong></li>
+<li>Poměrně silný důkaz bezpečnosti (spojuje ji s výpočetní náročností faktorizace celých čísel)</li>
+<li>Lze přímo spočítat <span class="arithmatex">\(i\)</span>-tý prvek posloupnosti:</li>
+<li>
+<div class="arithmatex">\[X_i = \left(X_0^{2^i \bmod (p-1)(q-1)}\right) \bmod m \tag{3}\]</div>
+</li>
+</ul>
 <div class="admonition warning">
 <p class="admonition-title">PRNG potřebuje skutečně náhodný seed</p>
-<p>Zmíněné PRNG vyžadují náhodný a tajný vstup, <em>seed</em>:
-- Bez nějaké skutečné náhody se stejně neobejdeme.
-- Kvalita PRNG se odvíjí i od kvality hodnoty <em>seed</em>.
-- Entropie výstupu PRNG: dána entropií, která vstupuje (<em>seed</em>), <strong>algoritmus samotný nikdy nemůže entropii zvyšovat</strong>.</p>
+<p>Zmíněné PRNG vyžadují náhodný a tajný vstup, <em>seed</em>:</p>
+<ul>
+<li>Bez nějaké skutečné náhody se stejně neobejdeme.</li>
+<li>Kvalita PRNG se odvíjí i od kvality hodnoty <em>seed</em>.</li>
+<li>Entropie výstupu PRNG: dána entropií, která vstupuje (<em>seed</em>), <strong>algoritmus samotný nikdy nemůže entropii zvyšovat</strong>.</li>
+</ul>
 </div>
-<pre class="mermaid"><code>flowchart LR
-    S["X₀ (seed, X₀&gt;1)"] --&gt; S1["X₁ = X₀² mod m"] --&gt; B1["bit = LSB(X₁)"]
-    S1 --&gt; S2["X₂ = X₁² mod m"] --&gt; B2["bit = LSB(X₂)"]
-    S2 --&gt; S3["X₃ = …"]</code></pre>
 <hr />
 <h2 id="910-skutecne-nahodne-generatory-trng">9.10 Skutečně náhodné generátory (TRNG)<a class="headerlink" href="#910-skutecne-nahodne-generatory-trng" title="Permanent link">&para;</a></h2>
 <p>Společná vlastnost kryptograficky bezpečných PRNG: Neobejdou se bez parametrů (zejm. <em>seed</em>), které je třeba zvolit náhodně. <strong>PRNG samy o sobě v kryptografii nestačí</strong> — je třeba umět generovat skutečně náhodná čísla resp. bity.</p>
 <div class="admonition info">
 <p class="admonition-title">Generátory skutečně náhodných čísel (TRNG)</p>
-<p>TRNG (<em>True Random Number Generator</em>) využívají <strong>zdroj entropie</strong>, kterým je zpravidla nějaký fyzikální jev nebo vnější vliv. Například:
-- Radioaktivní rozpad (projekt HotBits)
-- Atmosférický šum (viz projekt random.org)
-- Tepelný šum, např. na analogových součástkách
-- Chování uživatele (pohyb myši, prodlevy při psaní na klávesnici)</p>
+<p>TRNG (<em>True Random Number Generator</em>) využívají <strong>zdroj entropie</strong>, kterým je zpravidla nějaký fyzikální jev nebo vnější vliv. Například:</p>
+<ul>
+<li>Radioaktivní rozpad (projekt HotBits)</li>
+<li>Atmosférický šum (viz projekt random.org)</li>
+<li>Tepelný šum, např. na analogových součástkách</li>
+<li>Chování uživatele (pohyb myši, prodlevy při psaní na klávesnici)</li>
+</ul>
 </div>
-<p><strong>Vlastnosti generátorů skutečně náhodných čísel:</strong>
-- Výstup není předvídatelný, i když známe všechny parametry
-- Výstup má zpravidla <strong>horší statistické vlastnosti</strong> → je nutné následné zpracování
-- Implementace je složitější, často vyžaduje <strong>dodatečný dedikovaný hardware</strong>
-- Zdroj entropie je třeba <strong>průběžně testovat</strong>, časem se mohou zhoršit jeho vlastnosti</p>
+<p><strong>Vlastnosti generátorů skutečně náhodných čísel:</strong></p>
+<ul>
+<li>Výstup není předvídatelný, i když známe všechny parametry</li>
+<li>Výstup má zpravidla <strong>horší statistické vlastnosti</strong> → je nutné následné zpracování</li>
+<li>Implementace je složitější, často vyžaduje <strong>dodatečný dedikovaný hardware</strong></li>
+<li>Zdroj entropie je třeba <strong>průběžně testovat</strong>, časem se mohou zhoršit jeho vlastnosti</li>
+</ul>
 <h3 id="post-processing-trng">Post-processing TRNG<a class="headerlink" href="#post-processing-trng" title="Permanent link">&para;</a></h3>
-<p>Následné zpracování (<em>post-processing</em>) má za cíl vylepšit statistické vlastnosti TRNG, zejména:
-- <strong>Odstranění nevyváženosti jedniček a nul</strong> (<em>bias</em>) a zajištění rovnoměrného rozdělení
-- <strong>Extrakce entropie</strong> — zvýšení entropie výstupních bitů za cenu snížení rychlosti jejich generování (<em>bitrate</em>)</p>
+<p>Následné zpracování (<em>post-processing</em>) má za cíl vylepšit statistické vlastnosti TRNG, zejména:</p>
+<ul>
+<li><strong>Odstranění nevyváženosti jedniček a nul</strong> (<em>bias</em>) a zajištění rovnoměrného rozdělení</li>
+<li><strong>Extrakce entropie</strong> — zvýšení entropie výstupních bitů za cenu snížení rychlosti jejich generování (<em>bitrate</em>)</li>
+</ul>
 <p><strong>Von Neumannův dekorelátor</strong> — schopen eliminovat nevyváženost a snížit korelovanost výstupu:</p>
 <table>
 <thead>
@@ -1956,10 +1988,12 @@ $<span class="arithmatex">\(X_i = \left(X_0^{2^i \bmod (p-1)(q-1)}\right) \bmod 
 </tr>
 </tbody>
 </table>
-<p>Bity se odebírají po dvou. Další možnosti:
-- Výstup TRNG se XOR-uje s výstupem kryptograficky silného PRNG
-- Sloučení (XOR) výstupů dvou nebo více různých TRNG (<em>software whitening</em>)
-- Hešování výstupu TRNG kryptograficky kvalitní hešovací funkcí</p>
+<p>Bity se odebírají po dvou. Další možnosti:</p>
+<ul>
+<li>Výstup TRNG se XOR-uje s výstupem kryptograficky silného PRNG</li>
+<li>Sloučení (XOR) výstupů dvou nebo více různých TRNG (<em>software whitening</em>)</li>
+<li>Hešování výstupu TRNG kryptograficky kvalitní hešovací funkcí</li>
+</ul>
 <hr />
 <h2 id="911-testovani-nahodnych-generatoru">9.11 Testování náhodných generátorů<a class="headerlink" href="#911-testovani-nahodnych-generatoru" title="Permanent link">&para;</a></h2>
 <p>K ověření vlastností náhodných generátorů se používají <strong>statistické testy</strong>. Testy ověřují, zda generovaná posloupnost splňuje některé vlastnosti náhodné posloupnosti.</p>

@@ -53,3 +53,13 @@
 .mermaid {
   text-align: center;
 }
+
+/* ── Font size swap: regular text smaller, boxes larger ── */
+.md-typeset {
+  font-size: 0.64rem;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: 0.74rem;
+}

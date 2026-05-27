@@ -1090,65 +1090,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#56-digitalni-podpis" class="md-nav__link">
+  <a href="#56-elgamal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.6 Digitální podpis
+        5.6 ElGamal
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5.6 Digitální podpis">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#vlastnosti-digitalniho-podpisu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vlastnosti digitálního podpisu
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#kategorie-digitalnich-podpisu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kategorie digitálních podpisů
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dss-digital-signature-standard" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        DSS (Digital Signature Standard)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#57-elgamal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.7 ElGamal
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5.7 ElGamal">
+    <nav class="md-nav" aria-label="5.6 ElGamal">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1189,6 +1139,56 @@
     <span class="md-ellipsis">
       
         Dešifrování (Alice)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#57-digitalni-podpis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7 Digitální podpis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7 Digitální podpis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vlastnosti-digitalniho-podpisu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vlastnosti digitálního podpisu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kategorie-digitalnich-podpisu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kategorie digitálních podpisů
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dss-digital-signature-standard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DSS (Digital Signature Standard)
       
     </span>
   </a>
@@ -1718,8 +1718,8 @@ Byly uvedeny v roce <strong>1978 Pohligem a Hellmanem</strong>. Jsou značně od
 <h3 id="modularni-aritmetika-klicove-fakty">Modulární aritmetika — klíčové fakty<a class="headerlink" href="#modularni-aritmetika-klicove-fakty" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[a^{\phi(n)} \equiv 1 \pmod{n} \quad \text{(Eulerova věta, } \gcd(a,n)=1\text{)}\]</div>
 <div class="arithmatex">\[a^{p-1} \equiv 1 \pmod{p} \quad \text{(Fermatova věta, } p \text{ prvočíslo)}\]</div>
-<p><strong>Eulerova funkce:</strong>
-$<span class="arithmatex">\(\phi(p) = p - 1 \quad \phi(n) = (p-1)(q-1) \text{ pro } n = pq\)</span>$</p>
+<p><strong>Eulerova funkce:</strong></p>
+<div class="arithmatex">\[\phi(p) = p - 1 \quad \phi(n) = (p-1)(q-1) \text{ pro } n = pq\]</div>
 <h3 id="rozsireny-eukliduv-algoritmus-vypocet-inverzniho-prvku">Rozšířený Euklidův algoritmus (výpočet inverzního prvku)<a class="headerlink" href="#rozsireny-eukliduv-algoritmus-vypocet-inverzniho-prvku" title="Permanent link">&para;</a></h3>
 <p>Pro výpočet <span class="arithmatex">\(a^{-1} \bmod m\)</span> (existuje pokud <span class="arithmatex">\(\gcd(a,m) = 1\)</span>):</p>
 <div class="admonition example">
@@ -1840,7 +1840,6 @@ $<span class="arithmatex">\(\phi(p) = p - 1 \quad \phi(n) = (p-1)(q-1) \text{ pr
 <li>Funkční síto (momentálně nejrychlejší)</li>
 </ul>
 <h3 id="delka-klice-a-bezpecnostni-kategorie">Délka klíče a bezpečnostní kategorie<a class="headerlink" href="#delka-klice-a-bezpecnostni-kategorie" title="Permanent link">&para;</a></h3>
-<p><img alt="Tabulka délky klíče pro různé útočníky" src="../../assets/img/prednasky/p02-044.png" /></p>
 <table>
 <thead>
 <tr>
@@ -1949,8 +1948,8 @@ $<span class="arithmatex">\(\phi(p) = p - 1 \quad \phi(n) = (p-1)(q-1) \text{ pr
 <li>Podmínka <span class="arithmatex">\(2^e &gt; n\)</span> zaručuje, že každý blok OT <span class="arithmatex">\(m\)</span> je správně zašifrován (nelze dešifrovat pouhým odmocňováním bez modulární redukce).</li>
 </ul>
 <h3 id="sifrovani-a-desifrovani">Šifrování a dešifrování<a class="headerlink" href="#sifrovani-a-desifrovani" title="Permanent link">&para;</a></h3>
-<div class="arithmatex">\[E(m) = c = |m^e|_n, \quad 0 &lt; c &lt; n$$
-$$D(c) = m = |c^d|_n\]</div>
+<div class="arithmatex">\[E(m) = c = |m^e|_n, \quad 0 &lt; c &lt; n\]</div>
+<div class="arithmatex">\[D(c) = m = |c^d|_n\]</div>
 <p><strong>Formální důkaz dešifrování</strong> (pomocí Eulerovy věty):</p>
 <div class="arithmatex">\[D(c) = |c^d|_n = |m^{ed}|_n = |m^{k\Phi(n)+1}|_n = |(m^{\Phi(n)})^k \cdot m|_n = |m|_n\]</div>
 <p>kde <span class="arithmatex">\(ed = k\Phi(n) + 1\)</span> pro nějaké celé číslo <span class="arithmatex">\(k\)</span> a z Eulerovy věty <span class="arithmatex">\(|p^{\Phi(n)}|_n = 1\)</span> pro <span class="arithmatex">\(\gcd(p, n) = 1\)</span>.</p>
@@ -2044,12 +2043,7 @@ $$D(c) = m = |c^d|_n\]</div>
 <li>Vypočteme <span class="arithmatex">\(h = |q_{inv}(m_1 - m_2)|_p\)</span></li>
 <li>Vypočteme <span class="arithmatex">\(m = m_2 + hq\)</span></li>
 </ol>
-<pre class="mermaid"><code>flowchart TB
-    C["Ciphertext c"] --&gt; M1["① m₁ = |c^{dₚ}|ₚ\n(číslo délky p — poloviční!)"]
-    C --&gt; M2["① m₂ = |c^{d_q}|_q\n(číslo délky q — poloviční!)"]
-    M1 &amp; M2 --&gt; H["② h = |q_inv·(m₁-m₂)|ₚ"]
-    H --&gt; M["③ m = m₂ + h·q"]
-    style M fill:#1a1d2e,stroke:#34d399</code></pre>
+<hr />
 <ul>
 <li>Krok 1 je výpočetně nejnáročnější. Počítáme ale s polovičními délkami čísel.</li>
 <li>Výpočet <span class="arithmatex">\(m_1\)</span> a <span class="arithmatex">\(m_2\)</span> je datově nezávislý a lze ho provádět <strong>paralelně</strong>.</li>
@@ -2058,54 +2052,7 @@ $$D(c) = m = |c^d|_n\]</div>
 </ul>
 <p><strong>Proč je to rychlejší?</strong> Exponenciáty jsou délky <span class="arithmatex">\(p\)</span> a <span class="arithmatex">\(q\)</span> (polovina <span class="arithmatex">\(n\)</span>). Exponencování <span class="arithmatex">\(k\)</span>-bitového čísla trvá <span class="arithmatex">\(O(k^3)\)</span> → polovina délky = <span class="arithmatex">\((1/2)^3 = 1/8\)</span> → <strong>~4× rychlejší pro každé exponencování</strong> + <span class="arithmatex">\(m_1\)</span> a <span class="arithmatex">\(m_2\)</span> jsou nezávislé → <strong>paralelizovatelné</strong> = celkem 4–8× zrychlení.</p>
 <hr />
-<h2 id="56-digitalni-podpis">5.6 Digitální podpis<a class="headerlink" href="#56-digitalni-podpis" title="Permanent link">&para;</a></h2>
-<p>Digitální podpis je formou <strong>asymetrického kryptografického schématu</strong>:</p>
-<ul>
-<li><strong>Soukromý klíč</strong> — podepisování</li>
-<li><strong>Veřejný klíč</strong> — ověření</li>
-</ul>
-<h3 id="vlastnosti-digitalniho-podpisu">Vlastnosti digitálního podpisu<a class="headerlink" href="#vlastnosti-digitalniho-podpisu" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Vlastnost</th>
-<th>Popis</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Nezfalšovatelnost / autentizace</strong></td>
-<td>Podpis se nedá napodobit jiným subjektem než podepisujícím; ověřitelnost — příjemce dokumentu musí být schopen ověřit, že podpis je platný</td>
-</tr>
-<tr>
-<td><strong>Integrita</strong></td>
-<td>Podepsaná zpráva se nedá změnit, aniž by se zneplatnilo podpis</td>
-</tr>
-<tr>
-<td><strong>Nepopiratelnost</strong></td>
-<td>Podepisující nesmí mít možnost popřít, že dokument podepsal</td>
-</tr>
-</tbody>
-</table>
-<p>Digitální podpis je <strong>skupina bitů</strong>, jejichž hodnoty závisí na celém podepisovaném dokumentu. Využívá informaci, kterou zná jen podepisující (soukromý klíč). Implementace digitálního podpisu by měla být snadná, ale <strong>falšování digitálního podpisu by mělo být výpočetně obtížné</strong>:</p>
-<ul>
-<li>neschůdné vyrobit falešný podpis pro existující zprávu</li>
-<li>neschůdné vyrobit falešnou zprávu pro existující podpis</li>
-</ul>
-<h3 id="kategorie-digitalnich-podpisu">Kategorie digitálních podpisů<a class="headerlink" href="#kategorie-digitalnich-podpisu" title="Permanent link">&para;</a></h3>
-<p><strong>Přímé digitální podpisy (direct digital signature):</strong></p>
-<ul>
-<li>Mezi dvěma subjekty, příjemce zná VK odesílatele.</li>
-<li>Problém s popiratelností ⇒ pokud odesílatel popře podepsání zprávy, příjemce ho nemůže usvědčit (není nikdo třetí, kdo by svědčil proti odesílateli).</li>
-</ul>
-<p><strong>Verifikované digitální podpisy (arbitrated digital signature):</strong></p>
-<ul>
-<li>Využívá důvěryhodnou třetí stranu (arbitra), který ověřuje podpisy všech zpráv.</li>
-</ul>
-<h3 id="dss-digital-signature-standard">DSS (Digital Signature Standard)<a class="headerlink" href="#dss-digital-signature-standard" title="Permanent link">&para;</a></h3>
-<p><img alt="Porovnání RSA a DSS podpisu" src="../../assets/img/prednasky/p06-179.png" /></p>
-<hr />
-<h2 id="57-elgamal">5.7 ElGamal<a class="headerlink" href="#57-elgamal" title="Permanent link">&para;</a></h2>
+<h2 id="56-elgamal">5.6 ElGamal<a class="headerlink" href="#56-elgamal" title="Permanent link">&para;</a></h2>
 <p><strong>El Gamal</strong> (Taher ElGamal) je algoritmus pro kryptografii s veřejným klíčem. Je <strong>založen na Diffie-Hellmanově výměně klíčů</strong>, resp. problému diskrétního logaritmu (DLP). Podobně jako RSA umožňuje El Gamal šifrování i digitální podpis.</p>
 <h3 id="pripomenuti-dh">Připomenutí DH<a class="headerlink" href="#pripomenuti-dh" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2158,6 +2105,53 @@ Obdobně pro další bloky zprávy.</p>
 <p>Poměr plaintextů je přímo znám.</p>
 </div>
 <hr />
+<h2 id="57-digitalni-podpis">5.7 Digitální podpis<a class="headerlink" href="#57-digitalni-podpis" title="Permanent link">&para;</a></h2>
+<p>Digitální podpis je formou <strong>asymetrického kryptografického schématu</strong>:</p>
+<ul>
+<li><strong>Soukromý klíč</strong> — podepisování</li>
+<li><strong>Veřejný klíč</strong> — ověření</li>
+</ul>
+<h3 id="vlastnosti-digitalniho-podpisu">Vlastnosti digitálního podpisu<a class="headerlink" href="#vlastnosti-digitalniho-podpisu" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Vlastnost</th>
+<th>Popis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nezfalšovatelnost / autentizace</strong></td>
+<td>Podpis se nedá napodobit jiným subjektem než podepisujícím; ověřitelnost — příjemce dokumentu musí být schopen ověřit, že podpis je platný</td>
+</tr>
+<tr>
+<td><strong>Integrita</strong></td>
+<td>Podepsaná zpráva se nedá změnit, aniž by se zneplatnilo podpis</td>
+</tr>
+<tr>
+<td><strong>Nepopiratelnost</strong></td>
+<td>Podepisující nesmí mít možnost popřít, že dokument podepsal</td>
+</tr>
+</tbody>
+</table>
+<p>Digitální podpis je <strong>skupina bitů</strong>, jejichž hodnoty závisí na celém podepisovaném dokumentu. Využívá informaci, kterou zná jen podepisující (soukromý klíč). Implementace digitálního podpisu by měla být snadná, ale <strong>falšování digitálního podpisu by mělo být výpočetně obtížné</strong>:</p>
+<ul>
+<li>neschůdné vyrobit falešný podpis pro existující zprávu</li>
+<li>neschůdné vyrobit falešnou zprávu pro existující podpis</li>
+</ul>
+<h3 id="kategorie-digitalnich-podpisu">Kategorie digitálních podpisů<a class="headerlink" href="#kategorie-digitalnich-podpisu" title="Permanent link">&para;</a></h3>
+<p><strong>Přímé digitální podpisy (direct digital signature):</strong></p>
+<ul>
+<li>Mezi dvěma subjekty, příjemce zná VK odesílatele.</li>
+<li>Problém s popiratelností ⇒ pokud odesílatel popře podepsání zprávy, příjemce ho nemůže usvědčit (není nikdo třetí, kdo by svědčil proti odesílateli).</li>
+</ul>
+<p><strong>Verifikované digitální podpisy (arbitrated digital signature):</strong></p>
+<ul>
+<li>Využívá důvěryhodnou třetí stranu (arbitra), který ověřuje podpisy všech zpráv.</li>
+</ul>
+<h3 id="dss-digital-signature-standard">DSS (Digital Signature Standard)<a class="headerlink" href="#dss-digital-signature-standard" title="Permanent link">&para;</a></h3>
+<p><img alt="Porovnání RSA a DSS podpisu" src="../../assets/img/prednasky/p06-179.png" /></p>
+<hr />
 <h2 id="58-dsa-digital-signature-algorithm">5.8 DSA — Digital Signature Algorithm<a class="headerlink" href="#58-dsa-digital-signature-algorithm" title="Permanent link">&para;</a></h2>
 <h3 id="parametry_1">Parametry<a class="headerlink" href="#parametry_1" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2180,27 +2174,12 @@ Obdobně pro další bloky zprávy.</p>
 <li><span class="arithmatex">\(v = (g^{u_1} \cdot y^{u_2} \bmod p) \bmod q\)</span></li>
 <li>Platný ↔ <span class="arithmatex">\(v = r\)</span></li>
 </ol>
-<pre class="mermaid"><code>flowchart LR
-    subgraph SIGN["Podepisování"]
-        M1["M"] --&gt; HM["H(M)"]
-        k["nonce k"] --&gt; r["r=(g^k mod p) mod q"]
-        HM &amp; r &amp; x["sk x"] --&gt; s["s=k⁻¹(H(M)+xr) mod q"]
-        r &amp; s --&gt; SIG["(r,s)"]
-    end
-    subgraph VER["Ověření"]
-        SIG2["(r,s)"] --&gt; w["w = s⁻¹ mod q"]
-        M2["M"] --&gt; HM2["H(M)"]
-        w &amp; HM2 --&gt; u1["u₁=H(M)·w mod q"]
-        w &amp; SIG2 --&gt; u2["u₂=r·w mod q"]
-        u1 &amp; u2 &amp; y["pk y"] --&gt; v["v=(g^u₁·y^u₂ mod p) mod q"]
-        v --&gt; OK["v==r? ✓"]
-    end</code></pre>
 <div class="admonition danger">
 <p class="admonition-title">Sony PS3 — kritický příklad</p>
 <p>Sony používalo <strong>konstantní <span class="arithmatex">\(k\)</span></strong> (ne náhodné) pro všechny DSA podpisy firmwaru PS3.</p>
 <p>Ze dvou podpisů <span class="arithmatex">\((r, s_1)\)</span>, <span class="arithmatex">\((r, s_2)\)</span> pro zprávy <span class="arithmatex">\(H(M_1), H(M_2)\)</span>:</p>
-<div class="arithmatex">\[k = \frac{H(M_1) - H(M_2)}{s_1 - s_2} \pmod{q}$$
-$$x = \frac{s_1 k - H(M_1)}{r} \pmod{q}\]</div>
+<div class="arithmatex">\[k = \frac{H(M_1) - H(M_2)}{s_1 - s_2} \pmod{q}\]</div>
+<div class="arithmatex">\[x = \frac{s_1 k - H(M_1)}{r} \pmod{q}\]</div>
 <p>Hackeři tak získali soukromý klíč a mohli podepisovat libovolný software pro PS3.</p>
 </div>
 <div class="admonition tip">

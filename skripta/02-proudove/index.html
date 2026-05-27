@@ -1696,7 +1696,7 @@
 <p>Protože distribuce klíče stejně dlouhého jako zpráva je nepraktická, používají moderní proudové šifry <strong>algoritmické generování hesla</strong>:</p>
 <ul>
 <li>Heslo se „vypočítá" na základě tajného šifrovacího klíče (distribuuje se)</li>
-<li>Aby klíč nemusel být příliš použit ⇒ <strong>princip náhodně se měnícího inicializačního vektoru (IV)</strong></li>
+<li>Aby klíč mohl být použitý pro více zpráv ⇒ <strong>princip náhodně se měnícího inicializačního vektoru (IV)</strong></li>
 <li>IV pro každou zprávu je vybírán náhodně a je přenášen před ŠT v otevřené podobě</li>
 <li>IV (za účasti tajného klíče nebo bez něj) nastavuje příslušný algoritmus (konečný automat, šifrátor) vždy do <strong>jiného (náhodného) počátečního stavu</strong> ⇒ při stejném tajném klíči je pokaždé jiná heslová posloupnost</li>
 <li><strong>Za různost hesla zodpovídá IV; za utajenost zodpovídá tajný šifrovací klíč</strong> (podobný princip se využívá i v blokových šifrách)</li>
@@ -1704,9 +1704,9 @@
 <div class="admonition danger">
 <p class="admonition-title">Zlaté pravidlo</p>
 <p><strong>Keystream nesmí být nikdy použit dvakrát se stejným klíčem!</strong></p>
-<p>Pokud útočník zachytí <span class="arithmatex">\(c_1\)</span> a <span class="arithmatex">\(c_2\)</span> šifrované stejným keystreamem <span class="arithmatex">\(k\)</span>:
-$<span class="arithmatex">\(c_1 \oplus c_2 = (m_1 \oplus k) \oplus (m_2 \oplus k) = m_1 \oplus m_2\)</span>$
-Klíč se vyruší a útočník zná XOR plaintextů — z toho lze rekonstruovat oba texty.</p>
+<p>Pokud útočník zachytí <span class="arithmatex">\(c_1\)</span> a <span class="arithmatex">\(c_2\)</span> šifrované stejným keystreamem <span class="arithmatex">\(k\)</span>:</p>
+<div class="arithmatex">\[c_1 \oplus c_2 = (m_1 \oplus k) \oplus (m_2 \oplus k) = m_1 \oplus m_2\]</div>
+<p>Klíč se vyruší a útočník zná XOR plaintextů — z toho lze rekonstruovat oba texty.</p>
 </div>
 <hr />
 <h2 id="23-synchronni-a-asynchronni-proudove-sifry">2.3 Synchronní a asynchronní proudové šifry<a class="headerlink" href="#23-synchronni-a-asynchronni-proudove-sifry" title="Permanent link">&para;</a></h2>
