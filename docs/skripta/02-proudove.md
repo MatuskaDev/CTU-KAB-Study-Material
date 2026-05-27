@@ -82,7 +82,7 @@ Na OT (5b na písmeno v 32znakovém Baudotově kódu) se bit po bitu binárně n
 Protože distribuce klíče stejně dlouhého jako zpráva je nepraktická, používají moderní proudové šifry **algoritmické generování hesla**:
 
 - Heslo se „vypočítá" na základě tajného šifrovacího klíče (distribuuje se)
-- Aby klíč nemusel být příliš použit ⇒ **princip náhodně se měnícího inicializačního vektoru (IV)**
+- Aby klíč mohl být použitý pro více zpráv ⇒ **princip náhodně se měnícího inicializačního vektoru (IV)**
 - IV pro každou zprávu je vybírán náhodně a je přenášen před ŠT v otevřené podobě
 - IV (za účasti tajného klíče nebo bez něj) nastavuje příslušný algoritmus (konečný automat, šifrátor) vždy do **jiného (náhodného) počátečního stavu** ⇒ při stejném tajném klíči je pokaždé jiná heslová posloupnost
 - **Za různost hesla zodpovídá IV; za utajenost zodpovídá tajný šifrovací klíč** (podobný princip se využívá i v blokových šifrách)
@@ -91,7 +91,9 @@ Protože distribuce klíče stejně dlouhého jako zpráva je nepraktická, pou�
     **Keystream nesmí být nikdy použit dvakrát se stejným klíčem!**
 
     Pokud útočník zachytí $c_1$ a $c_2$ šifrované stejným keystreamem $k$:
+
     $$c_1 \oplus c_2 = (m_1 \oplus k) \oplus (m_2 \oplus k) = m_1 \oplus m_2$$
+
     Klíč se vyruší a útočník zná XOR plaintextů — z toho lze rekonstruovat oba texty.
 
 ---

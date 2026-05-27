@@ -169,15 +169,7 @@ Existuje 12 konstant $a$ (kde $\varphi(26) = 12$) a 26 hodnot $b$, tedy $12 \tim
 
 $c = |7p + 10|_{26}$ → ŠT: **LJMKG MGMXF QEXMW**
 
-Pro dešifrování: $a^{-1} = |7|^{-1}_{26} = 15$ (protože $7 \times 15 = 105 = 4 \times 26 + 1$), tedy $p = |15(c - 10)|_{26} = |15c + 6|_{26}$.
-
-Vzájemný vztah písmen pro šifru $c = |7p + 10|_{26}$:
-
-![Bijekce afinní šifry c=|7p+10|₂₆](../assets/img/prednasky/p01-014.png)
-
-#### Příklad: $a = 7$, $b = 10$, dešifrování
-
-ŠT „FEXEN ZMBMK JNHMG MYZMN" → OT: **DO NOT REVEAL THE SECRET**
+Pro dešifrování: $a^{-1} = |7|^{-1}_{26} = 15$, tedy $p = |15(c - 10)|_{26} = |15c + 6|_{26}$.
 
 ---
 
@@ -187,9 +179,7 @@ Vzájemný vztah písmen pro šifru $c = |7p + 10|_{26}$:
 
 Pokus prolomit znakovou šifru může začít porovnáním četnosti výskytu písmen v ŠT a OT.
 
-**Četnost výskytu jednotlivých písmen v běžném anglickém textu:**
-
-![Četnost písmen v anglickém textu](../assets/img/prednasky/p01-015.png)
+**Četnost výskytu jednotlivých písmen v běžném anglickém textu: (v %)**
 
 | A | B | C | D | E  | F | G | H | I | J   | K   | L | M |
 |---|---|---|---|----|---|---|---|---|-----|-----|---|---|
@@ -278,6 +268,7 @@ Uvažujeme šifru s blokem jednoho bigramu OT, který je převáděn do ŠT dvou
     První blok (19, 7):
 
     $$c_1 = |5 \cdot 19 + 17 \cdot 7|_{26} = |214|_{26} = 6$$
+
     $$c_2 = |4 \cdot 19 + 15 \cdot 7|_{26} = |181|_{26} = 25$$
 
 Celý zašifrovaný text převodem na písmena: **GZ SC XN VC DJ ZX EO VC RC LS RC**
@@ -466,8 +457,6 @@ Sloupcová transpozice přerozděluje znaky OT do sloupců. Znaky OT se rozděl�
     ```
     TSEEO AMROO KHTST WCNAS NSIHS OHOAN IWXSE ASOLR STOXI MGHWU TPIRX
     ```
-
-![Transpozice – vizualizace mřížky](../assets/img/prednasky/p01-034.png)
 
 ### Dvojitá transpozice
 
