@@ -248,13 +248,7 @@ NIST v srpnu 2024 vydal první post-kvantové standardy:
     - **Post-kvantová kryptografie:** ML-KEM, ML-DSA, SLH-DSA (NIST 2024)
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Co je qubit a jak se liší od klasického bitu? Jaké jsou fyzické realizace?
-    2. Proč nelze kvantovou informaci zkopírovat? (Heisenbergův princip)
-    3. Vysvětlete polarizační kódování — dvě báze a jejich vztah.
-    4. Projděte BB84 na příkladu — co Alice posílá, co Bob dělá, jak se filtruje klíč.
-    5. Jak Eve detekujeme? Proč Eva nemůže odposlechnout bez chyby?
-    6. Jaká je pravděpodobnost detekce Evy při $n$ obětovaných bitech? Spočítejte pro $n = 40$.
-    7. Co je QBER a jaký je bezpečnostní práh?
-    8. Jaké jsou implementační požadavky na kvantový vs. klasický kanál v BB84?
-    9. Jaké klasické kryptografické algoritmy ohrožuje Shorův algoritmus?
-    10. Co je post-kvantová kryptografie? Vyjmenujte NIST standardy 2024.
+    1. Jaký je základní rozdíl mezi klasickou a kvantovou informací? Co je qubit a čím se liší od klasického bitu?
+    2. Co je polarizační kódování fotonu? Jaké jsou dvě báze používané v BB84 a jak spolu souvisejí?
+    3. Popište princip protokolu BB84 — jak probíhá zřízení společného klíče?
+    4. Jak protokol BB84 umožňuje detekci odposlechu? Proč Eva nemůže odposlouchávat, aniž by zanechala stopu?

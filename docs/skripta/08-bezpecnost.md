@@ -427,14 +427,9 @@ Silnější model = slabší předpoklady pro útočníka = silnější bezpečn
     - **P vs NP:** NP-těžké problémy jsou základem asymetrické kryptografie; P=NP by kryptografii zničilo
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Formulujte Kerckhoffsův princip. Co znamená „security through obscurity"?
-    2. Jaký je rozdíl mezi nepodmíněnou a podmíněnou bezpečností? Příklady.
-    3. Co je prokazatelná bezpečnost? Jak je RSA prokazatelně bezpečný?
-    4. Co je COPACABANA a jak ilustruje výpočetní bezpečnost?
-    5. Definujte entropii. Kdy je entropie maximální?
-    6. Co je obsažnost jazyka $r$, absolutní obsažnost $R$ a nadbytečnost $D$? Hodnoty pro angličtinu.
-    7. Co je vzdálenost jednoznačnosti $\delta_U$? Spočítejte pro jednoduchou substituci a Vigenère.
-    8. Co je konfúze a difúze? Jak jsou realizovány v AES?
-    9. Proč je OTP dokonale bezpečný a proč ho nelze prakticky použít?
-    10. Jaká je třída složitosti faktorizace? Co by znamenalo P=NP pro kryptografii?
-    11. Vyjmenujte třídy složitosti P, NP, NP-úplný, PSPACE, EXPTIME, CoNP a jejich vztahy.
+    1. Formulujte Kerckhoffsův princip. Proč je princip „security through obscurity" považován za nebezpečný?
+    2. Jaký je rozdíl mezi teoretickou, nepodmíněnou, podmíněnou, prokazatelnou a výpočetní bezpečností? Uveďte příklady.
+    3. Co je entropie v teorii informace? Kdy je maximální a jaký má vztah k bezpečnosti šifer?
+    4. Co je obsažnost jazyka, absolutní obsažnost a nadbytečnost jazyka? Jaký mají praktický dopad na kryptografii?
+    5. Co je vzdálenost jednoznačnosti a jaký má praktický význam pro luštění šifer?
+    6. Jak teorie složitosti souvisí s bezpečností kryptografických algoritmů? Co by P=NP znamenalo pro kryptografii?

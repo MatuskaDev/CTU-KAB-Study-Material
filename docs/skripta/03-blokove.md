@@ -330,13 +330,9 @@ Proudové a blokové šifry zajišťují **důvěrnost**, ne integritu zpráv. M
     | AES-256 | SP-síť | 256b | 128b | 14 | ✅ |
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Proč DES F-funkce nemusí být invertibilní?
-    2. Co je S-box v DES a jak se adresuje? Proč je jediný nelineární prvek?
-    3. Jaké jsou 4 operace AES? Co zajišťuje konfúzi (SubBytes) a co difúzi (ShiftRows, MixColumns)?
-    4. Proč poslední kolo AES vynechává MixColumns?
-    5. Jaký je rozdíl mezi CFB a OFB? Co mají společného?
-    6. Jaký mód použít pro integritu zprávy bez šifrování? (CBC-MAC)
-    7. Co je metoda solení IV a jaká je její výhoda?
-    8. Proč je CTR výhodný oproti CBC z hlediska paralelizace?
-    9. Proč ECB nikdy nepoužívat? Jaký je konkrétní útok?
-    10. Jaký je efektivní počet bitů klíče 3DES s 3 různými klíči? (168b, ale meet-in-the-middle → 112b)
+    1. Co je Feistelův algoritmus a jaká je jeho klíčová výhoda z hlediska šifrování a dešifrování?
+    2. Jaké jsou základní charakteristiky šifry DES? Kde spočívá nelinearita DES?
+    3. Proč DES přestal být považován za bezpečný a co přinesl TripleDES?
+    4. Z jakých operací se skládá jedna runda AES? Co zajišťuje konfúzi a co difúzi?
+    5. Jaké jsou hlavní operační módy blokových šifer (ECB, CBC, CTR, OFB, CFB)? Jaké jsou jejich vlastnosti a kdy se který používá?
+    6. Co je MAC a k čemu slouží? Jaký je princip CBC-MAC?

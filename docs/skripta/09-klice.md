@@ -487,14 +487,10 @@ Tyto sady byly nicméně vyvinuty převážně pro testování PRNG. Při testov
     - **Testování:** Frekvenční, Runs, spektrální, Maurer; sady Diehard, NIST
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Formulujte CRT a spočítejte příklad.
-    2. Co je kvadratické residuum? Kolik jich je modulo prvočíslo $p$?
-    3. Co je Legendreův symbol a jak ho spočítat (Eulerovo kritérium)?
-    4. Jak se liší Legendreův a Jacobiho symbol?
-    5. Co je generátor (primitivní kořen) modulo $p$? Jak testovat, zda $g$ je generátor?
-    6. Vyjmenujte algoritmy pro faktorizaci čísel a jejich použití.
-    7. Popište Rabin-Millerův test. Jaká je pravděpodobnost chyby?
-    8. Jaké jsou praktické kroky generování prvočísla? Co jsou silná prvočísla?
-    9. Co je PRNG? Proč LCG není kryptograficky bezpečný?
-    10. Co je TRNG? Co je Von Neumannův dekorelátor a proč ho potřebujeme?
-    11. Co testují statistické testy náhodnosti? Proč nestačí je jen „projít"?
+    1. Co říká Čínská věta o zbytcích (CRT) a jaké má využití v kryptografii?
+    2. Co jsou kvadratická rezidua a jaký je jejich počet modulo prvočíslo?
+    3. Co je generátor multiplikativní grupy (primitivní kořen)? Jak poznáme, že je dané číslo generátorem?
+    4. Jak funguje Rabin-Millerův test prvočíselnosti a jaká je jeho spolehlivost?
+    5. Co jsou pseudonáhodné generátory (PRNG)? Proč lineární kongruenční generátor není vhodný pro kryptografii a co přináší Blum-Blum-Shub?
+    6. Co jsou skutečně náhodné generátory (TRNG)? Jaké jsou typické zdroje entropie?
+    7. K čemu slouží post-processing u náhodných generátorů? Jaké statistické testy náhodnosti znáte?

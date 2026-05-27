@@ -480,10 +480,10 @@ Aplikujeme transpozici dvakrát (s různými nebo stejnými klíči) → výrazn
     | Sloupcová transpozice | Transpoziční | perm. sloupců | $n!$ | Frekv. analýza (vzory zachovány) |
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Zašifrujte „HELLO" Caesarovou šifrou s $k = 13$ (ROT13).
-    2. Proč musí být $\gcd(a, 26) = 1$ u afinní šifry?
-    3. Jak Kasiskiho test odhalí délku klíče Vigenèrovy šifry?
-    4. Jaký je rozdíl mezi konfúzí a difúzí? Která platí pro transpozici?
-    5. Vyjmenujte 5 modelů útočníka na šifrovací systémy.
-    6. Proč je Hillova šifra zranitelná na known-plaintext útok?
-    7. Jaký je rozdíl mezi šifrou a kódem?
+    1. Jaký je základní rozdíl mezi substituční a transpoziční šifrou? Uveďte příklady obou typů.
+    2. Co je konfúze a difúze? Která vlastnost se uplatňuje u substituční a která u transpoziční šifry?
+    3. Jak funguje Vigenèrova šifra? Čím se zásadně liší od jednoduché substituční šifry?
+    4. Jakým způsobem lze kryptoanalyzovat Vigenèrovu šifru? Popište principiálně Kasiskiho test.
+    5. Co je Hillova šifra a proč je zranitelná vůči útoku se známým plaintextem?
+    6. Jaká je základní myšlenka frekvenční analýzy a pro jaké typy šifer ji lze využít?
+    7. Jak hodnotíme spolehlivost šifrovacího systému? Jaké základní typy útočníků rozlišujeme?

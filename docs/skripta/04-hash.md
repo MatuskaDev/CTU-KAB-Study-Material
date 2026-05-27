@@ -399,13 +399,10 @@ flowchart LR
     - **HMAC:** $H((K^+ \oplus opad) \| H((K^+ \oplus ipad) \| M))$; autentizace původu dat, NE nepopiratelnost
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Jaké jsou dva typy jednosměrných funkcí? Příklady každého.
-    2. Jaká jsou tři bezpečnostní vlastnosti hašovací funkce? Jaká je složitost každé?
-    3. Proč $O(2^{n/2})$ na kolize 1. řádu, ne $O(2^n)$? (narozeninový paradox)
-    4. Proč nestačí doplnit zprávu nulami? Jak se správně padduje?
-    5. Popište Damgård-Merklovu konstrukci.
-    6. Co je Davies-Meyerova kompresní funkce? Proč XOR?
-    7. Popište strukturu SHA-1 (kontext, počet kol, funkce, konstanty).
-    8. Čím se SHA-256 liší od SHA-1?
-    9. Co je HMAC? Proč neposkytuje nepopiratelnost?
-    10. Jak funguje průkaz znalosti pomocí HMAC?
+    1. Definujte jednosměrnou funkci a hašovací funkci. Jaké jsou tři základní bezpečnostní vlastnosti hašovací funkce?
+    2. Co je narozeninový paradox a jak ovlivňuje odolnost hašovacích funkcí vůči kolizím?
+    3. Jak se správně zarovnává vstupní zpráva před hašováním? Co je Damgård-Merklovo zesílení a proč je důležité?
+    4. Popište Damgård-Merklovu konstrukci hašovací funkce — jak je zpracována zpráva jako celek?
+    5. Co je Davies-Meyerova konstrukce kompresní funkce?
+    6. Jaké jsou základní charakteristiky SHA-1 a SHA-256? Čím se zásadně liší?
+    7. Co je HMAC, k čemu slouží a proč neposkytuje nepopiratelnost?

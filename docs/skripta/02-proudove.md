@@ -476,13 +476,9 @@ Keystream z jednoho rámce zabezpečí řádově milisekundy hovoru. Pro **dalš
     | A5/1 | 64 b | 3 LFSR (~64 b) | GSM | ❌ PROLOMEN |
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Co je keystream a proč ho nelze použít dvakrát?
-    2. Co je absolutní bezpečnost (Vernam)? Jakou má nevýhodu?
-    3. Jaký je rozdíl mezi synchronní a asynchronní proudovou šifrou?
-    4. Popište KSA a PRGA u RC4. Jaká je slabina RC4 ve WEP?
-    5. Co je útok dvojím použitím hesla (crib dragging)?
-    6. Jak vypadá vnitřní stav Salsa20 (matice 4×4)?
-    7. Co je QR (Quarter Round) a jaký je rozdíl mezi sloupcovými a diagonálními rundy u ChaCha?
-    8. Jak funguje majority taktování A5/1? Proč je to jediný nelineární prvek?
-    9. Popište inicializaci A5/1.
-    10. Co je eSTREAM a pro které profily (SW/HW) jsou šifry navrženy?
+    1. Jaký je základní princip proudové šifry? Jak se liší od blokové šifry?
+    2. Co je Vernamova šifra a proč je absolutně bezpečná? Jaká je její praktická nevýhoda?
+    3. Jaký je problém dvojího použití hesla u aditivních proudových šifer?
+    4. Jaký je rozdíl mezi synchronní a asynchronní proudovou šifrou? Co znamená samosynchronizace a jak ji demonstruje Vigenèrův autokláv?
+    5. Jaký je základní princip A5/1? K čemu slouží LFSR a jak je zavedena nelinearita?
+    6. Jaké jsou hlavní charakteristiky šifer Salsa20 a ChaCha20?

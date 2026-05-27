@@ -262,11 +262,8 @@ Analogie DSA na eliptické křivce:
     - **ECC vs RSA**: 128-bit bezpečnost → ECC 256 b vs RSA 3072 b
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Nakreslete schéma sčítání dvou různých bodů na eliptické křivce (geometrie).
-    2. Jaký je vzorec pro $P + Q$ a pro $2P$ nad $\text{GF}(p)$? (s mod operacemi)
-    3. Definujte řád bodu a řád křivky. Co je kofaktor?
-    4. Co je ECDLP a proč je výpočetně neřešitelný? Pollardova $\rho$ metoda.
-    5. Proč je ECDLP těžší než DLP a co to znamená pro délky klíčů?
-    6. Popište ECDH protokol — kdo co posílá, jak se vypočítá sdílený klíč?
-    7. Jaká je složitost Pollardovy $\rho$ metody pro $r = 2^{256}$?
-    8. Porovnejte délky klíčů RSA a ECC při 128bitové bezpečnosti.
+    1. Jak geometricky interpretujeme součet dvou bodů na eliptické křivce? Co se stane při sčítání bodu se sebou samým?
+    2. Co je řád bodu, řád křivky a kofaktor? Jak spolu tyto pojmy souvisejí?
+    3. Co je problém diskrétního logaritmu na eliptických křivkách (ECDLP) a proč je výpočetně obtížný?
+    4. Jak funguje Diffie-Hellmanův protokol na eliptických křivkách (ECDH)?
+    5. Proč ECC dosahuje srovnatelné bezpečnosti jako RSA s výrazně kratšími klíči?

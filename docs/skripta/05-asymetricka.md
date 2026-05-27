@@ -533,18 +533,11 @@ Digitální podpis je **skupina bitů**, jejichž hodnoty závisí na celém pod
     | DSA | DLP | $(x, y)$ | Pouze podpis |
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Vysvětlete princip šifrovacího systému VK — jak se liší od symetrické šifry?
-    2. Popište RSA: generování klíčů, šifrování, dešifrování, podpis. Formální důkaz dešifrování.
-    3. Jaký je vztah RSA k problému faktorizace? Proč nebylo prokázáno, že dešifrování RSA vyžaduje faktorizaci?
-    4. Jak funguje RSA-CRT? Jaká je podmínka na $ed_p$ a $ed_q$? Proč je to rychlejší?
-    5. Popište přímý digitální podpis RSA (bez hašování). Jaké vlastnosti digitálního podpisu garantuje?
-    6. Jaký je rozdíl mezi přímým a verifikovaným digitálním podpisem?
-    7. Proč je RSA bez paddingu nebezpečné?
-    8. Co je El Gamal? Jak se liší od DH? Projděte šifrování a dešifrování na příkladu.
-    9. Proč musí být $k_B$ v El Gamal vždy nové a náhodné?
-    10. Vysvětlete Sony PS3 exploit — proč konstantní $k$ kompromituje DSA?
-    11. Jaký je rozdíl mezi DH a El Gamal?
-    12. Co je problém diskrétního logaritmu? Proč je těžký v $\mathbb{Z}_p^*$ ale snadný v $\mathbb{Z}_p$?
-    13. Zašifrujte zprávu exponenciální šifrou ($m = 2633$, $e = 29$, blok 1907).
-    14. Co je slabá instance a silné prvočíslo u exponenciální šifry?
-    15. Jak funguje DH pro 3 subjekty?
+    1. Jaký je základní princip asymetrických kryptosystémů? V čem se zásadně liší od symetrické kryptografie?
+    2. Popište matematický princip RSA — jak se generují klíče, jaký je vztah mezi šifrovacím a dešifrovacím klíčem a jak lze správnost dešifrování dokázat?
+    3. Na čem závisí bezpečnost RSA? Jak souvisí s problémem faktorizace?
+    4. Jak funguje RSA-CRT a proč urychluje dešifrování?
+    5. Jak lze pomocí RSA realizovat digitální podpis? Jaké vlastnosti digitálního podpisu tím získáme?
+    6. Jaké jsou klíčové vlastnosti digitálního podpisu?
+    7. Co je šifra El Gamal a jak věcně souvisí s Diffie-Hellmanovým protokolem?
+    8. Co je exponenciální šifra a jaký je vztah mezi šifrovacím a dešifrovacím klíčem?

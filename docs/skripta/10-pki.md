@@ -266,15 +266,10 @@ Tato koncepce zaručuje **důvěrnost a autentizaci** při výměně tajného kl
     - **Distribuce tajných klíčů:** jednoduchá (jen pasivní útoky) vs. s autentizací (4 kroky, N_1, N_2 nonce)
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Vysvětlete hrozbu podvržení veřejného klíče. Jak probíhá útok?
-    2. Vyjmenujte a popište 4 metody distribuce VK.
-    3. Popište protokol distribuce VK pomocí autority (7 kroků).
-    4. Co je certifikát? Zapište jeho strukturu formálně ($C_A = \ldots$).
-    5. Co je certifikační autorita? Co je registrační autorita?
-    6. Jaká pole obsahuje certifikát X.509? Jaký je rozdíl mezi formáty 1, 2 a 3?
-    7. Co je certifikační strom a řetězec certifikátů?
-    8. Kdy je certifikát platný?
-    9. Co je křížová certifikace? Kdy je jednosměrná a kdy obousměrná?
-    10. Co je PKI? Kde je specifikováno?
-    11. Popište jednoduchou distribuci tajných klíčů a její slabinu.
-    12. Jak probíhá distribuce tajných klíčů s utajením a autentizací?
+    1. Jaká jsou rizika podvržení veřejného nebo tajného klíče? Jak takovému útoku probíhá?
+    2. Vyjmenujte způsoby distribuce veřejných klíčů a stručně popište každý z nich.
+    3. Co je certifikát veřejného klíče? Co obsahuje a kdo ho vydává?
+    4. Jaký je rozdíl mezi certifikační autoritou (CA) a registrační autoritou (RA)?
+    5. Jak funguje komunikace pomocí certifikátů — jak si ověříme, že veřejný klíč patří správné osobě?
+    6. Co je řetězec certifikátů a kořenová certifikační autorita?
+    7. Co je křížová certifikace a kdy se používá?

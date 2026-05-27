@@ -386,13 +386,9 @@ Vrstvová architektura (od hardwaru nahoru):
     - **Java Card:** CPU+JVM, Applet, EEPROM heap, JCRE/JCVM architektura
 
 !!! question "Klíčové otázky ke zkoušce"
-    1. Co je vícefaktorová autentizace? Jaké jsou tři faktory?
-    2. Jaký je rozdíl mezi kontaktním a bezkontaktním rozhraním? Jaký standard se používá pro NFC platební karty?
-    3. Jaký je formát Command APDU? Popište každé pole. Jaké jsou 4 případy?
-    4. Co jsou SW1 a SW2? Co znamená SW = 9000? A SW = 63Cx?
-    5. Nakreslete hierarchii souborového systému ISO 7816-4 (MF/DF/EF).
-    6. Co je FID, SFI a AID? Kdy se každý používá?
-    7. Co je Secure Messaging? Jaké jsou tři úrovně zabezpečení?
-    8. Co je Key Diversification? Jaká je výhoda oproti sdílení jednoho klíče?
-    9. Co je Java karta? Jaké jsou specifika jazyka Java Card?
-    10. Popište vrstvovou architekturu Java Card runtime prostředí.
+    1. Co je čipová karta a k čemu slouží? Uveďte typické aplikace.
+    2. Jaké jsou tři základní faktory autentizace? Uveďte příklady každého faktoru.
+    3. Jaké jsou typy čipových karet z hlediska rozhraní? Jaký je základní rozdíl mezi kontaktní a bezkontaktní kartou?
+    4. Z jakých součástí se skládá čipová karta vnitřně?
+    5. Jak je čipová karta kryptograficky zabezpečena? Jaký je princip odvozování klíče (key derivation)?
+    6. Jaký je princip zabezpečení komunikace čipové karty — jak funguje autentizace zprávy a šifrování?
