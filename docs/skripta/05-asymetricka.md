@@ -78,6 +78,7 @@ $$a^{\phi(n)} \equiv 1 \pmod{n} \quad \text{(Eulerova věta, } \gcd(a,n)=1\text{
 $$a^{p-1} \equiv 1 \pmod{p} \quad \text{(Fermatova věta, } p \text{ prvočíslo)}$$
 
 **Eulerova funkce:**
+
 $$\phi(p) = p - 1 \quad \phi(n) = (p-1)(q-1) \text{ pro } n = pq$$
 
 ### Rozšířený Euklidův algoritmus (výpočet inverzního prvku)
@@ -194,8 +195,6 @@ Nejrychlejší algoritmy pro výpočet diskrétního logaritmu v $\mathbb{Z}_p^*
 
 ### Délka klíče a bezpečnostní kategorie
 
-![Tabulka délky klíče pro různé útočníky](../assets/img/prednasky/p02-044.png)
-
 | | hacker | firma | taj. služba | lidé | ??? |
 |---|--------|-------|-------------|------|-----|
 | \# µPC | 1 | 10³ | 10⁵ | 10⁸ | 10⁵¹ |
@@ -263,6 +262,7 @@ Pro praktické použití: doporučená délka modulárního prvočísla pro $\ma
 ### Šifrování a dešifrování
 
 $$E(m) = c = |m^e|_n, \quad 0 < c < n$$
+
 $$D(c) = m = |c^d|_n$$
 
 **Formální důkaz dešifrování** (pomocí Eulerovy věty):
@@ -370,14 +370,7 @@ $$ed_p \equiv 1 \pmod{p-1} \qquad ed_q \equiv 1 \pmod{q-1}$$
 2. Vypočteme $h = |q_{inv}(m_1 - m_2)|_p$
 3. Vypočteme $m = m_2 + hq$
 
-```mermaid
-flowchart TB
-    C["Ciphertext c"] --> M1["① m₁ = |c^{dₚ}|ₚ\n(číslo délky p — poloviční!)"]
-    C --> M2["① m₂ = |c^{d_q}|_q\n(číslo délky q — poloviční!)"]
-    M1 & M2 --> H["② h = |q_inv·(m₁-m₂)|ₚ"]
-    H --> M["③ m = m₂ + h·q"]
-    style M fill:#1a1d2e,stroke:#34d399
-```
+---
 
 - Krok 1 je výpočetně nejnáročnější. Počítáme ale s polovičními délkami čísel.
 - Výpočet $m_1$ a $m_2$ je datově nezávislý a lze ho provádět **paralelně**.
@@ -388,44 +381,7 @@ flowchart TB
 
 ---
 
-## 5.6 Digitální podpis
-
-Digitální podpis je formou **asymetrického kryptografického schématu**:
-
-- **Soukromý klíč** — podepisování
-- **Veřejný klíč** — ověření
-
-### Vlastnosti digitálního podpisu
-
-| Vlastnost | Popis |
-|-----------|-------|
-| **Nezfalšovatelnost / autentizace** | Podpis se nedá napodobit jiným subjektem než podepisujícím; ověřitelnost — příjemce dokumentu musí být schopen ověřit, že podpis je platný |
-| **Integrita** | Podepsaná zpráva se nedá změnit, aniž by se zneplatnilo podpis |
-| **Nepopiratelnost** | Podepisující nesmí mít možnost popřít, že dokument podepsal |
-
-Digitální podpis je **skupina bitů**, jejichž hodnoty závisí na celém podepisovaném dokumentu. Využívá informaci, kterou zná jen podepisující (soukromý klíč). Implementace digitálního podpisu by měla být snadná, ale **falšování digitálního podpisu by mělo být výpočetně obtížné**:
-
-- neschůdné vyrobit falešný podpis pro existující zprávu
-- neschůdné vyrobit falešnou zprávu pro existující podpis
-
-### Kategorie digitálních podpisů
-
-**Přímé digitální podpisy (direct digital signature):**
-
-- Mezi dvěma subjekty, příjemce zná VK odesílatele.
-- Problém s popiratelností ⇒ pokud odesílatel popře podepsání zprávy, příjemce ho nemůže usvědčit (není nikdo třetí, kdo by svědčil proti odesílateli).
-
-**Verifikované digitální podpisy (arbitrated digital signature):**
-
-- Využívá důvěryhodnou třetí stranu (arbitra), který ověřuje podpisy všech zpráv.
-
-### DSS (Digital Signature Standard)
-
-![Porovnání RSA a DSS podpisu](../assets/img/prednasky/p06-179.png)
-
----
-
-## 5.7 ElGamal
+## 5.6 ElGamal
 
 **El Gamal** (Taher ElGamal) je algoritmus pro kryptografii s veřejným klíčem. Je **založen na Diffie-Hellmanově výměně klíčů**, resp. problému diskrétního logaritmu (DLP). Podobně jako RSA umožňuje El Gamal šifrování i digitální podpis.
 
@@ -487,6 +443,43 @@ El Gamal vzniká úpravou DH:
 
 ---
 
+## 5.7 Digitální podpis
+
+Digitální podpis je formou **asymetrického kryptografického schématu**:
+
+- **Soukromý klíč** — podepisování
+- **Veřejný klíč** — ověření
+
+### Vlastnosti digitálního podpisu
+
+| Vlastnost | Popis |
+|-----------|-------|
+| **Nezfalšovatelnost / autentizace** | Podpis se nedá napodobit jiným subjektem než podepisujícím; ověřitelnost — příjemce dokumentu musí být schopen ověřit, že podpis je platný |
+| **Integrita** | Podepsaná zpráva se nedá změnit, aniž by se zneplatnilo podpis |
+| **Nepopiratelnost** | Podepisující nesmí mít možnost popřít, že dokument podepsal |
+
+Digitální podpis je **skupina bitů**, jejichž hodnoty závisí na celém podepisovaném dokumentu. Využívá informaci, kterou zná jen podepisující (soukromý klíč). Implementace digitálního podpisu by měla být snadná, ale **falšování digitálního podpisu by mělo být výpočetně obtížné**:
+
+- neschůdné vyrobit falešný podpis pro existující zprávu
+- neschůdné vyrobit falešnou zprávu pro existující podpis
+
+### Kategorie digitálních podpisů
+
+**Přímé digitální podpisy (direct digital signature):**
+
+- Mezi dvěma subjekty, příjemce zná VK odesílatele.
+- Problém s popiratelností ⇒ pokud odesílatel popře podepsání zprávy, příjemce ho nemůže usvědčit (není nikdo třetí, kdo by svědčil proti odesílateli).
+
+**Verifikované digitální podpisy (arbitrated digital signature):**
+
+- Využívá důvěryhodnou třetí stranu (arbitra), který ověřuje podpisy všech zpráv.
+
+### DSS (Digital Signature Standard)
+
+![Porovnání RSA a DSS podpisu](../assets/img/prednasky/p06-179.png)
+
+---
+
 ## 5.8 DSA — Digital Signature Algorithm
 
 ### Parametry
@@ -510,30 +503,13 @@ El Gamal vzniká úpravou DH:
 3. $v = (g^{u_1} \cdot y^{u_2} \bmod p) \bmod q$
 4. Platný ↔ $v = r$
 
-```mermaid
-flowchart LR
-    subgraph SIGN["Podepisování"]
-        M1["M"] --> HM["H(M)"]
-        k["nonce k"] --> r["r=(g^k mod p) mod q"]
-        HM & r & x["sk x"] --> s["s=k⁻¹(H(M)+xr) mod q"]
-        r & s --> SIG["(r,s)"]
-    end
-    subgraph VER["Ověření"]
-        SIG2["(r,s)"] --> w["w = s⁻¹ mod q"]
-        M2["M"] --> HM2["H(M)"]
-        w & HM2 --> u1["u₁=H(M)·w mod q"]
-        w & SIG2 --> u2["u₂=r·w mod q"]
-        u1 & u2 & y["pk y"] --> v["v=(g^u₁·y^u₂ mod p) mod q"]
-        v --> OK["v==r? ✓"]
-    end
-```
-
 !!! danger "Sony PS3 — kritický příklad"
     Sony používalo **konstantní $k$** (ne náhodné) pro všechny DSA podpisy firmwaru PS3.
     
     Ze dvou podpisů $(r, s_1)$, $(r, s_2)$ pro zprávy $H(M_1), H(M_2)$:
     
     $$k = \frac{H(M_1) - H(M_2)}{s_1 - s_2} \pmod{q}$$
+
     $$x = \frac{s_1 k - H(M_1)}{r} \pmod{q}$$
     
     Hackeři tak získali soukromý klíč a mohli podepisovat libovolný software pro PS3.

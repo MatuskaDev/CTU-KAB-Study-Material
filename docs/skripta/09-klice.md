@@ -49,7 +49,9 @@
     Nechť $p$ je liché prvočíslo a $a$ je celé číslo nedělitelné $p$. Potom kongruence $x^2 \equiv a \pmod{m}$ má buď **přesně 2 vzájemně nekongruentní řešení** modulo $p$ nebo **nemá žádné řešení**.
 
 !!! example "Příklad pro $p = 7$"
+
     $$|1^2|_7 = |1|_7, \quad |2^2|_7 = |4|_7, \quad |3^2|_7 = |2|_7$$
+
     $$|4^2|_7 = |2|_7, \quad |5^2|_7 = |4|_7, \quad |6^2|_7 = |1|_7$$
     
     Každé kvadratické residuum se vyskytuje **2×**. Kvadratická residua mod 7: {1, 2, 4}. Kvadratická nonresiduua mod 7: {3, 5, 6}.
@@ -69,11 +71,11 @@
 
 !!! example "Příklad: $x^2 \equiv a \pmod{15}$, kde $15 = 5 \cdot 3$"
     
-    | $|x^2|_{15}$ | $|x^2|_5$ | $|x^2|_3$ | kořeny |
+    | $\lvert x^2\rvert_{15}$ | $\lvert x^2\rvert_5$ | $\lvert x^2\rvert_3$ | kořeny |
     |---|---|---|---|
-    | $|1^2|_{15}=1$ | $|1|_5$ → 1. kořen | $|1^2|_3=|1|_3$ → 1. kořen | $\gcd(1,15)=1$ → QR |
-    | $|4^2|_{15}=1$ | $|1|_5$ → 1. kořen | $|4^2|_3=|1|_3$ → 1. kořen | |
-    | $|9^2|_{15}=|6|_{15}$ | $\gcd(6,15)=3$ | | nevyhovuje $\gcd(a,n)=1$ |
+    | $\lvert 1^2\rvert_{15}=1$ | $\lvert 1\rvert_5$ → 1. kořen | $\lvert 1^2\rvert_3=\lvert 1\rvert_3$ → 1. kořen | $\gcd(1,15)=1$ → QR |
+    | $\lvert 4^2\rvert_{15}=1$ | $\lvert 1\rvert_5$ → 1. kořen | $\lvert 4^2\rvert_3=\lvert 1\rvert_3$ → 1. kořen | |
+    | $\lvert 9^2\rvert_{15}=\lvert 6\rvert_{15}$ | $\gcd(6,15)=3$ | | nevyhovuje $\gcd(a,n)=1$ |
     
     - 1, 4 jsou 4-násobná kvadratická residua; 9, 10, 6 nesplňují podmínku $\gcd(a,n) = 1$
     - 2, 3, 5, 7, 8, 11, 12, 13, 14 jsou kvadratická nonresiduua
@@ -191,7 +193,7 @@ Test čísla $p$ na prvočíselnost:
 3. Vypočítáme $j = \left|a^{\frac{p-1}{2}}\right|_p$.
 4. Když $j \neq \left(\frac{a}{p}\right)$ → $p$ **určitě není prvočíslo**.
 5. Když $j = \left(\frac{a}{p}\right)$ → **pravděpodobnost**, že $p$ je složené, je $\leq 50\%$.
-
+---
 - $a$, které dosvědčí, že $p$ není prvočíslo, říkáme **svědek** (*Witness*).
 - Když $p$ je složené → pravděpodobnost vystupování náhodného čísla $a$ jako svědka je $\geq 50\%$.
 - Opakováním testu $t$ krát pokaždé s jinou hodnotou $a$ docílíme, že pravděpodobnost toho, že složené $p$ projde všemi testy jako prvočíslo, je menší než $2^{-t}$.
@@ -206,7 +208,7 @@ Test čísla $p$ na prvočíselnost:
 2. Vypočítáme $j = \left|a^{\frac{p-1}{2}}\right|_p$.
 3. Když $j \not\equiv \pm 1 \pmod{p}$ → $p$ **určitě není prvočíslo**.
 4. Když $j \equiv \pm 1 \pmod{p}$ → pravděpodobnost, že $p$ je složené, je $\leq 50\%$.
-
+---
 - Jednoduší test na prvočíselnost.
 - Opět: pravděpodobnost composite p passing t tests < $2^{-t}$; přitom se musí vyskytnout minimálně jednou hodnota $-1$ (krok 2 až 4).
 
@@ -221,22 +223,7 @@ Zvolíme náhodně $p$ a spočítáme $b$ a $m$ tak, aby platilo: $p = 1 + 2^b m
 3. Když $z = 1$ → $p$ může být prvočíslem; k další iteraci.
 4. Dokud $z \neq p - 1$ a $j \leq b - 2$ → opakuj $z \leftarrow |z^2|_p$, $j \leftarrow j + 1$.
 5. Když $z \neq p - 1$ → $p$ **určitě není prvočíslo**.
-
-```mermaid
-flowchart TD
-    START["p=1+2ᵇm (m liché)\nZáklad a, 1 < a < p"] --> Z["z = aᵐ mod p, j=0"]
-    Z --> IF1{"z == 1?"}
-    IF1 -->|"Ano"| PASS["Pravděpodobně prvočíslo ✓"]
-    IF1 -->|"Ne"| LOOP{"z == p−1?"}
-    LOOP -->|"Ano"| PASS
-    LOOP -->|"Ne"| IF2{"j > b−2?"}
-    IF2 -->|"Ano"| COMP["JISTĚ SLOŽENÉ ✗"]
-    IF2 -->|"Ne"| SQ["z = z² mod p\nj++"]
-    SQ --> LOOP
-    style COMP fill:#450a0a,stroke:#f87171,color:#e2e8f0
-    style PASS fill:#064e3b,stroke:#34d399,color:#e2e8f0
-```
-
+---
 - Zjednodušená verze testu na prvočíselnost doporučeného normou DSS.
 - Pravděpodobnost průchodu složeného čísla testem jako prvočísla **klesá rychleji** než u předchozích testů.
 - $\frac{3}{4}$ hodnot $a$ lze tvrdit, že mohou vystupovat v roli **svědků**.
@@ -293,11 +280,13 @@ Když $n$ má být součinem 2 **silných prvočísel** $p$ a $q$ → silná prv
 ### Motivace
 
 Mnoho kryptografických aplikací vyžaduje **náhodná čísla**:
+
 - Generování kryptografických klíčů
 - Generování čísel *nonce*, *salt*, výplní (*padding*)
 - Vernamova šifra (*one-time pad*)
 
 Vyžadovaná „kvalita" náhodnosti se u různých aplikací liší:
+
 - *Nonce* v některých protokolech stačí **jedinečné**
 - Generování klíčů vyžaduje **vyšší kvalitu**
 - Záruka nerozluštitelnosti Vernamovy šifry platí jen v případě, že klíč byl získán ze skutečně náhodného zdroje s **vysokou entropií**
@@ -315,6 +304,7 @@ Vyžadovaná „kvalita" náhodnosti se u různých aplikací liší:
 ### Statistické vlastnosti náhodných posloupností
 
 Od náhodných posloupností očekáváme **dobré statistické vlastnosti**:
+
 - **Rovnoměrné rozdělení** — všechny hodnoty jsou generovány se stejnou pravděpodobností
 - **Nezávislost** — jednotlivé generované hodnoty jsou *nezávislé* — není mezi nimi žádná korelace
 
@@ -339,6 +329,7 @@ Počítače pracují deterministicky → jak generovat náhodná čísla?
     Algoritmus, jehož výstupem je posloupnost, která sice ve skutečnosti **není** náhodná, ale která se **zdá být** náhodná, pokud útočníkovi nejsou známy některé parametry generátoru.
 
 Vlastnosti:
+
 - Algoritmické → snadno realizovatelné
 - Obvykle **rychlé**
 - Zpravidla mají dobré statistické vlastnosti
@@ -353,6 +344,7 @@ $$X_{n+1} = (aX_n + c) \bmod m \tag{1}$$
 kde $X$ je posloupnost pseudonáhodných čísel, $m > 0$ je modul (často mocnina dvou), $a$ je násobitel, $c$ je inkrement a $X_0$ je počáteční hodnota (*seed*).
 
 Pseudonáhodná posloupnost $X$ se opakuje nejvýše po $m$ iteracích. Tohoto maxima dosáhneme, pokud jsou splněny:
+
 - Čísla $c$ a $m$ jsou nesoudělná
 - $a - 1$ je dělitelné všemi prvočiniteli $m$
 - Pokud $4 | m$, pak také $4 | a - 1$
@@ -370,6 +362,7 @@ Požadavky na kryptograficky bezpečné pseudonáhodné generátory:
 - **„State compromise"**: I když je zjištěn vnitřní stav generátoru (ať už celý nebo zčásti), nelze zpětně zrekonstruovat dosavadní vygenerovanou náhodnou posloupnost. Navíc, pokud do generátoru za běhu vstupuje další entropie, nemělo by být možné ze znalosti vnitřního stavu předpovědět vnitřní stav v následujících iteracích.
 
 Příklady realizace kryptograficky bezpečných PRNG:
+
 - **Bezpečná bloková šifra v režimu čítače**: Náhodně zvolit klíč (*seed*) a počáteční hodnotu čítače $i$. Postupně šifrovat hodnoty $i, i+1$, atd.
 - **Kryptograficky bezpečná hešovací funkce aplikovaná na čítač**: Náhodně zvolit počáteční hodnotu čítače $i$. Postupně hashovat $i, i+1$, atd.
 - **Proudové šifry** jsou v zásadě PRNG, s jejichž výstupem se XORuje plaintext.
@@ -388,23 +381,19 @@ $$X_{n+1} = X_n^2 \bmod m \tag{2}$$
 - Výstupem zpravidla není přímo hodnota $X_n$, ale její **parita nebo několik nejméně významných bitů**.
 
 **Vlastnosti:**
+
 - **Pomalý**
 - Poměrně silný důkaz bezpečnosti (spojuje ji s výpočetní náročností faktorizace celých čísel)
 - Lze přímo spočítat $i$-tý prvek posloupnosti:
+- 
 $$X_i = \left(X_0^{2^i \bmod (p-1)(q-1)}\right) \bmod m \tag{3}$$
 
 !!! warning "PRNG potřebuje skutečně náhodný seed"
     Zmíněné PRNG vyžadují náhodný a tajný vstup, *seed*:
+
     - Bez nějaké skutečné náhody se stejně neobejdeme.
     - Kvalita PRNG se odvíjí i od kvality hodnoty *seed*.
     - Entropie výstupu PRNG: dána entropií, která vstupuje (*seed*), **algoritmus samotný nikdy nemůže entropii zvyšovat**.
-
-```mermaid
-flowchart LR
-    S["X₀ (seed, X₀>1)"] --> S1["X₁ = X₀² mod m"] --> B1["bit = LSB(X₁)"]
-    S1 --> S2["X₂ = X₁² mod m"] --> B2["bit = LSB(X₂)"]
-    S2 --> S3["X₃ = …"]
-```
 
 ---
 
@@ -414,12 +403,14 @@ Společná vlastnost kryptograficky bezpečných PRNG: Neobejdou se bez parametr
 
 !!! info "Generátory skutečně náhodných čísel (TRNG)"
     TRNG (*True Random Number Generator*) využívají **zdroj entropie**, kterým je zpravidla nějaký fyzikální jev nebo vnější vliv. Například:
+
     - Radioaktivní rozpad (projekt HotBits)
     - Atmosférický šum (viz projekt random.org)
     - Tepelný šum, např. na analogových součástkách
     - Chování uživatele (pohyb myši, prodlevy při psaní na klávesnici)
 
 **Vlastnosti generátorů skutečně náhodných čísel:**
+
 - Výstup není předvídatelný, i když známe všechny parametry
 - Výstup má zpravidla **horší statistické vlastnosti** → je nutné následné zpracování
 - Implementace je složitější, často vyžaduje **dodatečný dedikovaný hardware**
@@ -428,6 +419,7 @@ Společná vlastnost kryptograficky bezpečných PRNG: Neobejdou se bez parametr
 ### Post-processing TRNG
 
 Následné zpracování (*post-processing*) má za cíl vylepšit statistické vlastnosti TRNG, zejména:
+
 - **Odstranění nevyváženosti jedniček a nul** (*bias*) a zajištění rovnoměrného rozdělení
 - **Extrakce entropie** — zvýšení entropie výstupních bitů za cenu snížení rychlosti jejich generování (*bitrate*)
 
@@ -440,6 +432,7 @@ Následné zpracování (*post-processing*) má za cíl vylepšit statistické v
 | `10` | `1` |
 
 Bity se odebírají po dvou. Další možnosti:
+
 - Výstup TRNG se XOR-uje s výstupem kryptograficky silného PRNG
 - Sloučení (XOR) výstupů dvou nebo více různých TRNG (*software whitening*)
 - Hešování výstupu TRNG kryptograficky kvalitní hešovací funkcí

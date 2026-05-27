@@ -15,6 +15,7 @@
 ### Problém podvržení veřejného klíče
 
 Úvod — distribuce tajných klíčů pomocí kryptografie VK:
+
 1. Distribuce veřejných klíčů.
 2. Použití šifrování s VK pro distribuci tajných klíčů.
 
@@ -23,6 +24,7 @@ S distribucí VK souvisí hrozba **podvržení veřejného klíče** → ohrože
 ![Podvržení veřejného klíče — MitM útok](../assets/img/prednasky/p11-308.png)
 
 **Způsob podvržení VK:**
+
 - Subjekt A pošle svůj $VK_A$ a svůj identifikátor $ID_A$, tj. zprávu $VK_A \| ID_A$, subjektu B.
     - Předpoklad: útočník U má **aktivní** přístup k veřejnému kanálu.
 - U zachytí zprávu $VK_A \| ID_A$, vytvoří novou zprávu $VK_U \| ID_A$ a odešle ji B — **podvržení $VK_U$ subjektu B**.
@@ -65,8 +67,6 @@ Distribuce veřejných klíčů lze realizovat technikou:
 - Správce periodicky aktualizuje adresář — elektronicky nebo fyzicky.
 - **Slabé místo:** Pokud nepovolaný subjekt získá $SK$ správce adresáře → může modifikovat adresář a provádět odposlech jako v předchozí metodě.
 
-![Princip veřejně dostupného adresáře](../assets/img/prednasky/p11-312.png)
-
 ---
 
 ### Metoda 3 — Autorita pro veřejné klíče
@@ -105,6 +105,7 @@ Distribuce VK bez kontaktu s třetím důvěryhodným subjektem. Tento přístup
 
 !!! info "Definice — Certifikát"
     Certifikát je struktura, která obsahuje:
+
     - veřejný klíč žadatele/držitele certifikátu
     - identifikační údaje držitele certifikátu
     - dobu platnosti certifikátu
@@ -123,6 +124,7 @@ Distribuce VK bez kontaktu s třetím důvěryhodným subjektem. Tento přístup
 #### Formát certifikátu
 
 CA vydá certifikát $C_A$ pro subjekt A, který obsahuje:
+
 - dobu platnosti — $T_1$
 - identifikační údaje A — $ID_A$
 - veřejný klíč A — $VK_A$
@@ -154,20 +156,6 @@ Formáty certifikátů určuje doporučení **ITU-T X.509**, které je částí 
 
 ![X.509 — formáty certifikátů (pole)](../assets/img/prednasky/p11-321.png)
 
-| Pole | Formát 1 | Formát 2 | Formát 3 |
-|------|---------|---------|---------|
-| Formát certifikátu | ✓ | ✓ | ✓ |
-| Sériové číslo certifikátu | ✓ | ✓ | ✓ |
-| Algorit. vytvoření podpisu certifikátu | ✓ | ✓ | ✓ |
-| Identifikační údaje CA | ✓ | ✓ | ✓ |
-| Doba platnosti certifikátu | ✓ | ✓ | ✓ |
-| Identifikační údaje uživatele | ✓ | ✓ | ✓ |
-| Veřejný klíč uživatele | ✓ | ✓ | ✓ |
-| Jednoznačný identifikátor CA | | ✓ | ✓ |
-| Jednoznačný identifikátor uživatele | | ✓ | ✓ |
-| Rozšíření | | | ✓ |
-| Digitální podpis CA | ✓ | ✓ | ✓ |
-
 ---
 
 ## 10.3 Certifikační strom
@@ -197,12 +185,14 @@ Posloupnost certifikátů od certifikátu uživatele až k certifikátu kořenov
 ### Křížová certifikace
 
 Problém vzniká se získáváním certifikátů uživatelů jiné stromové struktury. V tomto případě získání certifikátů mezi uživateli dvou různých CA umožňuje **křížová certifikace**:
+
 - **Jednosměrná**
 - **Obousměrná**
 
 ![Stromová struktura CA a křížová certifikace](../assets/img/prednasky/p11-325.png)
 
 **Příklad:** V případě, že C (obrazek Křížová certifikace) chce komunikovat s A, musí A poslat C množinu certifikátů:
+
 - certifikát A, podepsaný $CA_1$
 - certifikát $CA_1$ podepsaný $CA_1$, tj. kořenový certifikát $CA_1$
 - certifikát $CA_1$ podepsaný $CA_2$, tj. **křížový certifikát**

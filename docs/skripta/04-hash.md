@@ -169,8 +169,6 @@ Délka zprávy je součástí hašovacího procesu. 64 bitů vyjadřující dél
 - Blok $M_i$ se promítne do $H_i$, ale současně dochází ke ztrátě informace.
 - Hašováním posledního bloku $M_N$ dostáváme $H_N$, z něhož bereme buď celou délku nebo část jako výslednou haš.
 
-![Damgård-Merklova kompresní funkce](../assets/img/prednasky/p05-137.png)
-
 ### Bezpečnost Damgård-Merklovy konstrukce
 
 **Kolize kompresní funkce** $f$ spočívá v nalezení inicializační hodnoty $H$ a dvou různých bloků $B_1$ a $B_2$ tak, aby $f(H, B_1) = f(H, B_2)$.

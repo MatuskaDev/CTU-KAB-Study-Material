@@ -123,8 +123,6 @@ $$x_R = \left|s^2 - x_P - x_Q\right|_p \quad \text{a} \quad y_R = \left|s(x_P - 
     
     **Zkouška:** $3^2 \equiv 6^3 + 2 \cdot 6 + 2 \pmod{17}$ → $9 \equiv 12 + 12 + 2 \pmod{17}$ → $9 = 9$ ✓
 
-![Příklad výpočtu 2P na eliptické křivce](../assets/img/prednasky/p09-251.png)
-
 !!! tip "Zkouška"
     Na zkoušce budete počítat sčítání bodů ručně. Naučte se oba vzorce ($P+Q$ a $2P$) nazpaměť a procvičte výpočet inverzního prvku mod p (rozšířený Euklidův algoritmus nebo malá Fermatova věta: $a^{-1} \equiv a^{p-2} \pmod p$).
 
@@ -150,8 +148,6 @@ Body na křivce $E$ mají různý řád. V kryptografii vybíráme takové body,
 U bodu řádu $r$ máme zaručeno, že dojde k opakování v posloupnosti $P, 2P, 3P, \ldots$ až po $r$-tém kroku. V případě, že $r$ je velké číslo, např. $2^{256}$, je to skutečně dlouhá posloupnost.
 
 Právě při šifrování a elektronickém podepisování se využívá tak velké posloupnosti a to právě v souvislosti s tzv. **problémem diskrétního logaritmu**.
-
-![ECC a problém diskrétního logaritmu](../assets/img/prednasky/p09-252.png)
 
 ### Definice ECDLP
 
@@ -220,21 +216,6 @@ a současně:
 $$Z = d_j Q_i = d_j(d_i P) = (d_j d_i)P$$
 
 Tedy každá strana vezme veřejný klíč protistrany a sečte ho $n$-krát, kde $n$ je privátní klíč. Protože obě strany vycházejí ze stejného bodu $P$, dospějí do stejného bodu $Z$.
-
-![Šifrování s ECC — analogie DH](../assets/img/prednasky/p09-255.png)
-
-```mermaid
-flowchart LR
-    subgraph ECDH["ECDH — sdílený klíč"]
-        PUB["Veřejné: E, P, r"] --> A["Alice: dA, QA=dA·P"]
-        PUB --> B["Bob: dB, QB=dB·P"]
-        A -->|"Pošle QA"| B
-        B -->|"Pošle QB"| A
-        A --> ZA["Z = dA·QB = dA·dB·P"]
-        B --> ZB["Z = dB·QA = dB·dA·P"]
-        ZA & ZB --> SAME["Stejný bod Z ✓"]
-    end
-```
 
 ---
 

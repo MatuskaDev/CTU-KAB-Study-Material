@@ -30,6 +30,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 
     > (1) popisuje integritu, (2) popisuje ověření vlastnictví klíče, (4) zaměňuje VK za SK – podpis vytváří vlastník **soukromého** klíče.
 
+    *→ Skripta: [5.7 – Digitální podpis](skripta/05-asymetricka.md#57-digitalni-podpis)*
+
 ---
 
 **Využití digitálního podpisu NEzajistí:**
@@ -44,6 +46,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 
     Digitální podpis zajišťuje integritu, autentizaci a nepopiratelnost. Důvěrnost zajišťuje **šifrování**.
 
+    *→ Skripta: [5.7 – Digitální podpis](skripta/05-asymetricka.md#57-digitalni-podpis)*
+
 ---
 
 **Vyberte pravdivá tvrzení:**
@@ -57,6 +61,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 
     !!! danger "Oprava chybné odpovědi ze studentských poznámek"
         Tvrzení (1) je **NEPRAVDIVÉ** – dokonale nejednoznačná a zároveň bezpečná šifra existuje: **Vernamova šifra (OTP)**.
+
+    *→ Skripta: [8.2 – Typy bezpečnosti](skripta/08-bezpecnost.md#82-typy-bezpecnosti)*
 
 ---
 
@@ -74,6 +80,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     - (3) ✗ – nesprávná definice
     - (4) ✗ – digitální podpis zajišťuje **integritu a nepopiratelnost**, nikoliv důvěrnost
 
+    *→ Skripta: [8.2 – Typy bezpečnosti](skripta/08-bezpecnost.md#82-typy-bezpecnosti)*
+
 ---
 
 ## Modulární aritmetika a teorie čísel
@@ -88,6 +96,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     3. Exponent $\bmod 4$: $888\ldots880 \bmod 4 = 0$, zbyde $9 \bmod 4 = 1$
     4. $3^1 \bmod 10 = \mathbf{3}$
 
+    *→ Skripta: [5.1 – Matematické základy](skripta/05-asymetricka.md#51-matematicke-zaklady)*
+
 ---
 
 **Platí $x \equiv 4 \pmod{5}$ a $x \equiv 3 \pmod{4}$. Kolik je $|x|_{20}$?**
@@ -96,6 +106,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     **Výsledek: 19**
 
     $19 \bmod 5 = 4$ ✓, $19 \bmod 4 = 3$ ✓
+
+    *→ Skripta: [9.1 – CRT](skripta/09-klice.md#91-cinska-veta-o-zbytcich-crt)*
 
 ---
 
@@ -107,6 +119,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     - $\gcd(140614,1406) = \mathbf{2}$
     - $\gcd(21919,219) = \mathbf{1}$
     - $\gcd(15335,1530) = \mathbf{5}$
+
+    *→ Skripta: [5.1 – Matematické základy](skripta/05-asymetricka.md#51-matematicke-zaklady)*
 
 ---
 
@@ -123,6 +137,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     - (2) správně $a - b = km$, ne $a + b$
     - (3) ✓ přesná definice kongruence
 
+    *→ Skripta: [5.1 – Matematické základy](skripta/05-asymetricka.md#51-matematicke-zaklady)*
+
 ---
 
 **Vyberte SPRÁVNÉ možnosti odpovídající $a \equiv b \pmod{m}$:**
@@ -135,6 +151,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     ✅ **(1) a (3)**
 
     - (2) platí jen pokud $0 \le b < m$
+
+    *→ Skripta: [5.1 – Matematické základy](skripta/05-asymetricka.md#51-matematicke-zaklady)*
 
 ---
 
@@ -150,6 +168,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
         Podmínka je $\gcd(e,\, \mathbf{m-1}) = 1$, **ne** $\gcd(e, m) = 1$!
         Příklad chyby: $m=29$, $e=7$ → `gcd(7,29)=1` ✓ ale `gcd(7,28)=7≠1` ✗
 
+    *→ Skripta: [5.0 – Exponenciální šifra](skripta/05-asymetricka.md#50-exponencialni-sifra)*
+
 ---
 
 **Šifra 3DES, algoritmus EDE, $K_1 = K_2 = K_3$. Jaká je efektivní velikost klíče? Jak zvýšit bezpečnost?**
@@ -161,6 +181,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 
     - $K_1 = K_3 \neq K_2$ → **112 b**
     - $K_1 \neq K_2 \neq K_3$ → **168 b**
+
+    *→ Skripta: [3.4 – 3DES](skripta/03-blokove.md#34-3des-triple-des)*
 
 ---
 
@@ -174,6 +196,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 ??? success "Odpověď"
     ✅ **(1) a (3)** – synchronní proudová šifra
 
+    *→ Skripta: [3.6 – Provozní módy](skripta/03-blokove.md#36-provozni-mody-blokovych-sifer)*
+
 ---
 
 **Caesarova šifra, posun $k = 5$. Určete předpis pro dešifrování:**
@@ -186,6 +210,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 ??? success "Odpověď"
     ✅ **(1)** a **(4)** (varianta 4 platí pouze pro abecedu 26 znaků)
 
+    *→ Skripta: [1.1 – Substituční šifry](skripta/01-klasicka.md#11-monoalfabeticke-substitucni-sifry)*
+
 ---
 
 **Text délky 32 znaků zašifrovaný transpoziční šifrou. Do kolika sloupců ho lze rozdělit při dešifrování?**
@@ -197,6 +223,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 
 ??? success "Odpověď"
     ✅ **(1) a (3)** – $32/2=16$ ✓, $32/8=4$ ✓; 6 a 10 nedávají celé číslo.
+
+    *→ Skripta: [1.5 – Transpoziční šifry](skripta/01-klasicka.md#15-transpozicni-sifry)*
 
 ---
 
@@ -212,6 +240,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 
     Tyto módy generují proud hesla nezávisle na OT → opakovaný IV = identický proud → útočník získá XOR dvou plaintextů. ECB IV nevyužívá. CBC/CFB jsou citlivé na IV jinak.
 
+    *→ Skripta: [3.6 – Provozní módy](skripta/03-blokove.md#36-provozni-mody-blokovych-sifer)*
+
 ---
 
 **Hillova šifra, bloky velikosti 3, abeceda 26 znaků. Co musí platit pro determinant šifrovací matice? Kolik různých bloků OT je možné zašifrovat?**
@@ -220,6 +250,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     - $\gcd(\det A,\, 26) = 1$
     - Počet různých bloků: $26^3 = 17\,576$
 
+    *→ Skripta: [1.3 – Hillova šifra](skripta/01-klasicka.md#13-polygraficke-substitucni-sifry-hillova-sifra)*
+
 ---
 
 **AES v modu ECB: pokud při přenosu poškodíme jeden bit ŠT, kolik bitů OT bude poškozeno?**
@@ -227,12 +259,16 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 ??? success "Odpověď"
     **128 bitů** – celý blok AES.
 
+    *→ Skripta: [3.6 – Provozní módy](skripta/03-blokove.md#36-provozni-mody-blokovych-sifer)*
+
 ---
 
 **DES v modu ECB: pokud při přenosu poškodíme jeden bit ŠT, kolik bitů OT bude poškozeno?**
 
 ??? success "Odpověď"
     **64 bitů** – celý blok DES.
+
+    *→ Skripta: [3.6 – Provozní módy](skripta/03-blokove.md#36-provozni-mody-blokovych-sifer)*
 
 ---
 
@@ -246,6 +282,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 ??? success "Odpověď"
     ✅ **(2) Difúzi** a **(3) Rozptýlení závislostí**
 
+    *→ Skripta: [1.5 – Transpoziční šifry](skripta/01-klasicka.md#15-transpozicni-sifry)*
+
 ---
 
 **Požadavky na Vernamovu šifru (vyberte správné):**
@@ -257,6 +295,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 
 ??? success "Odpověď"
     ✅ **(2) a (3)**
+
+    *→ Skripta: [2.2 – Vernamova šifra](skripta/02-proudove.md#22-vernamova-sifra-a-absolutni-bezpecnost)*
 
 ---
 
@@ -270,6 +310,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 ??? success "Odpověď"
     ✅ **(3) a (4)**
 
+    *→ Skripta: [1.0 – Základní pojmy](skripta/01-klasicka.md#10-zakladni-pojmy-v-kryptologii)*
+
 ---
 
 **RSA-CRT: soukromý klíč bude tvořen ___. Napište vzorce pro každou složku.**
@@ -278,6 +320,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     Soukromý klíč: $(p,\; q,\; d_p,\; d_q,\; q_{\text{inv}})$
 
     $$d_p = d \bmod (p-1), \quad d_q = d \bmod (q-1), \quad q_{\text{inv}} = q^{-1} \bmod p$$
+
+    *→ Skripta: [5.5 – RSA-CRT](skripta/05-asymetricka.md#55-rsa-crt)*
 
 ---
 
@@ -296,6 +340,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     - (3) ✓ – RSA parametry jsou vzájemně odvoditelné
     - (4) ✗ – **RSA je asymetrická šifra!**
 
+    *→ Skripta: [5.4 – RSA](skripta/05-asymetricka.md#54-rsa)*
+
 ---
 
 **Mezi asymetrické šifry patří:**
@@ -310,6 +356,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 
     A5/1 = symetrická proudová šifra (GSM). AES = symetrická bloková šifra.
 
+    *→ Skripta: [5.4 – RSA](skripta/05-asymetricka.md#54-rsa)*
+
 ---
 
 ## Algoritmy pro zřízení společného klíče
@@ -318,6 +366,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 
 ??? success "Odpověď"
     $$Y_A = a^{k_A} \bmod m, \qquad K = Y_B^{k_A} \bmod m = a^{k_A k_B} \bmod m$$
+
+    *→ Skripta: [5.2 – Diffie-Hellman](skripta/05-asymetricka.md#52-diffie-hellman-vymena-klicu)*
 
 ---
 
@@ -335,6 +385,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     - P(Eva = opačná báze) = 0,5 → Bob dostane 1 s P = 0,5
     - Celkem: $0{,}5 \cdot 1 + 0{,}5 \cdot 0{,}5 = 0{,}75$
 
+    *→ Skripta: [7.6 – Protokol BB84](skripta/07-kvanty.md#76-protokol-bb84-benett-brassard-1984)*
+
 ---
 
 **Zvolte platnost tvrzení o protokolu BB-84:**
@@ -350,6 +402,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     - (3) ✗ – vyžaduje kvantový kanál (přenos fotonů)
     - (4) ✗ – se **správnou** bází je P = **100 %**; 50 % nastává při špatné bázi
 
+    *→ Skripta: [7.6 – Protokol BB84](skripta/07-kvanty.md#76-protokol-bb84-benett-brassard-1984)*
+
 ---
 
 ## Hašovací funkce
@@ -359,6 +413,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 ??? success "Odpověď"
     $2^{160}$ (délka hashe SHA-1 = 160 bitů)
 
+    *→ Skripta: [4.5 – SHA-x](skripta/04-hash.md#45-sha-x)*
+
 ---
 
 **SHA-512: po kolika pokusech nastane kolize 1. řádu s 50 % pravděpodobností?**
@@ -366,12 +422,16 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 ??? success "Odpověď"
     $2^{256}$ (narozeninový útok: $2^{n/2} = 2^{512/2}$)
 
+    *→ Skripta: [4.3 – Narozeninový paradox](skripta/04-hash.md#43-narozeninovy-paradox)*
+
 ---
 
 **SHA-256: kolik hashů musíme provést k nalezení kolize 2. řádu (ke konkrétní zprávě)?**
 
 ??? success "Odpověď"
     $2^{256}$ (= $2^n$ pro hash délky $n = 256$ b)
+
+    *→ Skripta: [4.2 – Bezpečnostní vlastnosti](skripta/04-hash.md#42-bezpecnostni-vlastnosti-a-bezkoliznost)*
 
 ---
 
@@ -382,6 +442,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 
     Kolize 2. řádu (ke konkrétní zprávě) by vyžadovala $2^{160}$ hashů.
 
+    *→ Skripta: [4.3 – Narozeninový paradox](skripta/04-hash.md#43-narozeninovy-paradox)*
+
 ---
 
 **Popište Damgard-Merklovu konstrukci hašovací funkce při použití AES jako kompresní funkce. Uveďte velikost bloku a způsob zpracování zprávy.**
@@ -391,6 +453,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     - Zarovnání: přidej bit 1, pak nuly, pak 64bitovou délku zprávy (D-M zesílení)
     - Iterace: $H_i = \text{AES}(H_{i-1},\, M_i)$, kde $H_0 = IV$
     - Výsledný hash = $H_N$ (128 bitů)
+
+    *→ Skripta: [4.4 – Damgård-Merklova konstrukce](skripta/04-hash.md#44-damgard-merklova-konstrukce)*
 
 ---
 
@@ -405,6 +469,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 
     Oba zajišťují **autentizaci původu dat**, ale **ne nepopiratelnost**.
 
+    *→ Skripta: [4.7 – HMAC](skripta/04-hash.md#47-hmac)*
+
 ---
 
 ## Entropie a vzdálenost jednoznačnosti
@@ -415,6 +481,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     $$\delta_U = \frac{H(K)}{D}, \qquad D = R - r, \qquad R = \log_2 L$$
 
     $H(K)$ = entropie klíče, $D$ = redundance jazyka OT, $L$ = velikost abecedy, $r$ = obsažnost jazyka
+
+    *→ Skripta: [8.3 – Vzdálenost jednoznačnosti](skripta/08-bezpecnost.md#vzdalenost-jednoznacnosti)*
 
 ---
 
@@ -427,6 +495,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     !!! danger "Oprava chybné odpovědi ze studentských poznámek"
         „Entropie je zdola omezená délkou zprávy" je **NEPRAVDIVÉ**. Minimum je $H = 0$, ne délka zprávy.
 
+    *→ Skripta: [8.3 – Entropie](skripta/08-bezpecnost.md#entropie)*
+
 ---
 
 **Jaká bude vzdálenost jednoznačnosti pro AES-192, kódování UTF-32?**
@@ -436,6 +506,8 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
     - $R = 32$ b, $r \approx 1{,}5$ b → $D = 30{,}5$
     - $\delta_U = 192 / 30{,}5 \approx \mathbf{6{,}3}$ znaků
 
+    *→ Skripta: [8.3 – Vzdálenost jednoznačnosti](skripta/08-bezpecnost.md#vzdalenost-jednoznacnosti)*
+
 ---
 
 **Spočtěte entropii RNG s pravděpodobnostmi:**
@@ -443,6 +515,8 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
 
 ??? success "Odpověď"
     $$H = \tfrac{1}{2}{\cdot}1 + \tfrac{1}{4}{\cdot}2 + \tfrac{1}{8}{\cdot}3 + \tfrac{1}{16}{\cdot}4 + \tfrac{1}{16}{\cdot}4 = 0{,}5 + 0{,}5 + 0{,}375 + 0{,}25 + 0{,}25 = \mathbf{1{,}875 \text{ b}}$$
+
+    *→ Skripta: [8.3 – Entropie](skripta/08-bezpecnost.md#entropie)*
 
 ---
 
@@ -462,6 +536,8 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
     - (2) ✗ – pro nekryptografické účely (simulace, hry) je použitelný
     - (3) ✗ – LCG není kryptograficky bezpečný, next-bit **lze** předpovědět
 
+    *→ Skripta: [9.8 – LCG](skripta/09-klice.md#98-pseudonahodne-generatory-prng)*
+
 ---
 
 **LCG: $a=9$, $c=5$, $m=32$. První vygenerovaná hodnota je 20. Jaký byl seed? Je perioda generátoru maximální?**
@@ -475,6 +551,8 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
     $s = 25 \cdot 15 \bmod 32 = 375 \bmod 32 = \mathbf{23}$
 
     **Perioda je maximální** ($= 32$): $\gcd(5,32)=1$ ✓, $2\mid(a-1)=8$ ✓, $4\mid(a-1)=8$ ✓
+
+    *→ Skripta: [9.8 – LCG](skripta/09-klice.md#98-pseudonahodne-generatory-prng)*
 
 ---
 
@@ -498,12 +576,16 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
 
     **Kryptograficky bezpečná: NE** – výstup je čistě periodický (23↔67), nesplňuje next-bit test.
 
+    *→ Skripta: [9.9 – BBS](skripta/09-klice.md#99-blum-blum-shub-bbs)*
+
 ---
 
 **Rabin-Miller test: $p = 13$, $a = 2$. Napiš rozklad $p-1$ ve tvaru $2^b \cdot m$.**
 
 ??? success "Odpověď"
     $p - 1 = 12 = 2^2 \cdot 3 \implies b = 2,\; m = 3$ (liché) ✓
+
+    *→ Skripta: [9.6 – Testy prvočíselnosti](skripta/09-klice.md#96-testy-prvociselnosti)*
 
 ---
 
@@ -520,6 +602,8 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
     | 01 | **0** |
 
     Výsledek: **`0010`**
+
+    *→ Skripta: [9.10 – TRNG](skripta/09-klice.md#910-skutecne-nahodne-generatory-trng)*
 
 ---
 
@@ -543,6 +627,8 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
     !!! tip "Klíčový princip"
         Asymetrie (RSA) slouží jen pro **výměnu klíče a autentizaci**. Data šifruje symetrická šifra.
 
+    *→ Skripta: [10.1 – Distribuce veřejných klíčů](skripta/10-pki.md#101-distribuce-verejnych-klicu)*
+
 ---
 
 ## PKI a certifikáty
@@ -554,6 +640,8 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
 
     Ověření: pomocí **veřejného klíče CA** ($VK_{\text{CA}}$).
 
+    *→ Skripta: [10.1 – Distribuce veřejných klíčů](skripta/10-pki.md#101-distribuce-verejnych-klicu)*
+
 ---
 
 **Jaké jsou 3 nepostradatelné složky certifikátu?**
@@ -562,6 +650,8 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
     1. Identifikátor certifikovaného subjektu
     2. Veřejný klíč certifikovaného subjektu
     3. Doba platnosti certifikátu
+
+    *→ Skripta: [10.2 – Formáty certifikátů X.509](skripta/10-pki.md#102-formaty-certifikatu-podle-x509)*
 
 ---
 
@@ -575,12 +665,16 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
 ??? success "Odpověď"
     ✅ **(2)** Zřídit společný tajný klíč $K$.
 
+    *→ Skripta: [4.7 – HMAC](skripta/04-hash.md#47-hmac)*
+
 ---
 
 **Model bezpečnosti OSI zahrnuje ___ bezpečnosti, ___ bezpečnosti a ___ bezpečnost.**
 
 ??? success "Odpověď"
     **Služby** bezpečnosti · **Mechanismy** bezpečnosti · **Útoky na** bezpečnost
+
+    *→ Skripta: [8.2 – Typy bezpečnosti](skripta/08-bezpecnost.md#82-typy-bezpecnosti)*
 
 ---
 
@@ -589,6 +683,8 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
 ??? success "Odpověď"
     1. Pravděpodobnost vzniku incidentu informační bezpečnosti
     2. Dopad incidentu
+
+    *→ Skripta: [8.2 – Typy bezpečnosti](skripta/08-bezpecnost.md#82-typy-bezpecnosti)*
 
 ---
 
@@ -600,6 +696,8 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
     3. Zabezpečení důvěrnosti dat
     4. Zabezpečení integrity dat
     5. Ochrana proti odmítnutí původu dat (nepopiratelnost)
+
+    *→ Skripta: [8.2 – Typy bezpečnosti](skripta/08-bezpecnost.md#82-typy-bezpecnosti)*
 
 ---
 
@@ -619,6 +717,8 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
 
     **Výsledek:** 17 je **pravděpodobně prvočíslo** ✓
 
+    *→ Skripta: [9.6 – Testy prvočíselnosti](skripta/09-klice.md#96-testy-prvociselnosti)*
+
 ---
 
 **Popište mód CTR (Counter) – princip, vlastnosti, šifrování i dešifrování.**
@@ -631,3 +731,5 @@ P(000) = 1/2, P(001) = 1/4, P(010) = 1/8, P(011) = 1/16, P(100) = 1/16, ostatní
     - Umožňuje **náhodný přístup** k blokům
     - Porucha 1 bitu ŠT → porucha právě 1 bitu OT
     - Nonce se **nesmí opakovat** se stejným klíčem
+
+    *→ Skripta: [3.6 – Provozní módy](skripta/03-blokove.md#36-provozni-mody-blokovych-sifer)*

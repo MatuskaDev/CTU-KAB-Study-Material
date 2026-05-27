@@ -91,9 +91,9 @@ Za fyzikální obraz qubitu považujeme libovolný kvantově mechanicky popsaný
 ### Lineární báze ("+")
 
 | Stav | Symbol | Polarizace |
-|------|--------|-----------|
-| $|0\rangle_{(r)}$ | `\|` | 0° (vertikální) |
-| $|1\rangle_{(r)}$ | `—` | 90° (horizontální) |
+|------|-------|-----------|
+| $\vert 0\rangle_{(r)}$ | `|` | 0° (vertikální) |
+| $\vert 1\rangle_{(r)}$ | `—` | 90° (horizontální) |
 
 $$|\psi\rangle = \omega_{(r),0}|0\rangle_{(r)} + \omega_{(r),1}|1\rangle_{(r)}$$
 
@@ -101,8 +101,8 @@ $$|\psi\rangle = \omega_{(r),0}|0\rangle_{(r)} + \omega_{(r),1}|1\rangle_{(r)}$$
 
 | Stav | Symbol | Polarizace |
 |------|--------|-----------|
-| $|0\rangle_{(d)}$ | `\` | 135° |
-| $|1\rangle_{(d)}$ | `/` | 45° |
+| $\vert 0\rangle_{(d)}$ | `\` | 135° |
+| $\vert 1\rangle_{(d)}$ | `/` | 45° |
 
 $$|\psi\rangle = \omega_{(d),0}|0\rangle_{(d)} + \omega_{(d),1}|1\rangle_{(d)}$$
 
@@ -120,8 +120,6 @@ $$|1\rangle_{(r)} = \frac{1}{\sqrt{2}}\left(|0\rangle_{(d)} - |1\rangle_{(d)}\ri
 
 Pokud měříme fotón ve **špatné bázi** (fotón je v bázi `+`, měříme bází `×`), výsledek je **náhodný** a původní stav je destruován.
 
-![Polarizační kódování fotonů](../assets/img/prednasky/p09-260.png)
-
 ---
 
 ## 7.6 Protokol BB84 (Benett-Brassard 1984)
@@ -136,50 +134,9 @@ Pokud měříme fotón ve **špatné bázi** (fotón je v bázi `+`, měříme b
     - Založen na využití **Heisenbergova principu neurčitosti** ve spojení s polarizačním kódováním.
     - S mírnými obměnami je BB84 používán a rozvíjen dodnes.
 
-### Průběh protokolu
-
-```mermaid
-sequenceDiagram
-    participant A as Alice
-    participant Q as Kvantový kanál
-    participant E as Eva (útočník?)
-    participant B as Bob
-    participant C as Klasický aut. kanál
-
-    A->>Q: Fotony s náhodnou polarizací (báze +/×, bit 0/1)
-    Q->>E: Eva případně odposlechne a přepošle
-    E->>B: Přeposlaný fotón (Eva změní stav!)
-    A->>C: Oznámí použité báze (NE hodnoty bitů!)
-    B->>C: Oznámí použité báze
-    note over A,B: Ponechají bity kde se báze shodují (~50% bitů = sieved key)
-    A->>C: Odhalí náhodný vzorek bitů klíče
-    B->>C: Porovná stejné pozice
-    note over A,B: QBER > práh (~11%) → Eva detekována → klíč zahodit
-    note over A,B: Jinak: Error Correction + Privacy Amplification → OTP klíč
-```
-
 ### Krok za krokem — příklad z přednášky
 
 ![Příklad průběhu BB84 komunikace](../assets/img/prednasky/p09-262.png)
-
-**① Odesílatel (Alice):** Generuje náhodnou binární posloupnost a provádí její polarizační kódování dle náhodně volené báze.
-
-| Alicin bit | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Báze | X | + | X | X | X | + | + | X | X | + | + | + | X | + | X | + | + | X | X | + |
-| Polarizace | / | — | / | / | / | \| | \| | / | \ | — | \| | \| | \ | \| | / | \| | \| | \ | \ | \| |
-
-**② Příjemce (Bob):** Dekóduje přijaté fotony dle náhodně volené báze.
-
-| Bobova báze | / | — | / | / | / | \| | \| | / | \ | — | \| | \| | \ | \| | / | \| | \| | \ | \ | \| |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Přijatý bit | 0 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 0 | 1 |
-
-**③ Odesílatel (Alice):** Oznámí Bobovi (veřejně, ovšem s autentizací původu zprávy), jakou bázi v daném kroku použila. To samé učiní Bob. Bity, kde se oba shodli, budou použity pro symetrický klíč.
-
-| Shoda báze | ✓ | | ✓ | ✓ | | | ✓ | | | ✓ | ✓ | ✓ | | ✓ | |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Výsledný klíč | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 0 |
 
 ### Proč Eva nemůže odposlechnout?
 
@@ -243,14 +200,6 @@ BB84 je schopen do jisté míry **nahradit asymetrické systémy** ve stávajíc
 |---------------|-----------|-----------|
 | Současní uživatelé asymetrických schémat | Vyšší teoretickou bezpečnost | Poněkud ztrácejí pohodlí; ne všechny komponenty lze zatím nahradit (podpis) |
 | Vojenští a zpravodajští uživatelé | Větší pohodlí při zachování přibližně stejné úrovně bezpečnosti | — |
-
-### Experimentální výsledky
-
-![Experimentální výsledky — Geneva Lake](../assets/img/prednasky/p09-267.png)
-
-**Muller et al. 1995–96, Ribordy et al. 1998, 2000** (foto: Gisin et al. 2001)
-
-Dohoda na klíči na vzdálenost **23 km** pomocí optického kabelu Swisscom pod dnem Ženevského jezera (entre Nyon a Ženevou).
 
 ---
 

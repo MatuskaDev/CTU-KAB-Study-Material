@@ -90,8 +90,6 @@ Problémy v praxi:
 !!! info "Definice — Výpočetní bezpečnost"
     Kryptosystém je výpočetně bezpečný, pokud pro jeho prolomení je třeba vynaložit prostředky nebo čas, které přesahují **cenu respektive životnost informace**.
 
-![Definice výpočetní bezpečnosti a COPACOBANA](../assets/img/prednasky/p08-218.png)
-
 !!! example "Příklad — COPACABANA (2006)"
     Prolomení DES na zařízení typu **COPACABANA** (2006) je možné v rámci **7 dní** s náklady na hardware kolem **$10 000**. V takovém případě je šifra výpočetně bezpečná pro informace, které ztrácí význam během kratší doby nebo mají menší hodnotu.
 
@@ -104,8 +102,6 @@ Problémy v praxi:
 
 !!! warning "Kerckhoffsův princip"
     Systém musí být prakticky, pokud ne matematicky, nedešifrovatelný a jeho utajení nesmí být podmínkou jeho bezpečnosti. Dále musí být přenositelný, schopný měnit klíče dle přání uživatele, snadný na používání a nesmí vyžadovat žádné speciální znalosti uživatele.
-
-![Kerckhoffsův princip a bezpečnostní předpoklady](../assets/img/prednasky/p08-219.png)
 
 - Při posuzování bezpečnosti kryptosystému **předpokládáme, že útočník zná celý kryptosystém** (Shannonovo maximum: *"The enemy knows the system"*).
 - Založení bezpečnosti na *security through obscurity* je nepřijatelné — může sloužit pouze jako **další bezpečnostní prvek**.
@@ -129,13 +125,13 @@ V letech 1948 a 1949 C. E. Shannon zveřejněním svých prací položil základ
     Entropie je množství informace obsažené ve zprávě. Teorie informace měří entropii zprávy průměrným počtem bitů nezbytných k jejímu zakódování při optimálním kódování (minimum bitů).
     
     Entropie zprávy ze zdroje $X$ je:
+
     $$H(X) = -\sum_{i=1}^{n} p_i \log_2 p_i \quad [\text{bitů}]$$
     
     kde $p_1, \ldots, p_n$ jsou pravděpodobnosti všech zpráv $X_1, \ldots, X_n$ zdroje $X$ a $-p_i \log_2 p_i$ = počet bitů nutných k optimálnímu zakódování zprávy $X_i$.
 
-![Definice entropie](../assets/img/prednasky/p08-222.png)
-
 Speciální případ — $n$ zpráv se **stejnou pravděpodobností** $p = \frac{1}{n}$:
+
 $$H(X) = -n \left(\frac{1}{n} \log_2 \frac{1}{n}\right) = \log_2 n$$
 
 !!! note "Maximální entropie"
@@ -145,13 +141,17 @@ $$H(X) = -n \left(\frac{1}{n} \log_2 \frac{1}{n}\right) = \log_2 n$$
 
 !!! example "Příklady výpočtu entropie"
     **Příklad 1:** Mějme 2 možné zprávy: „panna" nebo „orel" a nechť mají stejnou pravděpodobnost:
+
     $$H(X) = -0.5 \cdot (-1) - 0.5 \cdot (-1) = 1 \text{ bit}$$
     
     **Příklad 2:** Zdroj vydávající zprávy: „bílý" s pravděpodobností $\frac{1}{4}$ a „černý" s pravděpodobností $\frac{3}{4}$:
+
     $$H(X) = 0.25 \cdot \log_2 4 + 0.75 \cdot \log_2 \frac{4}{3} = 0.25 \cdot 2 + 0.75 \cdot 0.41 = 0.81 \text{ b}$$
     
     **Příklad 3:** Zdroj vydávající pouze jednu zprávu $p = 1$:
+
     $$H(X) = -(1 \cdot 0) = 0 \text{ b}$$
+
     Daný zdroj nemá žádnou neurčitost a zprávy z něj nenesou žádnou informaci.
 
 ---
@@ -174,8 +174,6 @@ $$H(X) = -n \left(\frac{1}{n} \log_2 \frac{1}{n}\right) = \log_2 n$$
     $$R_N = \frac{H(X)}{N}$$
     
     tj. průměrnou entropii na 1 znak (průměrný počet bitů informace v 1 znaku).
-
-![Obsažnost jazyka a absolutní obsažnost](../assets/img/prednasky/p08-225.png)
 
 - Máme-li dlouhou zprávu, její další písmeno bývá v řadě případů určeno již jednoznačně nebo je možný jen malý počet variant.
 - Například máme-li 13 znakovou zprávu „Zítra odpoled", je pravděpodobné, že pokračuje písmenem „n". U 14. znaku nepřibude žádná entropie.
@@ -206,8 +204,6 @@ $$H(X) = -n \left(\frac{1}{n} \log_2 \frac{1}{n}\right) = \log_2 n$$
     
     a číslo $\frac{100D}{R}$ pak udává, kolik bitů jazyka je nadbytečných procentuálně.
 
-![Výpočet nadbytečnosti angličtiny](../assets/img/prednasky/p08-227.png)
-
 !!! example "Nadbytečnost angličtiny"
     Pro angličtinu máme $L = 26$, $R = \log_2 26 = 4.7$ bitů na písmeno, $r = 1.5$ bitů/písmeno:
     
@@ -237,10 +233,6 @@ $$S = 2^{H(K)} \cdot \frac{2^{rN}}{2^{RN}} = \frac{2^{H(K)}}{2^{DN}} = 2^{H(K) -
 
 - Abychom dostali pouze jednu zprávu — tu, která byla skutečně zašifrována — musí být $S = 1$, tedy $H(K) = DN$.
 
-![Odvození vzdálenosti jednoznačnosti](../assets/img/prednasky/p08-228.png)
-
-#### Definice
-
 !!! info "Definice — Vzdálenost jednoznačnosti $\delta_U$"
     Z předchozího plyne: $H(K) = DN$ a $N = \frac{H(K)}{D} = \delta_U$.
     
@@ -249,8 +241,6 @@ $$S = 2^{H(K)} \cdot \frac{2^{rN}}{2^{RN}} = \frac{2^{H(K)}}{2^{DN}} = 2^{H(K) -
     $$\delta_U = \frac{H(K)}{D}$$
     
     kde $H(K)$ je neurčitost klíče a $D$ je redundance jazyka otevřené zprávy.
-
-![Definice a příklad vzdálenosti jednoznačnosti](../assets/img/prednasky/p08-229.png)
 
 !!! example "Jednoduchá substituce nad anglickou abecedou"
     Vzdálenost jednoznačnosti jednoduché substituce:
@@ -298,8 +288,6 @@ Podle Shannona jsou to základní techniky k **potlačení redundance $D$** ve z
     *Realizace:* ShiftRows + MixColumns v AES, P-permutace v DES
 
 Dobrá bloková šifra musí mít **obojí**.
-
-![Konfúze a difúze podle Shannona](../assets/img/prednasky/p08-232.png)
 
 ---
 
@@ -352,8 +340,6 @@ Výpočetní složitost se vyjadřuje **řádem $O$ (Order)** hodnoty výpočetn
 | $O(n^3)$ | $10^{18}$ | $3200\ \text{let}$ |
 | $O(2^n)$ | $10^{301030}$ | $10^{301005} \times \text{věk vesmíru}$ |
 
-![Tabulka složitosti algoritmů](../assets/img/prednasky/p08-236.png)
-
 !!! example "56-bitový klíč DES"
     Pro $n$-bitový klíč je časová složitost luštění hrubou silou $O(2^n)$.
     
@@ -387,18 +373,6 @@ Výpočetní složitost se vyjadřuje **řádem $O$ (Order)** hodnoty výpočetn
 ### Diagram tříd složitosti
 
 ![Diagram tříd složitosti](../assets/img/prednasky/p08-239.png)
-
-```
-EXPTIME
-  └─ PSPACE (úplné)
-       └─ PSPACE
-            ├─ NP (úplné)     CoNP (úplné)
-            │    └─ NP    ∩    CoNP
-            │         └─ NP ∩ CoNP
-            │               └─ P
-```
-
-**Předpokládané vztahy:** $P \subseteq NP \cap CoNP \subseteq NP, CoNP \subseteq PSPACE \subseteq EXPTIME$
 
 ---
 

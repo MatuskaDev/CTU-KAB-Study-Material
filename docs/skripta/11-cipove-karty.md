@@ -250,8 +250,6 @@ Veřejný a soukromý klíč, PKI, certifikáty, řetěz důvěry:
 - **Výstup:** Odvozený klíč (Diversified Key)
 - **Jednosměrnost:** Z odvozeného klíče je výpočetně neschůdné zjistit hlavní klíč
 
-![Diverzifikace klíčů](../assets/img/prednasky/p07-201.png)
-
 ---
 
 ## 11.8 Secure Messaging

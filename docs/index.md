@@ -8,6 +8,9 @@ hide:
 
 **Neoficiální studijní materiál na BI-KAB | Vygenerován pomocí Claude na základě prezentací a obsahu z fit-wiki | Lukáš Matuška 2026**
 
+!!! warning "Upozornění"
+    Tento materiál byl **vygenerován pomocí AI** a ručně zkontrolován, přesto může obsahovat chyby nebo nepřesnosti. Před zkouškou si ověř klíčové informace v oficiálních prezentacích. Našel/a jsi chybu? [:material-github: Přispěj na GitHubu](https://github.com/MatuskaDev/CTU-KAB-Study-Material)
+
 ---
 
 <div class="grid cards" markdown>
@@ -55,3 +58,20 @@ hide:
     2. Věnuj zvláštní pozornost boxům **Zkouška** a **Typická otázka**
     3. Umej odvodit/spočítat příklady, nejen popsat princip
     4. Zkontroluj si znalosti na stránce [Přehled algoritmů](prehled.md)
+
+---
+
+## Přispět & opravit chyby
+
+Našel/a jsi chybu, překlep nebo máš lepší vysvětlení? Přispění je vítáno!
+
+Materiál je open-source na GitHubu — otevři **pull request** nebo **issue**:
+
+:material-github: **[github.com/MatuskaDev/CTU-KAB-Study-Material](https://github.com/MatuskaDev/CTU-KAB-Study-Material)**
+
+Jak přispět:
+
+1. Klikni na odkaz výše a **fork**uj repozitář
+2. Uprav příslušný soubor v `docs/`
+3. Pošli **pull request** s popisem změny
+4. Nebo rovnou otevři **Issue**, pokud nevíš jak chybu opravit
