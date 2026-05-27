@@ -466,12 +466,12 @@ Otázky z minulých testů seřazené tematicky. Odpověď zobrazíš kliknutím
 4. Používá se různý exponent pro šifrování a dešifrování.
 
 ??? success "Odpověď"
-    - (1) ✓ – obě jsou asymetrické
+    - (1) ✗ – RSA je asymetrická šifra, ale **exponenciální šifra je symetrická** (obě strany sdílejí tajný exponent)
     - (2) ✓ – Square and Multiply urychluje modulární umocňování $m^e \bmod n$
     - (3) ✓ – je to běžné (např. $e = 65537$); pozor na Hastadův útok při malém $e$ a více příjemcích se stejnou zprávou
     - (4) ✓ – šifrování exponentem $e$ (veřejný), dešifrování exponentem $d$ (soukromý)
 
-    *→ Skripta: [5.4 – RSA](skripta/05-asymetricka.md#54-rsa)*
+    *→ Skripta: [5.4 – RSA](skripta/05-asymetricka.md#54-rsa), [5.0 – Exponenciální šifra](skripta/05-asymetricka.md#50-exponencialni-sifra)*
 
 ---
 
@@ -1208,8 +1208,11 @@ RNG   →    3 b  → SHA-256 → ? b  →────────────�
     **Krok 3: RSA-CRT parametry**
 
     $$d_p = d \bmod (p-1) = 185 \bmod 12 = \mathbf{5}$$
+
     $$d_q = d \bmod (q-1) = 185 \bmod 22 = \mathbf{9}$$
+
     $$q_{\text{inv}} = q^{-1} \bmod p = 23^{-1} \bmod 13 = 10^{-1} \bmod 13 = \mathbf{4}$$
+
     (ověř: $10 \cdot 4 = 40 = 3 \cdot 13 + 1$ ✓)
 
     **Soukromý klíč RSA-CRT:** $(p=13,\ q=23,\ d_p=5,\ d_q=9,\ q_{\text{inv}}=4)$
